@@ -74,14 +74,16 @@ section,
 .hero {
   min-height: 100vh;
   scroll-snap-align: start;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   padding: var(--section-padding) 1.5rem;
   margin: 0 auto;
   max-width: var(--max-width);
+}
+
+.section p + p {
+  margin-top: 1.2rem;
 }
 
 /* ============================================================
