@@ -28,6 +28,11 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  overscroll-behavior: none;
+}
+
 html {
   scroll-behavior: smooth;
   height: 100%;

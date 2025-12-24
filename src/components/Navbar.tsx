@@ -1,7 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Navbar = () => {
   const [active, setActive] = useState("hero");
+
+  // Keep an up‑to‑date reference to the active section without re‑binding listeners.
+  const activeRef = useRef(active);
+  useEffect(() => {
+    activeRef.current = active;
+  }, [active]);
 
   useEffect(() => {
     // Observe each section to:
@@ -44,14 +50,17 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    // Enable keyboard navigation between snap-scroll panels.
-    // ArrowDown moves to the next section; ArrowUp moves to the previous one.
+    // Keyboard navigation between snap-scroll panels.
+    // Attached once; uses activeRef to avoid re-binding on state changes.
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
 
+      // Prevent browser's default scroll behavior (which causes double movement)
+      e.preventDefault();
+
       const sections = Array.from(document.querySelectorAll("section"));
       const currentIndex = sections.findIndex(
-        (s) => s.id === active
+        (s) => s.id === activeRef.current
       );
 
       if (e.key === "ArrowDown" && currentIndex < sections.length - 1) {
@@ -63,9 +72,10 @@ const Navbar = () => {
       }
     };
 
-    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("keydown", onKeyDown, { passive: false });
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [active]);
+  }, []);
+
 
   return (
     <nav>
