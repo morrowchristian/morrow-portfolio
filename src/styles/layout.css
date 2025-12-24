@@ -1,22 +1,27 @@
 /* ============================================================
    LAYOUT
    ------------------------------------------------------------
-   Structural layout rules: snap panels, section spacing,
-   container widths, and global alignment patterns.
+   Snap-scroll layout tuned for tall header.
+   Starts at #about. No hero section.
 ============================================================ */
 
-section,
-.hero {
+section {
   min-height: 100vh;
   scroll-snap-align: start;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: var(--section-padding) 1.5rem;
+
   margin: 0 auto;
   max-width: var(--max-width);
+
+  scroll-margin-top: 12rem;
+  padding-top: 8rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
-.section p + p {
+section p + p {
   margin-top: 1.2rem;
 }
