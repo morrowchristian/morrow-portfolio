@@ -563,3 +563,53 @@ nav a:hover::after {
     transition: none !important;
   }
 }
+
+/* ============================================================
+   PROXIMITY NAV (Soft Scale Dock Effect)
+============================================================ */
+
+.proximity-nav {
+  position: fixed;
+  top: 1.2rem;
+  right: 1.6rem;
+  z-index: 1000;
+}
+
+.proximity-nav ul {
+  display: flex;
+  gap: 1.6rem;
+}
+
+.proximity-nav a {
+  position: relative;
+  display: inline-block;
+  font-size: 0.95rem;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+  transform-origin: center bottom;
+}
+
+/* Proximity scaling logic */
+.proximity-nav a {
+  --distance: calc(abs(var(--cursor-x) - (var(--item-x))) * 1px);
+  --scale: calc(1 + max(0, (120 - var(--distance)) / 600));
+  transform: scale(var(--scale));
+  opacity: calc(0.75 + (var(--scale) - 1) * 1.2);
+}
+
+/* Track each link's x-position */
+.proximity-nav a {
+  /* JS updates --cursor-x; CSS reads bounding box */
+}
+
+.proximity-nav a:hover {
+  opacity: 1;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .proximity-nav a {
+    transition: none;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
