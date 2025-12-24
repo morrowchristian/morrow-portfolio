@@ -9,24 +9,17 @@ const Skills = () => {
           <ul>
             <li>React</li>
             <li>TypeScript</li>
-            <li>JavaScript</li>
-            <li>Next.js</li>
-            <li>Tailwind CSS</li>
+            <li>JavaScript (ES6+)</li>
+            <li>HTML & CSS</li>
+            <li>Tailwind</li>
           </ul>
         </div>
 
         <div>
           <h4>Backend</h4>
           <ul>
-            <li>Django REST Framework</li>
-            <li>Python</li>
+            <li>Django & Django REST Framework</li>
             <li>Node.js</li>
-          </ul>
-        </div>
-
-        <div>
-          <h4>Databases</h4>
-          <ul>
             <li>PostgreSQL</li>
             <li>MySQL</li>
             <li>MongoDB</li>
@@ -34,11 +27,13 @@ const Skills = () => {
         </div>
 
         <div>
-          <h4>Other</h4>
+          <h4>Tools & Other</h4>
           <ul>
-            <li>Swift / SwiftUI</li>
-            <li>Chrome Extensions</li>
             <li>Git & GitHub</li>
+            <li>Swift & SwiftUI</li>
+            <li>Chrome Extension Development</li>
+            <li>REST APIs</li>
+            <li>UI/UX Principles</li>
           </ul>
         </div>
       </div>
