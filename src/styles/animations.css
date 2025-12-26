@@ -27,6 +27,7 @@
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 600ms ease, transform 600ms ease;
+  transition-delay: var(--delay, 0ms);
 }
 
 .reveal-card.visible {

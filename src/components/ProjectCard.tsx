@@ -3,11 +3,12 @@ type ProjectCardProps = {
   title: string;
   tagline: string;
   tech: string;
+  style?: React.CSSProperties;
 };
 
-const ProjectCard = ({ image, title, tagline, tech }: ProjectCardProps) => {
+const ProjectCard = ({ image, title, tagline, tech, style }: ProjectCardProps) => {
   return (
-    <div className="project-card reveal-card">
+    <div className="project-card reveal-card" style={style}>
       <div className="project-image">
         <img src={image} alt={title} />
       </div>
