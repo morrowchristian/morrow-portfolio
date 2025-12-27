@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import DarkModeToggle from "./DarkModeToggle";
 
 const Navbar = () => {
   const [active, setActive] = useState("about");
@@ -92,6 +93,10 @@ const Navbar = () => {
           <li><a href="#skills" className={active === "skills" ? "active-link" : ""}>Skills</a></li>
           <li><a href="#projects" className={active === "projects" ? "active-link" : ""}>Projects</a></li>
           <li><a href="#contact" className={active === "contact" ? "active-link" : ""}>Contact</a></li>
+          
+          <li className="theme-toggle-item">
+            <DarkModeToggle />
+          </li>
         </ul>
       </div>
     </nav>
