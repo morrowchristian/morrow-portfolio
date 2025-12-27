@@ -10,32 +10,47 @@
   --font-heading: 'Poppins', sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
-  /* Colors - Light mode */
-  --color-bg: #ffffff;
-  --color-surface: #f8f9fa;
-  --color-text-primary: #1e293b;
-  --color-text-secondary: #475569;
-  --color-accent: #008080; /* Muted teal - feel free to tweak */
-  --color-accent-hover: #006666;
+  /* Colors - Default "Light" Mode (your preferred sophisticated slate base) */
+  --color-bg: #0f172a;              /* Deep navy-slate background */
+  --color-surface: #1e293b;          /* Elevated cards/sections */
+  --color-surface-hover: #334155;   /* Subtle hover lift */
+  --color-text-primary: #f1f5f9;     /* Main headings/text (high contrast) */
+  --color-text-secondary: #cbd5e1;   /* Subtle text, captions */
+  --color-accent: #00b3b3;           /* Vibrant teal primary */
+  --color-accent-hover: #00e0e0;     /* Brighter cyan on hover */
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-strong: rgba(255, 255, 255, 0.2);
+
+  /* Additional tokens for polish */
+  --radius: 0.75rem;                 /* Consistent border radius */
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.4);
 
   /* Transitions */
-  --transition: all 0.3s ease;
+  --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* True Dark Mode Overrides (ultra-deep black for night viewing) */
 [data-theme="dark"] {
-  --color-bg: #0f172a;        /* Deep slate blue - sophisticated */
-  --color-surface: #1e293b;
-  --color-text-primary: #f1f5f9;
-  --color-text-secondary: #cbd5e1;
-  --color-accent: #00b3b3;    /* Brighter teal in dark mode */
-  --color-accent-hover: #00e0e0;
+  --color-bg: #000000;
+  --color-surface: #111111;
+  --color-surface-hover: #1f1f1f;
+  --color-text-primary: #e0e0e0;     /* Slightly warmer for readability */
+  --color-text-secondary: #a0a0a0;
+  --color-accent: #00ffff;           /* Pure cyan pop */
+  --color-accent-hover: #66ffff;
+  --color-border: rgba(255, 255, 255, 0.05);
+  --color-border-strong: rgba(255, 255, 255, 0.1);
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.6);
+  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.8);
 }
 
+/* Global application */
 body {
   font-family: var(--font-body);
   background-color: var(--color-bg);
   color: var(--color-text-primary);
-  transition: background-color 0.4s ease, color 0.4s ease;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -45,12 +60,35 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
 }
 
-/* Optional: Accent color for links, buttons, etc. */
-a, button {
+/* Interactive elements */
+a, button, .button {
   color: var(--color-accent);
   transition: var(--transition);
 }
 
-a:hover, button:hover {
+a:hover, button:hover, .button:hover {
   color: var(--color-accent-hover);
+}
+
+/* Navbar frosted glass effect */
+nav {
+  background: rgba(var(--color-bg-rgb, 15, 23, 42), 0.85); /* Fallback if you add RGB vars later */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px); /* Safari support */
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Elevated elements (cards, etc.) */
+.card, .project-card, .footer {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.card:hover, .project-card:hover {
+  background: var(--color-surface-hover);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
 }
