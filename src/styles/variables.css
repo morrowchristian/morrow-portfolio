@@ -1,51 +1,52 @@
 /* ============================================================
-   VARIABLES
+   VARIABLES / DESIGN TOKENS
    ------------------------------------------------------------
-   Global design tokens for color, spacing, typography, and
-   behavior. Updating these values updates the entire system.
+   Centralized color, spacing, typography, radius, shadows,
+   transitions. Updating here propagates throughout the system.
 ============================================================ */
 
 :root {
-  /* Font families */
+  /* Fonts */
   --font-heading: 'Poppins', sans-serif;
-  --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
 
-  /* Colors - Default Mode (sophisticated slate/teal – your preferred "light") */
-  --color-bg: #0f172a;                /* Deep navy-slate */
-  --color-surface: #1e293b;           /* Cards, elevated elements */
-  --color-surface-hover: #334155;     /* Hover state */
-  --color-text-primary: #f1f5f9;      /* Main text */
-  --color-text-secondary: #cbd5e1;    /* Subtle text */
-  --color-accent: #00b3b3;            /* Teal accent */
-  --color-accent-hover: #00e0e0;      /* Brighter on hover */
-  --color-border: rgba(255, 255, 255, 0.1);
-  --color-border-strong: rgba(255, 255, 255, 0.2);
+  /* Light Mode Colors */
+  --color-bg: #f8f9fa;                 /* page background */
+  --color-surface: #ffffff;            /* cards, elevated elements */
+  --color-surface-hover: #e5e7eb;      /* card hover effect */
+  --color-text-primary: #111827;       /* main text */
+  --color-text-secondary: #6b7280;     /* secondary text */
+  --color-accent: #00b3b3;             /* links, buttons */
+  --color-accent-hover: #00e0e0;       /* hover */
+  --color-border: rgba(0,0,0,0.1);
+  --color-border-strong: rgba(0,0,0,0.2);
 
-  /* Polish tokens */
   --radius: 0.75rem;
-  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 4px 12px rgba(0,0,0,0.1);
+  --shadow-md: 0 8px 30px rgba(0,0,0,0.15);
 
-  /* Transitions */
+  --max-width: 1200px;
   --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* True Dark Mode (ultra-black) */
+/* Dark Mode */
 [data-theme="dark"] {
-  --color-bg: #000000;
-  --color-surface: #111111;
-  --color-surface-hover: #1f1f1f;
-  --color-text-primary: #e0e0e0;
-  --color-text-secondary: #a0a0a0;
-  --color-accent: #00ffff;            /* Pure cyan for pop */
-  --color-accent-hover: #66ffff;
-  --color-border: rgba(255, 255, 255, 0.05);
-  --color-border-strong: rgba(255, 255, 255, 0.1);
-  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.6);
-  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.8);
+  --color-bg: #0f172a;                 
+  --color-surface: #1e293b;            
+  --color-surface-hover: #334155;      
+  --color-text-primary: #e0e0e0;       
+  --color-text-secondary: #a0a0a0;     
+  --color-accent: #00ffff;             
+  --color-accent-hover: #66ffff;       
+  --color-border: rgba(255,255,255,0.1);
+  --color-border-strong: rgba(255,255,255,0.2);
+
+  --shadow-sm: 0 4px 12px rgba(0,0,0,0.4);
+  --shadow-md: 0 8px 30px rgba(0,0,0,0.6);
 }
 
-/* Global application */
+
+/* Base body typography & transition */
 body {
   font-family: var(--font-body);
   background-color: var(--color-bg);
@@ -68,14 +69,6 @@ a, button, .button {
 
 a:hover, button:hover, .button:hover {
   color: var(--color-accent-hover);
-}
-
-/* Navbar – frosted glass */
-nav {
-  background: rgba(15, 23, 42, 0.85); /* Matches default --color-bg */
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--color-border);
 }
 
 /* Elevated components */

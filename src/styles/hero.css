@@ -1,4 +1,10 @@
+/* ============================================================
+   HERO SECTION - LIGHT & DARK MODE
+============================================================ */
+
+/* Base hero section */
 .hero-section {
+  position: relative;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -6,32 +12,84 @@
   align-items: center;
   text-align: center;
   padding: 0 2rem;
-  background: linear-gradient(to bottom, var(--bg-gradient-start, #f8f9fa), var(--bg-gradient-end, #ffffff));
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 
+    opacity 0.6s ease,
+    transform 0.6s ease,
+    background 0.5s ease,
+    color 0.5s ease;
 }
 
+/* Reveal animation */
+.hero-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Accent overlay for subtle depth */
+.hero-section.visible::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-accent);
+  opacity: 0.05; /* subtle accent pop */
+  pointer-events: none;
+  border-radius: var(--radius);
+}
+
+/* Hero content card (layering effect) */
+.hero-content {
+  position: relative;
+  background: rgba(255, 255, 255, 0.6); /* semi-transparent light layer */
+  border-radius: var(--radius);
+  padding: 2rem 2.5rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  max-width: 900px;
+  z-index: 1; /* above overlay */
+  transition: background 0.5s ease;
+}
+
+/* Dark mode hero content card adjustment */
+[data-theme="dark"] .hero-content {
+  background: rgba(30, 41, 59, 0.7);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+/* Hero text */
 .hero-title {
-  font-size: 4.5rem;
-  font-weight: 800;
-  margin-bottom: 1rem;
-  letter-spacing: -0.02em;
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.03em;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
 .hero-subtitle {
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
-  opacity: 0.9;
+  font-size: clamp(1.5rem, 3vw, 1.8rem);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #374151;
+}
+
+.hero-subtitle .accent-text {
+  color: var(--color-accent);
 }
 
 .hero-tagline {
-  font-size: 1.4rem;
-  max-width: 600px;
-  opacity: 0.8;
+  font-size: clamp(1.2rem, 2vw, 1.4rem);
+  color: #6b7280;
+  opacity: 0.9;
   margin-bottom: 3rem;
 }
 
+/* Scroll prompt */
 .scroll-prompt {
   font-size: 2.5rem;
   cursor: pointer;
+  color: #0f172a;
   animation: bounce 2s infinite;
 }
 
@@ -41,8 +99,30 @@
   60% { transform: translateY(-8px); }
 }
 
+/* Responsive scaling */
 @media (max-width: 768px) {
   .hero-title { font-size: 3.5rem; }
   .hero-subtitle { font-size: 1.5rem; }
   .hero-tagline { font-size: 1.2rem; }
+  .hero-content { padding: 1.5rem 2rem; }
+}
+
+/* -------------------------------
+   Mode-specific tweaks
+--------------------------------- */
+
+/* Light mode (override only if needed) */
+:root .hero-section.visible {
+  background: linear-gradient(180deg, #f5f9fa 0%, #e8f1f4 100%);
+  color: #111827;
+}
+
+/* Dark mode */
+[data-theme="dark"] .hero-section.visible {
+  background: linear-gradient(180deg, #0f172a, #1e293b);
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .scroll-prompt {
+  color: #e0e0e0;
 }

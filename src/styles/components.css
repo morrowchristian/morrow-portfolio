@@ -1,19 +1,6 @@
 /* ============================================================
    COMPONENTS
-   ------------------------------------------------------------
-   Reusable UI components: buttons, cards, grids, etc.
 ============================================================ */
-
-/* Links & Buttons - Scoped to avoid overriding nav links */
-body a:not(.header-right a) {
-  color: var(--color-accent);
-  text-decoration: none;
-  transition: var(--transition);
-}
-
-body a:not(.header-right a):hover {
-  color: var(--color-text-primary);
-}
 
 /* Buttons */
 .button {
@@ -29,9 +16,9 @@ body a:not(.header-right a):hover {
 }
 
 .button:hover {
-  background: var(--color-accent);
-  color: white;
-  transform: translateY(-2px);
+  background: linear-gradient(135deg, #00b3b3, #66ffff);
+  color: var(--color-bg);
+  transform: translateY(-2px) scale(1.02);
 }
 
 .button:active {
@@ -54,170 +41,46 @@ body a:not(.header-right a):hover {
   transition: var(--transition);
   z-index: 90;
 }
-
 .scroll-top.show {
   opacity: 1;
   transform: translateY(0);
 }
-
 .scroll-top:hover {
   background: var(--color-text-primary);
 }
 
-/* Hero */
-.hero {
-  text-align: center;
-  gap: 1.5rem;
-  padding: 0 2rem;
-}
-
-.hero h1 {
-  margin-bottom: 0.5rem;
-}
-
-.hero h2 {
-  color: var(--color-text-secondary);
-  font-weight: 400;
-  margin-bottom: 1.5rem;
-}
-
-.hero-tagline {
-  max-width: 600px;
-  margin: 0 auto 2rem auto;
-  color: var(--color-text-secondary);
-}
-
-.hero-links {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
-
-/* Skills */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 2rem;
-}
-
-.skills-grid h4 {
-  margin-bottom: 0.5rem;
-}
-
-.skills-grid ul {
-  list-style: none;
-  padding: 0;
-}
-
-.skills-grid li {
-  padding: 0.2rem 0;
-  color: var(--color-text-secondary);
-}
-
-/* Projects */
-.projects-grid {
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
-
+/* Project Cards */
 .project-card {
   padding: 1.5rem;
-  border: 1px solid var(--border);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius);
-  background: var(--color-bg);
+  background: var(--color-surface);
   transition: var(--transition);
 }
-
-.project-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--color-accent);
-}
-
+.project-card h3,
 .project-card h4 {
   margin-bottom: 0.5rem;
 }
+.project-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0, 179, 179, 0.3);
+}
+.project-card:hover .project-overlay {
+  opacity: 1;
+}
+.project-card:hover .project-image img {
+  transform: scale(1.05);
+}
 
-.project-tagline {
+/* Tech list & tagline */
+.project-tagline, .tech-list {
   color: var(--color-text-secondary);
+  font-size: 0.9rem;
   margin-bottom: 1rem;
 }
 
-.tech-list {
-  margin: 1rem 0;
-  font-size: 0.9rem;
-  color: var(--color-text-secondary);
-}
-
-/* Contact */
-#contact ul {
-  list-style: none;
-  margin-top: 1rem;
-  padding: 0;
-}
-
-#contact li {
-  margin-bottom: 0.5rem;
-}
-
-/* Footer */
-.footer {
-  border-top: 1px solid var(--border);
-  padding: 2rem 1.5rem;
-  background: var(--color-bg);
-  position: relative;
-}
-
-.footer::before {
-  content: "";
-  position: absolute;
-  top: -40px;
-  left: 0;
-  width: 100%;
-  height: 40px;
-  background: linear-gradient(to bottom, transparent, var(--border));
-  opacity: 0.4;
-}
-
-.footer-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.footer p {
-  color: var(--color-text-secondary);
-  font-size: 0.9rem;
-}
-
-.footer-links {
-  display: flex;
-  gap: 1.5rem;
-}
-
-.footer-links a {
-  color: var(--color-text-primary);
-  font-size: 0.9rem;
-  position: relative;
-  padding-bottom: 2px;
-  transition: var(--transition);
-}
-
-.footer-links a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 0%;
-  height: 1px;
-  background: var(--color-accent);
-  transition: width var(--transition);
-}
-
-.footer-links a:hover::after {
-  width: 100%;
+/* Skills grid */
+.skills-grid {
+  display: grid;
+  gap: clamp(1rem, 2vw, 2rem);
 }

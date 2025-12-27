@@ -1,26 +1,14 @@
 /* ============================================================
    ANIMATIONS
-   ------------------------------------------------------------
-   Global animation definitions and motion rules, including
-   reduced-motion fallbacks.
 ============================================================ */
-
-/* Section reveal */
 .reveal {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 600ms ease, transform 600ms ease;
 }
-
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
-}
-
-/* Scroll cue */
-.scroll-cue {
-  animation: scrollPulse 1.8s ease-in-out infinite;
-  opacity: 0.7;
 }
 
 .reveal-card {
@@ -29,20 +17,26 @@
   transition: opacity 600ms ease, transform 600ms ease;
   transition-delay: var(--delay, 0ms);
 }
-
 .reveal-card.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
+.scroll-cue {
+  animation: scrollPulse 1.8s ease-in-out infinite;
+  opacity: 0.7;
+}
+
 @keyframes scrollPulse {
-  0% { opacity: 0.4; transform: translateY(0); }
+  0%, 100% { opacity: 0.4; transform: translateY(0); }
   50% { opacity: 1; transform: translateY(6px); }
-  100% { opacity: 0.4; transform: translateY(0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .scroll-cue {
+  .scroll-cue,
+  .reveal,
+  .reveal-card {
     animation: none !important;
+    transition: none !important;
   }
 }

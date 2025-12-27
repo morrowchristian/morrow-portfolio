@@ -1,58 +1,53 @@
 /* ============================================================
-   NAVIGATION (Sticky Top Nav - Vertical Split Layout)
-   ------------------------------------------------------------
-   Custom styles for the two-column header: left (name/title),
-   right (vertical nav links + theme toggle).
+   NAVIGATION (Sticky Top Nav)
 ============================================================ */
-
 nav.top-header {
   position: sticky;
   top: 0;
-  z-index: 100;
-  background: rgba(255, 255, 255, 0.85);
+  z-index: 1000;
+  background: rgba(15, 23, 42, 0.85);
   backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--border);
-  padding: 2rem 1.5rem;
+  padding: 2.5rem 3rem 2rem;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: var(--max-width);
+  margin: 0 auto;
   transition: var(--transition);
 }
 
-[data-theme="dark"] nav.top-header {
-  background: rgba(15, 23, 42, 0.85); /* Matches your dark bg */
-}
-
 .header-left {
-  max-width: 500px;
+  width: 75%;
 }
 
 .header-name {
   font-family: var(--font-heading);
-  font-size: 2.5rem;
+  font-size: clamp(1.4rem, 5vw, 2.5rem);
   font-weight: 800;
-  margin: 0 0 0.5rem 0;
-  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
 }
 
 .header-title {
-  font-size: 1.4rem;
+  font-size: clamp(0.95rem, 2.5vw, 1.4rem);
   color: var(--color-accent);
-  margin: 0 0 1rem 0;
   font-weight: 600;
 }
 
 .header-profile {
   color: var(--color-text-secondary);
   line-height: 1.6;
-  margin: 0;
+  font-size: 0.85rem;
 }
 
-/* Right side: vertical links */
+/* Right-side nav links */
 .header-right ul {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 1.2rem; /* Consistent spacing between links */
+  gap: 1.2rem;
 }
 
 .header-right a {
@@ -64,10 +59,7 @@ nav.top-header {
   transition: var(--transition);
 }
 
-.header-right a:hover {
-  color: var(--color-accent);
-}
-
+.header-right a:hover,
 .header-right a.active-link {
   color: var(--color-accent);
 }
@@ -88,11 +80,11 @@ nav.top-header {
   width: 100%;
 }
 
-/* Theme toggle item - separated visually */
+/* Theme toggle */
 .theme-toggle-item {
-  margin-top: 2.5rem; /* Clear separation from nav links */
+  margin-top: 2.5rem;
   padding-top: 2rem;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--color-border);
 }
 
 .theme-toggle-btn {
@@ -106,45 +98,21 @@ nav.top-header {
   justify-content: center;
   color: var(--color-text-primary);
   opacity: 0.7;
-  transition: var(--transition);
 }
 
 .theme-toggle-btn:hover {
   opacity: 1;
-  background: var(--color-surface);
+  background: var(--color-surface-hover);
 }
 
-/* Responsive: Stack vertically on smaller screens */
-@media (max-width: 968px) {
-  nav.top-header {
-    padding: 1.5rem;
-  }
-
-  .top-header > div {
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .top-header {
     flex-direction: column;
-    text-align: center;
-  }
-
-  .header-left {
-    max-width: 100%;
-    margin-bottom: 2rem;
-  }
-
-  .header-right ul {
     align-items: center;
+    text-align: center;
+    padding: 2rem 1.5rem;
   }
-
-  .theme-toggle-item {
-    margin-top: 2rem;
-    border-top: none;
-  }
-}
-
-/* Optional: Add container flex if not in App/layout */
-.top-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  max-width: var(--max-width);
-  margin: 0 auto;
+  .header-left, .header-right { width: 100%; }
+  .header-right { margin-top: 2rem; justify-content: center; }
 }

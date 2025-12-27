@@ -1,18 +1,37 @@
 /* ============================================================
-   GLOBAL STYLES ENTRY POINT
+   INDEX / GLOBAL IMPORTS
    ------------------------------------------------------------
-   Imports all modular CSS files in the correct order to build
-   the full design system.
+   This file imports all the CSS in the proper order so that
+   variables, resets, base styles, components, layouts, and
+   animations are applied consistently across the site.
 ============================================================ */
 
-@import "./variables.css";
-@import "./reset.css";
-@import "./base.css";
-@import "./typography.css";
-@import "./layout.css";
-@import "./animations.css";
-@import "./navigation.css";
-@import "./proximity-nav.css";
-@import "./mobile-menu.css";
-@import "./components.css";
-@import "./hero.css";
+/* 1️⃣ Reset styles: Remove browser defaults, normalize elements */
+@import 'reset.css';
+
+/* 2️⃣ Variables: Define global design tokens for colors, fonts, spacing, transitions, etc. */
+@import 'variables.css';
+
+/* 3️⃣ Base styles: Global typography, body, html defaults, scroll behavior, and foundational page animations */
+@import 'base.css';
+
+/* 4️⃣ Typography: Headings, text hierarchy, line-height, and font consistency */
+@import 'typography.css';
+
+/* 5️⃣ Components: Buttons, cards, grids, scroll-to-top, footer, and reusable UI elements */
+@import 'components.css';
+
+/* 6️⃣ Layout: Section spacing, grids, and layouts for About, Skills, Projects, Contact */
+@import 'layout.css';
+
+/* 7️⃣ Animations: Section reveal, scroll cues, and reduced-motion support */
+@import 'animations.css';
+
+/* 8️⃣ Hero section: Full-height hero, title, subtitle, tagline, scroll prompt */
+@import 'hero.css';
+
+/* 9️⃣ Navigation: Top sticky nav, left/right layout, vertical nav links, theme toggle, responsive adjustments */
+@import 'navigation.css';
+
+/* 🔟 Mobile menu: Hamburger toggle, soft-focus overlay, small-screen navigation */
+@import 'mobile-menu.css';
