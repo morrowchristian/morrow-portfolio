@@ -1,31 +1,44 @@
-/* ============================================================
-   LAYOUT — GLOBAL SECTION STRUCTURE
-============================================================ */
-
+/* src/styles/layout.css */
 section {
-  padding: clamp(4rem, 6vw, 6rem) 1.5rem;
-  margin: 0 auto;
+  padding: var(--section-padding);
   max-width: var(--max-width);
-  scroll-margin-top: 80px;
-}
-
-section p + p {
-  margin-top: 1.25rem;
+  margin: 0 auto;
+  scroll-margin-top: 90px;
 }
 
 section + section {
-  margin-top: 3.5rem;
+  margin-top: 0;
 }
 
-h2 {
-  margin-bottom: 2rem;
-  font-size: clamp(2rem, 4vw, 2.5rem);
-  font-weight: 800;
+.projects-grid,
+.about-grid,
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--grid-gap);
+  margin-top: 2rem;
 }
 
-/* -----------------------------
-   SECTION HEADER
--------------------------------- */
+@media (max-width: 768px) {
+  :root {
+    --section-padding: clamp(3rem, 6vw, 4rem) 1.5rem;
+    --grid-gap: 1.75rem;
+  }
+
+  .projects-grid,
+  .about-grid,
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --section-padding: 2.5rem 1rem;
+  }
+}
+
+/* Keep section headers if you use them */
 .section-header {
   margin-bottom: 2rem;
   text-align: center;
@@ -45,252 +58,4 @@ h2 {
   font-size: clamp(2rem, 4vw, 2.5rem);
   font-weight: 800;
   color: var(--color-text-primary);
-}
-
-/* -----------------------------
-   ABOUT SECTION
--------------------------------- */
-.about {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.about-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2.5rem;
-  margin-top: 2rem;
-}
-
-.about-block h3 {
-  font-size: 1.15rem;
-  font-weight: 600;
-  margin-bottom: 0.8rem;
-}
-
-.about-block p {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: var(--color-text-secondary);
-}
-
-/* ============================================================
-   SKILLS SECTION
-============================================================ */
-.section.skills {
-  padding: 4rem 2rem;
-}
-
-.skills-grid {
-  display: grid;
-  gap: 1.75rem;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  margin-top: 2rem;
-}
-
-.skills-block {
-  background: var(--card-bg, #f9f9f9);
-  border-radius: 12px;
-  padding: 1rem 1.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-  box-shadow: var(--shadow, 0 4px 12px rgba(0,0,0,0.05));
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.skills-block:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-hover, 0 8px 20px rgba(0,0,0,0.1));
-}
-
-.skills-block h3 {
-  font-size: 1.15rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.skills-block p {
-  font-size: 0.9rem;
-  color: var(--text-muted, #555);
-}
-
-.skills-block .icon {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-  color: var(--color-accent);
-}
-
-/* Specific layouts for sections */
-.skills-grid.tech {
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-}
-
-.skills-grid.traits {
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-}
-
-.skills-grid.tools {
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-}
-
-.skills-block span {
-  font-weight: 500;
-  margin-top: 0.25rem;
-}
-
-.skills-description {
-  margin-bottom: 1rem;
-  font-size: 0.95rem;
-  color: var(--text-muted, #555);
-}
-
-/* Tech Icons Grid */
-.tech-icons {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 0.75rem;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.tech-icons li {
-  display: flex;
-  align-items: center;
-  font-size: 0.95rem;
-  color: var(--text-primary, #333);
-  transition: transform 0.2s ease;
-}
-
-.tech-icons li:hover {
-  transform: translateY(-2px);
-}
-
-.tech-icons .icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 0.5rem;
-  font-size: 1.3rem;
-}
-
-/* Brand colors */
-.icon.react { color: #61dafb; }
-.icon.typescript { color: #3178c6; }
-.icon.django { color: #092e20; }
-.icon.swift { color: #f05138; }
-.icon.node { color: #339933; }
-.icon.postgresql { color: #336791; }
-.icon.mysql { color: #00758f; }
-
-/* -----------------------------
-   PROJECTS SECTION
--------------------------------- */
-.projects {
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 2.5rem;
-  margin-top: 2rem;
-}
-
-.project-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: opacity 300ms ease;
-  font-size: 1rem;
-  font-weight: 500;
-  border-radius: var(--radius);
-}
-
-.project-card:hover .project-overlay {
-  opacity: 1;
-}
-
-.project-card:hover .project-image img {
-  transform: scale(1.05);
-}
-
-.project-image {
-  width: 100%;
-  height: 180px;
-  overflow: hidden;
-  border-radius: var(--radius);
-  margin-bottom: 1rem;
-}
-
-.project-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 300ms ease;
-}
-
-.project-tagline,
-.tech-list {
-  color: var(--color-text-secondary);
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
-}
-
-/* -----------------------------
-   CONTACT SECTION
--------------------------------- */
-.contact {
-  max-width: 700px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.contact-list {
-  list-style: none;
-  margin-top: 1.5rem;
-  padding: 0;
-}
-
-.contact-list li {
-  margin-bottom: 0.6rem;
-}
-
-.contact-list a {
-  color: var(--color-accent);
-  font-weight: 500;
-  transition: var(--transition);
-}
-
-.contact-list a:hover {
-  color: var(--color-accent-hover);
-}
-
-/* -----------------------------
-   RESPONSIVE
--------------------------------- */
-@media (max-width: 900px) {
-  .about-grid, .skills-grid, .projects-grid {
-    gap: 2rem;
-  }
-
-  section {
-    padding: 3rem 1.5rem;
-  }
-}
-
-@media (max-width: 700px) {
-  .about-grid, .skills-grid, .projects-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
 }

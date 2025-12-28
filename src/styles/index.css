@@ -1,13 +1,4 @@
-/* ============================================================
-   INDEX / GLOBAL IMPORTS
-   ------------------------------------------------------------
-   This file imports all the CSS in the proper order so that
-   variables, resets, base styles, components, layouts, and
-   animations are applied consistently across the site.
-============================================================ */
-
-/* 1️⃣ Reset styles: Remove browser defaults, normalize elements */
-@import 'reset.css';
+/* src/styles/index.css */
 
 /* 2️⃣ Variables: Define global design tokens for colors, fonts, spacing, transitions, etc. */
 @import 'variables.css';
@@ -15,8 +6,6 @@
 /* 3️⃣ Base styles: Global typography, body, html defaults, scroll behavior, and foundational page animations */
 @import 'base.css';
 
-/* 4️⃣ Typography: Headings, text hierarchy, line-height, and font consistency */
-@import 'typography.css';
 
 /* 5️⃣ Components: Buttons, cards, grids, scroll-to-top, footer, and reusable UI elements */
 @import 'components.css';
