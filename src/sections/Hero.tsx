@@ -10,12 +10,16 @@ const Hero: React.FC = () => {
       className="hero-section"
     >
       <h1 className="hero-title">Christian Morrow</h1>
+
       <p className="hero-subtitle">
-        Front-End Developer & UI/UX Enthusiast
+        Front-End Engineer <span className="accent-text">•</span> UI-Focused Full-Stack Developer
       </p>
+
       <p className="hero-tagline">
-        Crafting intentional digital experiences with clean code and expressive design.
+        I build scalable, accessible web applications using React, TypeScript, and modern backend frameworks —
+        with a strong focus on clean architecture and thoughtful user experience.
       </p>
+
       <motion.a
         href="#projects"
         className="scroll-prompt"

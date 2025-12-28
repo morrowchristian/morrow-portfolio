@@ -5,6 +5,7 @@ section {
   padding: clamp(3rem, 5vw, 5rem) 1.5rem;
   margin: 0 auto;
   max-width: var(--max-width);
+  scroll-margin-top: 90px;
 }
 
 section p + p {
@@ -12,7 +13,7 @@ section p + p {
 }
 
 section + section {
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 
 h2 {
