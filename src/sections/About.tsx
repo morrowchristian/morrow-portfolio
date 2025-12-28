@@ -1,40 +1,57 @@
-const About = () => {
-  return (
-    <section id="about" className="section reveal about">
-      <h2>About</h2>
+// src/sections/About.tsx
+import RevealSection from "../components/RevealSection";
+import { motion } from "framer-motion";
 
-      <div className="about-grid">
-        <div className="about-block">
-          <h3>What I Do</h3>
-          <p>
-            I’m a full‑stack software engineer who takes projects from rough concept to reliable,
-            production‑ready software. I focus on clear architecture, small composable pieces, and
-            code that another developer can understand and extend without friction.
-          </p>
-        </div>
+const aboutBlocks = [
+  {
+    title: "What I Do",
+    content:
+      "I’m a full‑stack software engineer who takes projects from rough concept to production‑ready software. I focus on clear architecture, composable pieces, and maintainable code."
+  },
+  {
+    title: "How I Build",
+    content:
+      "On the frontend, I work primarily with React and TypeScript to build clean, usable interfaces. On the backend, I’ve delivered APIs and internal tools using Django REST Framework, supported by relational databases such as PostgreSQL and MySQL."
+  },
+  {
+    title: "Recent Work",
+    content:
+      "Recent projects include a marketing site, an event management dashboard, an iOS SwiftUI app, and a Chrome extension for time calculations."
+  }
+];
 
-        <div className="about-block">
-          <h3>How I Build</h3>
-          <p>
-            On the frontend, I work primarily with React and TypeScript to build focused, minimal
-            interfaces that prioritize clarity and usability. On the backend, I’ve delivered APIs
-            and internal tools using Django REST Framework, supported by relational databases such
-            as PostgreSQL and MySQL.
-          </p>
-        </div>
-
-        <div className="about-block">
-          <h3>Recent Work</h3>
-          <p>
-            My recent work includes a marketing site for a client, an event management dashboard,
-            an iOS note‑taking app built with SwiftUI, and a Chrome extension for time calculations
-            published on the Chrome Web Store. I enjoy projects that solve concrete problems, evolve
-            through iteration, and leave room for thoughtful design.
-          </p>
-        </div>
-      </div>
-    </section>
-  );
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.15 } }
 };
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 }
+};
+
+const About = () => (
+  <RevealSection id="about" className="section about">
+    <header className="section-header">
+      <span className="section-eyebrow">Introduction</span>
+      <h2 className="section-title">About Me</h2>
+    </header>
+
+    <motion.div
+      className="about-grid"
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+    >
+      {aboutBlocks.map((block) => (
+        <motion.div key={block.title} className="about-block" variants={itemVariants}>
+          <h3>{block.title}</h3>
+          <p>{block.content}</p>
+        </motion.div>
+      ))}
+    </motion.div>
+  </RevealSection>
+);
 
 export default About;

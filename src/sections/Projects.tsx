@@ -1,4 +1,7 @@
+// src/sections/Projects.tsx
+import RevealSection from "../components/RevealSection";
 import ProjectCard from "../components/ProjectCard";
+import { motion } from "framer-motion";
 
 const projects = [
   {
@@ -27,22 +30,33 @@ const projects = [
   }
 ];
 
-const Projects = () => {
-  return (
-    <section id="projects" className="section projects reveal">
-      <h2>Projects</h2>
-
-      <div className="projects-grid">
-        {projects.map((p, i) => (
-          <ProjectCard
-            key={p.title}
-            {...p}
-            style={{ "--delay": `${i * 100}ms` } as React.CSSProperties}
-          />
-        ))}
-      </div>
-    </section>
-  );
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.15 } }
 };
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 }
+};
+
+const Projects = () => (
+  <RevealSection id="projects" className="section projects">
+    <h2>Projects</h2>
+    <motion.div
+      className="projects-grid"
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+    >
+      {projects.map((p) => (
+        <motion.div key={p.title} variants={itemVariants}>
+          <ProjectCard {...p} />
+        </motion.div>
+      ))}
+    </motion.div>
+  </RevealSection>
+);
 
 export default Projects;

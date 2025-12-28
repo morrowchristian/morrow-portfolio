@@ -1,3 +1,4 @@
+// src/components/Navbar.tsx
 import { useEffect, useRef, useState } from "react";
 import DarkModeToggle from "./DarkModeToggle";
 
@@ -5,16 +6,16 @@ const Navbar = () => {
   const [active, setActive] = useState("about");
   const activeRef = useRef(active);
 
-  /* Track active section for nav highlighting */
+  /* ------------------------------
+     Track active section for nav highlight
+  ------------------------------ */
   useEffect(() => {
     const sections = document.querySelectorAll("section");
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActive(entry.target.id);
-          }
+          if (entry.isIntersecting) setActive(entry.target.id);
         });
       },
       { threshold: 0.6 }
@@ -28,7 +29,9 @@ const Navbar = () => {
     activeRef.current = active;
   }, [active]);
 
-  /* Sticky nav scroll state */
+  /* ------------------------------
+     Sticky nav background on scroll
+  ------------------------------ */
   useEffect(() => {
     const nav = document.querySelector("nav.top-header");
     if (!nav) return;
@@ -42,7 +45,9 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  /* Keyboard navigation (Arrow Up / Down) */
+  /* ------------------------------
+     Keyboard navigation (Arrow Up/Down)
+  ------------------------------ */
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
@@ -56,7 +61,6 @@ const Navbar = () => {
       if (e.key === "ArrowDown" && currentIndex < sections.length - 1) {
         sections[currentIndex + 1].scrollIntoView({ behavior: "smooth" });
       }
-
       if (e.key === "ArrowUp" && currentIndex > 0) {
         sections[currentIndex - 1].scrollIntoView({ behavior: "smooth" });
       }
@@ -68,44 +72,26 @@ const Navbar = () => {
 
   return (
     <nav className="top-header">
-
-      {/* LEFT: logo / initials only */}
+      {/* LEFT: Logo / initials */}
       <div className="header-left">
-        <a href="#top" className="header-logo" aria-label="Home">      
+        <a href="#top" className="header-logo" aria-label="Home">
           CM
         </a>
       </div>
 
-      {/* RIGHT: navigation */}
+      {/* RIGHT: Navigation Links */}
       <div className="header-right">
         <ul>
-          <li>
-            <a href="#about" className={active === "about" ? "active-link" : ""}>
-              About
-            </a>
-          </li>
-          <li>
-            <a href="#skills" className={active === "skills" ? "active-link" : ""}>
-              Skills
-            </a>
-          </li>
-          <li>
-            <a
-              href="#projects"
-              className={active === "projects" ? "active-link" : ""}
-            >
-              Projects
-            </a>
-          </li>
-          <li>
-            <a
-              href="#contact"
-              className={active === "contact" ? "active-link" : ""}
-            >
-              Contact
-            </a>
-          </li>
-
+          {["about", "skills", "projects", "contact"].map((section) => (
+            <li key={section}>
+              <a
+                href={`#${section}`}
+                className={active === section ? "active-link" : ""}
+              >
+                {section.charAt(0).toUpperCase() + section.slice(1)}
+              </a>
+            </li>
+          ))}
           <li className="theme-toggle-item">
             <DarkModeToggle />
           </li>

@@ -1,26 +1,55 @@
 /* ============================================================
    LAYOUT — GLOBAL SECTION STRUCTURE
 ============================================================ */
+
 section {
-  padding: clamp(3rem, 5vw, 5rem) 1.5rem;
+  padding: clamp(4rem, 6vw, 6rem) 1.5rem; /* more breathing room with hero/navbar */
   margin: 0 auto;
   max-width: var(--max-width);
-  scroll-margin-top: 90px;
+  scroll-margin-top: 80px; /* offset for sticky navbar */
 }
 
 section p + p {
-  margin-top: 1.2rem;
+  margin-top: 1.25rem;
 }
 
 section + section {
-  margin-top: 2rem;
+  margin-top: 3.5rem; /* consistent vertical rhythm */
 }
 
 h2 {
   margin-bottom: 2rem;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 800;
 }
 
-/* ABOUT SECTION */
+/* -----------------------------
+   SECTION HEADER STYLING
+-------------------------------- */
+.section-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.section-eyebrow {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-accent);
+  margin-bottom: 0.5rem;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 800;
+  color: var(--color-text-primary);
+}
+
+/* -----------------------------
+   ABOUT SECTION
+-------------------------------- */
 .about {
   max-width: 900px;
   margin: 0 auto;
@@ -28,13 +57,13 @@ h2 {
 
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
   margin-top: 2rem;
 }
 
 .about-block h3 {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 600;
   margin-bottom: 0.8rem;
 }
@@ -42,17 +71,12 @@ h2 {
 .about-block p {
   font-size: 0.95rem;
   line-height: 1.6;
+  color: var(--color-text-secondary);
 }
 
-/* MOBILE */
-@media (max-width: 700px) {
-  .about-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-}
-
-/* SKILLS SECTION */
+/* -----------------------------
+   SKILLS SECTION
+-------------------------------- */
 .skills {
   max-width: 900px;
   margin: 0 auto;
@@ -65,31 +89,34 @@ h2 {
   margin-top: 2rem;
 }
 
-.skills-grid h3 {
+.skills-block h3 {
   font-size: 1.1rem;
   font-weight: 600;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.75rem;
 }
 
-.skills-grid li {
-  padding: 0.25rem 0;
-  color: var(--color-text-secondary);
+.skills-block ul li {
   font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 0.4rem;
 }
 
-/* PROJECTS SECTION */
+/* -----------------------------
+   PROJECTS SECTION
+-------------------------------- */
 .projects {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 2rem;
+  gap: 2.5rem;
   margin-top: 2rem;
 }
 
+/* Project overlay and image */
 .project-overlay {
   position: absolute;
   inset: 0;
@@ -107,7 +134,7 @@ h2 {
 
 .project-image {
   width: 100%;
-  height: 160px;
+  height: 180px;
   overflow: hidden;
   border-radius: var(--radius);
   margin-bottom: 1rem;
@@ -127,7 +154,9 @@ h2 {
   font-size: 0.9rem;
 }
 
-/* CONTACT SECTION */
+/* -----------------------------
+   CONTACT SECTION
+-------------------------------- */
 .contact {
   max-width: 700px;
   margin: 0 auto;
@@ -152,4 +181,32 @@ h2 {
 
 .contact-list a:hover {
   color: var(--color-accent-hover);
+}
+
+/* -----------------------------
+   RESPONSIVE
+-------------------------------- */
+@media (max-width: 900px) {
+  .about-grid, .skills-grid, .projects-grid {
+    gap: 2rem;
+  }
+
+  section {
+    padding: 3rem 1.5rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }

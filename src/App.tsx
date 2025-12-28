@@ -1,3 +1,4 @@
+// src/App.tsx
 import { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./sections/Hero";

@@ -1,35 +1,42 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+// src/sections/Hero.tsx
+import type { ReactNode } from "react";
+import RevealSection from "../components/RevealSection";
+import { motion } from "framer-motion";
 
-const Hero: React.FC = () => {
-  return (
-    <motion.section
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: 'easeOut' }}
-      className="hero-section"
-    >
-      <h1 className="hero-title">Christian Morrow</h1>
+const MotionText: React.FC<{ children: ReactNode; delay?: number; className?: string }> = ({
+  children,
+  delay = 0,
+  className
+}) => (
+  <motion.div
+    className={className}
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.8, delay }}
+  >
+    {children}
+  </motion.div>
+);
 
-      <p className="hero-subtitle">
-        Front-End Engineer <span className="accent-text">•</span> UI-Focused Full-Stack Developer
-      </p>
-
-      <p className="hero-tagline">
-        I build scalable, accessible web applications using React, TypeScript, and modern backend frameworks —
-        with a strong focus on clean architecture and thoughtful user experience.
-      </p>
-
-      <motion.a
-        href="#projects"
-        className="scroll-prompt"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-      >
+const Hero: React.FC = () => (
+  <RevealSection id="hero" className="hero-section">
+    <MotionText className="hero-title" delay={0}>
+      Christian Morrow
+    </MotionText>
+    <MotionText className="hero-subtitle" delay={0.1}>
+      Front-End Engineer <span className="accent-text">•</span> UI-Focused Full-Stack Developer
+    </MotionText>
+    <MotionText className="hero-tagline" delay={0.2}>
+      I build scalable, accessible web applications using React, TypeScript, and modern backend frameworks —
+      with a strong focus on clean architecture and thoughtful user experience.
+    </MotionText>
+    <MotionText className="scroll-prompt" delay={0.3}>
+      <a href="#projects" style={{ display: "inline-block" }}>
         Scroll to explore ↓
-      </motion.a>
-    </motion.section>
-  );
-};
+      </a>
+    </MotionText>
+  </RevealSection>
+);
 
 export default Hero;

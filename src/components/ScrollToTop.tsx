@@ -1,3 +1,4 @@
+// src/components/ScrollToTop.tsx
 import { useEffect, useState } from "react";
 
 const ScrollToTop = () => {

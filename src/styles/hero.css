@@ -5,7 +5,7 @@
 /* Base hero section */
 .hero-section {
   position: relative;
-  min-height: 90vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,11 +16,7 @@
   color: var(--color-text-primary);
   opacity: 0;
   transform: translateY(20px);
-  transition: 
-    opacity 0.6s ease,
-    transform 0.6s ease,
-    background 0.5s ease,
-    color 0.5s ease;
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 /* Reveal animation */
@@ -35,7 +31,7 @@
   position: absolute;
   inset: 0;
   background: var(--color-accent);
-  opacity: 0.05; /* subtle accent pop */
+  opacity: 0.05;
   pointer-events: none;
   border-radius: var(--radius);
 }
@@ -43,19 +39,19 @@
 /* Hero content card (layering effect) */
 .hero-content {
   position: relative;
-  background: rgba(255, 255, 255, 0.6); /* semi-transparent light layer */
-  border-radius: var(--radius);
+  max-width: 850px;
   padding: 2rem 2.5rem;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-  max-width: 900px;
-  z-index: 1; /* above overlay */
-  transition: background 0.5s ease;
+  background: rgba(255, 255, 255, 0.65);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  z-index: 1;
+  transition: background 0.5s ease, box-shadow 0.5s ease;
 }
 
 /* Dark mode hero content card adjustment */
 [data-theme="dark"] .hero-content {
-  background: rgba(30, 41, 59, 0.7);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  background: rgba(30, 41, 59, 0.75);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
 }
 
 /* Hero text */
@@ -68,10 +64,10 @@
 }
 
 .hero-subtitle {
-  font-size: clamp(1.5rem, 3vw, 1.8rem);
+  font-size: clamp(1.5rem, 3vw, 1.9rem);
   font-weight: 600;
-  margin-bottom: 1.5rem;
-  color: #374151;
+  margin-bottom: 1.2rem;
+  color: var(--color-text-secondary);
 }
 
 .hero-subtitle .accent-text {
@@ -81,7 +77,7 @@
 .hero-tagline {
   font-size: clamp(1.2rem, 2vw, 1.4rem);
   color: #6b7280;
-  opacity: 0.9;
+  opacity: 0.95;
   margin-bottom: 3rem;
 }
 
@@ -103,7 +99,7 @@
 @media (max-width: 768px) {
   .hero-title { font-size: 3.5rem; }
   .hero-subtitle { font-size: 1.5rem; }
-  .hero-tagline { font-size: 1.2rem; }
+  .hero-tagline { font-size: 1.25rem; }
   .hero-content { padding: 1.5rem 2rem; }
 }
 
