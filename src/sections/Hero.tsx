@@ -1,42 +1,61 @@
 // src/sections/Hero.tsx
-import type { ReactNode } from "react";
+import React from "react";
 import RevealSection from "../components/RevealSection";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 
-const MotionText: React.FC<{ children: ReactNode; delay?: number; className?: string }> = ({
-  children,
-  delay = 0,
-  className
-}) => (
-  <motion.div
-    className={className}
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.8, delay }}
-  >
-    {children}
-  </motion.div>
-);
+const motionTextVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.42, 0, 0.58, 1] } }
+};
 
-const Hero: React.FC = () => (
-  <RevealSection id="hero" className="hero-section">
-    <MotionText className="hero-title" delay={0}>
-      Christian Morrow
-    </MotionText>
-    <MotionText className="hero-subtitle" delay={0.1}>
-      Front-End Engineer <span className="accent-text">•</span> UI-Focused Full-Stack Developer
-    </MotionText>
-    <MotionText className="hero-tagline" delay={0.2}>
-      I build scalable, accessible web applications using React, TypeScript, and modern backend frameworks —
-      with a strong focus on clean architecture and thoughtful user experience.
-    </MotionText>
-    <MotionText className="scroll-prompt" delay={0.3}>
-      <a href="#projects" style={{ display: "inline-block" }}>
+const Hero: React.FC = () => {
+  return (
+    <RevealSection id="hero" className="hero-section">
+      <motion.h1
+        className="hero-title"
+        variants={motionTextVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        Christian Morrow
+      </motion.h1>
+
+      <motion.p
+        className="hero-subtitle"
+        variants={motionTextVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        Front-End Engineer <span className="accent-text">•</span> UI-Focused Full-Stack Developer
+      </motion.p>
+
+      <motion.p
+        className="hero-tagline"
+        variants={motionTextVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        I build scalable, accessible web applications using React, TypeScript, and modern backend frameworks —
+        with a strong focus on clean architecture and thoughtful user experience.
+      </motion.p>
+
+      <motion.a
+        href="#projects"
+        className="scroll-prompt"
+        variants={motionTextVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+      >
         Scroll to explore ↓
-      </a>
-    </MotionText>
-  </RevealSection>
-);
+      </motion.a>
+    </RevealSection>
+  );
+};
 
 export default Hero;

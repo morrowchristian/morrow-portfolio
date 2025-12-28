@@ -1,6 +1,6 @@
 // src/sections/About.tsx
 import RevealSection from "../components/RevealSection";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 
 const aboutBlocks = [
   {
@@ -20,38 +20,45 @@ const aboutBlocks = [
   }
 ];
 
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.15 } }
-};
-
-const itemVariants = {
+const blockVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 }
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.42, 0, 0.58, 1] } // cubic-bezier easing
+  }
 };
 
-const About = () => (
-  <RevealSection id="about" className="section about">
-    <header className="section-header">
-      <span className="section-eyebrow">Introduction</span>
-      <h2 className="section-title">About Me</h2>
-    </header>
+const About = () => {
+  return (
+    <RevealSection id="about" className="section about">
+      <header className="section-header">
+        <span className="section-eyebrow">Introduction</span>
+        <h2 className="section-title">About Me</h2>
+      </header>
 
-    <motion.div
-      className="about-grid"
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-    >
-      {aboutBlocks.map((block) => (
-        <motion.div key={block.title} className="about-block" variants={itemVariants}>
-          <h3>{block.title}</h3>
-          <p>{block.content}</p>
-        </motion.div>
-      ))}
-    </motion.div>
-  </RevealSection>
-);
+      <motion.div
+        className="about-grid"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={{
+          visible: { transition: { staggerChildren: 0.1 } }
+        }}
+      >
+        {aboutBlocks.map((block) => (
+          <motion.div
+            key={block.title}
+            className="about-block"
+            variants={blockVariants}
+          >
+            <h3>{block.title}</h3>
+            <p>{block.content}</p>
+          </motion.div>
+        ))}
+      </motion.div>
+    </RevealSection>
+  );
+};
 
 export default About;

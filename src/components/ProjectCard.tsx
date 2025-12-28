@@ -9,13 +9,12 @@ type ProjectCardProps = {
 
 const ProjectCard = ({ image, title, tagline, tech, style }: ProjectCardProps) => {
   return (
-    <div className="project-card" style={style}>
+    <div className="project-card reveal-card" style={style}>
       <div className="project-image">
         <img src={image} alt={title} />
-      </div>
-
-      <div className="project-overlay">
-        <p>View Project →</p>
+        <div className="project-overlay">
+          <p>View Project →</p>
+        </div>
       </div>
 
       <h3>{title}</h3>
