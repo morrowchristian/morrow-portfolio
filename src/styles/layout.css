@@ -83,14 +83,20 @@ h2 {
 
 .skills-grid {
   display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  margin-top: 2rem;
 }
 
 .skills-block {
   background: var(--card-bg, #f9f9f9);
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
   box-shadow: var(--shadow, 0 4px 12px rgba(0,0,0,0.05));
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -101,9 +107,38 @@ h2 {
 }
 
 .skills-block h3 {
-  margin-bottom: 0.75rem;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.skills-block p {
+  font-size: 0.9rem;
+  color: var(--text-muted, #555);
+}
+
+.skills-block .icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-accent);
+}
+
+/* Specific layouts for sections */
+.skills-grid.tech {
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}
+
+.skills-grid.traits {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.skills-grid.tools {
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+}
+
+.skills-block span {
+  font-weight: 500;
+  margin-top: 0.25rem;
 }
 
 .skills-description {
