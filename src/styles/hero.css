@@ -10,10 +10,6 @@
   background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-bg) 100%);
 }
 
-.dark .hero-section {
-  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
-}
-
 .hero-content {
   max-width: 900px;
   padding: 2.5rem;
@@ -21,8 +17,4 @@
   border-radius: var(--radius);
   box-shadow: var(--shadow-md);
   backdrop-filter: blur(4px);
-}
-
-.dark .hero-content {
-  background: rgba(30, 41, 59, 0.8);
 }

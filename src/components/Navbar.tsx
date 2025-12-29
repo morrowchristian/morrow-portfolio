@@ -1,6 +1,5 @@
 // src/components/Navbar.tsx
 import { useEffect, useRef, useState } from "react";
-import DarkModeToggle from "./DarkModeToggle";
 
 const Navbar = () => {
   const [active, setActive] = useState("about");
@@ -92,9 +91,6 @@ const Navbar = () => {
               </a>
             </li>
           ))}
-          <li className="theme-toggle-item">
-            <DarkModeToggle />
-          </li>
         </ul>
       </div>
     </nav>

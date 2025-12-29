@@ -9,7 +9,7 @@
   --grid-gap: clamp(1.5rem, 3vw, 2.5rem);
   --max-width: 1200px;
 
-  /* Light Mode */
+  /* Colors */
   --color-bg: #f8f9fa;
   --color-surface: #ffffff;
   --color-surface-hover: #f1f3f5;
@@ -25,20 +25,6 @@
   --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   --shadow-sm: 0 4px 12px rgba(0,0,0,0.08);
   --shadow-md: 0 12px 30px rgba(0,0,0,0.15);
-}
-
-.dark {
-  --color-bg: #0f172a;           /* Deeper slate */
-  --color-surface: #1e293b;
-  --color-surface-hover: #334155;
-  --color-text-primary: #f1f5f9;
-  --color-text-secondary: #94a3b8;
-  --color-accent: #00ffff;
-  --color-accent-hover: #66ffff;
-  --color-link: #60a5fa;          /* Lighter blue for dark links */
-  --color-border: rgba(255,255,255,0.12);
-  --shadow-sm: 0 4px 12px rgba(0,0,0,0.4);
-  --shadow-md: 0 12px 30px rgba(0,0,0,0.6);
 }
 
 body {

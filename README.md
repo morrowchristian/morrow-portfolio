@@ -109,7 +109,6 @@ Planned enhancements:
 
 - Directional stagger animations across all sections  
 - Scroll‑based parallax for hero and project imagery  
-- Dark mode system with CSS variables  
 - Project filtering by category or tech stack  
 - Accessibility improvements for keyboard and screen readers  
 
