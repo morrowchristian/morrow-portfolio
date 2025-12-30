@@ -21,6 +21,10 @@ import {
   SiVercel
 } from "react-icons/si";
 
+/* =========================
+   Motion Variants
+========================= */
+
 const containerVariants: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.08 } }
@@ -43,7 +47,7 @@ const languages = [
   { name: "TypeScript", icon: <SiTypescript /> },
   { name: "JavaScript", icon: <SiJavascript /> },
   { name: "Python", icon: <SiPython /> },
-  { name: "Swift", icon: <SiSwift /> },
+  { name: "Swift", icon: <SiSwift /> }
 ];
 
 const webFundamentals = [
@@ -91,6 +95,10 @@ const engineeringPrinciples = [
       "Comfortable taking features from idea to deployment, with attention to long-term stability."
   }
 ];
+
+/* =========================
+   Component
+========================= */
 
 const Skills = () => {
   return (

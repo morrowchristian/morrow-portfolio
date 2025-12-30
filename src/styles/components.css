@@ -34,16 +34,16 @@
 .skills-list {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 0.9rem;
 }
 
 .skill-item {
   display: flex;
   align-items: center;
-  gap: 0.9rem;
+  gap: 1rem;
   padding: 0.65rem 0.75rem;
   border-radius: calc(var(--radius) * 0.5);
-  transition: background 0.2s ease;
+  transition: var(--transition);
 }
 
 .skill-item:hover {
@@ -51,23 +51,46 @@
 }
 
 .skill-icon {
-  font-size: 1.35rem;
-  color: var(--color-text-secondary);
+  font-size: 1.5rem;
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
   flex-shrink: 0;
+}
+
+.skill-item:hover .skill-icon {
+  color: var(--color-accent);
 }
 
 .skill-name {
   font-size: 0.95rem;
   font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: var(--transition);
+}
+
+.skill-item:hover .skill-name {
   color: var(--color-text-primary);
 }
 
-/* Engineering Principles */
+/* Engineering Traits / Principles */
 
 .traits-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
+}
+
+.trait-item {
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.trait-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 .trait-item h4 {
@@ -84,7 +107,9 @@
   margin: 0;
 }
 
-/* Responsive */
+/* =========================
+   Responsive Styles
+========================= */
 
 @media (max-width: 1024px) {
   .skills-containers {
@@ -100,6 +125,7 @@
   .skills-containers {
     grid-template-columns: 1fr;
     gap: 1.75rem;
+    margin-top: 2.5rem;
   }
 
   .skills-container {
@@ -108,6 +134,11 @@
 
   .skills-container--wide {
     grid-column: span 1;
+  }
+
+  .skills-container h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1.25rem;
   }
 
   .traits-list {
