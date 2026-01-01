@@ -5,17 +5,14 @@ import { motion, type Variants } from "framer-motion";
 
 const motionTextVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { duration: 0.8, ease: [0.42, 0, 0.58, 1] } 
-  }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.42, 0, 0.58, 1] } }
 };
 
 const Hero: React.FC = () => {
   return (
     <RevealSection id="hero" className="hero-section">
       <div className="hero-content">
+        {/* Name / Eyebrow */}
         <motion.span
           className="hero-eyebrow"
           variants={motionTextVariants}
@@ -26,6 +23,7 @@ const Hero: React.FC = () => {
           Christian Morrow
         </motion.span>
 
+        {/* Headline */}
         <motion.h1
           className="hero-title"
           variants={motionTextVariants}
@@ -33,19 +31,10 @@ const Hero: React.FC = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          Software Engineer building modern, full-stack web applications.
+          Full-Stack Software Engineer
         </motion.h1>
 
-        <motion.p
-          className="hero-subtitle"
-          variants={motionTextVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          B.S. in Software Systems (Latin Honors), University of Tennessee at Chattanooga — May 2025.
-        </motion.p>
-
+        {/* Tagline / Value Proposition */}
         <motion.p
           className="hero-tagline"
           variants={motionTextVariants}
@@ -53,9 +42,10 @@ const Hero: React.FC = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          Experienced in building production-ready applications from the ground up using modern JavaScript and Python stacks.
+          Ready to turn complex ideas into polished, functional software from day one.
         </motion.p>
 
+        {/* Action Buttons */}
         <motion.div
           className="hero-actions"
           variants={motionTextVariants}
@@ -69,12 +59,15 @@ const Hero: React.FC = () => {
           <a href="/Christian_Morrow_Resume.pdf" className="btn btn-secondary">
             Download Resume
           </a>
+          <a href="https://github.com/morrowchristian" className="btn btn-secondary">
+            GitHub
+          </a>
         </motion.div>
 
+        {/* Scroll Prompt */}
         <motion.a
           href="#projects"
           className="scroll-prompt"
-          aria-label="Scroll to Projects"
           variants={motionTextVariants}
           initial="hidden"
           whileInView="visible"
