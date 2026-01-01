@@ -1,20 +1,137 @@
 /* src/styles/hero.css */
+
+/* -------------------------------
+   Hero Section Container
+--------------------------------- */
 .hero-section {
-  min-height: 100vh;
+  min-height: 80vh; /* reduces white space above */
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: var(--section-padding);
-  background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-bg) 100%);
+  justify-content: center; /* vertical alignment */
+  align-items: flex-start;  /* left-aligned content */
+  padding: clamp(3rem, 6vw, 5rem) 2rem; /* top & sides */
+  background: linear-gradient(
+    180deg,
+    rgba(0, 179, 179, 0.05) 0%,   /* light at top */
+    rgba(8, 40, 70, 0.95) 100%     /* dark at bottom */
+  );
+  color: var(--color-text-primary);
+  position: relative;
+  overflow: hidden;
 }
 
+/* subtle overlay if desired */
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.03);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* -------------------------------
+   Hero Content
+--------------------------------- */
 .hero-content {
-  max-width: 900px;
-  padding: 2.5rem;
-  background: rgba(255,255,255,0.7);
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Eyebrow / Name */
+.hero-eyebrow {
+  font-size: clamp(2rem, 4vw, 2.5rem); /* prominent */
+  font-weight: 700;
+  color: var(--color-text-primary); /* keep primary for emphasis */
+  letter-spacing: 0.03em;
+  margin-bottom: 0.25rem;
+}
+
+/* Main Title / Role */
+.hero-title {
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem); /* smaller than name */
+  font-weight: 500;
+  color: var(--color-text-primary); /* keep title visible on darker gradient bottom */
+  margin-bottom: 0.25rem;
+}
+
+/* Subtitle / Degree */
+.hero-subtitle {
+  font-size: clamp(0.95rem, 1.8vw, 1rem);
+  color: var(--color-text-primary);
+  margin-bottom: 0.25rem;
+}
+
+/* Optional tagline */
+.hero-tagline {
+  font-size: clamp(0.9rem, 1.6vw, 0.95rem);
+  color: var(--color-text-muted);
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+}
+
+/* -------------------------------
+   Hero Actions (Buttons)
+--------------------------------- */
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  padding: 0.6rem 1.25rem;
   border-radius: var(--radius);
-  box-shadow: var(--shadow-md);
-  backdrop-filter: blur(4px);
+  background: var(--color-accent);
+  color: white;
+  font-weight: 600;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background: var(--color-accent-hover);
+}
+
+.btn-secondary {
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary); /* stronger text */
+  font-weight: 600;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background: var(--color-surface-hover);
+  outline: 2px solid var(--color-accent); /* high contrast */
+  outline-offset: 2px;
+  color: var(--color-text-primary);
+}
+
+.btn-secondary:hover {
+  background: var(--color-surface-hover);
+}
+
+/* -------------------------------
+   Scroll Prompt
+--------------------------------- */
+.scroll-prompt {
+  font-size: clamp(0.8rem, 1.2vw, 0.875rem);
+  color: var(--color-accent);
+  margin-top: 2rem;
+  display: inline-block;
+  transition: var(--transition);
+}
+
+.scroll-prompt:hover {
+  transform: translateY(-2px);
+  color: var(--color-accent-hover);
 }
