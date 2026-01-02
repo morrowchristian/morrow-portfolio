@@ -1,36 +1,16 @@
 // src/components/Navbar.tsx
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
+import type { Section } from "../App";
 
-const Navbar = () => {
-  const [active, setActive] = useState("about");
-  const activeRef = useRef(active);
+interface NavbarProps {
+  activeSection: Section;
+  setActiveSection: (section: Section) => void;
+}
 
-  /* ------------------------------
-     Track active section for nav highlight
-  ------------------------------ */
-  useEffect(() => {
-    const sections = document.querySelectorAll("section");
+const Navbar = ({ activeSection, setActiveSection }: NavbarProps) => {
+  const navSections: Section[] = ["hero", "about", "skills", "projects", "contact"];
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(entry.target.id);
-        });
-      },
-      { threshold: 0.6 }
-    );
-
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    activeRef.current = active;
-  }, [active]);
-
-  /* ------------------------------
-     Sticky nav background on scroll
-  ------------------------------ */
+  // Sticky background on scroll
   useEffect(() => {
     const nav = document.querySelector("nav.top-header");
     if (!nav) return;
@@ -44,51 +24,33 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  /* ------------------------------
-     Keyboard navigation (Arrow Up/Down)
-  ------------------------------ */
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
-      e.preventDefault();
-
-      const sections = Array.from(document.querySelectorAll("section"));
-      const currentIndex = sections.findIndex(
-        (s) => s.id === activeRef.current
-      );
-
-      if (e.key === "ArrowDown" && currentIndex < sections.length - 1) {
-        sections[currentIndex + 1].scrollIntoView({ behavior: "smooth" });
-      }
-      if (e.key === "ArrowUp" && currentIndex > 0) {
-        sections[currentIndex - 1].scrollIntoView({ behavior: "smooth" });
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown, { passive: false });
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
-
   return (
     <nav className="top-header">
-      {/* LEFT: Logo / initials */}
+      {/* LEFT: Logo / Home */}
       <div className="header-left">
-        <a href="#top" className="header-logo" aria-label="Home">
+        <button
+          className={activeSection === "hero" ? "active-link" : ""}
+          aria-label="Jump to Home section"
+          aria-current={activeSection === "hero" ? "page" : undefined}
+          onClick={() => setActiveSection("hero")}
+        >
           CM
-        </a>
+        </button>
       </div>
 
       {/* RIGHT: Navigation Links */}
       <div className="header-right">
         <ul>
-          {["about", "skills", "projects", "contact"].map((section) => (
+          {navSections.slice(1).map((section) => (
             <li key={section}>
-              <a
-                href={`#${section}`}
-                className={active === section ? "active-link" : ""}
+              <button
+                className={activeSection === section ? "active-link" : ""}
+                aria-current={activeSection === section ? "page" : undefined}
+                aria-label={`Jump to ${section.charAt(0).toUpperCase() + section.slice(1)} section`}
+                onClick={() => setActiveSection(section)}
               >
                 {section.charAt(0).toUpperCase() + section.slice(1)}
-              </a>
+              </button>
             </li>
           ))}
         </ul>

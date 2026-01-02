@@ -4,20 +4,21 @@
    Hero Section Container
 --------------------------------- */
 .hero-section {
-  min-height: 80vh; /* reduces white space above */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* vertical alignment */
-  align-items: flex-start;  /* left-aligned content */
-  padding: clamp(3rem, 6vw, 5rem) 2rem; /* top & sides */
+  justify-content: center;
+  align-items: flex-start;
+  padding: clamp(3rem, 6vw, 5rem) 2rem;
   background: linear-gradient(
     180deg,
-    rgba(0, 179, 179, 0.05) 0%,   /* light at top */
-    rgba(8, 40, 70, 0.95) 100%     /* dark at bottom */
+    rgba(0, 179, 179, 0.05) 0%,
+    rgba(8, 40, 70, 0.95) 100%
   );
   color: var(--color-text-primary);
   position: relative;
   overflow: hidden;
+  scroll-snap-type: start;
 }
 
 /* subtle overlay if desired */

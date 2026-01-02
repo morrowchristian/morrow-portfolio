@@ -1,4 +1,7 @@
-/* src/styles/base.css */
+/* ============================================================
+   BASE STYLES - src\styles\base.css
+============================================================ */
+
 * {
   margin: 0;
   padding: 0;
@@ -11,9 +14,14 @@ html {
 }
 
 body {
+  font-family: var(--font-body);
+  color: var(--color-text-primary);
+  background: var(--color-bg);
+  line-height: 1.65;
   height: 100%;
   opacity: 0;
   animation: fadeInPage 0.6s ease forwards;
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
 @keyframes fadeInPage {
@@ -29,4 +37,26 @@ img {
 button, a, .button {
   min-height: 44px;
   min-width: 44px;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
 }

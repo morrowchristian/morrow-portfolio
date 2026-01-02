@@ -1,90 +1,82 @@
 // src/sections/Hero.tsx
-import React from "react";
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
+import type { Section } from "../App";
+import { itemFadeUp } from "../utils/motionVariants";
 
-const motionTextVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: [0.42, 0, 0.58, 1] },
-  },
-};
+interface HeroProps {
+  setActiveSection: (section: Section) => void;
+}
 
-const Hero: React.FC = () => {
-  return (
-    <section id="hero" className="hero-section">
-      <div className="hero-content">
-        <motion.span
-          className="hero-eyebrow"
-          variants={motionTextVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          Christian Morrow
-        </motion.span>
+const Hero = ({ setActiveSection }: HeroProps) => (
+  <section className="hero-section">
+    <div className="section-content hero-content">
+      <motion.span
+        className="hero-eyebrow"
+        variants={itemFadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        Christian Morrow
+      </motion.span>
 
-        <motion.h1
-          className="hero-title"
-          variants={motionTextVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          Full-Stack Software Engineer
-        </motion.h1>
+      <motion.h1
+        variants={itemFadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        Full-Stack Software Engineer
+      </motion.h1>
 
-        <motion.p
-          className="hero-subtitle"
-          variants={motionTextVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          B.S. in Software Systems (Cum Laude), University of Tennessee at Chattanooga — May 2025
-        </motion.p>
+      <motion.p
+        variants={itemFadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        B.S. in Software Systems (Cum Laude), University of Tennessee at Chattanooga — May 2025
+      </motion.p>
 
-        <motion.p
-          className="hero-tagline"
-          variants={motionTextVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          Building modern, full-stack applications with JavaScript and Python stacks.
-        </motion.p>
+      <motion.p
+        variants={itemFadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        Building modern, full-stack applications with JavaScript and Python stacks.
+      </motion.p>
 
-        <motion.div
-          className="hero-actions"
-          variants={motionTextVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <a href="#projects" className="btn btn-primary">
-            View Projects
-          </a>
-          <a href="/Christian_Morrow_Resume.pdf" className="btn btn-secondary">
-            Download Resume
-          </a>
-        </motion.div>
+      <motion.div
+        className="hero-actions"
+        variants={itemFadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <button className="btn btn-primary" onClick={() => setActiveSection("projects")}>
+          View Projects
+        </button>
+        <a href="/Christian_Morrow_Resume.pdf" className="btn btn-secondary">
+          Download Resume
+        </a>
+      </motion.div>
 
-        <motion.a
-          href="#projects"
-          className="scroll-prompt"
-          variants={motionTextVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          ↓ Scroll to explore ↓
-        </motion.a>
-      </div>
-    </section>
-  );
-};
+      <motion.button
+        className="scroll-prompt"
+        onClick={() => setActiveSection("about")}
+        variants={itemFadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        ↓ Scroll to explore ↓
+      </motion.button>
+    </div>
+  </section>
+);
 
 export default Hero;
+
