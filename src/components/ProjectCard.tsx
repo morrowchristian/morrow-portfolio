@@ -1,25 +1,23 @@
 // src/components/ProjectCard.tsx
-type ProjectCardProps = {
-  image: string;
-  title: string;
-  tagline: string;
-  tech: string;
-  style?: React.CSSProperties;
-};
+import React from "react";
+import type { Project } from "../types/Project";
 
-const ProjectCard = ({ image, title, tagline, tech, style }: ProjectCardProps) => {
+interface Props {
+  project: Project;
+}
+
+const ProjectCard: React.FC<Props> = ({ project }) => {
   return (
-    <div className="project-card reveal-card" style={style}>
-      <div className="project-image">
-        <img src={image} alt={title} />
-        <div className="project-overlay">
-          <p>View Project →</p>
-        </div>
-      </div>
-
-      <h3>{title}</h3>
-      <p className="project-tagline">{tagline}</p>
-      <p className="tech-list">{tech}</p>
+    <div style={{ border: "1px solid #ccc", padding: "1rem", width: "250px" }}>
+      {project.image && <img src={project.image} alt={project.title} style={{ width: "100%" }} />}
+      <h3>{project.title}</h3>
+      <p>{project.summary}</p>
+      <span>{project.techStack.join(", ")}</span>
+      {project.link && (
+        <a href={project.link} target="_blank" rel="noopener noreferrer">
+          View Project
+        </a>
+      )}
     </div>
   );
 };

@@ -1,35 +1,15 @@
 // src/components/Footer.tsx
-import type { Section } from "../App";
+import React from "react";
 
-interface FooterProps {
-  setActiveSection?: (section: Section) => void;
-}
-
-const Footer = ({ setActiveSection }: FooterProps) => {
+const Footer: React.FC = () => {
   return (
-    <footer className="footer">
-      <div className="footer-inner">
-        <p>© {new Date().getFullYear()} Christian Morrow</p>
-
-        <div className="footer-links">
-          <a
-            href="https://github.com/morrowchristian"
-            target="_blank"
-            rel="noreferrer"
-          >
-            GitHub
-          </a>
-          {setActiveSection && (
-            <button
-              className="footer-contact-btn"
-              onClick={() => setActiveSection("contact")}
-              aria-label="Jump to Contact section"
-            >
-              Contact
-            </button>
-          )}
-        </div>
-      </div>
+    <footer style={{ padding: "1rem", background: "#f4f4f4", textAlign: "center", marginTop: "2rem" }}>
+      <p>
+        <a href="mailto:morrowchristian@icloud.com">morrowchristian@icloud.com</a> | 
+        <a href="https://github.com/morrowchristian" target="_blank" rel="noopener noreferrer"> GitHub</a> | 
+        <a href="https://www.linkedin.com/in/christian-morrow/" target="_blank" rel="noopener noreferrer"> LinkedIn</a> | 
+        <a href="/resume.pdf" download>Download Resume</a>
+      </p>
     </footer>
   );
 };
