@@ -1,8 +1,4 @@
 /* src/styles/hero.css */
-
-/* -------------------------------
-   Hero Section Container
---------------------------------- */
 .hero-section {
   min-height: 100vh;
   display: flex;
@@ -10,120 +6,63 @@
   justify-content: center;
   align-items: flex-start;
   padding: clamp(3rem, 6vw, 5rem) 2rem;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 179, 179, 0.05) 0%,
-    rgba(8, 40, 70, 0.95) 100%
-  );
+  background: linear-gradient(180deg, rgba(0,179,179,0.05) 0%, rgba(8,40,70,0.85) 100%);
   color: var(--color-text-primary);
   position: relative;
   overflow: hidden;
-  scroll-snap-type: start;
 }
 
-/* subtle overlay if desired */
 .hero-section::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255,255,255,0.03);
   pointer-events: none;
   z-index: 0;
 }
 
-/* -------------------------------
-   Hero Content
---------------------------------- */
 .hero-content {
   position: relative;
   z-index: 1;
-  max-width: 700px;
+  max-width: 720px;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-/* Eyebrow / Name */
-.hero-eyebrow {
-  font-size: clamp(2rem, 4vw, 2.5rem); /* prominent */
-  font-weight: 700;
-  color: var(--color-text-primary); /* keep primary for emphasis */
-  letter-spacing: 0.03em;
-  margin-bottom: 0.25rem;
-}
+.hero-eyebrow { font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 700; }
+.hero-title { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; }
+.hero-subtitle { font-size: clamp(1rem, 1.8vw, 1.2rem); }
+.hero-tagline { font-size: clamp(0.9rem, 1.5vw, 1rem); color: var(--color-text-secondary); line-height: 1.5; }
 
-/* Main Title / Role */
-.hero-title {
-  font-size: clamp(1.25rem, 2.5vw, 1.5rem); /* smaller than name */
-  font-weight: 500;
-  color: var(--color-text-primary); /* keep title visible on darker gradient bottom */
-  margin-bottom: 0.25rem;
-}
-
-/* Subtitle / Degree */
-.hero-subtitle {
-  font-size: clamp(0.95rem, 1.8vw, 1rem);
-  color: var(--color-text-primary);
-  margin-bottom: 0.25rem;
-}
-
-/* Optional tagline */
-.hero-tagline {
-  font-size: clamp(0.9rem, 1.6vw, 0.95rem);
-  color: var(--color-text-muted);
-  margin-bottom: 1.25rem;
-  line-height: 1.5;
-}
-
-/* -------------------------------
-   Hero Actions (Buttons)
---------------------------------- */
-.hero-actions {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
 
 .btn-primary {
   padding: 0.6rem 1.25rem;
   border-radius: var(--radius);
   background: var(--color-accent);
-  color: white;
+  color: #fff;
   font-weight: 600;
-  transition: var(--transition);
   text-decoration: none;
+  transition: var(--transition);
 }
 
-.btn-primary:hover {
-  background: var(--color-accent-hover);
-}
+.btn-primary:hover { background: var(--color-accent-hover); }
 
 .btn-secondary {
   padding: 0.6rem 1.25rem;
   border-radius: var(--radius);
   background: transparent;
   border: 1px solid var(--color-border);
-  color: var(--color-text-primary); /* stronger text */
+  color: var(--color-text-primary);
   font-weight: 600;
-  transition: var(--transition);
   text-decoration: none;
+  transition: var(--transition);
 }
 
 .btn-secondary:hover,
-.btn-secondary:focus {
-  background: var(--color-surface-hover);
-  outline: 2px solid var(--color-accent); /* high contrast */
-  outline-offset: 2px;
-  color: var(--color-text-primary);
-}
+.btn-secondary:focus { background: var(--color-surface-hover); outline: 2px solid var(--color-accent); outline-offset: 2px; }
 
-.btn-secondary:hover {
-  background: var(--color-surface-hover);
-}
-
-/* -------------------------------
-   Scroll Prompt
---------------------------------- */
 .scroll-prompt {
   font-size: clamp(0.8rem, 1.2vw, 0.875rem);
   color: var(--color-accent);
@@ -132,7 +71,4 @@
   transition: var(--transition);
 }
 
-.scroll-prompt:hover {
-  transform: translateY(-2px);
-  color: var(--color-accent-hover);
-}
+.scroll-prompt:hover { transform: translateY(-2px); color: var(--color-accent-hover); }

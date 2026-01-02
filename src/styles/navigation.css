@@ -3,63 +3,30 @@ nav.top-header {
   position: sticky;
   top: 0;
   z-index: 1000;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 1.25rem 2rem;
-
-  background: transparent; /* let hero breathe */
+  background: transparent;
   border-bottom: none;
-
   transition: background 0.4s ease, padding 0.4s ease;
 }
 
-/* Background appears after scroll (JS adds .scrolled) */
 nav.top-header.scrolled {
-  background: rgba(15, 23, 42, 0.85);
+  background: rgba(15,23,42,0.85);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--color-border);
   padding: 1rem 2rem;
 }
 
-/* --------------------------------
-   LEFT SIDE (logo / initials only)
----------------------------------- */
-
-.header-left {
-  display: flex;
-  align-items: center;
-}
-
-/* OPTIONAL: replace name with initials or logo */
-.header-logo {
-  font-weight: 700;
-  font-size: 1.1rem;
-  letter-spacing: 0.08em;
-  color: var(--color-accent);
-  text-decoration: none;
-}
-
-/* Hide old identity elements (hero owns these now) */
-.header-name,
-.header-title,
-.header-profile {
-  display: none;
-}
-
-/* --------------------------------
-   RIGHT SIDE NAV LINKS
----------------------------------- */
+.header-left { display: flex; align-items: center; }
+.header-logo { font-weight: 700; font-size: 1.1rem; letter-spacing: 0.08em; color: var(--color-accent); text-decoration: none; }
+.header-name, .header-title, .header-profile { display: none; }
 
 .header-right ul {
   list-style: none;
-  padding: 0;
-  margin: 0;
-
   display: flex;
   align-items: center;
   gap: 2rem;
@@ -75,9 +42,7 @@ nav.top-header.scrolled {
 }
 
 .header-right a:hover,
-.header-right a.active-link {
-  color: var(--color-accent);
-}
+.header-right a.active-link { color: var(--color-accent); }
 
 .header-right a::after {
   content: "";
@@ -91,20 +56,9 @@ nav.top-header.scrolled {
 }
 
 .header-right a:hover::after,
-.header-right a.active-link::after {
-  width: 100%;
-}
-
-/* --------------------------------
-   MOBILE
----------------------------------- */
+.header-right a.active-link::after { width: 100%; }
 
 @media (max-width: 900px) {
-  nav.top-header {
-    padding: 1rem 1.5rem;
-  }
-
-  .header-right ul {
-    gap: 1.5rem;
-  }
+  nav.top-header { padding: 1rem 1.5rem; }
+  .header-right ul { gap: 1.5rem; }
 }

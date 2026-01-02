@@ -1,42 +1,12 @@
 /* src/styles/mobile-menu.css */
-.nav-container {
-  position: relative;
-}
+.nav-container { position: relative; }
 
-.nav-desktop {
-  display: flex;
-  gap: 2rem;
-}
+.nav-desktop { display: flex; gap: 2rem; }
+@media (max-width: 768px) { .nav-desktop { display: none; } }
 
-@media (max-width: 768px) {
-  .nav-desktop { display: none; }
-  .signal-toggle {
-    display: block;
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-  }
-}
-
-.signal-toggle {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-}
-
-.signal-bar {
-  width: 28px;
-  height: 2px;
-  background: var(--color-text-primary);
-  transition: transform 0.25s ease, opacity 0.25s ease;
-}
-
-.signal-toggle.open .signal-bar {
-  transform: scaleX(1.4);
-  opacity: 0.7;
-}
+.signal-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0; }
+.signal-bar { width: 28px; height: 2px; background: var(--color-text-primary); transition: transform 0.25s ease, opacity 0.25s ease; }
+.signal-toggle.open .signal-bar { transform: scaleX(1.4); opacity: 0.7; }
 
 .mobile-menu {
   position: absolute;
@@ -55,11 +25,7 @@
   box-shadow: var(--shadow-md);
 }
 
-.mobile-menu.open {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
+.mobile-menu.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
 
 .focus-overlay {
   position: fixed;
@@ -70,10 +36,7 @@
   transition: background 0.25s ease;
 }
 
-.focus-overlay.open {
-  background: rgba(0,0,0,0.04);
-  pointer-events: auto;
-}
+.focus-overlay.open { background: rgba(0,0,0,0.04); pointer-events: auto; }
 
 @media (prefers-reduced-motion: reduce) {
   .mobile-menu, .signal-bar, .focus-overlay { transition: none !important; }

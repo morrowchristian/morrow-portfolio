@@ -1,147 +1,195 @@
+/* src/styles/components.css */
+
 /* =========================
-   Skills Section
+   Buttons
 ========================= */
 
-.skills-containers {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2.25rem;
-  margin-top: 3rem;
-}
-
-.skills-container {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-}
-
-.skills-container--wide {
-  grid-column: span 3;
-}
-
-.skills-container h3 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-  color: var(--color-text-primary);
-}
-
-/* Skill List */
-
-.skills-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.9rem;
-}
-
-.skill-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.65rem 0.75rem;
-  border-radius: calc(var(--radius) * 0.5);
-  transition: var(--transition);
-}
-
-.skill-item:hover {
-  background: var(--color-surface-hover);
-}
-
-.skill-icon {
-  font-size: 1.5rem;
-  color: var(--color-text-primary);
-  display: flex;
+.button,
+.btn {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 0.6rem 1.25rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  cursor: pointer;
   transition: var(--transition);
-  flex-shrink: 0;
+  text-decoration: none;
+  border: none;
 }
 
-.skill-item:hover .skill-icon {
+.button-primary,
+.btn-primary {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.button-primary:hover,
+.btn-primary:hover {
+  background: var(--color-accent-hover);
+}
+
+.button-secondary,
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+}
+
+.button-secondary:hover,
+.btn-secondary:hover {
+  background: var(--color-surface-hover);
+  border-color: var(--color-accent);
+  color: var(--color-text-primary);
+}
+
+.button-tertiary,
+.btn-tertiary {
+  background: transparent;
   color: var(--color-accent);
 }
 
-.skill-name {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--color-text-secondary);
-  transition: var(--transition);
-}
-
-.skill-item:hover .skill-name {
-  color: var(--color-text-primary);
-}
-
-/* Engineering Traits / Principles */
-
-.traits-list {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-}
-
-.trait-item {
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--color-border);
-}
-
-.trait-item:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.trait-item h4 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.4rem;
-  color: var(--color-text-primary);
-}
-
-.trait-item p {
-  font-size: 0.9rem;
-  line-height: 1.6;
-  color: var(--color-text-secondary);
-  margin: 0;
+.button-tertiary:hover,
+.btn-tertiary:hover {
+  color: var(--color-accent-hover);
 }
 
 /* =========================
-   Responsive Styles
+   Cards
 ========================= */
 
-@media (max-width: 1024px) {
-  .skills-containers {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .skills-container--wide {
-    grid-column: span 2;
-  }
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-@media (max-width: 768px) {
-  .skills-containers {
-    grid-template-columns: 1fr;
-    gap: 1.75rem;
-    margin-top: 2.5rem;
-  }
-
-  .skills-container {
-    padding: 1.5rem;
-  }
-
-  .skills-container--wide {
-    grid-column: span 1;
-  }
-
-  .skills-container h3 {
-    font-size: 1.1rem;
-    margin-bottom: 1.25rem;
-  }
-
-  .traits-list {
-    grid-template-columns: 1fr;
-  }
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
+
+/* Card headers and titles */
+.card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.card p {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+/* =========================
+   Grids
+========================= */
+
+.grid {
+  display: grid;
+  gap: var(--grid-gap);
+}
+
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-auto { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+
+/* =========================
+   Scroll-to-top button
+========================= */
+
+.scroll-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--color-accent);
+  color: #fff;
+  padding: 0.6rem 0.9rem;
+  border-radius: 50%;
+  font-size: 1.25rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+  z-index: 1000;
+}
+
+.scroll-top:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-2px);
+}
+
+/* =========================
+   Form elements
+========================= */
+
+input, textarea, select, button {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  transition: var(--transition);
+  outline: none;
+  width: 100%;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px rgba(0,179,179,0.2);
+}
+
+/* =========================
+   Utility classes
+========================= */
+
+.flex { display: flex; }
+.flex-center { display: flex; align-items: center; justify-content: center; }
+.flex-col { display: flex; flex-direction: column; }
+
+.gap-1 { gap: 0.5rem; }
+.gap-2 { gap: 1rem; }
+.gap-3 { gap: 1.5rem; }
+
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-left { text-align: left; }
+
+.hidden { display: none; }
+.visible { display: block; }
+
+.rounded { border-radius: var(--radius); }
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow-md { box-shadow: var(--shadow-md); }
+
+/* =========================
+   Lists
+========================= */
+
+ul, ol {
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+/* =========================
+   Misc / helpers
+========================= */
+
+.transition { transition: var(--transition); }
+
+.hover-scale:hover {
+  transform: scale(1.03);
+  transition: var(--transition);
+}
+
+.opacity-50 { opacity: 0.5; }
+.opacity-100 { opacity: 1; }

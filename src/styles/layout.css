@@ -1,23 +1,19 @@
 /* src\styles\layout.css */
-
-/* Main container */
 main {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   background: linear-gradient(
     180deg,
-    rgba(0, 179, 179, 0.05) 0%,
-    rgba(8, 40, 70, 0.95) 100%
+    rgba(0,179,179,0.05) 0%,
+    rgba(8,40,70,0.85) 100%
   );
 }
 
-/* Sections */
 section {
   display: none;
   padding: var(--section-padding);
-  box-sizing: border-box;
-  max-width: var(--max-width, 1200px);
+  max-width: var(--max-width);
   margin: 0 auto;
   flex-direction: column;
   justify-content: center;
@@ -28,31 +24,21 @@ section.active {
   animation: fadeInSection 0.5s ease;
 }
 
-/* Fade-in animation for section switching */
 @keyframes fadeInSection {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Section content wrapper */
 .section-content {
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: var(--section-padding);
-  box-sizing: border-box;
   max-width: var(--max-width);
   margin: 0 auto;
 }
 
-/* Grids for Projects / About */
 .projects-grid,
 .about-grid {
   display: grid;
@@ -61,45 +47,28 @@ section.active {
   margin-top: 2rem;
 }
 
-/* Section headers */
-.section-header {
-  margin-bottom: 2rem;
-  text-align: center;
-}
+.section-header { margin-bottom: 2rem; text-align: center; }
 
 .section-eyebrow {
   display: block;
   font-size: 0.9rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
   color: var(--color-accent);
   margin-bottom: 0.5rem;
 }
 
 .section-title {
-  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
   font-weight: 800;
   color: var(--color-text-primary);
 }
 
-/* =========================
-   Responsive Adjustments
-========================= */
+/* Responsive */
 @media (max-width: 768px) {
-  :root {
-    --section-padding: clamp(3rem, 6vw, 4rem) 1.5rem;
-    --grid-gap: 1.75rem;
-  }
-
-  .projects-grid,
-  .about-grid {
-    grid-template-columns: 1fr;
-  }
+  :root { --section-padding: clamp(3rem, 6vw, 4rem) 1.5rem; --grid-gap: 1.75rem; }
+  .projects-grid, .about-grid { grid-template-columns: 1fr; }
 }
 
-@media (max-width: 480px) {
-  :root {
-    --section-padding: 2.5rem 1rem;
-  }
-}
+@media (max-width: 480px) { :root { --section-padding: 2.5rem 1rem; } }
+

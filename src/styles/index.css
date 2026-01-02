@@ -1,26 +1,9 @@
 /* src/styles/index.css */
-
-/* 2️⃣ Variables: Define global design tokens for colors, fonts, spacing, transitions, etc. */
 @import 'variables.css';
-
-/* 3️⃣ Base styles: Global typography, body, html defaults, scroll behavior, and foundational page animations */
 @import 'base.css';
-
-
-/* 5️⃣ Components: Buttons, cards, grids, scroll-to-top, footer, and reusable UI elements */
 @import 'components.css';
-
-/* 6️⃣ Layout: Section spacing, grids, and layouts for About, Skills, Projects, Contact */
 @import 'layout.css';
-
-/* 7️⃣ Animations: Section reveal, scroll cues, and reduced-motion support */
 @import 'animations.css';
-
-/* 8️⃣ Hero section: Full-height hero, title, subtitle, tagline, scroll prompt */
 @import 'hero.css';
-
-/* 9️⃣ Navigation: Top sticky nav, left/right layout, vertical nav links, responsive adjustments */
 @import 'navigation.css';
-
-/* 🔟 Mobile menu: Hamburger toggle, soft-focus overlay, small-screen navigation */
 @import 'mobile-menu.css';
