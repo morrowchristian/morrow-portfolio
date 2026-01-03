@@ -1,11 +1,16 @@
 // src/pages/ProjectA.tsx
 import React from "react";
+import projects from "../data/projects";
+import ProjectCard from "../components/ProjectCard";
 
 const ProjectA: React.FC = () => {
+  const project = projects.find(p => p.id === "project-a");
+
+  if (!project) return <p>Project not found</p>;
+
   return (
-    <div style={{ padding: "2rem", textAlign: "center" }}>
-      <h1>Project A</h1>
-      <p>Project A details, tech stack, and description will go here.</p>
+    <div style={{ minHeight: "100vh", display: "flex", justifyContent: "center", alignItems: "center", padding: "2rem" }}>
+      <ProjectCard project={project} />
     </div>
   );
 };

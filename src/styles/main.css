@@ -1,0 +1,20 @@
+/* src/styles/main.css */
+
+.page-wrapper {
+    min-height: 100vh;        /* full viewport */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;   /* vertical centering */
+    align-items: center;       /* horizontal centering */
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+  
+  /* Mobile scrolling */
+  @media (max-width: 768px) {
+    .page-wrapper {
+      min-height: auto;
+      justify-content: flex-start;
+    }
+  }
+  

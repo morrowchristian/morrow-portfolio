@@ -1,15 +1,28 @@
 // src/pages/Home.tsx
 import React from "react";
-import ProjectCard from "../components/ProjectCard";
+import { Link } from "react-router-dom";
 import projects from "../data/projects";
+import ProjectCard from "../components/ProjectCard";
 
 const Home: React.FC = () => {
   return (
     <div style={{ padding: "2rem", textAlign: "center" }}>
-      <h1>Christian Morrow's Portfolio</h1>
-      <div style={{ display: "flex", justifyContent: "center", gap: "1rem", flexWrap: "wrap", marginTop: "2rem" }}>
+      <h1>Welcome to Christian Morrow's Portfolio</h1>
+      <p>Click a project card to view details.</p>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          flexWrap: "wrap",
+          gap: "2rem",
+          marginTop: "2rem"
+        }}
+      >
         {projects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
+          <Link key={project.id} to={`/${project.id}`} style={{ textDecoration: "none", color: "inherit" }}>
+            <ProjectCard project={project} />
+          </Link>
         ))}
       </div>
     </div>
