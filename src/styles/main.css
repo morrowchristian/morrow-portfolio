@@ -1,20 +1,26 @@
 /* src/styles/main.css */
 
+.app-layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .page-wrapper {
-    min-height: 100vh;        /* full viewport */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;   /* vertical centering */
-    align-items: center;       /* horizontal centering */
-    padding: 2rem;
-    box-sizing: border-box;
-  }
-  
-  /* Mobile scrolling */
-  @media (max-width: 768px) {
-    .page-wrapper {
-      min-height: auto;
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .page-wrapper {
       justify-content: flex-start;
-    }
+      padding: 1rem;
   }
-  
+}

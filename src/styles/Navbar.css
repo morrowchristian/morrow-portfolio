@@ -1,12 +1,13 @@
 /* src/styles/Navbar.css */
 
 .navbar {
-    background: #f4f4f4;
+    background: #e9edf3;             /* light grey with blue undertone */
+    border-bottom: 1px solid #cbd5e1;
     padding: 1rem 2rem;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .navbar-container {
@@ -18,7 +19,7 @@
 .navbar-brand {
     font-weight: 700;
     font-size: 1.25rem;
-    color: #333;
+    color: #1e3a8a; /* darker blue for brand */
 }
 
 .navbar-links {
@@ -29,7 +30,7 @@
 .navbar-links a,
 .navbar-links .active {
     text-decoration: none;
-    color: #333;
+    color: #1e40af;         /* blue links for visibility */
     font-weight: 500;
     position: relative;
     padding-bottom: 2px;
@@ -45,13 +46,17 @@
     bottom: 0;
     width: 0%;
     height: 2px;
-    background: #333;
+    background: #1e40af;      /* underline accent color */
     transition: width 0.3s;
 }
 
 .navbar-links a:hover::after,
 .navbar-links .active::after {
     width: 100%;
+}
+
+.navbar-links a:hover {
+    color: #1e3a8a;            /* slightly darker on hover */
 }
 
 .navbar-toggle {
@@ -76,7 +81,7 @@
         overflow: hidden;
         max-height: 0;
         transition: max-height 0.3s ease, padding 0.3s ease;
-        background: #f4f4f4;
+        background: #e9edf3;   /* match container color */
         padding: 0 0;
     }
 

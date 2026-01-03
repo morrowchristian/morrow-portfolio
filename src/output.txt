@@ -1,0 +1,314 @@
+/* src/styles/Footer.css */
+
+.footer {
+    background: linear-gradient(to bottom, #eef2f6 0%, #e7ecf3 100%);
+    border-top: 1px solid #cbd5e1;
+    padding: 1rem 2rem;
+    margin-top: 3rem;
+    width: 100%;
+  }
+  
+  /* ---------------------------------------
+     Desktop / Ultra-wide >1300px
+  ---------------------------------------- */
+  @media (min-width: 1400px) {
+    .footer-container {
+      display: grid;
+      grid-template-columns: 1fr 250px; /* left flexible, right fixed */
+      align-items: left;
+      width: 100%;
+      gap: 2rem;
+    }
+  
+    /* Links: single row, evenly spaced */
+    .footer-links {
+      display: flex;
+      justify-content: space-evenly;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      padding-top: 0.5rem;
+      align-items: start;
+      width: 100%;
+    }
+  
+    .footer-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: #1e40af;
+      font-weight: 500;
+      opacity: 0.85;
+      transition: color 0.25s ease, transform 0.2s ease, opacity 0.25s ease;
+      white-space: nowrap;
+    }
+  
+    /* Right column: copyright block */
+    .footer-meta {
+      text-align: right;
+      font-size: 0.9rem;
+      color: #475569;
+      line-height: 1.4;
+      padding-right: 3rem;
+      padding-bottom: 0.5rem;
+    }
+  }
+  
+  /* ---------------------------------------
+     Tablet / Small Desktop 600px–1400px
+  ---------------------------------------- */
+  @media (min-width: 800px) and (max-width: 1399px) {
+    .footer-container {
+      display: grid;
+      grid-template-columns: 1fr 250px;
+      align-items: center;
+      width: 100%;
+      gap: 2rem;
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+    }
+  
+    /* Links: 2×2 grid */
+    .footer-links {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 2rem;        /* your row spacing */
+        column-gap: 1.5rem;   /* optional */
+        justify-items: left; /* centers items inside each grid cell */
+        align-items: center;   /* vertically centers items */
+        width: 100%;
+        margin: 0 auto;
+    }  
+  
+    .footer-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: #1e40af;
+      font-weight: 500;
+      opacity: 0.85;
+      white-space: nowrap;
+      transition: color 0.25s ease, transform 0.2s ease, opacity 0.25s ease;
+    }
+  
+    .footer-meta {
+      text-align: right;
+      font-size: 0.9rem;
+      color: #475569;
+      line-height: 1.4;
+    }
+  }
+  
+/* ---------------------------------------
+   Mobile <800px
+---------------------------------------- */
+@media (max-width: 799px) {
+    .footer-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+      width: 100%;
+    }
+  
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      width: 100%;
+      align-items: center; /* center the whole group */
+    }
+  
+    .footer-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center; /* center each link */
+      gap: 0.5rem;
+      text-decoration: none;
+      color: #1e40af;
+      font-weight: 500;
+      opacity: 0.85;
+      white-space: nowrap;
+    }
+  
+    .footer-divider {
+      width: 100%;
+      height: 1px;
+      background: #cbd5e1;
+      opacity: 0.6;
+      margin: 0.5rem 0 1rem 0; /* spacing above/below divider */
+    }
+  
+    .footer-meta {
+      text-align: center; /* center copyright */
+      font-size: 0.95rem;
+      color: #475569;
+      line-height: 1.4;
+      margin-top: 0.5rem; /* extra spacing */
+    }
+}
+  
+  /* ---------------------------------------
+     Icon Styling (global)
+  ---------------------------------------- */
+  .icon {
+    width: clamp(1rem, 2vw, 1.25rem);
+    height: clamp(1rem, 2vw, 1.25rem);
+    flex-shrink: 0;
+    transition: transform 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+  }
+  
+  .footer-links a:hover {
+    color: #2563eb;
+    opacity: 1;
+  }
+  
+  .footer-links a:hover .icon {
+    transform: translateY(-2px);
+    color: #2563eb;
+  }
+  
+  .resume-link {
+    font-weight: 600;
+  }
+  
+
+/* src/styles/Hero.css */
+
+/* src/styles/index.css */
+
+
+/* src/styles/main.css */
+
+.app-layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-wrapper {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .page-wrapper {
+      justify-content: flex-start;
+      padding: 1rem;
+  }
+}
+
+
+/* src/styles/Navbar.css */
+
+.navbar {
+    background: #e9edf3;             /* light grey with blue undertone */
+    border-bottom: 1px solid #cbd5e1;
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #1e3a8a; /* darker blue for brand */
+}
+
+.navbar-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.navbar-links a,
+.navbar-links .active {
+    text-decoration: none;
+    color: #1e40af;         /* blue links for visibility */
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 2px;
+    transition: color 0.2s;
+}
+
+/* Animated underline for active/hover */
+.navbar-links a::after,
+.navbar-links .active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background: #1e40af;      /* underline accent color */
+    transition: width 0.3s;
+}
+
+.navbar-links a:hover::after,
+.navbar-links .active::after {
+    width: 100%;
+}
+
+.navbar-links a:hover {
+    color: #1e3a8a;            /* slightly darker on hover */
+}
+
+.navbar-toggle {
+    display: none;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .navbar-toggle {
+        display: block;
+    }
+
+    .navbar-links {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 0;
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+        background: #e9edf3;   /* match container color */
+        padding: 0 0;
+    }
+
+    .navbar-links.open {
+        max-height: 500px;
+        padding: 1rem 0;
+    }
+
+    .navbar-links a,
+    .navbar-links .active {
+        margin: 0;
+    }
+}
+
+
+/* src/styles/ProjectCard.css */
+
+/* src/styles/responsive.css */
+
+/* src/styles/variables.css */
+
