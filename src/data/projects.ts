@@ -3,7 +3,7 @@ import type { Project } from "../types/Project";
 
 const projects: Project[] = [
   {
-    id: "1",
+    id: "project-a",
     title: "Project A",
     summary: "Short description of Project A",
     techStack: ["React", "TypeScript", "CSS"],
@@ -11,12 +11,20 @@ const projects: Project[] = [
     image: "/assets/projectA.png"
   },
   {
-    id: "2",
+    id: "project-b",
     title: "Project B",
     summary: "Short description of Project B",
     techStack: ["Django", "Python", "PostgreSQL"],
     link: "https://github.com/morrowchristian/project-b",
     image: "/assets/projectB.png"
+  },
+  {
+    id: "project-c",
+    title: "Project C",
+    summary: "Short description of Project C",
+    techStack: ["Django", "Python", "PostgreSQL"],
+    link: "https://github.com/morrowchristian/project-c",
+    image: "/assets/projectC.png"
   }
 ];
 
