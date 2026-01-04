@@ -1,6 +1,5 @@
 // src/pages/Home.tsx
 import React from "react";
-import { Link } from "react-router-dom";
 import projects from "../data/projects";
 import ProjectCard from "../components/ProjectCard";
 
@@ -20,9 +19,7 @@ const Home: React.FC = () => {
         }}
       >
         {projects.map((project) => (
-          <Link key={project.id} to={`/${project.id}`} style={{ textDecoration: "none", color: "inherit" }}>
-            <ProjectCard project={project} />
-          </Link>
+          <ProjectCard key={project.id} project={project} />
         ))}
       </div>
     </div>

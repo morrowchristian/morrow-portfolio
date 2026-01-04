@@ -1,16 +1,21 @@
+// src/components/ProjectDetail.tsx
 import React from "react";
-import { Link } from "react-router-dom";
-import type { Project } from "../types/Project";
+import { Link, useParams } from "react-router-dom";
+import projects from "../data/projects";
+import NotFound from "../pages/NotFound";
 import "../styles/ProjectDetail.css";
 
-interface Props {
-  project: Project;
-}
+const ProjectDetail: React.FC = () => {
+  const { id } = useParams();
+  const project = projects.find((p) => p.id === id);
 
-const ProjectDetail: React.FC<Props> = ({ project }) => {
+  // If no matching project, show NotFound
+  if (!project) {
+    return <NotFound />;
+  }
+
   return (
     <div className="project-detail">
-
       {/* Back Button */}
       <Link to="/" className="back-button">
         ← Back to Projects
@@ -50,7 +55,6 @@ const ProjectDetail: React.FC<Props> = ({ project }) => {
           )}
         </div>
       </section>
-
     </div>
   );
 };
