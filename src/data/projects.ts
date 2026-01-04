@@ -3,28 +3,40 @@ import type { Project } from "../types/Project";
 
 const projects: Project[] = [
   {
-    id: "project-a",
-    title: "Project A",
-    summary: "Short description of Project A",
-    techStack: ["React", "TypeScript", "CSS"],
-    link: "https://github.com/morrowchristian/project-a",
-    image: "/assets/projectA.png"
+    id: "event-dashboard",
+    title: "Event Dashboard",
+    summary:
+      "A real‑time event management dashboard featuring analytics, filtering, and a clean UI for tracking activity.",
+    techStack: ["React", "TypeScript", "Tailwind", "API Integration"],
+    link: "https://github.com/morrowchristian/event-dashboard",
+    image: "/assets/event-dashboard.png"
   },
   {
-    id: "project-b",
-    title: "Project B",
-    summary: "Short description of Project B",
-    techStack: ["Django", "Python", "PostgreSQL"],
-    link: "https://github.com/morrowchristian/project-b",
-    image: "/assets/projectB.png"
+    id: "north-georgia-awning-website",
+    title: "North Georgia Awning Website",
+    summary:
+      "A modern, responsive business website built for a local awning company, focusing on clean design and accessibility.",
+    techStack: ["React", "JavaScript", "CSS", "Responsive Design"],
+    link: "https://github.com/morrowchristian/north-georgia-awning-website",
+    image: "/assets/north-georgia-awning.png"
   },
   {
-    id: "project-c",
-    title: "Project C",
-    summary: "Short description of Project C",
-    techStack: ["Django", "Python", "PostgreSQL"],
-    link: "https://github.com/morrowchristian/project-c",
-    image: "/assets/projectC.png"
+    id: "timespan-calculator",
+    title: "Timespan Calculator",
+    summary:
+      "A utility tool for calculating precise time differences with a simple, intuitive interface.",
+    techStack: ["JavaScript", "HTML", "CSS"],
+    link: "https://github.com/morrowchristian/timespan-calculator",
+    image: "/assets/timespan-calculator.png"
+  },
+  {
+    id: "mynotes",
+    title: "MyNotes",
+    summary:
+      "A lightweight note‑taking app with local storage persistence and a clean, distraction‑free UI.",
+    techStack: ["React", "TypeScript", "LocalStorage"],
+    link: "https://github.com/morrowchristian/MyNotes",
+    image: "/assets/mynotes.png"
   }
 ];
 

@@ -130,12 +130,6 @@
       gap: 2.5rem;
     }
   
-    /* Larger icons on mobile */
-    .icon {
-      width: 1.75rem;
-      height: 1.75rem;
-    }
-  
     /* Resume button on mobile */
     .resume-button {
       background-color: #1e40af;
