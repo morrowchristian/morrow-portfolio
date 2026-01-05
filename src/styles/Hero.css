@@ -1,0 +1,39 @@
+/* src/styles/Hero.css */
+
+.hero {
+  text-align: center;
+  padding: 8rem 2rem 6rem;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.hero p {
+  margin-top: 1rem;
+  font-size: 1.25rem;
+  color: var(--muted);
+}
+
+.hero-buttons {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.hero-buttons button {
+  padding: 0.75rem 1.5rem;
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius);
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.hero-buttons button:hover {
+  opacity: 0.85;
+}

@@ -1,97 +1,107 @@
 /* src/styles/Navbar.css */
 
+/* Navbar Container */
 .navbar {
-    background: #e9edf3;
-    border-bottom: 1px solid #cbd5e1;
-    padding: 1rem 2rem;
-    position: sticky;
-    top: 0;
-    z-index: 2000;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  z-index: 2000;
 }
 
+/* Inner Layout */
 .navbar-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
+/* Brand */
 .navbar-brand {
-    font-weight: 700;
-    font-size: 1.25rem;
-    color: #1e3a8a; /* darker blue for brand */
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--text);
 }
 
+/* Links */
 .navbar-links {
-    display: flex;
-    gap: 1.5rem;
+  display: flex;
+  gap: 1.5rem;
 }
 
 .navbar-links a,
 .navbar-links .active {
-    text-decoration: none;
-    color: #1e40af;         /* blue links for visibility */
-    font-weight: 500;
-    position: relative;
-    padding-bottom: 2px;
-    transition: color 0.2s;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+  position: relative;
+  padding-bottom: 2px;
+  transition: color var(--transition);
 }
 
-/* Animated underline for active/hover */
+/* Underline Animation */
 .navbar-links a::after,
 .navbar-links .active::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 0%;
-    height: 2px;
-    background: #1e40af;      /* underline accent color */
-    transition: width 0.3s;
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.3s;
 }
 
 .navbar-links a:hover::after,
 .navbar-links .active::after {
-    width: 100%;
+  width: 100%;
 }
 
 .navbar-links a:hover {
-    color: #1e3a8a;            /* slightly darker on hover */
+  color: var(--accent);
 }
 
+/* Mobile Toggle */
 .navbar-toggle {
-    display: none;
-    font-size: 1.5rem;
-    background: none;
-    border: none;
-    cursor: pointer;
+  display: none;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
 }
 
-/* Mobile */
+/* Mobile Menu */
 @media (max-width: 768px) {
-    .navbar-toggle {
-        display: block;
-    }
+  .navbar-toggle {
+    display: block;
+  }
 
-    .navbar-links {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        margin-top: 0;
-        overflow: hidden;
-        max-height: 0;
-        transition: max-height 0.3s ease, padding 0.3s ease;
-        background: #e9edf3;   /* match container color */
-        padding: 0 0;
-    }
+  .navbar-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 0;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    background: var(--bg);
+    padding: 0;
+  }
 
-    .navbar-links.open {
-        max-height: 500px;
-        padding: 1rem 0;
-    }
+  .navbar-links.open {
+    max-height: 500px;
+    padding: 1rem 0;
+  }
 
-    .navbar-links a,
-    .navbar-links .active {
-        margin: 0;
-    }
+  .navbar-links a,
+  .navbar-links .active {
+    margin: 0;
+  }
 }

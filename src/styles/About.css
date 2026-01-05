@@ -1,0 +1,17 @@
+/* src/styles/Hero.css */
+
+.about {
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.about h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.about p {
+  margin-bottom: 1rem;
+  color: var(--muted);
+}

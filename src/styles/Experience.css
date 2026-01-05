@@ -1,0 +1,38 @@
+/* src/styles/Experience.css */
+
+.experience {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.experience h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.experience-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+}
+
+.experience-item h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.experience-item p {
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.experience-item ul {
+  margin-top: 1rem;
+  padding-left: 1.25rem;
+  line-height: 1.6;
+}
+
+.experience-item li {
+  margin-bottom: 0.5rem;
+}

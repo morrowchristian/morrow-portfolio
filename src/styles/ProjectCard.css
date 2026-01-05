@@ -1,27 +1,37 @@
 /* src/styles/ProjectCard.css */
 
 .project-card {
-  border: 1px solid #ccc;
-  padding: 1rem;
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  width: 100%;
-  max-width: none;
-  box-sizing: border-box;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  transition: var(--transition);
+  cursor: pointer;
 }
 
-.project-card-image {
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+
+.project-card img {
   width: 100%;
-  height: auto;
-  display: block;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
 }
 
 .project-card h3 {
-  margin-top: 0.75rem;
+  font-size: 1.25rem;
   margin-bottom: 0.5rem;
 }
 
 .project-card p {
+  color: var(--muted);
   margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.project-card span {
+  font-size: 0.9rem;
+  color: var(--accent);
 }

@@ -1,50 +1,65 @@
 // src/components/Navbar.tsx
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "../styles/Navbar.css";
 
-const Navbar: React.FC = () => {
+export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [active, setActive] = useState("hero");
 
-  const toggleMenu = () => setMenuOpen(!menuOpen);
-  const closeMenu = () => setMenuOpen(false);
+  // Scroll‑spy behavior
+  useEffect(() => {
+    const sections = document.querySelectorAll("section[id]");
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setActive(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    sections.forEach(section => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <nav className="navbar">
+    <nav className="navbar fade-in">
       <div className="navbar-container">
+        <div className="navbar-brand">Christian Morrow</div>
 
-        <div className="navbar-brand">
-          <NavLink to="/" onClick={closeMenu}>
-            Christian Morrow
-          </NavLink>
-        </div>
-
-        <button className="navbar-toggle" onClick={toggleMenu}>
+        <button
+          className="navbar-toggle"
+          onClick={() => setMenuOpen(prev => !prev)}
+          aria-label="Toggle navigation"
+        >
           ☰
         </button>
 
         <div className={`navbar-links ${menuOpen ? "open" : ""}`}>
-          <NavLink
-            to="/"
-            onClick={closeMenu}
-            className={({ isActive }) => (isActive ? "active" : "")}
-          >
+          <a href="#hero" className={active === "hero" ? "active" : ""}>
             Home
-          </NavLink>
-
+          </a>
+          <a href="#about" className={active === "about" ? "active" : ""}>
+            About
+          </a>
+          <a href="#projects" className={active === "projects" ? "active" : ""}>
+            Projects
+          </a>
           <a
-            href="https://github.com/morrowchristian"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={closeMenu}
+            href="#experience"
+            className={active === "experience" ? "active" : ""}
           >
-            GitHub
+            Experience
+          </a>
+          <a href="#contact" className={active === "contact" ? "active" : ""}>
+            Contact
           </a>
         </div>
-
       </div>
     </nav>
   );
-};
-
-export default Navbar;
+}
