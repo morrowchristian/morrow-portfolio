@@ -1,5 +1,9 @@
 /* src/styles/Navbar.css */
 
+hero-link::after {
+  display: none;
+}
+
 /* Navbar Container */
 .navbar {
   width: 100%;
@@ -38,6 +42,10 @@
   font-weight: 500;
   position: relative;
   padding-bottom: 2px;
+  transition: color var(--transition);
+}
+
+.navbar-links a svg {
   transition: color var(--transition);
 }
 
