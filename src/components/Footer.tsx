@@ -1,8 +1,8 @@
 // src/components/Footer.tsx
-import "../styles/Footer.css";
 import GitHubIcon from "./icons/GitHubIcon";
 import LinkedInIcon from "./icons/LinkedInIcon";
 import { EnvelopeIcon } from "@heroicons/react/24/solid";
+import "../styles/components/Footer.css";
 
 export default function Footer() {
   return (
