@@ -1,0 +1,35 @@
+/* src/styles/layout/structure.css */
+
+/* Layout Wrappers */
+
+.layout-wrapper {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.content-width {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Global Section Spacing */
+
+section {
+  padding: var(--space-2xl) var(--space-md);
+}
+
+/* Reveal Animation */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+

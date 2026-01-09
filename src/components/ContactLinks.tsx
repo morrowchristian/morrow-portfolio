@@ -1,8 +1,8 @@
 // src/components/ContactLinks.tsx
-import "../styles/ContactLinks.css";
 import GitHubIcon from "./icons/GitHubIcon";
 import LinkedInIcon from "./icons/LinkedInIcon";
 import { EnvelopeIcon } from "@heroicons/react/24/solid";
+import "../styles/components/ContactLinks.css";
 
 export default function ContactLinks() {
   return (

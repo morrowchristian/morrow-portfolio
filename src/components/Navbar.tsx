@@ -1,7 +1,7 @@
 // src/components/Navbar.tsx
 import { useEffect, useState } from "react";
 import { FiHome } from "react-icons/fi";
-import "../styles/Navbar.css";
+import "../styles/components/Navbar.css";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);

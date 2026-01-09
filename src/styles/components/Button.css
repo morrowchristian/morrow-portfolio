@@ -1,0 +1,21 @@
+/* src/styles/components/Button.css */
+
+.button {
+  padding: var(--space-sm) var(--space-lg);
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius);
+  color: var(--text-on-accent);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: var(--transition);
+}
+
+.button:hover {
+  opacity: 0.85;
+}
+

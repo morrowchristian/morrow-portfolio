@@ -1,0 +1,21 @@
+/* src/styles/sections/Projects.css */
+
+.projects {
+  color: var(--text);
+  text-align: center;
+}
+
+.projects h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-xl);
+  color: var(--text);
+  line-height: var(--line-height-tight);
+}
+
+.projects-grid {
+  display: grid;
+  gap: var(--space-lg);
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  margin-top: var(--space-xl);
+}
