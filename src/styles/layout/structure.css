@@ -1,12 +1,26 @@
 /* src/styles/layout/structure.css */
 
-section {
-  padding: var(--space-2xl) var(--space-md);
+/* Layout Wrappers */
+
+.layout-wrapper {
+  width: 100%;
   max-width: 900px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.content-width {
+  max-width: 700px;
   margin: 0 auto;
 }
 
-/* Reveal Animation (layout-level behavior) */
+/* Global Section Spacing */
+
+section {
+  padding: var(--space-2xl) var(--space-md);
+}
+
+/* Reveal Animation */
 
 .reveal {
   opacity: 0;
@@ -18,3 +32,4 @@ section {
   opacity: 1;
   transform: translateY(0);
 }
+

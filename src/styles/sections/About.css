@@ -2,19 +2,22 @@
 
 .about {
   margin: 0 auto;
-  line-height: 1.7;
   color: var(--text);
+  line-height: var(--line-height-loose);
 }
 
 .about h2 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-lg);
   color: var(--text);
-  font-weight: 700;
+  line-height: var(--line-height-tight);
 }
 
 .about p {
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-md);
   color: var(--text2);
-  font-size: 1.05rem;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-normal);
+  font-weight: var(--font-weight-regular);
 }

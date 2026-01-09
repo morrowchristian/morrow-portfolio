@@ -6,15 +6,18 @@
 }
 
 .contact h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-md);
   color: var(--text);
-  font-weight: 700;
+  line-height: var(--line-height-tight);
 }
 
 .contact p {
   color: var(--text2);
-  margin-bottom: 2rem;
-  line-height: 1.6;
-  font-size: 1.05rem;
+  margin-bottom: var(--space-xl);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-normal);
+  font-weight: var(--font-weight-regular);
 }
+

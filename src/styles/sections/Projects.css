@@ -6,15 +6,16 @@
 }
 
 .projects h2 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-xl);
   color: var(--text);
-  font-weight: 700;
+  line-height: var(--line-height-tight);
 }
 
 .projects-grid {
   display: grid;
-  gap: 1.5rem;
+  gap: var(--space-lg);
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  margin-top: 2rem;
+  margin-top: var(--space-xl);
 }

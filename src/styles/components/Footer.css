@@ -1,86 +1,58 @@
 /* src/styles/Footer.css */
 
-/* Footer Base */
 .footer {
-  padding: 2rem;
+  padding: var(--space-xl) var(--space-lg);
   text-align: center;
-  color: var(--text2); /* muted stone gray */
+  color: var(--text2);
   border-top: 1px solid var(--border);
-  margin-top: 4rem;
-  background: var(--footer-bg); /* Ink Black */
-  backdrop-filter: blur(6px); /* premium subtle blur */
+  margin-top: var(--space-2xl);
+  background: var(--footer-bg);
+  backdrop-filter: blur(6px);
 }
 
-/* Layout Container */
 .footer-container {
   max-width: 900px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--space-lg);
 }
 
-/* Links Row */
 .footer-links {
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  gap: var(--space-xl);
 }
 
 .footer-links a {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--space-xs);
   text-decoration: none;
-  color: var(--text2); /* muted stone gray */
-  font-weight: 500;
+  color: var(--text2);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
   opacity: 0.85;
   transition: var(--transition);
 }
 
-/* Icon Hover Animation */
 .icon {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 24px;
+  height: 24px;
   color: var(--text2);
   transition: transform 0.2s ease, color 0.2s ease, opacity 0.2s ease;
 }
 
-.footer-links a:hover {
-  color: var(--accent); /* muted gold */
-  opacity: 1;
-}
-
-.footer-links a:hover .icon {
-  transform: translateY(-2px);
-  color: var(--accent);
-}
-
-/* Meta Text */
 .footer-meta {
-  font-size: 0.9rem;
-  color: var(--text2); /* muted stone gray */
-  line-height: 1.4;
+  font-size: var(--font-size-small);
+  color: var(--text2);
+  line-height: var(--line-height-normal);
 }
 
-/* Mobile */
 @media (max-width: 600px) {
   .footer-links {
     flex-direction: column;
-    gap: 1rem;
-  }
-}
-
-/* Fade-in animation */
-.fade-in {
-  opacity: 0;
-  transform: translateY(12px);
-  animation: fadeInUp 0.6s ease forwards;
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
+    gap: var(--space-md);
   }
 }

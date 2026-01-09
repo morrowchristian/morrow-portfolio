@@ -4,7 +4,7 @@
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 1.25rem;
+  padding: var(--space-md);
   transition: var(--transition);
   cursor: pointer;
 }
@@ -17,23 +17,27 @@
 .project-card img {
   width: 100%;
   border-radius: var(--radius);
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-sm);
 }
 
 .project-card h3 {
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
-  color: var(--text); /* strong contrast */
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-xs);
+  color: var(--text);
+  line-height: var(--line-height-tight);
 }
 
 .project-card p {
-  color: var(--text2); /* muted stone gray */
-  margin-bottom: 0.75rem;
-  line-height: 1.5;
-  font-size: 1rem;
+  color: var(--text2);
+  margin-bottom: var(--space-sm);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-normal);
+  font-weight: var(--font-weight-regular);
 }
 
 .project-card span {
-  font-size: 0.9rem;
-  color: var(--accent); /* muted gold */
+  font-size: var(--font-size-small);
+  color: var(--accent);
+  font-weight: var(--font-weight-medium);
 }

@@ -3,30 +3,24 @@
 .contact-links {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--space-md);
 }
 
 .contact-link {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  color: var(--text2); /* muted stone gray */
+  gap: var(--space-xs);
+  color: var(--text2);
   text-decoration: none;
-  font-size: 1rem;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
   transition: color var(--transition);
-}
-
-.contact-link:hover {
-  color: var(--accent); /* muted gold */
 }
 
 .icon {
-  width: 20px;
-  height: 20px;
-  color: var(--text2); /* ensures icons match text */
+  width: 24px;
+  height: 24px;
+  color: var(--text2);
   transition: color var(--transition);
-}
-
-.contact-link:hover .icon {
-  color: var(--accent); /* icon changes with text */
 }

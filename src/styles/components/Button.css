@@ -1,12 +1,14 @@
 /* src/styles/components/Button.css */
 
 .button {
-  padding: 0.75rem 1.5rem;
+  padding: var(--space-sm) var(--space-lg);
   background: var(--accent);
   border: none;
   border-radius: var(--radius);
-  color: #000;
-  font-weight: 600;
+  color: var(--text-on-accent);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
@@ -16,3 +18,4 @@
 .button:hover {
   opacity: 0.85;
 }
+

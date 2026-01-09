@@ -1,31 +1,9 @@
 /* src/styles/index.css */
 @import './base/spacing.css';
-@import "./layout/wrappers.css";
+@import "./base/colors.css";
+@import "./base/typography.css";
 @import "./layout/structure.css";
 
-:root {
-  /* Core Backgrounds */
-  --navbar-bg: #0A0A0A;   /* Ink Black */
-  --footer-bg: #0A0A0A;   /* Ink Black */
-  --page-bg: #1C1C1C;     /* Warm Dark Gray */
-
-  /* Text Colors */
-  --text: #F5F5F2;        /* Warm White */
-  --text2: #B8B8B2;       /* Stone Gray (muted) */
-
-  /* Accent */
-  --accent: #D4A657;      /* Muted Gold */
-
-  /* Borders & Cards */
-  --border: #2A2A2A;      /* Soft Graphite */
-  --card-bg: #1A1A1A;     /* Slightly lighter than navbar */
-
-  /* Misc */
-  --radius: 8px;
-  --transition: 0.2s ease;
-}
-
-/* Global Reset */
 * {
   margin: 0;
   padding: 0;
@@ -44,8 +22,8 @@ html, body {
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
-  font-family: system-ui, sans-serif;
-  background: var(--page-bg); /* FIXED: was var(--bg) */
+  background: var(--page-bg);
   color: var(--text);
+  font-family: var(--font-family-base);
   scroll-behavior: smooth;
 }

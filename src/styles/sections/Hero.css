@@ -6,22 +6,24 @@
 }
 
 .hero h1 {
-  font-size: 3rem;
-  font-weight: 700;
+  font-size: var(--font-size-h1);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-bold);
   color: var(--text);
-  line-height: 1.2;
 }
 
 .hero p {
-  margin-top: 1rem;
-  font-size: 1.25rem;
+  margin-top: var(--space-md);
+  font-size: var(--font-size-body);
   color: var(--text2);
-  line-height: 1.6;
+  line-height: var(--line-height-normal);
+  font-weight: var(--font-weight-regular);
 }
 
 .hero-button {
-  margin-top: 2rem;
+  margin-top: var(--space-xl);
   display: flex;
-  gap: 1rem;
+  gap: var(--space-md);
   justify-content: flex-start;
 }
+
