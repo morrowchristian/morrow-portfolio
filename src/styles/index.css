@@ -1,5 +1,6 @@
 /* src/styles/index.css */
 @import './base/spacing.css';
+@import "./layout/wrappers.css";
 
 :root {
   /* Core Backgrounds */

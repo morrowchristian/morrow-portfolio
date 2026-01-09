@@ -1,0 +1,18 @@
+/* src/styles/layout/wrappers.css */
+
+.layout-wrapper {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.section-spacing {
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-2xl);
+}
+
+.content-width {
+  max-width: 700px;
+  margin: 0 auto;
+}
