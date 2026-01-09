@@ -1,6 +1,6 @@
 // src/sections/Contact.tsx
 import ContactLinks from "../components/ContactLinks.tsx";
-import "../styles/Contact.css";
+import "../styles/sections/Contact.css";
 
 export default function Contact() {
   return (

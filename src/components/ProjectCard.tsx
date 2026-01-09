@@ -1,7 +1,7 @@
 // src/components/ProjectCard.tsx
 import React from "react";
 import type { Project } from "../types/Project";
-import "../styles/ProjectCard.css";
+import "../styles/components/ProjectCard.css";
 
 interface Props {
   project: Project;

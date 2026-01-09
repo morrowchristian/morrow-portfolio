@@ -1,7 +1,7 @@
 // src/sections/Projects.tsx
 import projects from "../data/projects";
 import ProjectCard from "../components/ProjectCard";
-import "../styles/Projects.css";
+import "../styles/sections/Projects.css";
 
 export default function Projects() {
   return (

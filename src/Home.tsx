@@ -10,10 +10,10 @@ export default function Home() {
 
   return (
     <>
-      <section id="hero" className="reveal"><Hero /></section>
-      <section id="about" className="reveal"><About /></section>
-      <section id="projects" className="reveal"><Projects /></section>
-      <section id="contact" className="reveal"><Contact /></section>
+      <section id="hero" className="reveal"><div className="layout-wrapper"><Hero /></div></section>
+      <section id="about" className="reveal"><div className="layout-wrapper content-width"><About /></div></section>
+      <section id="projects" className="reveal"><div className="layout-wrapper"><Projects /></div></section>
+      <section id="contact" className="reveal"><div className="layout-wrapper content-width"><Contact /></div></section>
     </>
   );
 }

@@ -1,5 +1,5 @@
 // src/sections/About.tsx
-import "../styles/About.css";
+import "../styles/sections/About.css";
 
 export default function About() {
   return (

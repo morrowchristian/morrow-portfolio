@@ -1,5 +1,5 @@
 // src/sections/Hero.tsx
-import "../styles/Hero.css";
+import "../styles/sections/Hero.css";
 
 export default function Hero() {
   return (
