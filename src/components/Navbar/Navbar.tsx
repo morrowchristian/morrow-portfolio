@@ -1,26 +1,44 @@
-// src/components/Modal/Modal.tsx
-import React from "react";
-import "./Modal.css";
-import { ContactForm } from "../ContactForm/ContactForm";
+// src/components/Navbar/Navbar.tsx
+import "./Navbar.css";
+import { useScrollOffset } from "../../hooks/useScrollOffset";
 
-interface ModalProps {
-  onClose: () => void;
+const NAV_ITEMS = [
+  { label: "Bio", href: "#bio" },
+  { label: "Portfolio", href: "#portfolio" },
+  { label: "Resume", href: "#resume" },
+  { label: "Services", href: "#services" },
+];
+
+interface NavbarProps {
+  onConnectClick: () => void;
 }
 
-export const Modal: React.FC<ModalProps> = ({ onClose }) => {
-  const handleBackgroundClick = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) onClose();
-  };
+export const Navbar: React.FC<NavbarProps> = ({ onConnectClick }) => {
+  const isScrolled = useScrollOffset(24);
 
   return (
-    <div className="modal__overlay" onClick={handleBackgroundClick}>
-      <div className="modal__content">
-        <button className="modal__close" onClick={onClose}>
-          ✕
-        </button>
+    <header className={`navbar ${isScrolled ? "navbar--scrolled" : ""}`}>
+      <div className="navbar__inner">
+        <a href="#bio" className="navbar__brand">
+          Christian Morrow
+        </a>
 
-        <ContactForm onClose={onClose} />
+        <nav className="navbar__nav">
+          {NAV_ITEMS.map((item) => (
+            <a key={item.href} href={item.href} className="navbar__link">
+              {item.label}
+            </a>
+          ))}
+        </nav>
+
+        <button
+          type="button"
+          className="navbar__connect-button"
+          onClick={onConnectClick}
+        >
+          Connect
+        </button>
       </div>
-    </div>
+    </header>
   );
 };

@@ -3,10 +3,10 @@ import { useState } from "react";
 import "./ContactForm.css";
 
 interface ContactFormProps {
-  onClose: () => void;
+  onSuccess?: () => void;
 }
 
-export const ContactForm: React.FC<ContactFormProps> = ({ onClose }) => {
+export const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -40,8 +40,9 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onClose }) => {
       setStatus("success");
       setForm({ name: "", email: "", subject: "", message: "" });
 
+      // Trigger modal close if provided
       setTimeout(() => {
-        onClose();
+        onSuccess?.();
         setStatus("idle");
       }, 1500);
     } catch (err) {
