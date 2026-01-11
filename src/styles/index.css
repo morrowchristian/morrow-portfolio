@@ -1,0 +1,16 @@
+/* src/styles/index.css */
+
+/* Design system tokens */
+@import "./tokens.css";
+
+/* Typography scale + font families */
+@import "./typography.css";
+
+/* Layout primitives (Container, Grid, section spacing) */
+@import "./layout.css";
+
+/* Utility classes (flex, animations, helpers) */
+@import "./utilities.css";
+
+/* Global resets + base HTML defaults */
+@import "./globals.css";
