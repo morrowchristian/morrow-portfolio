@@ -1,0 +1,32 @@
+/* src/components/Portfolio/ProjectModalContent.css */
+
+.project-modal__title {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  margin-bottom: var(--space-16);
+}
+
+.project-modal__description {
+  opacity: 0.85;
+  margin-bottom: var(--space-24);
+}
+
+.project-modal__highlights {
+  margin-bottom: var(--space-24);
+}
+
+.project-modal__highlight {
+  margin-bottom: var(--space-8);
+}
+
+.project-modal__images {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.project-modal__image {
+  width: 100%;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+}

@@ -1,4 +1,5 @@
 // src/components/Modal/Modal.tsx
+import { useEffect } from "react";
 import "./Modal.css";
 
 interface ModalProps {
@@ -8,6 +9,22 @@ interface ModalProps {
 }
 
 export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKey);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKey);
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const handleBackgroundClick = (e: React.MouseEvent) => {
@@ -27,9 +44,3 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   );
 };
 
-/* TODO (Modal)
-- Add fade/scale animations
-- Add ESC key to close
-- Add scroll lock on body
-- Add responsive modal width (sm/md/lg)
-*/
