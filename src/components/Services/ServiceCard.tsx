@@ -5,25 +5,31 @@ interface ServiceCardProps {
   title: string;
   description: string;
   icon: React.ComponentType<{ className?: string }>;
+  accent: "blue" | "purple" | "green" | "orange";
+  cta?: {
+    label: string;
+    href: string;
+  };
 }
 
 export const ServiceCard: React.FC<ServiceCardProps> = ({
   title,
   description,
   icon: Icon,
+  accent,
+  cta,
 }) => {
   return (
-    <div className="service-card">
+    <div className={`service-card service-card--accent-${accent}`}>
       <Icon className="service-card__icon" />
       <h3 className="service-card__title">{title}</h3>
       <p className="service-card__description">{description}</p>
+
+      {cta && (
+        <a href={cta.href} className="service-card__cta">
+          {cta.label}
+        </a>
+      )}
     </div>
   );
 };
-
-/* TODO (ServiceCard)
-- Add hover animation (lift, glow, tilt)
-- Add icon color variants
-- Add responsive spacing tokens
-- Add optional CTA button per service
-*/
