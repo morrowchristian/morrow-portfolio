@@ -1,5 +1,6 @@
 /* src/components/Portfolio/Portfolio.css */
 
+/* Portfolio Section */
 .portfolio {
   padding-block: var(--space-64);
 }
@@ -10,13 +11,13 @@
   margin-bottom: var(--space-32);
 }
 
-/* Project Card */
+/* Project Card Base */
 .project-card {
   background: var(--color-surface);
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
   transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-  transition-delay: var(--transition-fast);
+  transition-delay: var(--transition-fast); /* supports stagger animation */
 }
 
 .project-card:hover {
@@ -44,6 +45,7 @@
   margin-bottom: var(--space-16);
 }
 
+/* Project Card Tags */
 .project-card__tech {
   display: flex;
   flex-wrap: wrap;
@@ -57,26 +59,6 @@
   background: var(--color-border);
   font-size: var(--text-xs);
 }
-
-.project-card__links {
-  display: flex;
-  gap: var(--space-16);
-}
-
-.project-card__link {
-  color: var(--color-accent);
-  font-size: var(--text-sm);
-}
-
-/* Featured Project Variant */
-.project-card--featured {
-  background: var(--featured-bg);
-  border: 1px solid var(--featured-border);
-  box-shadow: var(--featured-shadow);
-  border-radius: var(--featured-radius);
-  padding: var(--featured-padding);
-}
-
 
 /* Tag Color Variants */
 .project-card__tag--react {
@@ -104,3 +86,45 @@
   color: var(--tag-html-text);
 }
 
+/* Project Card Links */
+.project-card__links {
+  display: flex;
+  gap: var(--space-16);
+}
+
+.project-card__link {
+  color: var(--color-accent);
+  font-size: var(--text-sm);
+}
+
+/* Featured Project Variant */
+.project-card--featured {
+  background: var(--featured-bg);
+  border: 1px solid var(--featured-border);
+  box-shadow: var(--featured-shadow);
+  border-radius: var(--featured-radius);
+  padding: var(--featured-padding);
+}
+
+/* Filter Bar Container */
+.portfolio__filters {
+  display: flex;
+  gap: var(--space-12);
+  margin-bottom: var(--space-32);
+}
+
+/* Filter Buttons */
+.portfolio__filter-btn {
+  padding: var(--space-8) var(--space-16);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+/* Active Filter State */
+.portfolio__filter-btn.is-active {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
