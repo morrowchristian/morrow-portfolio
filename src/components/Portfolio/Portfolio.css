@@ -15,11 +15,12 @@
   background: var(--color-surface);
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
-  transition: var(--transition-medium);
+  transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+  transition-delay: var(--transition-fast);
 }
 
 .project-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
   box-shadow: var(--shadow-md);
 }
 
@@ -66,3 +67,40 @@
   color: var(--color-accent);
   font-size: var(--text-sm);
 }
+
+/* Featured Project Variant */
+.project-card--featured {
+  background: var(--featured-bg);
+  border: 1px solid var(--featured-border);
+  box-shadow: var(--featured-shadow);
+  border-radius: var(--featured-radius);
+  padding: var(--featured-padding);
+}
+
+
+/* Tag Color Variants */
+.project-card__tag--react {
+  background: var(--tag-react-bg);
+  color: var(--tag-react-text);
+}
+
+.project-card__tag--ts {
+  background: var(--tag-ts-bg);
+  color: var(--tag-ts-text);
+}
+
+.project-card__tag--js {
+  background: var(--tag-js-bg);
+  color: var(--tag-js-text);
+}
+
+.project-card__tag--css {
+  background: var(--tag-css-bg);
+  color: var(--tag-css-text);
+}
+
+.project-card__tag--html {
+  background: var(--tag-html-bg);
+  color: var(--tag-html-text);
+}
+
