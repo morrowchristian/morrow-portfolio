@@ -2,24 +2,44 @@
 import "./Portfolio.css";
 
 interface ProjectCardProps {
-  title: string;
-  description: string;
-  tech: string[];
-  image: string;
-  demoLink?: string;
-  repoLink?: string;
+  project: {
+    title: string;
+    description: string;
+    image: string;
+    tags: string[];
+    featured?: boolean;
+    demoLink?: string;
+    repoLink?: string;
+  };
+  index: number;
+  onOpen?: (project: any) => void;
 }
 
+const TAG_CLASS_MAP: Record<string, string> = {
+  React: "project-card__tag--react",
+  TypeScript: "project-card__tag--ts",
+  JavaScript: "project-card__tag--js",
+  CSS: "project-card__tag--css",
+  HTML: "project-card__tag--html",
+};
+
 export const ProjectCard: React.FC<ProjectCardProps> = ({
-  title,
-  description,
-  tech,
-  image,
-  demoLink,
-  repoLink,
+  project,
+  index,
+  onOpen,
 }) => {
+  const { title, description, image, tags, featured, demoLink, repoLink } = project;
+
+  const cardClass = featured
+    ? "project-card project-card--featured"
+    : "project-card";
+
   return (
-    <div className="project-card">
+    <div
+      className={cardClass}
+      style={{ transitionDelay: `${index * 60}ms` }}
+      onClick={() => onOpen?.(project)}
+    >
       <img src={image} alt={title} className="project-card__image" />
 
       <div className="project-card__content">
@@ -27,9 +47,12 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         <p className="project-card__description">{description}</p>
 
         <div className="project-card__tech">
-          {tech.map((t) => (
-            <span key={t} className="project-card__tag">
-              {t}
+          {tags.map((tag) => (
+            <span
+              key={tag}
+              className={`project-card__tag ${TAG_CLASS_MAP[tag] || ""}`}
+            >
+              {tag}
             </span>
           ))}
         </div>
@@ -50,11 +73,3 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     </div>
   );
 };
-
-/* TODO (ProjectCard)
-- Add hover animation (scale, shadow, lift)
-- Add skeleton loading state for images
-- Add responsive image aspect ratios
-- Add tech tag color variants
-- Add optional “featured” badge
-*/
