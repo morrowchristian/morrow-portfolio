@@ -1,5 +1,7 @@
 /* src/components/Services/Services.css */
 
+
+/* Services Section */
 .services {
   padding-block: var(--space-64);
 }
@@ -10,12 +12,14 @@
   margin-bottom: var(--space-32);
 }
 
+
+/* Service Card Base */
 .service-card {
   background: var(--color-surface);
   border-radius: var(--radius-lg);
   padding: var(--space-32);
   border: 1px solid var(--color-border);
-  transition: var(--transition-medium);
+  transition: transform var(--transition-medium), box-shadow var(--transition-medium), border-color var(--transition-medium);
 }
 
 .service-card:hover {
@@ -23,12 +27,15 @@
   box-shadow: var(--shadow-md);
 }
 
+
+/* Service Card Icon */
 .service-card__icon {
   font-size: 2rem;
-  color: var(--color-accent);
   margin-bottom: var(--space-16);
 }
 
+
+/* Service Card Text */
 .service-card__title {
   font-size: var(--text-lg);
   font-weight: var(--weight-bold);
@@ -37,4 +44,63 @@
 
 .service-card__description {
   opacity: 0.85;
+  margin-bottom: var(--space-16);
+}
+
+
+/* Service Card CTA */
+.service-card__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8) var(--space-16);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  text-decoration: none;
+  transition: background var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+
+/* Accent Variants */
+.service-card--accent-blue .service-card__icon {
+  color: var(--tag-react-bg);
+}
+
+.service-card--accent-purple .service-card__icon {
+  color: var(--color-accent);
+}
+
+.service-card--accent-green .service-card__icon {
+  color: var(--tag-ts-bg);
+}
+
+.service-card--accent-orange .service-card__icon {
+  color: var(--tag-js-bg);
+}
+
+/* CTA inherits accent */
+.service-card--accent-blue .service-card__cta {
+  background: var(--tag-react-bg);
+  color: var(--tag-react-text);
+}
+
+.service-card--accent-purple .service-card__cta {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.service-card--accent-green .service-card__cta {
+  background: var(--tag-ts-bg);
+  color: var(--tag-ts-text);
+}
+
+.service-card--accent-orange .service-card__cta {
+  background: var(--tag-js-bg);
+  color: var(--tag-js-text);
+}
+
+.service-card__cta:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
 }
