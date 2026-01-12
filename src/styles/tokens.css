@@ -9,6 +9,18 @@
   --color-text-muted: #b8b8b2;
   --color-accent: #d4a657;
 
+  /* Tag Colors */
+  --tag-react-bg: #61dafb20;
+  --tag-react-text: #61dafb;
+  --tag-ts-bg: #3178c620;
+  --tag-ts-text: #3178c6;
+  --tag-js-bg: #f7df1e20;
+  --tag-js-text: #f7df1e;
+  --tag-css-bg: #2965f120;
+  --tag-css-text: #2965f1;
+  --tag-html-bg: #e34f2620;
+  --tag-html-text: #e34f26;
+
   /* Spacing scale */
   --space-2: 0.125rem;
   --space-4: 0.25rem;
@@ -32,4 +44,22 @@
   /* Transitions */
   --transition-fast: 150ms ease;
   --transition-medium: 250ms ease;
+
+  /* Featured Project */
+  --featured-bg: #ffffff05;
+  --featured-border: #ffffff20;
+  --featured-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --featured-radius: var(--radius-lg);
+  --featured-padding: var(--space-32);
+
+  /* Modal */
+  --modal-backdrop: rgba(0, 0, 0, 0.65);
+  --modal-bg: var(--color-surface);
+  --modal-radius: var(--radius-lg);
+  --modal-shadow: var(--shadow-md);
+
+  /* Modal Animations */
+  --modal-scale-in: 0.96;
+  --modal-scale-out: 1;
+  --modal-fade-duration: 250ms;
 }
