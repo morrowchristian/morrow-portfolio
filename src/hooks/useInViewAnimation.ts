@@ -1,0 +1,30 @@
+// src/hooks/useInViewAnimation.ts
+import { useEffect, useRef, useState } from "react";
+
+export const useInViewAnimation = (threshold = 0.2) => {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setIsVisible(true);
+      },
+      { threshold }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+
+    return () => observer.disconnect();
+  }, [threshold]);
+
+  return { ref, isVisible };
+};
+
+/* TODO (useInViewAnimation)
+- Add option to reset visibility when leaving viewport
+- Add support for multiple refs (array mode)
+- Add animation delay or stagger helpers
+- Add rootMargin support for earlier/later triggers
+- Add callback for when element becomes visible
+*/

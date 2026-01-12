@@ -1,0 +1,71 @@
+/* src/components/ui/Button.css */
+
+.ui-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  border: none;
+  cursor: pointer;
+  font-weight: var(--weight-medium);
+  border-radius: var(--radius-md);
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+/* Variants */
+.ui-button--primary {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.ui-button--secondary {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.ui-button--ghost {
+  background: transparent;
+  color: var(--color-text);
+}
+
+/* Sizes */
+.ui-button--sm {
+  padding: var(--space-8) var(--space-12);
+  font-size: var(--text-sm);
+}
+
+.ui-button--md {
+  padding: var(--space-12) var(--space-16);
+  font-size: var(--text-base);
+}
+
+.ui-button--lg {
+  padding: var(--space-16) var(--space-20);
+  font-size: var(--text-lg);
+}
+
+/* Full width */
+.ui-button--full {
+  width: 100%;
+}
+
+/* Loading */
+.ui-button--loading {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+/* Icons */
+.ui-button__icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.ui-button__icon--left {
+  margin-right: var(--space-4);
+}
+
+.ui-button__icon--right {
+  margin-left: var(--space-4);
+}

@@ -1,0 +1,33 @@
+/* src/components/Bio/Bio.css */
+
+.bio {
+  padding-block: var(--space-64);
+}
+
+.bio__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.bio__title {
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-bold);
+}
+
+.bio__subtitle {
+  font-size: var(--text-lg);
+  opacity: 0.85;
+  max-width: 480px;
+}
+
+.bio__image-wrapper {
+  width: 100%;
+  max-width: 360px;
+  margin-inline: auto;
+}
+
+.bio__image {
+  width: 100%;
+  border-radius: 50%;
+}

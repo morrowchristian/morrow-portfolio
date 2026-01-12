@@ -1,0 +1,40 @@
+/* src/styles/utilities.css */
+
+/* Flex helpers */
+.flex {
+  display: flex;
+}
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Text alignment */
+.text-center {
+  text-align: center;
+}
+
+/* Animation utilities */
+.animate {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+.animate--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hide visually but keep accessible */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}

@@ -1,0 +1,44 @@
+/* src/components/ui/Card.css */
+
+.ui-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+/* Padding tokens */
+.ui-card--p-sm {
+  padding: var(--space-12);
+}
+
+.ui-card--p-md {
+  padding: var(--space-20);
+}
+
+.ui-card--p-lg {
+  padding: var(--space-32);
+}
+
+/* Radius tokens */
+.ui-card--r-sm {
+  border-radius: var(--radius-sm);
+}
+
+.ui-card--r-md {
+  border-radius: var(--radius-md);
+}
+
+.ui-card--r-lg {
+  border-radius: var(--radius-lg);
+}
+
+/* Hover elevation (future variants) */
+.ui-card--hover {
+  cursor: pointer;
+}
+
+.ui-card--hover:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}

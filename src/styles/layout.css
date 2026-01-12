@@ -1,0 +1,20 @@
+/* src/styles/layout.css */
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-inline: var(--space-24);
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  gap: var(--space-32);
+}
+
+/* Section spacing */
+section {
+  padding-block: var(--space-64);
+}
