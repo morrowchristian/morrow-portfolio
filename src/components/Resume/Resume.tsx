@@ -5,9 +5,10 @@ import { Container } from "../Container/Container";
 import { Grid } from "../Grid/Grid";
 import { useInViewAnimation } from "../../hooks/useInViewAnimation";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
-
 import { Timeline } from "./Timeline";
 import { SkillBarGroup } from "./SkillBarGroup";
+import { Education } from "./Education";
+import { Certifications } from "./Certifications";
 
 export const Resume: React.FC = () => {
   const { ref, isVisible } = useInViewAnimation();
@@ -35,6 +36,12 @@ export const Resume: React.FC = () => {
             ))}
           </div>
         </Grid>
+
+        {/* Education Section */}
+        <Education items={resume.education} />
+
+        {/* Certifications Section */}
+        <Certifications items={resume.certifications} />        
       </Container>
     </section>
   );

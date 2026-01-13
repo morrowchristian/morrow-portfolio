@@ -1,0 +1,38 @@
+/* src/components/Resume/Education.css */
+
+.education {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+.education__title {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+}
+
+.education__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+.education__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.education__degree {
+  font-weight: var(--weight-bold);
+}
+
+.education__school {
+  opacity: 0.85;
+}
+
+.education__details {
+  padding-left: var(--space-16);
+  opacity: 0.85;
+  margin-top: var(--space-8);
+}
