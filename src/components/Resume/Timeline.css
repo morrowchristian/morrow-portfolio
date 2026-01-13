@@ -1,0 +1,61 @@
+/* src/components/Resume/Timeline.css */
+
+.timeline {
+  position: relative;
+  padding-left: var(--space-32);
+}
+
+.timeline__line {
+  position: absolute;
+  left: var(--space-12);
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border-subtle);
+}
+
+.timeline__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
+}
+
+.timeline__item {
+  position: relative;
+  display: flex;
+  gap: var(--space-16);
+}
+
+.timeline__dot {
+  position: absolute;
+  left: calc(var(--space-12) - 5px);
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.timeline__content {
+  padding-left: var(--space-24);
+}
+
+.timeline__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.timeline__role {
+  font-weight: var(--weight-bold);
+}
+
+.timeline__company {
+  opacity: 0.85;
+}
+
+.timeline__bullets {
+  padding-left: var(--space-16);
+  opacity: 0.85;
+  margin-top: var(--space-8);
+}
