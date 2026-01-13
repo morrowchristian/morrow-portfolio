@@ -9,6 +9,7 @@ import { Timeline } from "./Timeline";
 import { SkillBarGroup } from "./SkillBarGroup";
 import { Education } from "./Education";
 import { Certifications } from "./Certifications";
+import { DownloadResumeButton } from "./DownloadResumeButton";
 
 export const Resume: React.FC = () => {
   const { ref, isVisible } = useInViewAnimation();
@@ -18,7 +19,7 @@ export const Resume: React.FC = () => {
     <section id="resume" className="resume">
       <Container>
         <h2 className="resume__title">Resume</h2>
-
+        <DownloadResumeButton />
         <Grid
           ref={ref}
           columns={isMobile ? "1fr" : "1fr 1fr"}
