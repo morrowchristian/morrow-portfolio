@@ -38,11 +38,14 @@ export const Resume: React.FC = () => {
           </div>
         </Grid>
 
-        {/* Education Section */}
-        <Education items={resume.education} />
+        <div className="resume__details">
+          {/* Education Section */}
+          <Education items={resume.education} />
 
-        {/* Certifications Section */}
-        <Certifications items={resume.certifications} />        
+          {/* Certifications Section */}
+          <Certifications items={resume.certifications} />
+        </div>
+           
       </Container>
     </section>
   );

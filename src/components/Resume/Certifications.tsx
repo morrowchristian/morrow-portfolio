@@ -12,8 +12,12 @@ export const Certifications: React.FC<CertificationsProps> = ({ items }) => {
       <h3 className="certifications__title">Certifications</h3>
 
       <ul className="certifications__list">
-        {items.map((cert) => (
-          <li key={cert.name} className="certifications__item">
+        {items.map((cert, i) => (
+          <li 
+            key={cert.name} 
+            className="certifications__item stagger"
+            style={{ "--delay": `${i * 100}ms` } as React.CSSProperties}
+          >
             <span className="certifications__name">{cert.name}</span>
             <span className="certifications__issuer">{cert.issuer}</span>
             <span className="certifications__year">{cert.year}</span>

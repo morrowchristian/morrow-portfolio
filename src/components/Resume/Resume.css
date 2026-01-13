@@ -1,7 +1,19 @@
 /* src/components/Resume/Resume.css */
 
+.education,
+.certifications {
+  margin-top: var(--space-48);
+}
+
 .resume {
   padding-block: var(--space-64);
+}
+
+.resume__details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-48);
+  margin-top: var(--space-64);
 }
 
 .resume__title {
@@ -28,22 +40,4 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-32);
-}
-
-.experience-item__header {
-  display: flex;
-  justify-content: space-between;
-}
-
-.experience-item__role {
-  font-weight: var(--weight-bold);
-}
-
-.experience-item__company {
-  opacity: 0.85;
-}
-
-.experience-item__bullets {
-  padding-left: var(--space-16);
-  opacity: 0.85;
 }
