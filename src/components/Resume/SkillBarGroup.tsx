@@ -9,7 +9,7 @@ interface SkillBarGroupProps {
 export const SkillBarGroup: React.FC<SkillBarGroupProps> = ({ group }) => {
   return (
     <div className="skillbar-group">
-      <h3 className="skillbar-group__title">{group.title}</h3>
+      <h3 className="skillbar-group__title heading-4">{group.title}</h3>
 
       <div className="skillbar-group__items">
         {group.items.map((skill, i) => (

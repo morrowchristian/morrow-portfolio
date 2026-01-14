@@ -9,12 +9,12 @@ import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { useState } from "react";
 import { Modal } from "../Modal/Modal";
 import { ProjectModalContent } from "./ProjectModalContent";
+import { SectionHeader } from "../ui/SectionHeader/SectionHeader";
 
 export const Portfolio: React.FC = () => {
   const { ref, isVisible } = useInViewAnimation();
   const isMobile = useMediaQuery("(max-width: 640px)");
 
-  // Filtering
   const [activeFilter, setActiveFilter] = useState<string>("All");
   const FILTERS = ["All", "React", "TypeScript", "JavaScript", "CSS", "HTML"];
 
@@ -23,15 +23,17 @@ export const Portfolio: React.FC = () => {
       ? projects
       : projects.filter((p) => p.tags.includes(activeFilter));
 
-  // Modal
   const [selectedProject, setSelectedProject] = useState<any | null>(null);
 
   return (
     <section id="portfolio" className="portfolio">
       <Container>
-        <h2 className="portfolio__title">Portfolio</h2>
-
-        {/* Filter Bar */}
+        <SectionHeader
+          title="Portfolio"
+          subtitle="Selected work"
+          as="h2"
+          accent
+        />
         <div className="portfolio__filters">
           {FILTERS.map((filter) => (
             <button
@@ -46,7 +48,6 @@ export const Portfolio: React.FC = () => {
           ))}
         </div>
 
-        {/* Project Grid */}
         <Grid
           ref={ref}
           columns={isMobile ? "1fr" : "repeat(auto-fill, minmax(280px, 1fr))"}
@@ -63,7 +64,6 @@ export const Portfolio: React.FC = () => {
         </Grid>
       </Container>
 
-      {/* Modal */}
       <Modal
         isOpen={!!selectedProject}
         onClose={() => setSelectedProject(null)}
@@ -75,4 +75,3 @@ export const Portfolio: React.FC = () => {
     </section>
   );
 };
-

@@ -18,22 +18,26 @@ export const Timeline: React.FC<TimelineProps> = ({ items }) => {
             className="timeline__item stagger"
             style={{ "--delay": `${index * 120}ms` } as React.CSSProperties}
           >
-          <div className="timeline__dot" />
-          
-          <div className="timeline__content">
-            <div className="timeline__header">
-               <h3 className="timeline__role">{item.role}</h3>
-               <span className="timeline__period">{item.period}</span>
+            <div className="timeline__dot" />
+
+            <div className="timeline__content">
+              <div className="timeline__header">
+                <h3 className="timeline__role heading-4">{item.role}</h3>
+                <span className="timeline__period text-small">
+                  {item.period}
+                </span>
               </div>
 
-              <p className="timeline__company">
+              <p className="timeline__company text-small">
                 {item.company}
                 {item.location ? ` — ${item.location}` : ""}
               </p>
 
               <ul className="timeline__bullets">
                 {item.bullets.map((b, i) => (
-                  <li key={i}>{b.text}</li>
+                  <li key={i} className="text-description">
+                    {b.text}
+                  </li>
                 ))}
               </ul>
             </div>

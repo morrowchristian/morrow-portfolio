@@ -15,28 +15,35 @@ export const Bio: React.FC = () => {
         <Grid
           ref={ref}
           columns={isMobile ? "1fr" : "1fr 1fr"}
+          gap="48px"
           className={`animate ${isVisible ? "animate--visible" : ""}`}
         >
+          {/* Left: Text */}
           <div className="bio__content">
-            <h1 className="bio__title">Christian Morrow</h1>
-            <p className="bio__subtitle">
+            <p className="bio__location text-small text-muted">Cleveland, TN</p>
+
+            <h1 className="bio__title heading-1">Christian Morrow</h1>
+
+            <p className="bio__subtitle text-description">
               Full‑Stack Software Engineer crafting intentional, expressive UI.
             </p>
+
+            <div className="bio__buttons">
+              {/* Add CTA buttons here if needed */}
+            </div>
           </div>
 
+          {/* Right: Image */}
           <div className="bio__image-wrapper">
-            <img src="/me.jpg" alt="Christian Morrow" className="bio__image" />
+            <div className="bio__image-bg" />
+            <img
+              src="/me.jpg"
+              alt="Christian Morrow"
+              className="bio__image"
+            />
           </div>
         </Grid>
       </Container>
     </section>
   );
 };
-
-/* TODO (Bio)
-- Add social links or CTA buttons
-- Add responsive typography scaling
-- Add subtle parallax or fade-in for image
-- Add a short intro paragraph or tagline
-- Add spacing tokens for mobile vs desktop
-*/

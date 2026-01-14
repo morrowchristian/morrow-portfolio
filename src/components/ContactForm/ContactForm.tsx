@@ -51,9 +51,9 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
 
   return (
     <form className="contact-form" onSubmit={handleSubmit}>
-      <h2 className="contact-form__title">Send me a message</h2>
+      <h2 className="contact-form__title heading-2">Send me a message</h2>
 
-      <label className="contact-form__label">
+      <label className="contact-form__label text-small text-muted">
         Name
         <input
           type="text"
@@ -61,11 +61,11 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
           value={form.name}
           onChange={handleChange}
           required
-          className="contact-form__input"
+          className="contact-form__input text-body"
         />
       </label>
 
-      <label className="contact-form__label">
+      <label className="contact-form__label text-small text-muted">
         Email
         <input
           type="email"
@@ -73,11 +73,11 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
           value={form.email}
           onChange={handleChange}
           required
-          className="contact-form__input"
+          className="contact-form__input text-body"
         />
       </label>
 
-      <label className="contact-form__label">
+      <label className="contact-form__label text-small text-muted">
         Subject
         <input
           type="text"
@@ -85,46 +85,40 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
           value={form.subject}
           onChange={handleChange}
           required
-          className="contact-form__input"
+          className="contact-form__input text-body"
         />
       </label>
 
-      <label className="contact-form__label">
+      <label className="contact-form__label text-small text-muted">
         Message
         <textarea
           name="message"
           value={form.message}
           onChange={handleChange}
           required
-          className="contact-form__textarea"
+          className="contact-form__textarea text-body"
         />
       </label>
 
       <button
         type="submit"
-        className="contact-form__submit"
+        className="contact-form__submit text-small"
         disabled={status === "loading"}
       >
         {status === "loading" ? "Sending..." : "Send Message"}
       </button>
 
       {status === "success" && (
-        <p className="contact-form__success">Message sent successfully!</p>
+        <p className="contact-form__success text-small">
+          Message sent successfully!
+        </p>
       )}
 
       {status === "error" && (
-        <p className="contact-form__error">
+        <p className="contact-form__error text-small">
           Something went wrong. Please try again.
         </p>
       )}
     </form>
   );
 };
-
-/* TODO (ContactForm)
-- Add responsive layout (2-column on desktop)
-- Add validation UI (invalid states, inline errors)
-- Add success animation or confetti burst
-- Add loading spinner instead of text
-- Add keyboard accessibility improvements
-*/

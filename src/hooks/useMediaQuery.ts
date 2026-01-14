@@ -19,10 +19,3 @@ export const useMediaQuery = (query: string) => {
 
   return matches;
 };
-
-/* TODO (useMediaQuery)
-- Add server-safe fallback for SSR environments
-- Add support for multiple queries (returning an object)
-- Add breakpoint tokens (e.g., "md", "lg") mapped to query strings
-- Add event throttling for performance on resize
-*/

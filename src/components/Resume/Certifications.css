@@ -5,25 +5,3 @@
   flex-direction: column;
   gap: var(--space-24);
 }
-
-.certifications__title {
-  font-size: var(--text-lg);
-  font-weight: var(--weight-bold);
-}
-
-.certifications__list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-16);
-}
-
-.certifications__item {
-  display: flex;
-  justify-content: space-between;
-  font-size: var(--text-sm);
-  opacity: 0.9;
-}
-
-.certifications__name {
-  font-weight: var(--weight-medium);
-}

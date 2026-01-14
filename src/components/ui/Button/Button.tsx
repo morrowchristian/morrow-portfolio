@@ -41,15 +41,3 @@ export const Button: React.FC<ButtonProps> = ({
     </button>
   );
 };
-
-/* TODO (Button)
-- Add animated loading spinner component
-- Add ARIA attributes for loading and accessibility states
-- Add keyboard focus-visible ring using tokens
-- Add icon-only variant (square button)
-- Add motion/hover polish (scale, shadow, accent glow)
-- Add dark/light theme adjustments if theme system is added later
-- Add disabled variant styling using tokens
-- Add variant for destructive/alert actions
-*/
-

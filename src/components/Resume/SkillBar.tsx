@@ -10,8 +10,8 @@ export const SkillBar: React.FC<SkillBarProps> = ({ skill }) => {
   return (
     <div className="skillbar">
       <div className="skillbar__header">
-        <span className="skillbar__name">{skill.name}</span>
-        <span className="skillbar__value">{skill.level}%</span>
+        <span className="skillbar__name text-small">{skill.name}</span>
+        <span className="skillbar__value text-small">{skill.level}%</span>
       </div>
 
       <div className="skillbar__track">

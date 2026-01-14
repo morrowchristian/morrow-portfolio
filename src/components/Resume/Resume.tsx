@@ -10,6 +10,7 @@ import { SkillBarGroup } from "./SkillBarGroup";
 import { Education } from "./Education";
 import { Certifications } from "./Certifications";
 import { DownloadResumeButton } from "./DownloadResumeButton";
+import { SectionHeader } from "../ui/SectionHeader/SectionHeader";
 
 export const Resume: React.FC = () => {
   const { ref, isVisible } = useInViewAnimation();
@@ -18,7 +19,12 @@ export const Resume: React.FC = () => {
   return (
     <section id="resume" className="resume">
       <Container>
-        <h2 className="resume__title">Resume</h2>
+        <SectionHeader
+          title="Experience"
+          as="h2"
+          align="left"
+          accent
+        />
         <DownloadResumeButton />
         <Grid
           ref={ref}

@@ -1,5 +1,5 @@
 // src/components/Resume/DownloadResumeButton.tsx
-import { Button } from "../ui/Button";
+import { Button } from "../ui/Button/Button";
 
 export const DownloadResumeButton: React.FC = () => {
   return (

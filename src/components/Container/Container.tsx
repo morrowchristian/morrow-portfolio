@@ -15,9 +15,3 @@ export const Container = forwardRef<HTMLDivElement, ContainerProps>(
     );
   }
 );
-
-/* TODO (Container)
-- Add responsive padding tokens (sm/md/lg)
-- Add max-width variants (narrow, wide, full)
-- Add optional “centered” or “stacked” layout helpers
-*/

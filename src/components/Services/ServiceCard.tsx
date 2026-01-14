@@ -22,11 +22,10 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
   return (
     <div className={`service-card service-card--accent-${accent}`}>
       <Icon className="service-card__icon" />
-      <h3 className="service-card__title">{title}</h3>
-      <p className="service-card__description">{description}</p>
-
+      <h3 className="service-card__title heading-3">{title}</h3>
+      <p className="service-card__description text-description">{description}</p>
       {cta && (
-        <a href={cta.href} className="service-card__cta">
+        <a href={cta.href} className="service-card__cta text-small">
           {cta.label}
         </a>
       )}

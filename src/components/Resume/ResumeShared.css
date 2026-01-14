@@ -1,0 +1,45 @@
+/* src/components/Resume/ResumeShared.css */
+
+.resume-item__description {
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  opacity: 0.85;
+}
+
+.resume-item__meta {
+  font-size: var(--text-sm);
+  opacity: 0.85;
+}
+
+.resume-item__title {
+  font-size: var(--text-base);
+  font-weight: var(--weight-bold);
+}
+
+@media (min-width: 768px) {
+  .resume-item__description {
+    font-size: var(--text-base);
+  }
+
+  .resume-item__meta {
+    font-size: var(--text-base);
+  }
+
+  .resume-item__title {
+    font-size: var(--text-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .resume-item__description {
+    font-size: var(--text-lg);
+  }
+
+  .resume-item__meta {
+    font-size: var(--text-lg);
+  }
+
+  .resume-item__title {
+    font-size: var(--text-xl);
+  }
+}

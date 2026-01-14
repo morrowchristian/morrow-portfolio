@@ -17,24 +17,17 @@ export const ExperienceItem: React.FC<ExperienceItemProps> = ({
   return (
     <div className="experience-item">
       <div className="experience-item__header">
-        <h3 className="experience-item__role">{role}</h3>
-        <span className="experience-item__dates">{dates}</span>
+        <h3 className="experience-item__role heading-4">{role}</h3>
+        <span className="experience-item__dates text-small">{dates}</span>
       </div>
 
-      <p className="experience-item__company">{company}</p>
+      <p className="experience-item__company text-small">{company}</p>
 
       <ul className="experience-item__bullets">
         {bullets.map((b, i) => (
-          <li key={i}>{b}</li>
+          <li key={i} className="text-description">{b}</li>
         ))}
       </ul>
     </div>
   );
 };
-
-/* TODO (ExperienceItem)
-- Add animation staggering for bullet list
-- Add timeline connector UI
-- Add responsive spacing + typography
-- Add icons or category tags for roles
-*/

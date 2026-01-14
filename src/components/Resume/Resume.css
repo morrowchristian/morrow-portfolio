@@ -1,7 +1,9 @@
 /* src/components/Resume/Resume.css */
 
-.education,
-.certifications {
+/* src/components/Resume/Resume.css */
+
+.certifications,
+.education {
   margin-top: var(--space-48);
 }
 
@@ -16,15 +18,10 @@
   margin-top: var(--space-64);
 }
 
-.resume__title {
-  font-size: var(--text-2xl);
-  font-weight: var(--weight-bold);
-  margin-bottom: var(--space-24);
-}
-
-.resume__skills {
-  display: grid;
-  gap: var(--space-24);
+.resume__experience {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
 }
 
 .resume__skill-group h3 {
@@ -36,8 +33,27 @@
   opacity: 0.85;
 }
 
-.resume__experience {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-32);
+.resume__skills {
+  display: grid;
+  gap: var(--space-24);
+}
+
+.resume__title {
+  font-size: var(--text-xl);
+}
+
+@media (min-width: 768px) {
+  .resume__title {
+    font-size: var(--text-2xl);
+  }
+
+  .timeline__role {
+    font-size: var(--text-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .resume__title {
+    font-size: var(--text-3xl);
+  }
 }

@@ -1,22 +1,10 @@
 /* src/components/Resume/DownloadResumeButton.css */
 
 .resume-download {
-  display: inline-flex;
   align-items: center;
+  display: inline-flex;
   gap: var(--space-8);
-  padding: var(--space-12) var(--space-20);
-  background: var(--accent);
-  color: var(--text-on-accent);
-  border-radius: var(--radius-md);
-  font-weight: var(--weight-medium);
-  font-size: var(--text-sm);
   text-decoration: none;
-  transition: background 0.2s ease, transform 0.2s ease;
-}
-
-.resume-download:hover {
-  background: var(--accent-hover);
-  transform: translateY(-2px);
 }
 
 .resume-download__icon {
