@@ -1,0 +1,25 @@
+/* src/components/Resume/Education.css */
+
+.education {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+.education__details {
+  padding-left: var(--space-16);
+  margin-top: var(--space-8);
+}
+
+.education__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.education__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+

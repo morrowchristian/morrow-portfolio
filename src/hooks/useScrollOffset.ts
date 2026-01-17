@@ -17,10 +17,3 @@ export const useScrollOffset = (threshold = 16) => {
 
   return isScrolled;
 };
-
-/* TODO (useScrollOffset)
-- Add direction detection (scrolling up vs down)
-- Add velocity detection for advanced nav behavior
-- Add throttling or requestAnimationFrame for performance
-- Add support for custom scroll containers
-*/

@@ -1,33 +1,18 @@
-/* src/components/Bio/Bio.css */
-
-.bio {
-  padding-block: var(--space-64);
-}
+/* Bio.css */
 
 .bio__content {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: var(--space-16);
 }
 
-.bio__title {
-  font-size: var(--text-3xl);
-  font-weight: var(--weight-bold);
-}
-
-.bio__subtitle {
-  font-size: var(--text-lg);
-  opacity: 0.85;
-  max-width: 480px;
-}
-
-.bio__image-wrapper {
-  width: 100%;
-  max-width: 360px;
-  margin-inline: auto;
-}
-
 .bio__image {
-  width: 100%;
+  width: 240px;
+  height: 240px;
   border-radius: 50%;
+  object-fit: cover;
+  box-shadow:
+    0 0 40px rgba(255,255,255,0.04),
+    0 0 4px rgba(255,255,255,0.1);
 }

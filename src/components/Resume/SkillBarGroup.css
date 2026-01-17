@@ -1,0 +1,17 @@
+/* src/components/Resume/SkillBarGroup.css */
+
+.skillbar-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.skillbar-group__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.skillbar-group__title {
+  margin-bottom: var(--space-8);
+}

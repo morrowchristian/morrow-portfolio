@@ -21,8 +21,9 @@ export const Footer: React.FC = () => {
           }}
         >
           <div className="footer__left">
-            <h3 className="footer__name">Christian Morrow</h3>
-            <p className="footer__tagline">
+            <h3 className="footer__name heading-4">Christian Morrow</h3>
+
+            <p className="footer__tagline text-description">
               Full‑Stack Software Engineer • Cleveland, TN
             </p>
           </div>
@@ -30,7 +31,7 @@ export const Footer: React.FC = () => {
           <div className="footer__right">
             <a
               href="mailto:morrowchristian@icloud.com"
-              className="footer__link"
+              className="footer__link text-body"
             >
               morrowchristian@icloud.com
             </a>
@@ -56,15 +57,10 @@ export const Footer: React.FC = () => {
 
         <div className="footer__divider" />
 
-        <p className="footer__credit">Made by Christian Morrow © 2026</p>
+        <p className="footer__credit text-small text-muted">
+          Made by Christian Morrow © 2026
+        </p>
       </Container>
     </footer>
   );
 };
-
-/* TODO (Footer)
-- Add dark/light theme support
-- Add scroll-to-top button
-- Add animated social icons
-- Add responsive spacing tokens
-*/

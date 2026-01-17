@@ -22,13 +22,3 @@ export const Card: React.FC<CardProps> = ({
     </div>
   );
 };
-
-/* TODO (Card)
-- Add hover elevation variants using shadow tokens
-- Add interactive mode (clickable card with focus/hover states)
-- Add responsive padding tokens (mobile vs desktop)
-- Add skeleton/loading variant for async content
-- Add dark/light theme adjustments if theme system is added later
-- Add card header/footer subcomponents for structured layouts
-*/
-

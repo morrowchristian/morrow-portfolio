@@ -20,11 +20,3 @@ export const useInViewAnimation = (threshold = 0.2) => {
 
   return { ref, isVisible };
 };
-
-/* TODO (useInViewAnimation)
-- Add option to reset visibility when leaving viewport
-- Add support for multiple refs (array mode)
-- Add animation delay or stagger helpers
-- Add rootMargin support for earlier/later triggers
-- Add callback for when element becomes visible
-*/

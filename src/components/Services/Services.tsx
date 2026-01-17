@@ -6,6 +6,7 @@ import { useInViewAnimation } from "../../hooks/useInViewAnimation";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { Grid } from "../Grid/Grid";
 import { Container } from "../Container/Container";
+import { SectionHeader } from "../ui/SectionHeader/SectionHeader";
 
 export const Services: React.FC = () => {
   const { ref, isVisible } = useInViewAnimation();
@@ -14,8 +15,12 @@ export const Services: React.FC = () => {
   return (
     <section id="services" className="services">
       <Container>
-        <h2 className="services__title">Services</h2>
-
+        <SectionHeader
+          title="Services"
+          subtitle="What I can help you with"
+          align="center"
+          accent
+        />
         <Grid
           ref={ref}
           columns={isMobile ? "1fr" : "repeat(auto-fill, minmax(280px, 1fr))"}
@@ -29,11 +34,3 @@ export const Services: React.FC = () => {
     </section>
   );
 };
-
-/* TODO (Services)
-- Add staggered animations for each ServiceCard
-- Add icons or illustrations for each service
-- Add responsive spacing tokens (padding, gap)
-- Add hover effects or subtle card elevation
-- Add section intro text for context
-*/

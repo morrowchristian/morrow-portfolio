@@ -1,0 +1,32 @@
+/* src/components/ui/SectionHeader.css */
+
+.section-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.section-header--accent .section-header__title {
+  position: relative;
+}
+
+.section-header--accent .section-header__title::after {
+  background: var(--color-accent);
+  border-radius: var(--radius-full);
+  bottom: -6px;
+  content: "";
+  height: 3px;
+  left: 0;
+  position: absolute;
+  width: 48px;
+}
+
+.section-header--center {
+  align-items: center;
+  text-align: center;
+}
+
+.section-header__subtitle {
+  max-width: 600px;
+  opacity: 0.75;
+}

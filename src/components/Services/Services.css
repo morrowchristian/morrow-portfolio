@@ -1,93 +1,53 @@
 /* src/components/Services/Services.css */
 
-
-/* Services Section */
-.services {
-  padding-block: var(--space-64);
-}
-
-.services__title {
-  font-size: var(--text-2xl);
-  font-weight: var(--weight-bold);
-  margin-bottom: var(--space-32);
-}
-
-
-/* Service Card Base */
 .service-card {
   background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--space-32);
-  border: 1px solid var(--color-border);
   transition: transform var(--transition-medium), box-shadow var(--transition-medium), border-color var(--transition-medium);
 }
 
 .service-card:hover {
-  transform: translateY(-4px);
   box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
 }
 
-
-/* Service Card Icon */
-.service-card__icon {
-  font-size: 2rem;
-  margin-bottom: var(--space-16);
-}
-
-
-/* Service Card Text */
-.service-card__title {
-  font-size: var(--text-lg);
-  font-weight: var(--weight-bold);
-  margin-bottom: var(--space-12);
-}
-
-.service-card__description {
-  opacity: 0.85;
-  margin-bottom: var(--space-16);
-}
-
-
-/* Service Card CTA */
 .service-card__cta {
-  display: inline-flex;
   align-items: center;
+  border-radius: var(--radius-md);
+  display: inline-flex;
   justify-content: center;
   padding: var(--space-8) var(--space-16);
-  border-radius: var(--radius-md);
-  font-size: var(--text-sm);
-  font-weight: var(--weight-medium);
   text-decoration: none;
   transition: background var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
 }
 
-
-/* Accent Variants */
-.service-card--accent-blue .service-card__icon {
-  color: var(--tag-react-bg);
+.service-card__cta:hover {
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
 }
 
-.service-card--accent-purple .service-card__icon {
-  color: var(--color-accent);
+.service-card__description {
+  margin-bottom: var(--space-16);
+  opacity: 0.85;
 }
 
-.service-card--accent-green .service-card__icon {
-  color: var(--tag-ts-bg);
+.service-card__icon {
+  margin-bottom: var(--space-16);
 }
 
-.service-card--accent-orange .service-card__icon {
-  color: var(--tag-js-bg);
+.service-card__title {
+  margin-bottom: var(--space-12);
 }
 
-/* CTA inherits accent */
 .service-card--accent-blue .service-card__cta {
   background: var(--tag-react-bg);
   color: var(--tag-react-text);
 }
 
-.service-card--accent-purple .service-card__cta {
-  background: var(--color-accent);
-  color: var(--color-accent-contrast);
+.service-card--accent-blue .service-card__icon {
+  color: var(--tag-react-bg);
 }
 
 .service-card--accent-green .service-card__cta {
@@ -95,12 +55,32 @@
   color: var(--tag-ts-text);
 }
 
+.service-card--accent-green .service-card__icon {
+  color: var(--tag-ts-bg);
+}
+
 .service-card--accent-orange .service-card__cta {
   background: var(--tag-js-bg);
   color: var(--tag-js-text);
 }
 
-.service-card__cta:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-sm);
+.service-card--accent-orange .service-card__icon {
+  color: var(--tag-js-bg);
+}
+
+.service-card--accent-purple .service-card__cta {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.service-card--accent-purple .service-card__icon {
+  color: var(--color-accent);
+}
+
+.services {
+  padding-block: var(--space-64);
+}
+
+.services__title {
+  margin-bottom: var(--space-32);
 }

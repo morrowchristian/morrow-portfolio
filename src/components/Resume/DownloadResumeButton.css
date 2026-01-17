@@ -1,0 +1,12 @@
+/* src/components/Resume/DownloadResumeButton.css */
+
+.resume-download {
+  align-items: center;
+  display: inline-flex;
+  gap: var(--space-8);
+  text-decoration: none;
+}
+
+.resume-download__icon {
+  font-size: var(--text-md);
+}

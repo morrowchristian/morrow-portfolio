@@ -34,11 +34,3 @@ export default function App() {
     </>
   );
 }
-
-/* TODO (App)
-- Add global ThemeProvider (light/dark mode)
-- Add global UI context for modal, toasts, etc.
-- Add RouterProvider if multi-page structure is added
-- Add ErrorBoundary wrapper for production stability
-- Add Suspense + lazy-loaded sections for performance
-*/

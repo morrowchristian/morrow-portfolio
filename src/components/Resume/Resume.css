@@ -1,18 +1,27 @@
 /* src/components/Resume/Resume.css */
 
+/* src/components/Resume/Resume.css */
+
+.certifications,
+.education {
+  margin-top: var(--space-48);
+}
+
 .resume {
   padding-block: var(--space-64);
 }
 
-.resume__title {
-  font-size: var(--text-2xl);
-  font-weight: var(--weight-bold);
-  margin-bottom: var(--space-24);
+.resume__details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-48);
+  margin-top: var(--space-64);
 }
 
-.resume__skills {
-  display: grid;
-  gap: var(--space-24);
+.resume__experience {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
 }
 
 .resume__skill-group h3 {
@@ -24,26 +33,27 @@
   opacity: 0.85;
 }
 
-.resume__experience {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-32);
+.resume__skills {
+  display: grid;
+  gap: var(--space-24);
 }
 
-.experience-item__header {
-  display: flex;
-  justify-content: space-between;
+.resume__title {
+  font-size: var(--text-xl);
 }
 
-.experience-item__role {
-  font-weight: var(--weight-bold);
+@media (min-width: 768px) {
+  .resume__title {
+    font-size: var(--text-2xl);
+  }
+
+  .timeline__role {
+    font-size: var(--text-lg);
+  }
 }
 
-.experience-item__company {
-  opacity: 0.85;
-}
-
-.experience-item__bullets {
-  padding-left: var(--space-16);
-  opacity: 0.85;
+@media (min-width: 1024px) {
+  .resume__title {
+    font-size: var(--text-3xl);
+  }
 }
