@@ -79,8 +79,8 @@ Recent work includes:
 Clone the repo:
 
 ```
-git clone https://github.com/morrowchristian/Christian-Morrow-Portfolio
-cd Christian-Morrow-Portfolio
+git clone https://github.com/morrowchristian/morrow-portfolio
+cd morrow-portfolio
 ```
 
 Install dependencies:
