@@ -8,7 +8,7 @@ export const Hero = () => {
   return (
     <section className="hero">
       <Container>
-        <Grid columns={{ base: 1, md: 1 }} gap="32px">
+        <Grid columns={{ base: 1, md: 2 }} gap="32px">
           <div className="hero__content">
             <p className="hero__location">Cleveland, TN</p>
 
@@ -31,6 +31,14 @@ export const Hero = () => {
             </div>
           </div>
 
+          <div className="hero__image-wrapper">
+            <div className="hero__image-bg" />
+            <img
+              src="/portrait.jpg"
+              alt="Christian Morrow"
+              className="hero__image"
+            />
+          </div>
         </Grid>
       </Container>
     </section>

@@ -3,16 +3,18 @@ import "./Bio.css";
 import { Container } from "../Container/Container";
 import { Grid } from "../Grid/Grid";
 import { useInViewAnimation } from "../../hooks/useInViewAnimation";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 export const Bio: React.FC = () => {
   const { ref, isVisible } = useInViewAnimation();
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
     <section id="bio" className="bio">
       <Container>
         <Grid
           ref={ref}
-          columns="1fr"
+          columns={isMobile ? "1fr" : "1fr 1fr"}
           className={`animate ${isVisible ? "animate--visible" : ""}`}
         >
           <div className="bio__content">
@@ -22,6 +24,9 @@ export const Bio: React.FC = () => {
             </p>
           </div>
 
+          <div className="bio__image-wrapper">
+            <img src="/me.jpg" alt="Christian Morrow" className="bio__image" />
+          </div>
         </Grid>
       </Container>
     </section>
