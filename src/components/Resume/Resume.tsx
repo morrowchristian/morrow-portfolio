@@ -15,6 +15,11 @@ export const Resume: React.FC = () => {
     <section id="resume" className="resume">
       <Container>
         <h2 className="resume__title">Resume</h2>
+        <p>
+          <a href="/resume.pdf" download="Christian-Morrow-Resume.pdf">
+            Download Resume (PDF)
+          </a>
+        </p>
 
         <Grid
           ref={ref}
