@@ -21,7 +21,7 @@
 
 .resume__skill-group ul {
   padding-left: var(--space-16);
-  opacity: 0.85;
+  color: var(--color-text-muted);
 }
 
 .resume__experience {
@@ -40,10 +40,10 @@
 }
 
 .experience-item__company {
-  opacity: 0.85;
+  color: var(--color-text-muted);
 }
 
 .experience-item__bullets {
   padding-left: var(--space-16);
-  opacity: 0.85;
+  color: var(--color-text-muted);
 }

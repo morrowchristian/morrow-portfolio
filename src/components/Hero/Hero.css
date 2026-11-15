@@ -24,7 +24,7 @@
 
 .hero__subtitle {
   font-size: var(--text-lg);
-  opacity: 0.85;
+  color: var(--color-text-muted);
   max-width: 480px;
 }
 

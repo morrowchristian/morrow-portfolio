@@ -2,6 +2,7 @@
 
 .bio {
   padding-block: var(--space-64);
+  padding-top: calc(var(--space-64) + var(--space-32));
 }
 
 .bio__content {
@@ -17,7 +18,7 @@
 
 .bio__subtitle {
   font-size: var(--text-lg);
-  opacity: 0.85;
+  color: var(--color-text-muted);
   max-width: 480px;
 }
 

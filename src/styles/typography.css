@@ -3,7 +3,7 @@
 :root {
   /* Font families */
   --font-body: "Inter", sans-serif;
-  --font-heading: "Inter", sans-serif;
+  --font-heading: "Poppins", "Inter", sans-serif;
 
   /* Type scale */
   --text-xs: 0.8rem;

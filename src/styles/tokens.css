@@ -8,16 +8,17 @@
   --color-text: #f5f5f2;
   --color-text-muted: #b8b8b2;
   --color-accent: #d4a657;
+  --color-accent-contrast: #1a1a1a;
 
   /* Tag Colors */
   --tag-react-bg: #61dafb20;
   --tag-react-text: #61dafb;
   --tag-ts-bg: #3178c620;
-  --tag-ts-text: #3178c6;
+  --tag-ts-text: #6ea8fe;
   --tag-js-bg: #f7df1e20;
   --tag-js-text: #f7df1e;
   --tag-css-bg: #2965f120;
-  --tag-css-text: #2965f1;
+  --tag-css-text: #7aa5ff;
   --tag-html-bg: #e34f2620;
   --tag-html-text: #e34f26;
 

@@ -41,7 +41,7 @@
 }
 
 .project-card__description {
-  opacity: 0.85;
+  color: var(--color-text-muted);
   margin-bottom: var(--space-16);
 }
 
