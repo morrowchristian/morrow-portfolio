@@ -1,4 +1,6 @@
-// src/data/skills.ts
+// src/data/skills.ts — trimmed 2026-11-15 to match Christian's resume
+// Removed Angular, Bootstrap, Material UI, SASS/SCSS, Microsoft Power Automate
+// and Redux — none appear on his resume. Added Astro and SwiftUI, which do.
 import { FaCode, FaTools, FaCss3Alt, FaReact, FaCogs } from "react-icons/fa";
 
 export const skills = [
@@ -10,17 +12,17 @@ export const skills = [
   {
     category: "Frameworks & Libraries",
     icon: FaReact,
-    items: ["React", "Next.js", "Angular", "Django"],
+    items: ["React", "Next.js", "Django", "Astro", "SwiftUI"],
   },
   {
     category: "Styling & UI",
     icon: FaCss3Alt,
-    items: ["Tailwind CSS", "Bootstrap", "Material UI", "SASS/SCSS"],
+    items: ["Tailwind CSS"],
   },
   {
     category: "Tools & Platforms",
     icon: FaTools,
-    items: ["Git", "Vite", "Postman", "Microsoft Power Automate", "Playwright"],
+    items: ["Git", "Vite", "Postman", "Playwright"],
   },
   {
     category: "Development Concepts",
@@ -28,7 +30,7 @@ export const skills = [
     items: [
       "Responsive Design",
       "Component-Based Architecture",
-      "State Management (Redux, Context API)",
+      "State Management (Context API)",
       "RESTful APIs",
       "Performance Optimization",
       "Cross-Browser Compatibility",

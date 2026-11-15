@@ -30,7 +30,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
 
     try {
       // No backend exists for /api/send-email in this static site, so open the
-      // visitor's email client instead. This always works on Vercel.
+      // visitor's email client instead.
       const subject = encodeURIComponent(form.subject || "Portfolio contact");
       const body = encodeURIComponent(
         `Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`
@@ -109,7 +109,10 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
       </button>
 
       {status === "success" && (
-        <p className="contact-form__success">Message sent successfully!</p>
+        <p className="contact-form__success">
+          Your email app should now be open — send the message from there to
+          reach me.
+        </p>
       )}
 
       {status === "error" && (

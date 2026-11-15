@@ -1,8 +1,11 @@
-// src/data/projects.ts — CORRECTED 2026-11-13
-// Fixes: North Georgia Awning demo now points to the live Netlify site (was the GitHub repo),
-// tags now match the actual stack (Astro, not React; MyNotes is SwiftUI, not JS/HTML;
-// EventFlow is vanilla JS, not React). No 100% test-coverage claim anywhere.
-// Added: personal-tracker and Hiawatha, the two strongest software projects missing from the portfolio.
+// src/data/projects.ts — CORRECTED 2026-11-13, updated 2026-11-14
+// 2026-11-14 fixes: "Live Demo" buttons linked to GitHub repos, not live sites —
+// ProjectCard renders demoLink as "Live Demo", so demoLink is now kept ONLY where
+// a live site was verified (North Georgia Awning on Netlify). The other five
+// projects keep repoLink only; no live demo is claimed for them.
+// Hiawatha tags now include Next.js + Tailwind CSS (its repo README: Next.js 16,
+// React 19, TypeScript, Tailwind v4). Timespan Calculator is a Chrome extension,
+// not a generic web utility — description/tags corrected to say so.
 export const projects = [
   {
     title: "North Georgia Awning Website",
@@ -31,7 +34,6 @@ export const projects = [
     image: "src/assets/projects/project2.jpg",
     tags: ["React", "Django", "TypeScript", "Python"],
     featured: true,
-    demoLink: "https://github.com/morrowchristian/personal-tracker",
     repoLink: "https://github.com/morrowchristian/personal-tracker",
     modal: {
       longDescription:
@@ -49,9 +51,8 @@ export const projects = [
     description:
       "TypeScript civic and campaign websites for Cleveland, TN, including the campaign site, brand identity, and donation flow.",
     image: "src/assets/projects/project1.jpg",
-    tags: ["TypeScript", "React"],
+    tags: ["TypeScript", "React", "Next.js", "Tailwind CSS"],
     featured: false,
-    demoLink: "https://github.com/morrowchristian/hiawatha-brown-2026",
     repoLink: "https://github.com/morrowchristian/hiawatha-brown-2026",
     modal: {
       longDescription:
@@ -60,7 +61,7 @@ export const projects = [
       highlights: [
         "Campaign website and donation flow",
         "Civic / community project",
-        "TypeScript",
+        "Built with Next.js, React & TypeScript",
       ],
     },
   },
@@ -71,7 +72,6 @@ export const projects = [
     image: "src/assets/projects/project2.jpg",
     tags: ["SwiftUI", "Swift"],
     featured: false,
-    demoLink: "https://github.com/morrowchristian/MyNotes",
     repoLink: "https://github.com/morrowchristian/MyNotes",
     modal: {
       longDescription:
@@ -91,7 +91,6 @@ export const projects = [
     image: "src/assets/projects/project1.jpg",
     tags: ["JavaScript", "HTML", "CSS", "Playwright"],
     featured: true,
-    demoLink: "https://github.com/morrowchristian/event-dashboard",
     repoLink: "https://github.com/morrowchristian/event-dashboard",
     modal: {
       longDescription:
@@ -107,20 +106,19 @@ export const projects = [
   {
     title: "Timespan Calculator",
     description:
-      "A utility tool for calculating time differences with a clean UI and instant results.",
+      "A Chrome extension for calculating time differences and adding minutes to times, with smart time parsing and a clean UI.",
     image: "src/assets/projects/project2.jpg",
-    tags: ["JavaScript", "HTML", "CSS"],
+    tags: ["JavaScript", "HTML", "CSS", "Chrome Extension"],
     featured: false,
-    demoLink: "https://github.com/morrowchristian/timespan-calculator",
     repoLink: "https://github.com/morrowchristian/timespan-calculator",
     modal: {
       longDescription:
-        "A simple calculator for determining time spans between dates. Built with a focus on clarity and ease of use.",
+        "A Chrome extension that calculates minutes between two times and adds minutes to a start time, with smart parsing of formats like 9a, 930a, and 9:30 AM. Built with vanilla JavaScript and the Chrome Extension API.",
       images: ["src/assets/projects/project2.jpg"],
       highlights: [
-        "Instant time calculations",
+        "Smart time parsing",
+        "Add-minutes calculation",
         "Clean and simple UI",
-        "Lightweight and fast",
       ],
     },
   },
