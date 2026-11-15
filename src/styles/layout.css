@@ -18,3 +18,8 @@
 section {
   padding-block: var(--space-64);
 }
+
+/* Page wrapper: offset for the fixed 64px navbar */
+.page {
+  padding-top: 64px;
+}

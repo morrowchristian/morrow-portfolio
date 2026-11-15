@@ -1,6 +1,9 @@
-// src/components/Bio/Bio.tsx — text-led bio. The Hero above already shows
-// the glitch portrait, so this section does not repeat a large photo.
+// src/components/Bio/Bio.tsx — landing page (route "/").
+// Full-page background is the extended glitch portrait
+// (public/bio-background.jpg); the original image is pasted 1:1,
+// so Christian's face is never stretched or warped.
 import "./Bio.css";
+import { Link } from "react-router-dom";
 import { Container } from "../Container/Container";
 import { useInViewAnimation } from "../../hooks/useInViewAnimation";
 
@@ -8,16 +11,16 @@ export const Bio: React.FC = () => {
   const { ref, isVisible } = useInViewAnimation();
 
   return (
-    <section id="bio" className="bio">
+    <section className="bio-page">
       <Container>
         <div
           ref={ref}
-          className={`bio__content animate ${isVisible ? "animate--visible" : ""}`}
+          className={`bio__panel animate ${isVisible ? "animate--visible" : ""}`}
         >
           <p className="bio__eyebrow">About</p>
           <h1 className="bio__title">Christian Morrow</h1>
           <p className="bio__subtitle">
-            Full‑Stack Software Engineer crafting intentional, expressive UI.
+            Full-Stack Software Engineer — Cleveland, TN
           </p>
           <p className="bio__intro">
             B.S. Software Systems ’25 from the University of Tennessee at
@@ -27,15 +30,20 @@ export const Bio: React.FC = () => {
             team-lead experience to every project: calm problem-solving under
             pressure, clear communication, and code that stays maintainable.
           </p>
+          <div className="bio__buttons">
+            <Link to="/portfolio" className="bio__button bio__button--primary">
+              View my work
+            </Link>
+            <a
+              href="/resume.pdf"
+              download="Christian-Morrow-Resume.pdf"
+              className="bio__button bio__button--secondary"
+            >
+              Download resume
+            </a>
+          </div>
         </div>
       </Container>
     </section>
   );
 };
-
-/* TODO (Bio)
-- Add social links or CTA buttons
-- Add responsive typography scaling
-- Add subtle parallax or fade-in for image
-- Add spacing tokens for mobile vs desktop
-*/

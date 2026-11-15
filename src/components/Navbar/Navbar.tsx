@@ -1,13 +1,14 @@
-// src/components/Navbar/Navbar.tsx — black bar, like the designer/coder reference
+// src/components/Navbar/Navbar.tsx — black bar, router links to pages
 import "./Navbar.css";
+import { Link, NavLink } from "react-router-dom";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { useScrollOffset } from "../../hooks/useScrollOffset";
 
 const NAV_ITEMS = [
-  { label: "Bio", href: "#bio" },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "Resume", href: "#resume" },
-  { label: "Services", href: "#services" },
+  { label: "Bio", to: "/" },
+  { label: "Portfolio", to: "/portfolio" },
+  { label: "Resume", to: "/resume" },
+  { label: "Services", to: "/services" },
 ];
 
 interface NavbarProps {
@@ -20,16 +21,25 @@ export const Navbar: React.FC<NavbarProps> = ({ onConnectClick }) => {
   return (
     <header className={`navbar ${isScrolled ? "navbar--scrolled" : ""}`}>
       <div className="navbar__inner">
-        <a href="#bio" className="navbar__brand" aria-label="Christian Morrow — home">
+        <Link to="/" className="navbar__brand" aria-label="Christian Morrow — home">
           <span className="navbar__monogram">CM</span>
           <span className="navbar__brand-name">Christian Morrow</span>
-        </a>
+        </Link>
 
         <nav className="navbar__nav">
           {NAV_ITEMS.map((item) => (
-            <a key={item.href} href={item.href} className="navbar__link">
+            <NavLink
+              key={item.to}
+              to={item.to}
+              end={item.to === "/"}
+              className={({ isActive }) =>
+                isActive
+                  ? "navbar__link navbar__link--active"
+                  : "navbar__link"
+              }
+            >
               {item.label}
-            </a>
+            </NavLink>
           ))}
           <button
             type="button"
@@ -74,7 +84,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onConnectClick }) => {
 
 /* TODO (Navbar)
 - Add mobile menu (hamburger → slide-out)
-- Add active section highlighting
 - Add scroll progress bar
 - Add responsive spacing + typography
 */

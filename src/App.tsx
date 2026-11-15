@@ -1,31 +1,43 @@
-// src/App.tsx
-import { useState } from "react";
+// src/App.tsx — multi-page portfolio (HashRouter: a static Vite site
+// has no server rewrites, so hash routing keeps refreshes working).
+import { useEffect, useState } from "react";
+import { HashRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import "./styles/globals.css";
 
 import { Navbar } from "./components/Navbar/Navbar";
 import { Modal } from "./components/Modal/Modal";
 import { ContactForm } from "./components/ContactForm/ContactForm";
 
-import { Hero } from "./components/Hero/Hero";
 import { Bio } from "./components/Bio/Bio";
 import { Portfolio } from "./components/Portfolio/Portfolio";
 import { Services } from "./components/Services/Services";
 import { Resume } from "./components/Resume/Resume";
 import { Footer } from "./components/Footer/Footer";
 
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+};
+
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <>
+    <HashRouter>
+      <ScrollToTop />
       <Navbar onConnectClick={() => setIsModalOpen(true)} />
 
-      <main>
-        <Hero />
-        <Bio />
-        <Portfolio />
-        <Services />
-        <Resume />
+      <main className="page">
+        <Routes>
+          <Route path="/" element={<Bio />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/resume" element={<Resume />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </main>
 
       <Footer />
@@ -33,14 +45,6 @@ export default function App() {
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <ContactForm onSuccess={() => setIsModalOpen(false)} />
       </Modal>
-    </>
+    </HashRouter>
   );
 }
-
-/* TODO (App)
-- Add global ThemeProvider (light/dark mode)
-- Add global UI context for modal, toasts, etc.
-- Add RouterProvider if multi-page structure is added
-- Add ErrorBoundary wrapper for production stability
-- Add Suspense + lazy-loaded sections for performance
-*/
