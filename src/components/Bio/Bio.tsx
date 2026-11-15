@@ -1,7 +1,7 @@
 // src/components/Bio/Bio.tsx — landing page (route "/").
-// Two-zone full-height layout: text on the left on the plain page
-// background, glitch portrait on the right at full viewport height.
-// No panel over the image — the portrait's own white background sits
+// Two-zone full-height layout: glitch portrait on the left at full
+// viewport height, text on the right on the plain page
+// background. No panel over the image — the portrait's own white background sits
 // on a white zone that blends with it, so the page reads as one
 // clean composition. The portrait is hero.jpg (1024x1024 square
 // crop), shown with object-fit: contain so Christian's whole face,

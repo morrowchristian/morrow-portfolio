@@ -1,10 +1,10 @@
 /* src/components/Bio/Bio.css — landing page: fixed, non-scrollable,
    two-zone layout.
-   - Left: text on the plain page background (#faf9f6).
-   - Right: the glitch portrait (hero.jpg, 1024x1024 square crop) at
+   - Left: the glitch portrait (hero.jpg, 1024x1024 square crop) at
      full viewport height on a white zone — the portrait's own white
      background blends into it, so the page reads as one clean
      composition. No floating panel over the image.
+   - Right: text on the plain page background (#faf9f6).
    - The portrait is an <img> with object-fit: contain, so the whole
      face, hair and shoulders are always fully visible: never cropped,
      never stretched, never warped. (The previous background-size:
@@ -17,7 +17,7 @@
 
 .bio-page {
   display: grid;
-  grid-template-columns: minmax(400px, 42%) 1fr;
+  grid-template-columns: 1fr minmax(400px, 37%);
   height: calc(100svh - 64px);
   min-height: 560px;
   padding-block: 0;
@@ -25,19 +25,21 @@
   background: var(--color-bg);
 }
 
-/* Left zone: text, vertically centred, on the plain background. */
+/* Right zone: text, vertically centred, on the plain background. */
 .bio__text {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: var(--space-16);
   max-width: 600px;
-  padding: var(--space-32) var(--space-24) var(--space-32) var(--space-48);
+  padding: var(--space-32) var(--space-48) var(--space-32) var(--space-24);
 }
 
-/* Right zone: white, so it blends with the portrait's white
-   background; the image fills the zone's height. */
+/* Left zone: white, so it blends with the portrait's white
+   background; the image fills the zone's height. Placed first via
+   order so the portrait sits on the left. */
 .bio__portrait {
+  order: -1;
   min-width: 0;
   min-height: 0;
   height: 100%;
