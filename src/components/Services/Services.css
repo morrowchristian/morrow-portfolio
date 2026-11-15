@@ -64,19 +64,19 @@
 
 /* Accent Variants */
 .service-card--accent-blue .service-card__icon {
-  color: var(--tag-react-bg);
+  color: var(--tag-react-text);
 }
 
 .service-card--accent-purple .service-card__icon {
-  color: var(--color-accent);
+  color: var(--color-accent-red);
 }
 
 .service-card--accent-green .service-card__icon {
-  color: var(--tag-ts-bg);
+  color: #2f855a;
 }
 
 .service-card--accent-orange .service-card__icon {
-  color: var(--tag-js-bg);
+  color: var(--tag-js-text);
 }
 
 /* CTA inherits accent */
@@ -86,13 +86,13 @@
 }
 
 .service-card--accent-purple .service-card__cta {
-  background: var(--color-accent);
-  color: var(--color-accent-contrast);
+  background: #fee2e2;
+  color: #b91c1c;
 }
 
 .service-card--accent-green .service-card__cta {
-  background: var(--tag-ts-bg);
-  color: var(--tag-ts-text);
+  background: #dcfce7;
+  color: #166534;
 }
 
 .service-card--accent-orange .service-card__cta {

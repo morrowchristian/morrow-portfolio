@@ -1,9 +1,10 @@
-/* src/components/Footer/Footer.css */
+/* src/components/Footer/Footer.css — dark footer, matching the black nav */
 
 .footer {
   padding-block: var(--space-48);
-  background: var(--color-bg);
-  border-top: 1px solid var(--color-border);
+  background: var(--color-nav);
+  color: var(--color-nav-text);
+  border-top: none;
 }
 
 .footer__content {
@@ -19,7 +20,7 @@
 }
 
 .footer__tagline {
-  opacity: 0.75;
+  color: var(--color-nav-text-muted);
 }
 
 .footer__right {
@@ -29,7 +30,7 @@
 }
 
 .footer__link {
-  color: var(--color-accent);
+  color: var(--color-accent-light);
   transition: var(--transition-fast);
 }
 
@@ -44,22 +45,22 @@
 
 .footer__icon {
   font-size: 1.4rem;
-  opacity: 0.85;
+  color: var(--color-nav-text-muted);
   transition: var(--transition-fast);
 }
 
 .footer__icon:hover {
-  opacity: 1;
+  color: var(--color-nav-text);
 }
 
 .footer__divider {
   height: 1px;
-  background: var(--color-border);
+  background: #2a2a2a;
   margin-block: var(--space-24);
 }
 
 .footer__credit {
   text-align: center;
-  opacity: 0.6;
+  color: var(--color-nav-text-muted);
   font-size: var(--text-sm);
 }

@@ -1,14 +1,22 @@
-/* src/components/Bio/Bio.css */
+/* src/components/Bio/Bio.css — text-led, no photo (the Hero carries it) */
 
 .bio {
   padding-block: var(--space-64);
-  padding-top: calc(var(--space-64) + var(--space-32));
 }
 
 .bio__content {
   display: flex;
   flex-direction: column;
   gap: var(--space-16);
+  max-width: 720px;
+}
+
+.bio__eyebrow {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
 }
 
 .bio__title {
@@ -22,13 +30,8 @@
   max-width: 480px;
 }
 
-.bio__image-wrapper {
-  width: 100%;
-  max-width: 360px;
-  margin-inline: auto;
-}
-
-.bio__image {
-  width: 100%;
-  border-radius: 50%;
+.bio__intro {
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  max-width: 640px;
 }

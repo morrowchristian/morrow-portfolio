@@ -1,5 +1,6 @@
-// src/components/Navbar/Navbar.tsx
+// src/components/Navbar/Navbar.tsx — black bar, like the designer/coder reference
 import "./Navbar.css";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { useScrollOffset } from "../../hooks/useScrollOffset";
 
 const NAV_ITEMS = [
@@ -19,8 +20,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onConnectClick }) => {
   return (
     <header className={`navbar ${isScrolled ? "navbar--scrolled" : ""}`}>
       <div className="navbar__inner">
-        <a href="#bio" className="navbar__brand">
-          Christian Morrow
+        <a href="#bio" className="navbar__brand" aria-label="Christian Morrow — home">
+          <span className="navbar__monogram">CM</span>
+          <span className="navbar__brand-name">Christian Morrow</span>
         </a>
 
         <nav className="navbar__nav">
@@ -29,15 +31,42 @@ export const Navbar: React.FC<NavbarProps> = ({ onConnectClick }) => {
               {item.label}
             </a>
           ))}
+          <button
+            type="button"
+            className="navbar__link navbar__link--button"
+            onClick={onConnectClick}
+          >
+            Contact
+          </button>
         </nav>
 
-        <button
-          type="button"
-          className="navbar__connect-button"
-          onClick={onConnectClick}
-        >
-          Connect
-        </button>
+        <div className="navbar__right">
+          <a
+            href="https://github.com/morrowchristian"
+            target="_blank"
+            rel="noreferrer"
+            className="navbar__social"
+            aria-label="GitHub"
+          >
+            <FaGithub />
+          </a>
+          <a
+            href="https://linkedin.com/in/morrowchristian"
+            target="_blank"
+            rel="noreferrer"
+            className="navbar__social"
+            aria-label="LinkedIn"
+          >
+            <FaLinkedin />
+          </a>
+          <button
+            type="button"
+            className="navbar__connect-button"
+            onClick={onConnectClick}
+          >
+            Connect
+          </button>
+        </div>
       </div>
     </header>
   );

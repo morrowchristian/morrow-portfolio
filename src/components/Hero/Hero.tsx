@@ -1,60 +1,57 @@
-// src/components/Hero/Hero.tsx
-import { Button } from "../ui/Button";
-import { Container } from "../Container/Container";
-import { Grid } from "../Grid/Grid";
+// src/components/Hero/Hero.tsx — designer / coder split hero, like the reference:
+// "designer" left, the glitch portrait centre, "<coder>" right.
 import "./Hero.css";
+import { Container } from "../Container/Container";
 
 export const Hero = () => {
   return (
     <section className="hero">
       <Container>
-        <Grid columns={{ base: 1, md: 2 }} gap="32px">
-          <div className="hero__content">
-            <p className="hero__location">Cleveland, TN</p>
-
-            <h1 className="hero__title">
-              I build expressive, scalable web experiences that feel premium.
-            </h1>
-
-            <p className="hero__subtitle">
-              I help teams ship faster with clean architecture, reusable
-              components, and intentional UI/UX.
+        <div className="hero__grid">
+          <div className="hero__side hero__side--left">
+            <h2 className="hero__word">designer</h2>
+            <p className="hero__blurb">
+              Design-minded engineer with a passion for beautiful and
+              functional user experiences — expressive, intentional interfaces
+              with clean hierarchy.
             </p>
-
-            <div className="hero__buttons">
-              <Button variant="primary" size="lg">
-                View my work
-              </Button>
-              <Button variant="secondary" size="lg">
-                Start a project
-              </Button>
-            </div>
           </div>
 
           <div className="hero__image-wrapper">
-            <div className="hero__image-bg" />
             <img
-              src="/portrait.jpg"
-              alt="Christian Morrow"
+              src="/hero.jpg"
+              alt="Christian Morrow — half glitch art, half portrait"
               className="hero__image"
             />
           </div>
-        </Grid>
+
+          <div className="hero__side hero__side--right">
+            <h2 className="hero__word">
+              &lt;coder&gt;
+            </h2>
+            <p className="hero__blurb">
+              Full-stack developer who focuses on writing clean, elegant and
+              efficient code — React, TypeScript and Django, shipped for real
+              clients.
+            </p>
+          </div>
+        </div>
+
+        <div className="hero__intro">
+          <p className="hero__name">Christian Morrow</p>
+          <p className="hero__tagline">
+            Full-Stack Software Engineer — Cleveland, TN
+          </p>
+          <div className="hero__buttons">
+            <a href="#portfolio" className="hero__button hero__button--primary">
+              View my work
+            </a>
+            <a href="/resume.pdf" className="hero__button hero__button--secondary">
+              Download resume
+            </a>
+          </div>
+        </div>
       </Container>
     </section>
   );
 };
-
-// TODO (Hero)
-// - Add scroll-based reveal animation using IntersectionObserver
-// - Add responsive typography scaling for title and subtitle
-// - Add mobile-specific layout adjustments via useMediaQuery
-// - Add props for dynamic content (location, title, subtitle, image)
-// - Add variant support (e.g., with/without image, reversed layout)
-// - Add CTA link targets (scroll to sections or open modal)
-// - Add analytics tracking for CTA clicks (optional)
-// - Add accent/visual variants (underline, highlight, gradient text)
-// - Add optional decorative elements (shapes, patterns, subtle motion)
-// - Add hover/interaction polish for image wrapper (parallax, tilt, glow)
-// - Add dark/light theme adjustments if theme system is added later
-
