@@ -1,31 +1,55 @@
-/* src/components/Bio/Bio.css — landing page: full-page background.
-   The background is the extended glitch portrait; the text sits in a
-   soft cream panel on the left so it stays readable and never covers
-   Christian's face (right side of the image). */
+/* src/components/Bio/Bio.css — landing page: fixed, non-scrollable,
+   two-zone layout.
+   - Left: text on the plain page background (#faf9f6).
+   - Right: the glitch portrait (hero.jpg, 1024x1024 square crop) at
+     full viewport height on a white zone — the portrait's own white
+     background blends into it, so the page reads as one clean
+     composition. No floating panel over the image.
+   - The portrait is an <img> with object-fit: contain, so the whole
+     face, hair and shoulders are always fully visible: never cropped,
+     never stretched, never warped. (The previous background-size:
+     cover on the wide 2048x1280 image zoomed the face in and the
+     text panel covered half of it — see screenshot image-3.)
+   - Desktop: exactly one viewport tall (100svh minus the 64px fixed
+     navbar), overflow hidden, no page scroll on this route. The
+     section padding from layout.css is overridden to 0 so the height
+     is exact. Other pages are unaffected and keep scrolling. */
 
 .bio-page {
-  min-height: calc(100svh - 64px);
-  display: flex;
-  align-items: center;
-  padding-block: var(--space-48);
-  background-image: url("/bio-background.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: #ffffff;
+  display: grid;
+  grid-template-columns: minmax(400px, 42%) 1fr;
+  height: calc(100svh - 64px);
+  min-height: 560px;
+  padding-block: 0;
+  overflow: hidden;
+  background: var(--color-bg);
 }
 
-.bio__panel {
+/* Left zone: text, vertically centred, on the plain background. */
+.bio__text {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: var(--space-16);
-  max-width: 580px;
-  padding: var(--space-32);
-  background: rgba(250, 249, 246, 0.94);
-  backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+  max-width: 600px;
+  padding: var(--space-32) var(--space-24) var(--space-32) var(--space-48);
+}
+
+/* Right zone: white, so it blends with the portrait's white
+   background; the image fills the zone's height. */
+.bio__portrait {
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  background: #ffffff;
+}
+
+.bio__portrait-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
 }
 
 .bio__eyebrow {
@@ -39,6 +63,7 @@
 .bio__title {
   font-size: var(--text-3xl);
   font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
 }
 
 .bio__subtitle {
@@ -88,14 +113,48 @@
   color: var(--color-accent);
 }
 
-@media (max-width: 768px) {
-  .bio-page {
-    background-position: 72% center;
-    align-items: flex-end;
-    padding-bottom: var(--space-32);
+/* Short desktop viewports: tighten the text so it still fits in
+   one viewport height without scrolling. */
+@media (max-height: 720px) {
+  .bio__text {
+    gap: var(--space-12);
+    padding-block: var(--space-24);
   }
 
-  .bio__panel {
+  .bio__title {
+    font-size: 2.25rem;
+  }
+
+  .bio__intro {
+    font-size: 0.95rem;
+  }
+}
+
+/* Narrow screens: stack — portrait on top at ~38svh, text below.
+   The portrait still uses object-fit: contain, so his face is never
+   cropped. The fixed-height rule is relaxed here, so the page may
+   scroll gracefully if the text needs more room. */
+@media (max-width: 768px) {
+  .bio-page {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(260px, 38svh) auto;
+    height: auto;
+    min-height: calc(100svh - 64px);
+    overflow: visible;
+  }
+
+  .bio__portrait {
+    order: -1;
+    height: 100%;
+  }
+
+  .bio__text {
+    max-width: none;
     padding: var(--space-24);
+    justify-content: flex-start;
+  }
+
+  .bio__title {
+    font-size: 2.25rem;
   }
 }

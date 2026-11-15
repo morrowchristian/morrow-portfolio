@@ -23,10 +23,25 @@ const ScrollToTop = () => {
 };
 
 export default function App() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   return (
     <HashRouter>
+      <AppShell />
+    </HashRouter>
+  );
+}
+
+// Inside the router so it can read the current route. The Bio landing
+// page is fixed to exactly one viewport height with no scroll, so the
+// Footer is hidden on that route only — it would otherwise add height
+// below the Bio section and force the page to scroll. All other pages
+// keep the Footer and scroll normally.
+function AppShell() {
+  const { pathname } = useLocation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const isBio = pathname === "/";
+
+  return (
+    <>
       <ScrollToTop />
       <Navbar onConnectClick={() => setIsModalOpen(true)} />
 
@@ -40,11 +55,11 @@ export default function App() {
         </Routes>
       </main>
 
-      <Footer />
+      {!isBio && <Footer />}
 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <ContactForm onSuccess={() => setIsModalOpen(false)} />
       </Modal>
-    </HashRouter>
+    </>
   );
 }
