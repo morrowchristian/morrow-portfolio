@@ -55,8 +55,8 @@ function AppShell() {
         </Routes>
       </main>
 
-      {!isBio && <Footer />}
-
+      <Footer />
+      
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <ContactForm onSuccess={() => setIsModalOpen(false)} />
       </Modal>

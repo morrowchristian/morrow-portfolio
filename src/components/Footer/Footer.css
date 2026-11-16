@@ -1,7 +1,7 @@
 /* src/components/Footer/Footer.css — dark footer, matching the black nav */
 
 .footer {
-  padding-block: var(--space-48);
+  padding-block: var(--space-24);
   background: var(--color-nav);
   color: var(--color-nav-text);
   border-top: none;
