@@ -11,10 +11,10 @@ export const Footer: React.FC = () => {
 
   return (
     <footer id="footer" className="footer">
-      <Container className="footer__inner animate">
+      <Container className="footer__inner">
         <div
           ref={ref}
-          className={`footer__content ${isVisible ? "animate--visible" : ""}`}
+          className={`footer__content animate ${isVisible ? "animate--visible" : ""}`}
           style={{
             flexDirection: isMobile ? "column" : "row",
             textAlign: isMobile ? "center" : "left",

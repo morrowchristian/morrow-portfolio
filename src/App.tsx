@@ -30,15 +30,10 @@ export default function App() {
   );
 }
 
-// Inside the router so it can read the current route. The Bio landing
-// page is fixed to exactly one viewport height with no scroll, so the
-// Footer is hidden on that route only — it would otherwise add height
-// below the Bio section and force the page to scroll. All other pages
-// keep the Footer and scroll normally.
+// Inside the router so it can read the current route. The Footer
+// renders on every page, including Bio.
 function AppShell() {
-  const { pathname } = useLocation();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const isBio = pathname === "/";
 
   return (
     <>

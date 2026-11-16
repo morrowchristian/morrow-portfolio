@@ -1,44 +1,60 @@
-/* src/components/Bio/Bio.css — landing page: fixed, non-scrollable,
-   two-zone layout.
-   - Left: the glitch portrait (hero.jpg, 1024x1024 square crop) at
-     full viewport height on a white zone — the portrait's own white
-     background blends into it, so the page reads as one clean
-     composition. No floating panel over the image.
-   - Right: text on the plain page background (#faf9f6).
-   - The portrait is an <img> with object-fit: contain, so the whole
-     face, hair and shoulders are always fully visible: never cropped,
-     never stretched, never warped. (The previous background-size:
-     cover on the wide 2048x1280 image zoomed the face in and the
-     text panel covered half of it — see screenshot image-3.)
-   - Desktop: exactly one viewport tall (100svh minus the 64px fixed
-     navbar), overflow hidden, no page scroll on this route. The
-     section padding from layout.css is overridden to 0 so the height
-     is exact. Other pages are unaffected and keep scrolling. */
+/* src/components/Bio/Bio.css — landing page: two-zone layout, one-panel feel.
+   - Left: text. Right: the glitch portrait (hero.jpg, 1024x1024 square
+     crop) at full viewport height.
+   - ONE PANEL: the whole section shares one white background (#ffffff),
+     so there is no visible seam between the zones — the portrait's own
+     white background blends into it and the page reads as a single
+     continuous panel. (Previously the text zone was cream #faf9f6
+     against a white portrait zone, which drew a hard column edge.)
+   - GLITCH STROKES: thin blue/black/red lines, bars and small squares
+     drawn behind the text (inline SVG in Bio.tsx, .bio__strokes) echo
+     the photo's glitch edge. The photo's glitch art sits on its left
+     side, which after the flip is the seam in the middle of the page,
+     so the strokes are anchored to the seam (right edge of the text
+     zone) and fade out toward the left — they read as the glitch
+     continuing from the photo into the text zone. They are
+     pointer-events: none, low-key, and hidden on small screens, so
+     they never hurt readability.
+   - DYNAMIC SCALING: title, subtitle, intro, gaps and padding all use
+     clamp(), so the page scales smoothly with the viewport instead of
+     jumping at breakpoints.
+   - The portrait is an <img> with object-fit: contain, capped at
+     650px wide and centred in its zone, so the whole face, hair and
+     shoulders are always fully visible: never cropped, never stretched,
+     never warped.
+   - The section grows to fill the viewport (flex: 1 on .page) and the
+     page scrolls normally when content exceeds the viewport — there is
+     no fixed height or overflow lock on this route. */
 
 .bio-page {
   display: grid;
-  grid-template-columns: 1fr minmax(400px, 37%);
+  grid-template-columns: minmax(400px, 37%) 1fr;
   flex: 1;
-  min-height: 560px;  
+  min-height: 560px;
   padding-block: 0;
-  background: var(--color-bg);
+  background: #ffffff;
 }
 
-/* Right zone: text, vertically centred, on the plain background. */
+/* Left zone: text, vertically centred, on the shared white panel. */
 .bio__text {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: var(--space-12);
-  max-width: 600px;
-  padding: var(--space-24) var(--space-32) var(--space-24) var(--space-24);
+  gap: clamp(0.75rem, 1.5vh, 1rem);
+  max-width: clamp(28rem, 36vw, 37.5rem);
+  padding: clamp(1.5rem, 3vh, 2rem) clamp(1.5rem, 2.5vw, 2rem)
+    clamp(1.5rem, 3vh, 2rem) clamp(1.5rem, 4vw, 3rem);
 }
 
-/* Left zone: white, so it blends with the portrait's white
-   background; the image fills the zone's height. Placed first via
-   order so the portrait sits on the left. */
+/* Keep the text above the decorative strokes. */
+.bio__text > *:not(.bio__strokes) {
+  position: relative;
+  z-index: 1;
+}
+
+/* Right zone: same white as the page, so the portrait blends in. */
 .bio__portrait {
-  order: -1;
   min-width: 0;
   min-height: 0;
   height: 100%;
@@ -54,8 +70,22 @@
   margin-inline: auto;
 }
 
+/* Glitch strokes behind the text, anchored to the seam (right edge
+   of the text zone, where the photo's glitch edge sits). Pure
+   decoration: never interactive, never above the text. */
+.bio__strokes {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: clamp(180px, 38%, 340px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+}
+
 .bio__eyebrow {
-  font-size: var(--text-sm);
+  font-size: clamp(0.8rem, 0.7rem + 0.3vw, 0.9rem);
   font-weight: var(--weight-bold);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -63,33 +93,37 @@
 }
 
 .bio__title {
-  font-size: 1.5rem;
+  font-size: clamp(1.6rem, 1rem + 1.2vw, 2.25rem);
   line-height: 1.05;
+  font-weight: var(--weight-bold);
 }
 
 .bio__subtitle {
-  font-size: 1rem;
+  font-size: clamp(1rem, 0.9rem + 0.4vw, 1.25rem);
   line-height: 1.4;
+  color: var(--color-text-muted);
 }
 
 .bio__intro {
-  font-size: 0.95rem;
+  font-size: clamp(0.9rem, 0.85rem + 0.25vw, 1rem);
   line-height: 1.55;
 }
 
 .bio__buttons {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-16);
-  margin-top: var(--space-8);
+  gap: clamp(0.75rem, 1vw, 1rem);
+  margin-top: clamp(0.25rem, 1vh, 0.5rem);
 }
 
 .bio__button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-12) var(--space-24);
+  padding: clamp(0.625rem, 0.5rem + 0.5vh, 0.75rem)
+    clamp(1.25rem, 1rem + 1vw, 1.5rem);
   border-radius: var(--radius-md);
+  font-size: clamp(0.9rem, 0.85rem + 0.2vw, 1rem);
   font-weight: var(--weight-medium);
   transition: var(--transition-fast);
 }
@@ -114,27 +148,25 @@
   color: var(--color-accent);
 }
 
-/* Short desktop viewports: tighten the text so it still fits in
-   one viewport height without scrolling. */
+/* Short desktop viewports: tighten the text so it still fits
+   comfortably. The fluid sizes already shrink, this just closes
+   the gaps a little more. */
 @media (max-height: 720px) {
   .bio__text {
-    gap: var(--space-12);
-    padding-block: var(--space-24);
-  }
-
-  .bio__title {
-    font-size: 2.25rem;
+    gap: clamp(0.5rem, 1vh, 0.75rem);
+    padding-block: clamp(1rem, 2vh, 1.5rem);
   }
 
   .bio__intro {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
 }
 
 /* Narrow screens: stack — portrait on top at ~38svh, text below.
    The portrait still uses object-fit: contain, so his face is never
    cropped. The fixed-height rule is relaxed here, so the page may
-   scroll gracefully if the text needs more room. */
+   scroll gracefully if the text needs more room. The strokes are
+   hidden on small screens so they cannot clutter the text. */
 @media (max-width: 768px) {
   .bio-page {
     grid-template-columns: 1fr;
@@ -149,13 +181,13 @@
     height: 100%;
   }
 
-  .bio__text {
-    max-width: none;
-    padding: var(--space-24);
-    justify-content: flex-start;
+  .bio__strokes {
+    display: none;
   }
 
-  .bio__title {
-    font-size: 2.25rem;
+  .bio__text {
+    max-width: none;
+    padding: clamp(1.25rem, 4vw, 1.5rem);
+    justify-content: flex-start;
   }
 }
