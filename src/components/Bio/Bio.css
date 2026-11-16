@@ -7,14 +7,17 @@
      continuous panel. (Previously the text zone was cream #faf9f6
      against a white portrait zone, which drew a hard column edge.)
    - GLITCH STROKES: thin blue/black/red lines, bars and small squares
-     drawn behind the text (inline SVG in Bio.tsx, .bio__strokes) echo
-     the photo's glitch edge. The photo's glitch art sits on its left
-     side, which after the flip is the seam in the middle of the page,
-     so the strokes are anchored to the seam (right edge of the text
-     zone) and fade out toward the left — they read as the glitch
-     continuing from the photo into the text zone. They are
-     pointer-events: none, low-key, and hidden on small screens, so
-     they never hurt readability.
+     (inline SVG in Bio.tsx, .bio__strokes) echo the photo's glitch
+     edge. They live in the empty white space between the seam and
+     the portrait image — a child of the portrait zone, anchored to
+     its left edge (the seam) — and never extend left of the seam, so
+     they can never cross any text. (Previously they sat behind the
+     text and the bars ran through the subtitle and intro lines,
+     reading as strikethroughs.) Their width tracks the actual white
+     space left of the centred 650px image, so they shrink as the
+     viewport narrows and disappear where there is no gap to fill.
+     They are pointer-events: none, low-key, and hidden on small
+     screens, so they never hurt readability.
    - DYNAMIC SCALING: title, subtitle, intro, gaps and padding all use
      clamp(), so the page scales smoothly with the viewport instead of
      jumping at breakpoints.
@@ -35,26 +38,22 @@
   background: #ffffff;
 }
 
-/* Left zone: text, vertically centred, on the shared white panel. */
+/* Left zone: text, vertically centred, on the shared white panel.
+   The text block is a touch wider than before (max-width cap raised),
+   so it sits closer to the seam and the empty middle band is smaller. */
 .bio__text {
-  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: clamp(0.75rem, 1.5vh, 1rem);
-  max-width: clamp(28rem, 36vw, 37.5rem);
+  max-width: clamp(28rem, 36vw, 40rem);
   padding: clamp(1.5rem, 3vh, 2rem) clamp(1.5rem, 2.5vw, 2rem)
     clamp(1.5rem, 3vh, 2rem) clamp(1.5rem, 4vw, 3rem);
 }
 
-/* Keep the text above the decorative strokes. */
-.bio__text > *:not(.bio__strokes) {
-  position: relative;
-  z-index: 1;
-}
-
 /* Right zone: same white as the page, so the portrait blends in. */
 .bio__portrait {
+  position: relative;
   min-width: 0;
   min-height: 0;
   height: 100%;
@@ -62,6 +61,8 @@
 }
 
 .bio__portrait-img {
+  position: relative;
+  z-index: 1;
   display: block;
   width: min(100%, 650px);
   height: 100%;
@@ -70,18 +71,25 @@
   margin-inline: auto;
 }
 
-/* Glitch strokes behind the text, anchored to the seam (right edge
-   of the text zone, where the photo's glitch edge sits). Pure
-   decoration: never interactive, never above the text. */
+/* Glitch strokes in the empty white space left of the portrait
+   image, anchored to the seam (left edge of the portrait zone).
+   The width is exactly that white space — half of what is left
+   after the centred 650px image — minus a 12px safety margin, so
+   the strokes stop short of the photo and never reach the text,
+   which is on the other side of the seam entirely. Pure decoration:
+   never interactive, always behind the image. */
 .bio__strokes {
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   height: 100%;
-  width: clamp(180px, 38%, 340px);
+  width: min(
+    300px,
+    max(0px, calc((100% - min(100%, 650px)) / 2 - 12px))
+  );
   pointer-events: none;
   z-index: 0;
-  opacity: 0.55;
+  opacity: 0.45;
 }
 
 .bio__eyebrow {
@@ -146,6 +154,15 @@
 .bio__button--secondary:hover {
   border-color: var(--color-accent);
   color: var(--color-accent);
+}
+
+/* Below ~1200px the white space left of the portrait is only a
+   sliver, so the strokes would be a meaningless clipped strip —
+   hide them there rather than show a fragment. */
+@media (max-width: 1200px) {
+  .bio__strokes {
+    display: none;
+  }
 }
 
 /* Short desktop viewports: tighten the text so it still fits
