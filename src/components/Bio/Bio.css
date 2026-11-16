@@ -1,47 +1,46 @@
-/* src/components/Bio/Bio.css — landing page: two-zone layout, one-panel feel.
-   - Left: text. Right: the glitch portrait (hero.jpg, 1024x1024 square
-     crop) at full viewport height.
-   - ONE PANEL: the whole section shares one white background (#ffffff),
-     so there is no visible seam between the zones — the portrait's own
-     white background blends into it and the page reads as a single
-     continuous panel. (Previously the text zone was cream #faf9f6
-     against a white portrait zone, which drew a hard column edge.)
-   - GLITCH STROKES: thin blue/black/red lines, bars and small squares
-     (inline SVG in Bio.tsx, .bio__strokes) echo the photo's glitch
-     edge. They live in the empty white space between the seam and
-     the portrait image — a child of the portrait zone, anchored to
-     its left edge (the seam) — and never extend left of the seam, so
-     they can never cross any text. (Previously they sat behind the
-     text and the bars ran through the subtitle and intro lines,
-     reading as strikethroughs.) Their width tracks the actual white
-     space left of the centred 650px image, so they shrink as the
-     viewport narrows and disappear where there is no gap to fill.
-     They are pointer-events: none, low-key, and hidden on small
-     screens, so they never hurt readability.
+/* src/components/Bio/Bio.css — landing page: SIGNAL DARK.
+   - One dark panel: the whole section shares the navbar/footer black
+     (#111111), so the landing reads as a single continuous dark page
+     with no seam at the top or bottom.
+   - Left: text in light tones (white title, muted-grey subtitle,
+     light-blue eyebrow). Right: the transparent glitch cutout
+     (portrait-cutout.png — him and the splotches, no background),
+     anchored bottom-right at full viewport height.
+   - SPLOTCH BARS: blue/red glitch bars (.bio__bars, inline SVG in
+     Bio.tsx) escape from under the portrait and run leftward along
+     the bottom of the page, behind the text zone — longest near the
+     photo, tapering toward the left edge. They sit behind the text
+     (z-index 0) and never cross it.
+   - CIRCUIT: a faint thin-line motif (.bio__circuit) in the empty
+     dark space between the text and the portrait, echoing the photo's
+     line work. It tracks the white — now dark — space left of the
+     image and is hidden where there is no gap to fill.
    - DYNAMIC SCALING: title, subtitle, intro, gaps and padding all use
      clamp(), so the page scales smoothly with the viewport instead of
      jumping at breakpoints.
-   - The portrait is an <img> with object-fit: contain, capped at
-     650px wide and centred in its zone, so the whole face, hair and
-     shoulders are always fully visible: never cropped, never stretched,
-     never warped.
+   - The portrait is an <img> with object-fit: contain, anchored
+     bottom-right, so the whole face, hair and shoulders are always
+     fully visible: never cropped, never stretched, never warped.
    - The section grows to fill the viewport (flex: 1 on .page) and the
      page scrolls normally when content exceeds the viewport — there is
      no fixed height or overflow lock on this route. */
 
 .bio-page {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(400px, 37%) 1fr;
   flex: 1;
   min-height: 560px;
   padding-block: 0;
-  background: #ffffff;
+  overflow: hidden;
+  background: #111111;
+  color: #f5f5f2;
 }
 
-/* Left zone: text, vertically centred, on the shared white panel.
-   The text block is a touch wider than before (max-width cap raised),
-   so it sits closer to the seam and the empty middle band is smaller. */
+/* Left zone: text, vertically centred, above the bars. */
 .bio__text {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -51,45 +50,57 @@
     clamp(1.5rem, 3vh, 2rem) clamp(1.5rem, 4vw, 3rem);
 }
 
-/* Right zone: same white as the page, so the portrait blends in. */
+/* Right zone: transparent, so the dark page shows through the cutout. */
 .bio__portrait {
   position: relative;
   min-width: 0;
   min-height: 0;
   height: 100%;
-  background: #ffffff;
+  background: transparent;
 }
 
 .bio__portrait-img {
   position: relative;
   z-index: 1;
   display: block;
-  width: min(100%, 650px);
+  width: min(100%, 920px);
   height: 100%;
   object-fit: contain;
-  object-position: center;
-  margin-inline: auto;
+  object-position: right bottom;
+  margin-left: auto;
 }
 
-/* Glitch strokes in the empty white space left of the portrait
-   image, anchored to the seam (left edge of the portrait zone).
-   The width is exactly that white space — half of what is left
-   after the centred 650px image — minus a 12px safety margin, so
-   the strokes stop short of the photo and never reach the text,
-   which is on the other side of the seam entirely. Pure decoration:
-   never interactive, always behind the image. */
-.bio__strokes {
+/* Splotch bars running under the page: full-width strip along the
+   bottom, behind the text, anchored to the portrait's right edge. */
+.bio__bars {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 140px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.85;
+}
+
+/* Faint circuit lines in the dark gap left of the portrait image,
+   anchored to the seam (left edge of the portrait zone). The width is
+   exactly that gap — half of what is left after the 920px image —
+   minus a 12px safety margin, so the motif stops short of the photo
+   and never reaches the text. Pure decoration: never interactive. */
+.bio__circuit {
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: min(
-    300px,
-    max(0px, calc((100% - min(100%, 650px)) / 2 - 12px))
+    260px,
+    max(0px, calc((100% - min(100%, 920px)) / 2 - 12px))
   );
   pointer-events: none;
   z-index: 0;
-  opacity: 0.45;
+  opacity: 0.28;
 }
 
 .bio__eyebrow {
@@ -97,24 +108,26 @@
   font-weight: var(--weight-bold);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--color-accent-light);
 }
 
 .bio__title {
   font-size: clamp(1.6rem, 1rem + 1.2vw, 2.25rem);
   line-height: 1.05;
   font-weight: var(--weight-bold);
+  color: #ffffff;
 }
 
 .bio__subtitle {
   font-size: clamp(1rem, 0.9rem + 0.4vw, 1.25rem);
   line-height: 1.4;
-  color: var(--color-text-muted);
+  color: #c9c9c9;
 }
 
 .bio__intro {
   font-size: clamp(0.9rem, 0.85rem + 0.25vw, 1rem);
   line-height: 1.55;
+  color: #e8e6e1;
 }
 
 .bio__buttons {
@@ -138,7 +151,7 @@
 
 .bio__button--primary {
   background: var(--color-accent);
-  color: var(--color-accent-contrast);
+  color: #ffffff;
 }
 
 .bio__button--primary:hover {
@@ -146,21 +159,21 @@
 }
 
 .bio__button--secondary {
-  background: #ffffff;
-  color: var(--color-text);
-  border: 1px solid var(--color-border);
+  background: transparent;
+  color: #f5f5f2;
+  border: 1px solid #4a4f55;
 }
 
 .bio__button--secondary:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
+  border-color: var(--color-accent-light);
+  color: var(--color-accent-light);
 }
 
-/* Below ~1200px the white space left of the portrait is only a
-   sliver, so the strokes would be a meaningless clipped strip —
-   hide them there rather than show a fragment. */
+/* Below ~1200px the gap left of the portrait is only a sliver, so the
+   circuit would be a meaningless clipped strip — hide it there rather
+   than show a fragment. */
 @media (max-width: 1200px) {
-  .bio__strokes {
+  .bio__circuit {
     display: none;
   }
 }
@@ -182,8 +195,9 @@
 /* Narrow screens: stack — portrait on top at ~38svh, text below.
    The portrait still uses object-fit: contain, so his face is never
    cropped. The fixed-height rule is relaxed here, so the page may
-   scroll gracefully if the text needs more room. The strokes are
-   hidden on small screens so they cannot clutter the text. */
+   scroll gracefully if the text needs more room. The circuit is
+   hidden on small screens so it cannot clutter the text, and the
+   bars strip shrinks to fit under the text. */
 @media (max-width: 768px) {
   .bio-page {
     grid-template-columns: 1fr;
@@ -198,8 +212,17 @@
     height: 100%;
   }
 
-  .bio__strokes {
+  .bio__portrait-img {
+    object-position: center bottom;
+    margin-inline: auto;
+  }
+
+  .bio__circuit {
     display: none;
+  }
+
+  .bio__bars {
+    height: 90px;
   }
 
   .bio__text {

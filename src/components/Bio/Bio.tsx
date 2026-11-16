@@ -1,19 +1,19 @@
 // src/components/Bio/Bio.tsx — landing page (route "/").
-// Two-zone layout, one continuous panel: text on the left, glitch
-// portrait on the right at full viewport height, both on one shared
-// white background so there is no visible seam between the zones.
-// The decorative glitch strokes (.bio__strokes, inline SVG) live in
-// the empty white space between the seam and the portrait image —
-// they are a child of the portrait zone, anchored to its left edge
-// (the seam), and never extend left of the seam, so they can never
-// cross any text. They echo the photo's glitch edge: the photo's
-// glitch art is on its left side, so the strokes read as the glitch
-// continuing leftward from the photo toward the text. Pure
-// decoration — pointer-events: none, hidden on small screens.
-// The portrait is hero.jpg (1024x1024 square crop), shown with
-// object-fit: contain, capped at 650px wide and centred, so
-// Christian's whole face, hair and shoulders are always fully
-// visible, never cropped, stretched or warped.
+// SIGNAL DARK: a near-black page (#111111, the same black as the
+// navbar and footer, so the whole landing reads as one dark panel),
+// info on the left, Christian's transparent glitch cutout anchored
+// bottom-right. The cutout is portrait-cutout.png — the glitch
+// portrait with the white background removed, just him and the
+// blue/black/red splotches — shown with object-fit: contain, so his
+// face, hair and shoulders are always fully visible, never cropped,
+// stretched or warped.
+// The splotch bars (.bio__bars, inline SVG) escape from under the
+// portrait and run leftward along the bottom of the page, behind the
+// text zone — the glitch spilling out of the photo across the page.
+// A faint circuit motif (.bio__circuit) sits in the empty dark space
+// between the text and the portrait, echoing the photo's line work
+// without ever touching the text. Both decorations are
+// pointer-events: none and hidden on small screens.
 import "./Bio.css";
 import { Link } from "react-router-dom";
 import { useInViewAnimation } from "../../hooks/useInViewAnimation";
@@ -56,52 +56,49 @@ export const Bio: React.FC = () => {
 
       <div className="bio__portrait" aria-hidden="true">
         <svg
-          className="bio__strokes"
-          viewBox="0 0 300 800"
+          className="bio__circuit"
+          viewBox="0 0 260 800"
           preserveAspectRatio="xMinYMid slice"
           aria-hidden="true"
           focusable="false"
         >
-          {/* Horizontal bars reaching right from the seam (left edge),
-              fading toward the photo — the glitch continues from the
-              photo toward the text, never the other way. */}
-          <rect x="0" y="88" width="150" height="6" fill="#2b6cb0" />
-          <rect x="0" y="148" width="100" height="10" fill="#111111" />
-          <rect x="0" y="228" width="130" height="4" fill="#e53e3e" />
-          <rect x="0" y="328" width="170" height="8" fill="#2b6cb0" />
-          <rect x="0" y="418" width="80" height="5" fill="#111111" />
-          <rect x="0" y="518" width="140" height="6" fill="#e53e3e" />
-          <rect x="0" y="638" width="95" height="9" fill="#2b6cb0" />
-          <rect x="0" y="718" width="160" height="4" fill="#111111" />
-          {/* Shorter, sparser bars further from the seam */}
-          <rect x="180" y="178" width="60" height="4" fill="#9aa0a6" />
-          <rect x="200" y="468" width="55" height="3" fill="#2b6cb0" />
-          <rect x="170" y="598" width="50" height="5" fill="#e53e3e" />
-          <rect x="210" y="688" width="45" height="3" fill="#9aa0a6" />
-          {/* Small squares */}
-          <rect x="20" y="58" width="14" height="14" fill="#2b6cb0" />
-          <rect x="90" y="268" width="10" height="10" fill="#e53e3e" />
-          <rect x="30" y="558" width="12" height="12" fill="#111111" />
-          <rect x="150" y="378" width="9" height="9" fill="#2b6cb0" />
-          <rect x="60" y="698" width="10" height="10" fill="#9aa0a6" />
-          {/* Thin vertical ticks */}
-          <line x1="40" y1="40" x2="40" y2="200" stroke="#111111" strokeWidth="1.5" />
-          <line x1="90" y1="480" x2="90" y2="640" stroke="#2b6cb0" strokeWidth="1.5" />
-          <line x1="150" y1="120" x2="150" y2="210" stroke="#9aa0a6" strokeWidth="1" />
-          {/* Crosshair ring, like the one in the photo's glitch field */}
-          <circle cx="70" cy="350" r="26" fill="none" stroke="#111111" strokeWidth="1" />
-          <line x1="70" y1="318" x2="70" y2="330" stroke="#111111" strokeWidth="1.5" />
-          <line x1="70" y1="370" x2="70" y2="382" stroke="#111111" strokeWidth="1.5" />
-          <line x1="38" y1="350" x2="50" y2="350" stroke="#111111" strokeWidth="1.5" />
-          <line x1="90" y1="350" x2="102" y2="350" stroke="#111111" strokeWidth="1.5" />
+          {/* Faint circuit lines in the dark gap left of the portrait. */}
+          <line x1="30" y1="60" x2="30" y2="220" stroke="#63b3ed" strokeWidth="1.5" />
+          <line x1="80" y1="420" x2="80" y2="580" stroke="#9aa0a6" strokeWidth="1.5" />
+          <line x1="180" y1="120" x2="240" y2="120" stroke="#63b3ed" strokeWidth="1.5" />
+          <rect x="20" y="300" width="90" height="5" fill="#2b6cb0" />
+          <rect x="40" y="640" width="70" height="4" fill="#e53e3e" />
+          <rect x="150" y="180" width="10" height="10" fill="#63b3ed" />
+          <rect x="200" y="700" width="8" height="8" fill="#e53e3e" />
+          <circle cx="60" cy="480" r="24" fill="none" stroke="#9aa0a6" strokeWidth="1" />
         </svg>
         <img
-          src="/hero.jpg"
+          src="/portrait-cutout.png"
           alt=""
           className="bio__portrait-img"
           fetchPriority="high"
         />
       </div>
+
+      <svg
+        className="bio__bars"
+        viewBox="0 0 1200 140"
+        preserveAspectRatio="xMaxYMid slice"
+        aria-hidden="true"
+        focusable="false"
+      >
+        {/* Splotch bars escaping leftward from under the portrait,
+            longest near the photo, tapering off toward the left edge. */}
+        <rect x="420" y="16" width="780" height="8" fill="#2b6cb0" />
+        <rect x="180" y="42" width="1020" height="5" fill="#63b3ed" />
+        <rect x="640" y="64" width="560" height="10" fill="#e53e3e" />
+        <rect x="300" y="90" width="900" height="6" fill="#2b6cb0" />
+        <rect x="760" y="114" width="440" height="4" fill="#f5f5f2" opacity="0.45" />
+        <rect x="1150" y="28" width="12" height="12" fill="#2b6cb0" />
+        <rect x="1080" y="78" width="9" height="9" fill="#e53e3e" />
+        <rect x="980" y="118" width="10" height="10" fill="#63b3ed" />
+        <line x1="1120" y1="8" x2="1120" y2="56" stroke="#9aa0a6" strokeWidth="1.5" />
+      </svg>
     </section>
   );
 };
