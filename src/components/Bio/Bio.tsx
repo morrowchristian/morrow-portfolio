@@ -5,9 +5,10 @@
 //   1  2  3  4
 //   5  6  7  8
 //   9 10 11 12
-// Text in 1, 2, 5, 6 (top-left); cutout in 7, 8, 11, 12
-// (right, lower two rows); bars in 9, 10, 11 (bottom row, left
-// three cells, passing behind the cutout's bottom-left).
+// Text in 1, 2 (top-left); stack chips in 3, 4 (top-right);
+// cutout in 7, 8, 11, 12 (right, lower two rows); bars in 9, 10,
+// 11 (bottom row, left three cells, passing behind the cutout's
+// bottom-left).
 // The cutout is portrait-cutout.png — the glitch
 // portrait with the white background removed, just him and the
 // blue/black/red splotches — shown with object-fit: contain, so his
@@ -55,6 +56,18 @@ export const Bio: React.FC = () => {
             Download resume
           </a>
         </div>
+      </div>
+
+      <div className="bio__stack" aria-label="Tech stack">
+        <p className="bio__stack-label">My stack</p>
+        <ul className="bio__stack-chips">
+          <li>React</li>
+          <li>TypeScript</li>
+          <li>Python</li>
+          <li>Django</li>
+          <li>SwiftUI</li>
+          <li>Astro</li>
+        </ul>
       </div>
 
       <div className="bio__portrait" aria-hidden="true">

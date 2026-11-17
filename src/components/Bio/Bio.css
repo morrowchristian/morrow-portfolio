@@ -6,10 +6,12 @@
        1  2  3  4
        5  6  7  8
        9 10 11 12
-     Text in 1, 2, 5, 6 (top-left, light tones: white title,
-     muted-grey subtitle, light-blue eyebrow). Cutout in 7, 8, 11, 12
+     Text in 1, 2 (top-left, light tones: white title,
+     muted-grey subtitle, light-blue eyebrow). Stack chips in 3, 4
+     (top-right, above the portrait). Cutout in 7, 8, 11, 12
      (right, lower two rows; portrait-cutout.png — him and the
-     splotches, no background), anchored bottom-right. Bars in 9, 10,
+     splotches, no background), top-aligned so its top edge shares
+     a plane with the text's bottom edge. Bars in 9, 10,
      11 (bottom row, left three cells), passing behind the cutout's
      bottom-left. Both text and image are sized to fit one viewport
      with no cropping.
@@ -43,7 +45,7 @@
 /* Capped content: the dark background stays full-bleed, but the grid
    itself stops at 1200px and centres — the leftover space becomes
    the margin on wide screens. The grid is 4 columns x 3 rows:
-   text 1/2/5/6, portrait 7/8/11/12, bars 9/10/11.
+   text 1/2, stack 3/4, portrait 7/8/11/12, bars 9/10/11.
    Rows are auto / auto / 1fr: row 1 sizes to the text, so the text's
    bottom edge IS the top of the portrait's row — the portrait starts
    exactly where the text ends, on the same horizontal plane. */
@@ -74,6 +76,52 @@
      here would push the portrait down by that much. */
   padding: clamp(1.5rem, 3vh, 2rem) clamp(1.5rem, 2.5vw, 2rem) 0
     clamp(1.5rem, 4vw, 3rem);
+}
+
+/* Boxes 3, 4: tech stack chips, top-right, above the portrait.
+   Top-aligned like the text, so the two blocks start on the same
+   line. Row 1 sizes to the text, which is taller, so the chips
+   never move the portrait. */
+.bio__stack {
+  grid-column: 3 / 5;
+  grid-row: 1;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: clamp(0.6rem, 1.2vh, 0.75rem);
+  min-width: 0;
+  padding: clamp(1.5rem, 3vh, 2rem) clamp(1.5rem, 4vw, 3rem) 0
+    clamp(1.5rem, 2.5vw, 2rem);
+}
+
+.bio__stack-label {
+  font-size: clamp(0.8rem, 0.7rem + 0.3vw, 0.9rem);
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent-light);
+}
+
+.bio__stack-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.bio__stack-chips li {
+  padding: 0.35rem 0.8rem;
+  border: 1px solid #4a4f55;
+  border-radius: 999px;
+  font-size: clamp(0.8rem, 0.75rem + 0.2vw, 0.9rem);
+  line-height: 1.4;
+  color: #e8e6e1;
+  background: transparent;
+  white-space: nowrap;
 }
 
 /* Boxes 7, 8, 11, 12: transparent, so the dark page shows through
@@ -214,12 +262,18 @@
 
   .bio__inner {
     grid-template-columns: 1fr;
-    grid-template-rows: auto minmax(260px, 38svh) auto;
+    grid-template-rows: auto auto minmax(260px, 38svh) auto;
+  }
+
+  .bio__stack {
+    grid-column: 1;
+    grid-row: 2;
+    padding: clamp(1.25rem, 4vw, 1.5rem) clamp(1.25rem, 4vw, 1.5rem) 0;
   }
 
   .bio__portrait {
     grid-column: 1;
-    grid-row: 2;
+    grid-row: 3;
     height: 100%;
   }
 
@@ -230,7 +284,7 @@
 
   .bio__bars {
     grid-column: 1;
-    grid-row: 3;
+    grid-row: 4;
     height: 90px;
   }
 
