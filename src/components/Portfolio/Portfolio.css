@@ -3,19 +3,35 @@
    soft brown #4c463a. Newsreader serif for headings, IBM Plex Mono
    for labels, buttons and tags. Sharp 2px corners, hairline rules,
    red used sparingly. The values are written out here (not the
-   shared tokens) so the rework stays scoped to this page — the
-   Resume and Services pages keep the old light theme. */
+   shared tokens) so the rework stays scoped to this page.
+
+   Layout: a horizontal scroller, not a grid. One project is shown
+   in full detail; the rest line up in a strip below it. The page
+   fits one viewport (navbar 56px + footer ~60px) so the footer is
+   always visible — the detail panel flexes to fill the space and
+   its body scrolls internally if the content is taller than it. */
 
 /* Portfolio Section */
 .portfolio {
   background: #f6f1e7;
-  padding-block: var(--space-64);
+  padding-block: var(--space-32) var(--space-24);
+  min-height: calc(100svh - 116px);
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio__container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-20);
+  min-height: 0;
 }
 
 /* Header: mono kick, serif title, red rule, short intro — the
    same furniture as the Bio's intro column. */
 .portfolio__header {
-  margin-bottom: var(--space-32);
+  margin-bottom: 0;
 }
 
 .portfolio__kick {
@@ -30,7 +46,7 @@
 
 .portfolio__title {
   font-family: "Newsreader", Georgia, "Times New Roman", serif;
-  font-size: clamp(2rem, 1.6rem + 1.4vw, 2.75rem);
+  font-size: clamp(1.8rem, 1.5rem + 1vw, 2.25rem);
   font-weight: 500;
   line-height: 1.08;
   letter-spacing: -0.01em;
@@ -54,105 +70,12 @@
   max-width: 34rem;
 }
 
-/* Project Card Base — white card on paper, hairline border,
-   sharp corners, warm hover lift. */
-.project-card {
-  background: #ffffff;
-  border-radius: 2px;
-  border: 1px solid rgba(33, 29, 22, 0.15);
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-  transition-delay: var(--transition-fast); /* supports stagger animation */
-}
-
-.project-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 24px rgba(33, 29, 22, 0.14);
-}
-
-.project-card__image {
-  display: block;
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-bottom: 1px solid rgba(33, 29, 22, 0.15);
-}
-
-.project-card__content {
-  padding: var(--space-24);
-}
-
-.project-card__title {
-  font-family: "Newsreader", Georgia, "Times New Roman", serif;
-  font-size: 1.25rem;
-  font-weight: 500;
-  line-height: 1.2;
-  color: #211d16;
-  margin-bottom: 0.5rem;
-}
-
-.project-card__description {
-  font-family: "Newsreader", Georgia, "Times New Roman", serif;
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #4c463a;
-  margin-bottom: var(--space-16);
-}
-
-/* Project Card Tags — mono pills with a hairline ink border,
-   the same as the Bio's stack chips. No per-tech colours. */
-.project-card__tech {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-8);
-  margin-bottom: var(--space-16);
-}
-
-.project-card__tag {
-  padding: 0.35rem 0.8rem;
-  border: 1px solid #211d16;
-  border-radius: 999px;
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
-  font-size: 0.8rem;
-  line-height: 1.4;
-  color: #211d16;
-  background: transparent;
-  white-space: nowrap;
-}
-
-/* Project Card Links — mono uppercase, red, underline on hover. */
-.project-card__links {
-  display: flex;
-  gap: var(--space-16);
-}
-
-.project-card__link {
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
-  font-size: 0.78rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #a02c1e;
-  text-decoration: none;
-}
-
-.project-card__link:hover {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-/* Featured Project Variant — a red top rule marks it, nothing else. */
-.project-card--featured {
-  border-top: 3px solid #a02c1e;
-}
-
 /* Filter Bar Container */
 .portfolio__filters {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-12);
-  margin-bottom: var(--space-32);
+  margin-bottom: 0;
 }
 
 /* Filter Buttons — mono uppercase pills; the active one is solid
@@ -182,4 +105,324 @@
   background: #a02c1e;
   border-color: #a02c1e;
   color: #f6f1e7;
+}
+
+/* Detail panel — the current project, in full. White card, image
+   left, details right. It flexes to fill the viewport, and the
+   body scrolls internally if the content is taller than it. */
+.portfolio__detail {
+  flex: 1;
+  min-height: 200px;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  background: #ffffff;
+  border: 1px solid rgba(33, 29, 22, 0.15);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+  animation: portfolio-detail-in 300ms ease;
+}
+
+@keyframes portfolio-detail-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.portfolio__detail-media {
+  position: relative;
+  min-height: 0;
+}
+
+.portfolio__detail-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.portfolio__detail-featured {
+  position: absolute;
+  top: var(--space-16);
+  left: var(--space-16);
+  padding: 0.3rem 0.6rem;
+  background: #a02c1e;
+  color: #f6f1e7;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.portfolio__detail-body {
+  padding: var(--space-32);
+  overflow-y: auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.portfolio__detail-count {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: #4c463a;
+}
+
+.portfolio__detail-count span {
+  font-weight: 500;
+  color: #a02c1e;
+}
+
+.portfolio__detail-title {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: clamp(1.5rem, 1.3rem + 0.8vw, 1.9rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: #211d16;
+}
+
+.portfolio__detail-description {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #4c463a;
+}
+
+.portfolio__detail-highlights {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #211d16;
+}
+
+.portfolio__detail-highlights li {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.portfolio__detail-highlights li::before {
+  content: "";
+  flex: none;
+  width: 7px;
+  height: 7px;
+  margin-top: 0.45em;
+  background: #a02c1e;
+}
+
+/* Tag and link styles — shared by the detail panel. The old
+   ProjectCard container rules are gone (that component is
+   unreferenced now); only the tag and link pieces remain. */
+.project-card__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+}
+
+.project-card__tag {
+  padding: 0.35rem 0.8rem;
+  border: 1px solid #211d16;
+  border-radius: 999px;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: #211d16;
+  background: transparent;
+  white-space: nowrap;
+}
+
+.project-card__links {
+  display: flex;
+  gap: var(--space-16);
+}
+
+.project-card__link {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #a02c1e;
+  text-decoration: none;
+}
+
+.project-card__link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Prev / next arrows on the detail panel. */
+.portfolio__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #f6f1e7;
+  border: 1px solid rgba(33, 29, 22, 0.25);
+  border-radius: 2px;
+  color: #211d16;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+  transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.portfolio__arrow:hover {
+  background: #a02c1e;
+  border-color: #a02c1e;
+  color: #f6f1e7;
+}
+
+.portfolio__arrow--prev {
+  left: var(--space-16);
+}
+
+.portfolio__arrow--next {
+  right: var(--space-16);
+}
+
+/* Strip label — mono, with a hint on the right. */
+.portfolio__strip-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #4c463a;
+}
+
+.portfolio__strip-hint {
+  letter-spacing: 0.06em;
+  text-transform: none;
+  font-weight: 400;
+}
+
+/* Strip — the other projects, lined up horizontally and
+   scrollable. The active card gets a red top rule and a red
+   title. */
+.portfolio__strip {
+  display: flex;
+  gap: var(--space-16);
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(33, 29, 22, 0.35) transparent;
+}
+
+.portfolio__strip::-webkit-scrollbar {
+  height: 6px;
+}
+
+.portfolio__strip::-webkit-scrollbar-thumb {
+  background: rgba(33, 29, 22, 0.35);
+  border-radius: 3px;
+}
+
+.portfolio__strip-card {
+  flex: none;
+  width: 190px;
+  text-align: left;
+  background: #ffffff;
+  border: 1px solid rgba(33, 29, 22, 0.15);
+  border-radius: 2px;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.portfolio__strip-card:hover {
+  border-color: #a02c1e;
+}
+
+.portfolio__strip-card--active {
+  border-color: #a02c1e;
+  box-shadow: inset 0 3px 0 #a02c1e;
+}
+
+.portfolio__strip-card-thumb {
+  display: block;
+  width: 100%;
+  height: 84px;
+  object-fit: cover;
+  border-bottom: 1px solid rgba(33, 29, 22, 0.15);
+}
+
+.portfolio__strip-card-title {
+  display: block;
+  padding: 10px 12px 4px;
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.25;
+  color: #211d16;
+}
+
+.portfolio__strip-card--active .portfolio__strip-card-title {
+  color: #a02c1e;
+}
+
+.portfolio__strip-card-number {
+  display: block;
+  padding: 0 12px 10px;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: #4c463a;
+}
+
+/* Short viewports: tighten the header so the detail panel keeps
+   its height and the page still fits one viewport. */
+@media (max-height: 800px) {
+  .portfolio {
+    padding-block: var(--space-20) var(--space-16);
+  }
+
+  .portfolio__title {
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .portfolio__rule {
+    margin-bottom: 0.75rem;
+  }
+
+  .portfolio__intro {
+    display: none;
+  }
+
+  .portfolio__detail-body {
+    padding: var(--space-24);
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio__detail {
+    grid-template-columns: 1fr;
+    grid-template-rows: 220px 1fr;
+  }
+
+  .portfolio__strip-card {
+    width: 160px;
+  }
 }

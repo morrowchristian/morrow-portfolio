@@ -1,49 +1,262 @@
-/* src/components/Resume/Resume.css */
+/* src/components/Resume/Resume.css — EDITORIAL, native to the Bio.
+   Warm paper #f6f1e7, espresso ink #211d16, shirt red #a02c1e,
+   soft brown #4c463a. Newsreader serif for headings and body,
+   IBM Plex Mono for labels, dates and chips. Sharp 2px corners,
+   hairline rules, red used sparingly. The values are written out
+   here (not the shared tokens) so the retheme stays scoped to this
+   page — the Services page keeps the old light theme. */
 
+/* Resume Section */
 .resume {
+  background: #f6f1e7;
   padding-block: var(--space-64);
 }
 
+/* Header: mono kick, serif title, red rule, short intro — the
+   same furniture as the Bio's intro column and the Portfolio
+   header. */
+.resume__header {
+  margin-bottom: var(--space-48);
+}
+
+.resume__kick {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #a02c1e;
+  margin-bottom: 0.75rem;
+}
+
 .resume__title {
-  font-size: var(--text-2xl);
-  font-weight: var(--weight-bold);
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 1.6rem + 1.4vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: #211d16;
+  margin-bottom: 1rem;
+}
+
+.resume__rule {
+  display: block;
+  width: 3.5rem;
+  height: 3px;
+  background: #a02c1e;
+  margin-bottom: 1rem;
+}
+
+.resume__intro {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #4c463a;
+  max-width: 34rem;
   margin-bottom: var(--space-24);
 }
 
-.resume__skills {
-  display: grid;
-  gap: var(--space-24);
+/* Download button — the same outlined red mono button as the
+   navbar's résumé download. */
+.resume__download {
+  display: inline-flex;
+  padding: var(--space-8) var(--space-16);
+  border: 1px solid #a02c1e;
+  border-radius: 2px;
+  background: transparent;
+  color: #a02c1e;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
 }
 
-.resume__skill-group h3 {
+.resume__download:hover {
+  background: #a02c1e;
+  color: #f6f1e7;
+}
+
+/* Sections — separated by hairline rules. */
+.resume__sections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-48);
+}
+
+.resume__section {
+  border-top: 1px solid rgba(33, 29, 22, 0.15);
+  padding-top: var(--space-24);
+}
+
+.resume__section-title {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #a02c1e;
+  margin-bottom: var(--space-24);
+}
+
+/* Experience timeline — a vertical hairline with a red square
+   marking each role. */
+.resume__timeline {
+  list-style: none;
+  position: relative;
+  padding-left: 28px;
+}
+
+.resume__timeline::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: rgba(33, 29, 22, 0.2);
+}
+
+.resume__item {
+  position: relative;
+  margin-bottom: var(--space-32);
+}
+
+.resume__item:last-child {
+  margin-bottom: 0;
+}
+
+.resume__timeline .resume__item::before {
+  content: "";
+  position: absolute;
+  left: -25px;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  background: #a02c1e;
+}
+
+.resume__period {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #a02c1e;
+  margin-bottom: 6px;
+}
+
+.resume__role {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1.25;
+  color: #211d16;
+  margin-bottom: 4px;
+}
+
+.resume__company {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  font-style: italic;
+  line-height: 1.5;
+  color: #4c463a;
+  margin-bottom: 12px;
+}
+
+.resume__bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.resume__bullets li {
+  position: relative;
+  padding-left: 16px;
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #4c463a;
+}
+
+.resume__bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  background: #a02c1e;
+}
+
+.resume__earlier {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: 0.95rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: #4c463a;
+  margin-top: var(--space-24);
+}
+
+/* Skills — mono pill chips by category, the same as the Bio's
+   stack chips and the Portfolio's tags. */
+.resume__skill-group {
+  margin-bottom: var(--space-20);
+}
+
+.resume__skill-group:last-child {
+  margin-bottom: 0;
+}
+
+.resume__skill-group-title {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #211d16;
   margin-bottom: var(--space-8);
 }
 
-.resume__skill-group ul {
-  padding-left: var(--space-16);
-  color: var(--color-text-muted);
-}
-
-.resume__experience {
+.resume__chips {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-32);
+  flex-wrap: wrap;
+  gap: var(--space-8);
 }
 
-.experience-item__header {
-  display: flex;
-  justify-content: space-between;
+.resume__chip {
+  padding: 0.35rem 0.8rem;
+  border: 1px solid #211d16;
+  border-radius: 999px;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: #211d16;
+  background: transparent;
+  white-space: nowrap;
 }
 
-.experience-item__role {
-  font-weight: var(--weight-bold);
+/* Education entries reuse the role/company type. */
+.resume__education {
+  margin-bottom: var(--space-20);
 }
 
-.experience-item__company {
-  color: var(--color-text-muted);
+.resume__education:last-child {
+  margin-bottom: 0;
 }
 
-.experience-item__bullets {
-  padding-left: var(--space-16);
-  color: var(--color-text-muted);
+@media (max-width: 768px) {
+  .resume {
+    padding-block: var(--space-48);
+  }
+
+  .resume__timeline {
+    padding-left: 24px;
+  }
+
+  .resume__timeline .resume__item::before {
+    left: -21px;
+  }
 }
