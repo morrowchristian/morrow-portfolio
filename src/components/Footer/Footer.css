@@ -1,8 +1,7 @@
-/* src/components/Footer/Footer.css — Editorial footer.
-   The site menu lives here now (it moved out of the navbar).
-   Paper with a hairline top rule, mono links, red active state.
-   No socials, no email, no Connect button here — those stay in
-   the navbar. */
+/* src/components/Footer/Footer.css — the site footer is the Bio's
+   numbered index, on every page. Paper with a hairline top rule,
+   mono links, the number always red, the current page red +
+   underlined. */
 
 .footer {
   background: #f6f1e7;
@@ -14,70 +13,49 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1.25rem var(--space-24) 1.5rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem 2rem;
+  padding: 1rem var(--space-24) 1.25rem;
 }
 
-.footer__nav {
+.footer__index {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-32);
-  align-items: center;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
 }
 
-.footer__link {
+.footer__index-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
   padding-bottom: 2px;
   border-bottom: 2px solid transparent;
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
-  font-size: 0.78rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #4c463a;
-  text-decoration: none;
-  transition: var(--transition-fast);
-}
-
-.footer__link:hover {
   color: #211d16;
+  text-decoration: none;
+  transition: color var(--transition-fast), border-bottom-color var(--transition-fast);
 }
 
-.footer__link--active {
+.footer__index-item span {
+  font-weight: 500;
+  color: #a02c1e;
+}
+
+.footer__index-item:hover {
+  color: #a02c1e;
+}
+
+.footer__index-item--active {
   color: #a02c1e;
   border-bottom-color: #a02c1e;
 }
 
-/* The Contact button shares the link styling; only the button
-   chrome is reset here — no font rules, so it keeps the mono
-   link type instead of falling back to the body font. */
-.footer__link--button {
-  padding: 0 0 2px;
-  border-top: none;
-  border-right: none;
-  border-left: none;
-  background: none;
-  cursor: pointer;
-}
-
-.footer__credit {
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
-  font-size: 0.78rem;
-  letter-spacing: 0.06em;
-  color: #4c463a;
-}
-
 @media (max-width: 768px) {
   .footer__inner {
-    flex-direction: column;
-    align-items: flex-start;
     padding-inline: var(--space-16);
   }
 
-  .footer__nav {
+  .footer__index {
     gap: var(--space-16);
   }
 }

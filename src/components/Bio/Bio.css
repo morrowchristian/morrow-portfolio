@@ -4,10 +4,10 @@
      tech demo second.
    - MAGAZINE LAYOUT: an intro column on the left (mono kick with
      his name, a Newsreader serif headline, a short red rule, the
-     bio in soft brown, the stack chips, and a quiet résumé link),
-     the transparent paint cutout anchored bottom-right with a
-     single deep-red block behind its lower part, and a numbered
-     link index along the bottom.
+     bio in soft brown, the stack chips, and a quiet résumé link)
+     and the transparent paint cutout anchored bottom-right with a
+     single deep-red block behind its lower part. The numbered
+     link index now lives in the site footer, on every page.
    - The circuit art survives only as faint traces (opacity 0.16)
      and one concentric red ring, top-right of the portrait column
      — in flow above the portrait, so it can never overlap it.
@@ -198,37 +198,6 @@
   object-position: right bottom;
 }
 
-/* Bottom: numbered link index, under a hairline rule. */
-.bio__index {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-wrap: wrap;
-  gap: clamp(1.5rem, 3vw, 3rem);
-  padding-block: 1rem 1.25rem;
-  border-top: 1px solid rgba(33, 29, 22, 0.25);
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
-  font-size: 0.85rem;
-  letter-spacing: 0.06em;
-}
-
-.bio__index-item {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.5rem;
-  color: #211d16;
-  text-decoration: none;
-}
-
-.bio__index-item span {
-  font-weight: 500;
-  color: #a02c1e;
-}
-
-.bio__index-item:hover {
-  color: #a02c1e;
-}
-
 /* Short desktop viewports: tighten the column so it still fits
    comfortably. The fluid sizes already shrink; this just closes
    the gaps a little more. */
@@ -248,10 +217,10 @@
 }
 
 /* Narrow screens: one column — intro on top, portrait below at
-   ~55svh with the red block behind its lower part, index at the
-   bottom. The ring is hidden (it would crowd the text); the
-   portrait still uses object-fit: contain, so his face is never
-   cropped. The page scrolls gracefully if the text needs room. */
+   ~55svh with the red block behind its lower part. The ring is
+   hidden (it would crowd the text); the portrait still uses
+   object-fit: contain, so his face is never cropped. The page
+   scrolls gracefully if the text needs room. */
 @media (max-width: 768px) {
   .bio-page {
     overflow: visible;
