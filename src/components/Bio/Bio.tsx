@@ -14,8 +14,9 @@
 // the Bio + footer fit one viewport: the inner min-height subtracts
 // the navbar (56px) and the footer (~60px), so the portrait is
 // always fully in frame. A single circuit line with a square on
-// each end sits between the intro and the stack — it replaces the
-// L-shaped trace that used to sit behind the stack.
+// each end closes the intro — it replaces the L-shaped trace that
+// used to sit behind the stack (the stack itself was removed
+// 2026-11-17 at Christian's request).
 // Type: Newsreader serif for the headline, IBM Plex Mono for the
 // furniture (kick, labels, index). Palette: #f6f1e7 warm paper,
 // #211d16 espresso ink, #a02c1e shirt red, #4c463a soft brown.
@@ -84,24 +85,13 @@ export const Bio: React.FC = () => {
               team-lead experience to every project: calm problem-solving under
               pressure, clear communication, and code that stays maintainable.
             </p>
-            {/* A single circuit line with a square on each end, in
-                flow between the bio and the stack — it replaces the
-                L-shaped trace that used to sit behind the stack. */}
+            {/* A single circuit line with a square on each end,
+                closing the intro — it replaces the L-shaped trace
+                that used to sit behind the stack. */}
             <div className="bio__divider" aria-hidden="true">
               <span className="bio__divider-square" />
               <span className="bio__divider-line" />
               <span className="bio__divider-square" />
-            </div>
-            <div className="bio__stack" aria-label="Tech stack">
-              <p className="bio__stack-label">Stack</p>
-              <ul className="bio__stack-chips">
-                <li>React</li>
-                <li>TypeScript</li>
-                <li>Python</li>
-                <li>Django</li>
-                <li>SwiftUI</li>
-                <li>Astro</li>
-              </ul>
             </div>
           </div>
 
