@@ -1,15 +1,9 @@
-// src/components/Navbar/Navbar.tsx — black bar, router links to pages
+// src/components/Navbar/Navbar.tsx — Editorial navbar: brand,
+// socials and Connect only. The site menu moved to the footer.
 import "./Navbar.css";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { useScrollOffset } from "../../hooks/useScrollOffset";
-
-const NAV_ITEMS = [
-  { label: "Bio", to: "/" },
-  { label: "Portfolio", to: "/portfolio" },
-  { label: "Resume", to: "/resume" },
-  { label: "Services", to: "/services" },
-];
 
 interface NavbarProps {
   onConnectClick: () => void;
@@ -28,30 +22,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onConnectClick }) => {
             <span className="navbar__brand-subtitle">Full-Stack Software Engineer</span>
           </span>
         </Link>
-
-        <nav className="navbar__nav">
-          {NAV_ITEMS.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              end={item.to === "/"}
-              className={({ isActive }) =>
-                isActive
-                  ? "navbar__link navbar__link--active"
-                  : "navbar__link"
-              }
-            >
-              {item.label}
-            </NavLink>
-          ))}
-          <button
-            type="button"
-            className="navbar__link navbar__link--button"
-            onClick={onConnectClick}
-          >
-            Contact
-          </button>
-        </nav>
 
         <div className="navbar__right">
           <a
@@ -86,7 +56,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onConnectClick }) => {
 };
 
 /* TODO (Navbar)
-- Add mobile menu (hamburger → slide-out)
 - Add scroll progress bar
 - Add responsive spacing + typography
 */

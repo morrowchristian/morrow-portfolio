@@ -3,10 +3,10 @@
    Editorial Bio (and the other pages' light backgrounds) instead
    of the old black bar. Paper background with a hairline bottom
    rule, Newsreader serif for the brand name, IBM Plex Mono for
-   the nav, and a solid red Connect button. Slimmer at 56px — the
-   .page top offset in layout.css and the Bio min-height calcs
-   match it. The active page gets red text plus a short red
-   underline; the old CSS had no active-link rule at all. */
+   the subtitle, and a solid red Connect button. Slimmer at 56px
+   — the .page top offset in layout.css and the Bio min-height
+   calcs match it. Brand, socials and Connect only: the site menu
+   moved to the footer. */
 
 .navbar {
   position: fixed;
@@ -83,44 +83,6 @@
   letter-spacing: 0.5px;
 }
 
-.navbar__nav {
-  display: flex;
-  gap: var(--space-32);
-  align-items: center;
-}
-
-.navbar__link {
-  padding-bottom: 2px;
-  border-bottom: 2px solid transparent;
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
-  font-size: 0.78rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #4c463a;
-  transition: var(--transition-fast);
-}
-
-.navbar__link:hover {
-  color: #211d16;
-}
-
-.navbar__link--active {
-  color: #a02c1e;
-  border-bottom-color: #a02c1e;
-}
-
-.navbar__link--button {
-  padding: 0 0 2px;
-  border-top: none;
-  border-right: none;
-  border-left: none;
-  background: none;
-  font-family: inherit;
-  font-size: inherit;
-  cursor: pointer;
-}
-
 .navbar__right {
   display: flex;
   align-items: center;
@@ -166,10 +128,6 @@
 
   .navbar__brand-text {
     display: none;
-  }
-
-  .navbar__nav {
-    gap: var(--space-12);
   }
 
   .navbar__social {

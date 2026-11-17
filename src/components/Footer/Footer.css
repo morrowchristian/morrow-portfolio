@@ -1,66 +1,83 @@
-/* src/components/Footer/Footer.css — dark footer, matching the black nav */
+/* src/components/Footer/Footer.css — Editorial footer.
+   The site menu lives here now (it moved out of the navbar).
+   Paper with a hairline top rule, mono links, red active state.
+   No socials, no email, no Connect button here — those stay in
+   the navbar. */
 
 .footer {
-  padding-block: var(--space-24);
-  background: var(--color-nav);
-  color: var(--color-nav-text);
-  border-top: none;
+  background: #f6f1e7;
+  color: #211d16;
+  border-top: 1px solid rgba(33, 29, 22, 0.15);
 }
 
-.footer__content {
+.footer__inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.25rem var(--space-24) 1.5rem;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  gap: var(--space-24);
+  gap: 1rem 2rem;
 }
 
-.footer__name {
-  font-size: var(--text-lg);
-  font-weight: var(--weight-bold);
-}
-
-.footer__tagline {
-  color: var(--color-nav-text-muted);
-}
-
-.footer__right {
+.footer__nav {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-12);
+  flex-wrap: wrap;
+  gap: var(--space-32);
+  align-items: center;
 }
 
 .footer__link {
-  color: var(--color-accent-light);
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #4c463a;
+  text-decoration: none;
   transition: var(--transition-fast);
 }
 
 .footer__link:hover {
-  opacity: 0.7;
+  color: #211d16;
 }
 
-.footer__socials {
-  display: flex;
-  gap: var(--space-16);
+.footer__link--active {
+  color: #a02c1e;
+  border-bottom-color: #a02c1e;
 }
 
-.footer__icon {
-  font-size: 1.4rem;
-  color: var(--color-nav-text-muted);
-  transition: var(--transition-fast);
-}
-
-.footer__icon:hover {
-  color: var(--color-nav-text);
-}
-
-.footer__divider {
-  height: 1px;
-  background: #2a2a2a;
-  margin-block: var(--space-24);
+/* The Contact button shares the link styling; only the button
+   chrome is reset here — no font rules, so it keeps the mono
+   link type instead of falling back to the body font. */
+.footer__link--button {
+  padding: 0 0 2px;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  background: none;
+  cursor: pointer;
 }
 
 .footer__credit {
-  text-align: center;
-  color: var(--color-nav-text-muted);
-  font-size: var(--text-sm);
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: #4c463a;
+}
+
+@media (max-width: 768px) {
+  .footer__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-inline: var(--space-16);
+  }
+
+  .footer__nav {
+    gap: var(--space-16);
+  }
 }

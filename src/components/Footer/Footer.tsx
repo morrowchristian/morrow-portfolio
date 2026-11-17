@@ -1,70 +1,53 @@
-// src/components/Footer/Footer.tsx
+// src/components/Footer/Footer.tsx — Editorial footer: the site
+// menu lives here now (it moved out of the navbar). Paper, a
+// hairline top rule, mono links, red active state. No socials,
+// no email, no Connect button in the footer — those stay in the
+// navbar.
 import "./Footer.css";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { useInViewAnimation } from "../../hooks/useInViewAnimation";
-import { useMediaQuery } from "../../hooks/useMediaQuery";
-import { Container } from "../Container/Container";
+import { NavLink } from "react-router-dom";
 
-export const Footer: React.FC = () => {
-  const { ref, isVisible } = useInViewAnimation();
-  const isMobile = useMediaQuery("(max-width: 768px)");
+const FOOTER_ITEMS = [
+  { label: "Bio", to: "/" },
+  { label: "Portfolio", to: "/portfolio" },
+  { label: "Resume", to: "/resume" },
+  { label: "Services", to: "/services" },
+];
 
+interface FooterProps {
+  onConnectClick: () => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onConnectClick }) => {
   return (
-    <footer id="footer" className="footer">
-      <Container className="footer__inner">
-        <div
-          ref={ref}
-          className={`footer__content animate ${isVisible ? "animate--visible" : ""}`}
-          style={{
-            flexDirection: isMobile ? "column" : "row",
-            textAlign: isMobile ? "center" : "left",
-          }}
-        >
-          <div className="footer__left">
-            <h3 className="footer__name">Christian Morrow</h3>
-            <p className="footer__tagline">
-              Full‑Stack Software Engineer • Cleveland, TN
-            </p>
-          </div>
-
-          <div className="footer__right">
-            <a
-              href="mailto:morrowchristian@icloud.com"
-              className="footer__link"
+    <footer className="footer">
+      <div className="footer__inner">
+        <nav className="footer__nav" aria-label="Site menu">
+          {FOOTER_ITEMS.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              end={item.to === "/"}
+              className={({ isActive }) =>
+                isActive
+                  ? "footer__link footer__link--active"
+                  : "footer__link"
+              }
             >
-              morrowchristian@icloud.com
-            </a>
-
-            <div className="footer__socials">
-              <a
-                href="https://github.com/morrowchristian"
-                target="_blank"
-                className="footer__icon"
-              >
-                <FaGithub />
-              </a>
-              <a
-                href="https://linkedin.com/in/morrowchristian"
-                target="_blank"
-                className="footer__icon"
-              >
-                <FaLinkedin />
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div className="footer__divider" />
-
-        <p className="footer__credit">Made by Christian Morrow © 2026</p>
-      </Container>
+              {item.label}
+            </NavLink>
+          ))}
+          <button
+            type="button"
+            className="footer__link footer__link--button"
+            onClick={onConnectClick}
+          >
+            Contact
+          </button>
+        </nav>
+        <p className="footer__credit">
+          © 2026 Christian Morrow — Full-Stack Software Engineer
+        </p>
+      </div>
     </footer>
   );
 };
-
-/* TODO (Footer)
-- Add dark/light theme support
-- Add scroll-to-top button
-- Add animated social icons
-- Add responsive spacing tokens
-*/
