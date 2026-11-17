@@ -1,8 +1,13 @@
 // src/components/Bio/Bio.tsx — landing page (route "/").
 // SIGNAL DARK: a near-black page (#111111, the same black as the
 // navbar and footer, so the whole landing reads as one dark panel),
-// info top-left, Christian's transparent glitch cutout below it and
-// to the right, anchored bottom-right — the two stagger left-to-right.
+// The page below the navbar is a 4x3 grid:
+//   1  2  3  4
+//   5  6  7  8
+//   9 10 11 12
+// Text in 1, 2, 5, 6 (top-left); cutout in 7, 8, 11, 12
+// (right, lower two rows); bars in 9, 10, 11 (bottom row, left
+// three cells, passing behind the cutout's bottom-left).
 // The cutout is portrait-cutout.png — the glitch
 // portrait with the white background removed, just him and the
 // blue/black/red splotches — shown with object-fit: contain, so his
@@ -60,12 +65,11 @@ export const Bio: React.FC = () => {
           fetchPriority="high"
         />
       </div>
-      </div>
 
       <svg
         className="bio__bars"
         viewBox="0 0 1200 140"
-        preserveAspectRatio="xMaxYMid slice"
+        preserveAspectRatio="none"
         aria-hidden="true"
         focusable="false"
       >
@@ -81,6 +85,7 @@ export const Bio: React.FC = () => {
         <rect x="980" y="118" width="10" height="10" fill="#63b3ed" />
         <line x1="1120" y1="8" x2="1120" y2="56" stroke="#9aa0a6" strokeWidth="1.5" />
       </svg>
+      </div>
     </section>
   );
 };
