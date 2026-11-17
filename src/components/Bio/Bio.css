@@ -148,23 +148,6 @@
   white-space: nowrap;
 }
 
-.bio__resume {
-  margin-top: 0.25rem;
-  padding-bottom: 0.2rem;
-  border-bottom: 1px solid #a02c1e;
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #211d16;
-  text-decoration: none;
-}
-
-.bio__resume:hover {
-  color: #a02c1e;
-}
-
 /* Right: portrait column — ring on top, portrait at the bottom,
    red block behind the portrait's lower part. */
 .bio__portrait {

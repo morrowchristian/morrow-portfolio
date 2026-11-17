@@ -1,5 +1,6 @@
 // src/components/Navbar/Navbar.tsx — Editorial navbar: brand,
-// socials and Connect only. The site menu moved to the footer.
+// socials, résumé download and Connect. The site menu lives in
+// the Bio's numbered index; there is no footer element.
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
@@ -41,6 +42,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onConnectClick }) => {
             aria-label="LinkedIn"
           >
             <FaLinkedin />
+          </a>
+          <a
+            href="/resume.pdf"
+            download="Christian-Morrow-Resume.pdf"
+            className="navbar__resume-button"
+          >
+            Download résumé
           </a>
           <button
             type="button"

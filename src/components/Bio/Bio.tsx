@@ -4,10 +4,12 @@
 // The circuit art survives only as faint traces and one red ring.
 // Magazine layout: an intro column on the left, the transparent
 // glitch cutout anchored bottom-right with the red block behind
-// its lower part, and a numbered link index along the bottom that
-// holds the site pages — Portfolio, Resume, Services. GitHub,
-// LinkedIn and Contact are not repeated here; they already live
-// in the navbar. There is no separate footer element.
+// its lower part, and a numbered link index along the bottom —
+// 01 About (this page), 02 Portfolio, 03 Resume, 04 Services.
+// GitHub, LinkedIn and Contact are not repeated here; they already
+// live in the navbar. The résumé download lives in the navbar too
+// (next to Connect), not on this page. There is no separate footer
+// element.
 // Type: Newsreader serif for the headline, IBM Plex Mono for the
 // furniture (kick, labels, index). Palette: #f6f1e7 warm paper,
 // #211d16 espresso ink, #a02c1e shirt red, #4c463a soft brown.
@@ -90,13 +92,6 @@ export const Bio: React.FC = () => {
                 <li>Astro</li>
               </ul>
             </div>
-            <a
-              href="/resume.pdf"
-              download="Christian-Morrow-Resume.pdf"
-              className="bio__resume"
-            >
-              Download résumé
-            </a>
           </div>
 
           <div className="bio__portrait" aria-hidden="true">
@@ -146,14 +141,17 @@ export const Bio: React.FC = () => {
         </div>
 
         <nav className="bio__index" aria-label="Index">
+          <Link to="/" className="bio__index-item">
+            <span>01</span> About
+          </Link>
           <Link to="/portfolio" className="bio__index-item">
-            <span>01</span> Portfolio
+            <span>02</span> Portfolio
           </Link>
           <Link to="/resume" className="bio__index-item">
-            <span>02</span> Resume
+            <span>03</span> Resume
           </Link>
           <Link to="/services" className="bio__index-item">
-            <span>03</span> Services
+            <span>04</span> Services
           </Link>
         </nav>
       </div>
