@@ -84,12 +84,13 @@
   margin-left: auto;
 }
 
-/* Splotch bars running under the page: full-width strip along the
-   bottom, behind the text, anchored to the portrait's right edge. */
+/* Clean bar stack along the bottom of the page, lifted 16px off the
+   edge so it reads as placed, not clipped. Full-width within the
+   1200px column, behind the portrait. */
 .bio__bars {
   position: absolute;
   left: 50%;
-  bottom: 0;
+  bottom: 16px;
   width: min(1200px, 100%);
   height: 140px;
   transform: translateX(-50%);
