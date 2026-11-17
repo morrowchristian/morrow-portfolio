@@ -1,13 +1,21 @@
-/* src/components/Portfolio/ProjectModalContent.css */
+/* src/components/Portfolio/ProjectModalContent.css — EDITORIAL,
+   native to the Bio: Newsreader serif, soft brown body, mono
+   highlights, sharp 2px corners. */
 
 .project-modal__title {
-  font-size: var(--text-xl);
-  font-weight: var(--weight-bold);
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: #211d16;
   margin-bottom: var(--space-16);
 }
 
 .project-modal__description {
-  color: var(--color-text-muted);
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #4c463a;
   margin-bottom: var(--space-24);
 }
 
@@ -16,6 +24,10 @@
 }
 
 .project-modal__highlight {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #211d16;
   margin-bottom: var(--space-8);
 }
 
@@ -27,6 +39,7 @@
 
 .project-modal__image {
   width: 100%;
-  border-radius: var(--radius-md);
+  border-radius: 2px;
+  border: 1px solid rgba(33, 29, 22, 0.15);
   object-fit: cover;
 }

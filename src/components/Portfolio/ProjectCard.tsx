@@ -15,14 +15,6 @@ interface ProjectCardProps {
   onOpen?: (project: any) => void;
 }
 
-const TAG_CLASS_MAP: Record<string, string> = {
-  React: "project-card__tag--react",
-  TypeScript: "project-card__tag--ts",
-  JavaScript: "project-card__tag--js",
-  CSS: "project-card__tag--css",
-  HTML: "project-card__tag--html",
-};
-
 export const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   index,
@@ -48,10 +40,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
 
         <div className="project-card__tech">
           {tags.map((tag) => (
-            <span
-              key={tag}
-              className={`project-card__tag ${TAG_CLASS_MAP[tag] || ""}`}
-            >
+            <span key={tag} className="project-card__tag">
               {tag}
             </span>
           ))}

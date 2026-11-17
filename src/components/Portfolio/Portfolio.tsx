@@ -29,7 +29,14 @@ export const Portfolio: React.FC = () => {
   return (
     <section id="portfolio" className="portfolio">
       <Container>
-        <h2 className="portfolio__title">Portfolio</h2>
+        <header className="portfolio__header">
+          <p className="portfolio__kick">Selected Work</p>
+          <h2 className="portfolio__title">Portfolio</h2>
+          <span className="portfolio__rule" aria-hidden="true" />
+          <p className="portfolio__intro">
+            Client work, campaign sites and tools — built end to end.
+          </p>
+        </header>
 
         {/* Filter Bar */}
         <div className="portfolio__filters">
