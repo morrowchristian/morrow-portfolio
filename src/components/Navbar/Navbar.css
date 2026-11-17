@@ -1,20 +1,29 @@
-/* src/components/Navbar/Navbar.css — black bar */
+/* src/components/Navbar/Navbar.css — Editorial navbar.
+   Warm paper, espresso ink, shirt red: the bar matches the
+   Editorial Bio (and the other pages' light backgrounds) instead
+   of the old black bar. Paper background with a hairline bottom
+   rule, Newsreader serif for the brand name, IBM Plex Mono for
+   the nav, and a solid red Connect button. Slimmer at 56px — the
+   .page top offset in layout.css and the Bio min-height calcs
+   match it. The active page gets red text plus a short red
+   underline; the old CSS had no active-link rule at all. */
 
 .navbar {
   position: fixed;
   inset-inline: 0;
   top: 0;
-  height: 64px;
+  height: 56px;
   display: flex;
   align-items: center;
-  background: var(--color-nav);
-  color: var(--color-nav-text);
+  background: #f6f1e7;
+  color: #211d16;
+  border-bottom: 1px solid rgba(33, 29, 22, 0.15);
   transition: var(--transition-medium);
   z-index: 100;
 }
 
 .navbar--scrolled {
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 16px rgba(33, 29, 22, 0.08);
 }
 
 .navbar__inner {
@@ -32,34 +41,45 @@
   display: flex;
   align-items: center;
   gap: var(--space-12);
-  font-weight: var(--weight-bold);
-  color: var(--color-nav-text);
+  color: #211d16;
   white-space: nowrap;
 }
 
 .navbar__brand-text {
   display: flex;
   flex-direction: column;
-  line-height: 1.2;
+  line-height: 1.25;
+}
+
+.navbar__brand-name {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #211d16;
 }
 
 .navbar__brand-subtitle {
-  font-size: var(--text-sm);
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.66rem;
   font-weight: 400;
-  color: var(--color-nav-text-muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #4c463a;
 }
 
 .navbar__monogram {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
-  border: 2px solid var(--color-nav-text);
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  font-family: var(--font-heading);
-  font-size: var(--text-sm);
-  font-weight: var(--weight-bold);
+  background: #a02c1e;
+  color: #f6f1e7;
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: 0.85rem;
+  font-weight: 600;
   letter-spacing: 0.5px;
 }
 
@@ -70,20 +90,35 @@
 }
 
 .navbar__link {
-  color: var(--color-nav-text-muted);
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #4c463a;
   transition: var(--transition-fast);
-  font-size: var(--text-base);
 }
 
 .navbar__link:hover {
-  color: var(--color-nav-text);
+  color: #211d16;
+}
+
+.navbar__link--active {
+  color: #a02c1e;
+  border-bottom-color: #a02c1e;
 }
 
 .navbar__link--button {
+  padding: 0 0 2px;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  background: none;
   font-family: inherit;
-  font-size: var(--text-base);
+  font-size: inherit;
   cursor: pointer;
-  padding: 0;
 }
 
 .navbar__right {
@@ -94,34 +129,55 @@
 
 .navbar__social {
   display: inline-flex;
-  font-size: 1.25rem;
-  color: var(--color-nav-text-muted);
+  font-size: 1.15rem;
+  color: #4c463a;
   transition: var(--transition-fast);
 }
 
 .navbar__social:hover {
-  color: var(--color-nav-text);
+  color: #a02c1e;
 }
 
 .navbar__connect-button {
   padding: var(--space-8) var(--space-16);
-  border-radius: var(--radius-lg);
-  background: var(--color-accent);
-  color: var(--color-accent-contrast);
-  font-weight: var(--weight-medium);
+  border: none;
+  border-radius: 2px;
+  background: #a02c1e;
+  color: #f6f1e7;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   white-space: nowrap;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.navbar__connect-button:hover {
+  background: #8c2418;
 }
 
 @media (max-width: 768px) {
+  .navbar__inner {
+    padding-inline: var(--space-16);
+    gap: var(--space-12);
+  }
+
   .navbar__brand-text {
     display: none;
   }
 
   .navbar__nav {
-    gap: var(--space-16);
+    gap: var(--space-12);
   }
 
   .navbar__social {
     display: none;
+  }
+
+  .navbar__connect-button {
+    padding: 6px 10px;
+    font-size: 0.72rem;
   }
 }

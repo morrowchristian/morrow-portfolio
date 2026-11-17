@@ -25,10 +25,10 @@ section {
   padding-block: var(--space-64);
 }
 
-/* Page wrapper: offset for the fixed 64px navbar */
+/* Page wrapper: offset for the fixed 56px navbar */
 .page {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding-top: 64px;
+  padding-top: 56px;
 }

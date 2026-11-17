@@ -37,7 +37,7 @@
   flex-direction: column;
   width: 100%;
   max-width: 1200px;
-  min-height: calc(100svh - 64px);
+  min-height: calc(100svh - 56px);
   margin-inline: auto;
   padding-inline: clamp(1.5rem, 4vw, 3rem);
 }
@@ -265,7 +265,7 @@
   }
 
   .bio__inner {
-    min-height: calc(100svh - 64px);
+    min-height: calc(100svh - 56px);
   }
 
   .bio__main {
