@@ -2,11 +2,12 @@
    - One dark panel: the whole section shares the navbar/footer black
      (#111111), so the landing reads as a single continuous dark page
      with no seam at the top or bottom.
-   - Stacked: text on top in light tones (white title, muted-grey
-     subtitle, light-blue eyebrow), then the transparent glitch cutout
-     (portrait-cutout.png — him and the splotches, no background)
-     below it, anchored bottom-right. The image is always below the
-     text, at every width.
+   - Staggered on wide screens: smaller text top-left in light tones
+     (white title, muted-grey subtitle, light-blue eyebrow), then the
+     transparent glitch cutout (portrait-cutout.png — him and the
+     splotches, no background) below it and to the right, anchored
+     bottom-right. Text and image step left-to-right down the page,
+     and both are sized to fit one viewport with no cropping.
    - SPLOTCH BARS: blue/red glitch bars (.bio__bars, inline SVG in
      Bio.tsx) escape from under the portrait and run leftward along
      the bottom of the page, behind the text zone — longest near the
@@ -31,7 +32,7 @@
   display: grid;
   grid-template-rows: 1fr;
   flex: 1;
-  min-height: 720px;
+  min-height: 560px;
   padding-block: 0;
   overflow: hidden;
   background: #111111;
@@ -43,14 +44,13 @@
    the margin on wide screens. */
 .bio__inner {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto minmax(340px, 1fr);
+  grid-template-columns: minmax(340px, 42%) 1fr;
   width: 100%;
   max-width: 1200px;
   margin-inline: auto;
 }
 
-/* Top zone: text, above the portrait and the bars. */
+/* Left zone: text, top-aligned, stepping down to the portrait. */
 .bio__text {
   position: relative;
   z-index: 1;
@@ -76,8 +76,9 @@
   position: relative;
   z-index: 1;
   display: block;
-  width: min(100%, 920px);
+  width: min(100%, 560px);
   height: 100%;
+  max-height: 56svh;
   object-fit: contain;
   object-position: right bottom;
   margin-left: auto;
@@ -99,7 +100,7 @@
 
 /* Faint circuit lines in the dark gap left of the portrait image,
    anchored to the seam (left edge of the portrait zone). The width is
-   exactly that gap — half of what is left after the 920px image —
+   exactly that gap — half of what is left after the 560px image —
    minus a 12px safety margin, so the motif stops short of the photo
    and never reaches the text. Pure decoration: never interactive. */
 .bio__circuit {
@@ -109,7 +110,7 @@
   height: 100%;
   width: min(
     260px,
-    max(0px, calc((100% - min(100%, 920px)) / 2 - 12px))
+    max(0px, calc((100% - min(100%, 560px)) / 2 - 12px))
   );
   pointer-events: none;
   z-index: 0;
@@ -125,20 +126,20 @@
 }
 
 .bio__title {
-  font-size: clamp(1.6rem, 1rem + 1.2vw, 2.25rem);
+  font-size: clamp(1.35rem, 0.9rem + 0.9vw, 1.75rem);
   line-height: 1.05;
   font-weight: var(--weight-bold);
   color: #ffffff;
 }
 
 .bio__subtitle {
-  font-size: clamp(1rem, 0.9rem + 0.4vw, 1.25rem);
+  font-size: clamp(0.9rem, 0.85rem + 0.25vw, 1.05rem);
   line-height: 1.4;
   color: #c9c9c9;
 }
 
 .bio__intro {
-  font-size: clamp(0.9rem, 0.85rem + 0.25vw, 1rem);
+  font-size: clamp(0.85rem, 0.8rem + 0.2vw, 0.95rem);
   line-height: 1.55;
   color: #e8e6e1;
 }
@@ -154,10 +155,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(0.625rem, 0.5rem + 0.5vh, 0.75rem)
-    clamp(1.25rem, 1rem + 1vw, 1.5rem);
+  padding: clamp(0.55rem, 0.45rem + 0.4vh, 0.65rem)
+    clamp(1.1rem, 0.9rem + 0.9vw, 1.35rem);
   border-radius: var(--radius-md);
-  font-size: clamp(0.9rem, 0.85rem + 0.2vw, 1rem);
+  font-size: clamp(0.85rem, 0.8rem + 0.15vw, 0.95rem);
   font-weight: var(--weight-medium);
   transition: var(--transition-fast);
 }
