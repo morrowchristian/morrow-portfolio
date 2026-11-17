@@ -49,7 +49,7 @@ function AppShell() {
         </Routes>
       </main>
 
-      <Footer />
+      <Footer onConnectClick={() => setIsModalOpen(true)} />
 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <ContactForm onSuccess={() => setIsModalOpen(false)} />

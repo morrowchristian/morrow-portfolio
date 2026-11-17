@@ -1,14 +1,21 @@
-// src/components/Navbar/Navbar.tsx — Editorial navbar: brand,
-// socials, résumé download and Connect. The site menu lives in
-// the Bio's numbered index; there is no footer element.
+// src/components/Navbar/Navbar.tsx — Editorial navbar: brand, the
+// page menu (About, Portfolio, Resume, Services), résumé download
+// and Connect. The GitHub and LinkedIn links live in the footer
+// now, so the menu can sit at the top without crowding the bar.
 import "./Navbar.css";
-import { Link } from "react-router-dom";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { Link, NavLink } from "react-router-dom";
 import { useScrollOffset } from "../../hooks/useScrollOffset";
 
 interface NavbarProps {
   onConnectClick: () => void;
 }
+
+const NAV_ITEMS = [
+  { label: "About", to: "/" },
+  { label: "Portfolio", to: "/portfolio" },
+  { label: "Resume", to: "/resume" },
+  { label: "Services", to: "/services" },
+];
 
 export const Navbar: React.FC<NavbarProps> = ({ onConnectClick }) => {
   const isScrolled = useScrollOffset(24);
@@ -25,24 +32,22 @@ export const Navbar: React.FC<NavbarProps> = ({ onConnectClick }) => {
         </Link>
 
         <div className="navbar__right">
-          <a
-            href="https://github.com/morrowchristian"
-            target="_blank"
-            rel="noreferrer"
-            className="navbar__social"
-            aria-label="GitHub"
-          >
-            <FaGithub />
-          </a>
-          <a
-            href="https://linkedin.com/in/morrowchristian"
-            target="_blank"
-            rel="noreferrer"
-            className="navbar__social"
-            aria-label="LinkedIn"
-          >
-            <FaLinkedin />
-          </a>
+          <nav className="navbar__menu" aria-label="Site menu">
+            {NAV_ITEMS.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                end={item.to === "/"}
+                className={({ isActive }) =>
+                  isActive
+                    ? "navbar__link navbar__link--active"
+                    : "navbar__link"
+                }
+              >
+                {item.label}
+              </NavLink>
+            ))}
+          </nav>
           <a
             href="/resume.pdf"
             download="Christian-Morrow-Resume.pdf"
