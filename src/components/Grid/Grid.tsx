@@ -14,7 +14,7 @@ interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const Grid = forwardRef<HTMLDivElement, GridProps>(
-  ({ children, columns = "repeat(auto-fill, minmax(280px, 1fr))", gap = "32px", style, ...props }, ref) => {
+  ({ children, columns = "repeat(auto-fill, minmax(280px, 1fr))", gap = "32px", style, className = "", ...props }, ref) => {
     
     const resolveColumns = (value: GridProps["columns"]) => {
       if (typeof value === "string") return value;
@@ -28,10 +28,14 @@ export const Grid = forwardRef<HTMLDivElement, GridProps>(
       return "1fr";
     };
 
+    // Merge the caller's className with "grid" — spreading ...props
+    // after className="grid" used to drop the grid class entirely
+    // (Portfolio/Resume/Services all pass an animate class), which
+    // killed display: grid and stacked every card in one column.
     return (
       <div
         ref={ref}
-        className="grid"
+        className={`grid ${className}`}
         style={{
           gridTemplateColumns: resolveColumns(columns),
           gap,
