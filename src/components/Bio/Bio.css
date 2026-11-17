@@ -2,10 +2,11 @@
    - One dark panel: the whole section shares the navbar/footer black
      (#111111), so the landing reads as a single continuous dark page
      with no seam at the top or bottom.
-   - Left: text in light tones (white title, muted-grey subtitle,
-     light-blue eyebrow). Right: the transparent glitch cutout
-     (portrait-cutout.png — him and the splotches, no background),
-     anchored bottom-right at full viewport height.
+   - Stacked: text on top in light tones (white title, muted-grey
+     subtitle, light-blue eyebrow), then the transparent glitch cutout
+     (portrait-cutout.png — him and the splotches, no background)
+     below it, anchored bottom-right. The image is always below the
+     text, at every width.
    - SPLOTCH BARS: blue/red glitch bars (.bio__bars, inline SVG in
      Bio.tsx) escape from under the portrait and run leftward along
      the bottom of the page, behind the text zone — longest near the
@@ -30,7 +31,7 @@
   display: grid;
   grid-template-rows: 1fr;
   flex: 1;
-  min-height: 560px;
+  min-height: 720px;
   padding-block: 0;
   overflow: hidden;
   background: #111111;
@@ -42,26 +43,27 @@
    the margin on wide screens. */
 .bio__inner {
   display: grid;
-  grid-template-columns: minmax(400px, 37%) 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto minmax(340px, 1fr);
   width: 100%;
   max-width: 1200px;
   margin-inline: auto;
 }
 
-/* Left zone: text, vertically centred, above the bars. */
+/* Top zone: text, above the portrait and the bars. */
 .bio__text {
   position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   gap: clamp(0.75rem, 1.5vh, 1rem);
   max-width: clamp(28rem, 36vw, 40rem);
   padding: clamp(1.5rem, 3vh, 2rem) clamp(1.5rem, 2.5vw, 2rem)
     clamp(1.5rem, 3vh, 2rem) clamp(1.5rem, 4vw, 3rem);
 }
 
-/* Right zone: transparent, so the dark page shows through the cutout. */
+/* Bottom zone: transparent, so the dark page shows through the cutout. */
 .bio__portrait {
   position: relative;
   min-width: 0;
@@ -203,7 +205,7 @@
   }
 }
 
-/* Narrow screens: stack — portrait on top at ~38svh, text below.
+/* Narrow screens: same stack — text on top, portrait below at ~38svh.
    The portrait still uses object-fit: contain, so his face is never
    cropped. The fixed-height rule is relaxed here, so the page may
    scroll gracefully if the text needs more room. The circuit is
@@ -218,11 +220,10 @@
 
   .bio__inner {
     grid-template-columns: 1fr;
-    grid-template-rows: minmax(260px, 38svh) auto;
+    grid-template-rows: auto minmax(260px, 38svh);
   }
 
   .bio__portrait {
-    order: -1;
     height: 100%;
   }
 

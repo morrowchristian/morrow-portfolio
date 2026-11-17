@@ -1,8 +1,8 @@
 // src/components/Bio/Bio.tsx — landing page (route "/").
 // SIGNAL DARK: a near-black page (#111111, the same black as the
 // navbar and footer, so the whole landing reads as one dark panel),
-// info on the left, Christian's transparent glitch cutout anchored
-// bottom-right. The cutout is portrait-cutout.png — the glitch
+// info on top, Christian's transparent glitch cutout below it,
+// anchored bottom-right. The cutout is portrait-cutout.png — the glitch
 // portrait with the white background removed, just him and the
 // blue/black/red splotches — shown with object-fit: contain, so his
 // face, hair and shoulders are always fully visible, never cropped,
