@@ -4,7 +4,9 @@
 // The circuit art survives only as faint traces and one red ring.
 // Magazine layout: an intro column on the left, the transparent
 // glitch cutout anchored bottom-right with the red block behind
-// its lower part, and a numbered link index along the bottom.
+// its lower part, and a numbered link index along the bottom that
+// holds the whole site menu — pages, externals and Contact. There
+// is no separate footer element.
 // Type: Newsreader serif for the headline, IBM Plex Mono for the
 // furniture (kick, labels, index). Palette: #f6f1e7 warm paper,
 // #211d16 espresso ink, #a02c1e shirt red, #4c463a soft brown.
@@ -18,7 +20,11 @@ import "./Bio.css";
 import { Link } from "react-router-dom";
 import { useInViewAnimation } from "../../hooks/useInViewAnimation";
 
-export const Bio: React.FC = () => {
+interface BioProps {
+  onConnectClick: () => void;
+}
+
+export const Bio: React.FC<BioProps> = ({ onConnectClick }) => {
   const { ref, isVisible } = useInViewAnimation();
 
   return (
@@ -162,6 +168,19 @@ export const Bio: React.FC = () => {
           >
             <span>03</span> LinkedIn
           </a>
+          <Link to="/resume" className="bio__index-item">
+            <span>04</span> Resume
+          </Link>
+          <Link to="/services" className="bio__index-item">
+            <span>05</span> Services
+          </Link>
+          <button
+            type="button"
+            className="bio__index-item bio__index-item--button"
+            onClick={onConnectClick}
+          >
+            <span>06</span> Contact
+          </button>
         </nav>
       </div>
     </section>

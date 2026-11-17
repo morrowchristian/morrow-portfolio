@@ -5,7 +5,6 @@ import { HashRouter, Navigate, Route, Routes, useLocation } from "react-router-d
 import "./styles/globals.css";
 
 import { Navbar } from "./components/Navbar/Navbar";
-import { Footer } from "./components/Footer/Footer";
 import { Modal } from "./components/Modal/Modal";
 import { ContactForm } from "./components/ContactForm/ContactForm";
 
@@ -41,15 +40,13 @@ function AppShell() {
 
       <main className="page">
         <Routes>
-          <Route path="/" element={<Bio />} />
+          <Route path="/" element={<Bio onConnectClick={() => setIsModalOpen(true)} />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/resume" element={<Resume />} />
           <Route path="/services" element={<Services />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
-
-      <Footer onConnectClick={() => setIsModalOpen(true)} />
 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <ContactForm onSuccess={() => setIsModalOpen(false)} />
