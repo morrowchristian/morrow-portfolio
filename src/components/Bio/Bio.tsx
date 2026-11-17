@@ -23,6 +23,7 @@ export const Bio: React.FC = () => {
 
   return (
     <section className="bio-page">
+      <div className="bio__inner">
       <div
         ref={ref}
         className={`bio__text animate ${isVisible ? "animate--visible" : ""}`}
@@ -78,6 +79,7 @@ export const Bio: React.FC = () => {
           className="bio__portrait-img"
           fetchPriority="high"
         />
+      </div>
       </div>
 
       <svg
