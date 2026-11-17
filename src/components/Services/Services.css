@@ -7,7 +7,12 @@
    icon on the top row, a serif title, a soft-brown description
    and a mono red link. */
 
+/* The section stretches to fill the viewport (the page is a flex
+   column), so the paper runs all the way to the footer — otherwise
+   the body's off-white #faf9f6 shows as an empty band below the
+   cards on a short page like this one. */
 .services {
+  flex: 1;
   background: #f6f1e7;
   color: #211d16;
   padding-block: 64px;
