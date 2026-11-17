@@ -1,22 +1,19 @@
 // src/components/Bio/Bio.tsx — landing page (route "/").
-// SIGNAL DARK: a near-black page (#111111, the same black as the
-// navbar and footer, so the whole landing reads as one dark panel),
-// The page below the navbar is a 4x3 grid:
-//   1  2  3  4
-//   5  6  7  8
-//   9 10 11 12
-// Text in 1, 2 (top-left); stack chips in 3, 4 (top-right);
-// cutout in 7, 8, 11, 12 (right, lower two rows); bars in 9, 10,
-// 11 (bottom row, left three cells, passing behind the cutout's
-// bottom-left).
-// The cutout is portrait-cutout.png — the glitch
-// portrait with the white background removed, just him and the
-// blue/black/red splotches — shown with object-fit: contain, so his
-// face, hair and shoulders are always fully visible, never cropped,
-// stretched or warped.
-// The splotch bars (.bio__bars, inline SVG) escape from under the
-// portrait and run leftward along the bottom of the page, behind the
-// text zone — the glitch spilling out of the photo across the page.
+// EDITORIAL (03): warm paper, a serif headline, and a single
+// deep-red block behind the portrait, taken from his shirt.
+// The circuit art survives only as faint traces and one red ring.
+// Magazine layout: an intro column on the left, the transparent
+// glitch cutout anchored bottom-right with the red block behind
+// its lower part, and a numbered link index along the bottom.
+// Type: Newsreader serif for the headline, IBM Plex Mono for the
+// furniture (kick, labels, index). Palette: #f6f1e7 warm paper,
+// #211d16 espresso ink, #a02c1e shirt red, #4c463a soft brown.
+// The portrait is portrait-cutout.png — the glitch portrait with
+// the white background removed — shown with object-fit: contain,
+// so his face, hair and shoulders are always fully visible, never
+// cropped, stretched or warped. The red block sits behind the
+// portrait's lower part (his shirt merges into the block, by
+// design); the face stays against warm paper.
 import "./Bio.css";
 import { Link } from "react-router-dom";
 import { useInViewAnimation } from "../../hooks/useInViewAnimation";
@@ -27,77 +24,145 @@ export const Bio: React.FC = () => {
   return (
     <section className="bio-page">
       <div className="bio__inner">
-      <div
-        ref={ref}
-        className={`bio__text animate ${isVisible ? "animate--visible" : ""}`}
-      >
-        <p className="bio__eyebrow">About</p>
-        <h1 className="bio__title">Christian Morrow</h1>
-        <p className="bio__subtitle">
-          Full-Stack Software Engineer — Cleveland, TN
-        </p>
-        <p className="bio__intro">
-          B.S. Software Systems ’25 from the University of Tennessee at
-          Chattanooga, Latin Honors, 3.7 GPA. I build full-stack web
-          applications in React, TypeScript and Django — with real client
-          websites shipped — and bring 7+ years of high-urgency service and
-          team-lead experience to every project: calm problem-solving under
-          pressure, clear communication, and code that stays maintainable.
-        </p>
-        <div className="bio__buttons">
-          <Link to="/portfolio" className="bio__button bio__button--primary">
-            View my work
+        {/* Faint circuit traces across the paper — a nod to the
+            original line-work, kept near-invisible. */}
+        <svg
+          className="bio__traces"
+          viewBox="0 0 1200 800"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <g stroke="#211d16" strokeWidth="1" fill="none" opacity="0.16">
+            <polyline points="700,80 900,80 900,160 1040,160" />
+            <polyline points="980,300 1120,300 1120,380" />
+            <polyline points="60,700 300,700 300,640" />
+          </g>
+          <g fill="#211d16" opacity="0.16">
+            <rect x="696" y="76" width="8" height="8" />
+            <rect x="1036" y="156" width="8" height="8" />
+            <rect x="1116" y="376" width="8" height="8" />
+            <rect x="56" y="696" width="8" height="8" />
+            <rect x="296" y="636" width="8" height="8" />
+          </g>
+          <rect
+            x="896"
+            y="76"
+            width="9"
+            height="9"
+            fill="#a02c1e"
+            opacity="0.55"
+          />
+        </svg>
+
+        <div className="bio__main">
+          <div
+            ref={ref}
+            className={`bio__text animate ${isVisible ? "animate--visible" : ""}`}
+          >
+            <p className="bio__kick">Christian Morrow</p>
+            <h1 className="bio__title">
+              Software, built end to end — built to last.
+            </h1>
+            <span className="bio__rule" aria-hidden="true" />
+            <p className="bio__subtitle">
+              Full-Stack Software Engineer — Cleveland, TN
+            </p>
+            <p className="bio__intro">
+              B.S. Software Systems ’25 from the University of Tennessee at
+              Chattanooga, Latin Honors, 3.7 GPA. I build full-stack web
+              applications in React, TypeScript and Django — with real client
+              websites shipped — and bring 7+ years of high-urgency service and
+              team-lead experience to every project: calm problem-solving under
+              pressure, clear communication, and code that stays maintainable.
+            </p>
+            <div className="bio__stack" aria-label="Tech stack">
+              <p className="bio__stack-label">Stack</p>
+              <ul className="bio__stack-chips">
+                <li>React</li>
+                <li>TypeScript</li>
+                <li>Python</li>
+                <li>Django</li>
+                <li>SwiftUI</li>
+                <li>Astro</li>
+              </ul>
+            </div>
+            <a
+              href="/resume.pdf"
+              download="Christian-Morrow-Resume.pdf"
+              className="bio__resume"
+            >
+              Download résumé
+            </a>
+          </div>
+
+          <div className="bio__portrait" aria-hidden="true">
+            {/* One concentric ring, top-right of the portrait column,
+                in flow above the portrait so it can never overlap it. */}
+            <svg
+              className="bio__ring"
+              viewBox="0 0 220 220"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <circle
+                cx="110"
+                cy="110"
+                r="90"
+                fill="none"
+                stroke="#a02c1e"
+                strokeWidth="1.5"
+                opacity="0.35"
+              />
+              <circle
+                cx="110"
+                cy="110"
+                r="58"
+                fill="none"
+                stroke="#211d16"
+                strokeWidth="1"
+                opacity="0.2"
+              />
+              <rect
+                x="106"
+                y="106"
+                width="8"
+                height="8"
+                fill="#a02c1e"
+                opacity="0.55"
+              />
+            </svg>
+            <span className="bio__redblock" aria-hidden="true" />
+            <img
+              src="/portrait-cutout.png"
+              alt=""
+              className="bio__portrait-img"
+              fetchPriority="high"
+            />
+          </div>
+        </div>
+
+        <nav className="bio__index" aria-label="Index">
+          <Link to="/portfolio" className="bio__index-item">
+            <span>01</span> Portfolio
           </Link>
           <a
-            href="/resume.pdf"
-            download="Christian-Morrow-Resume.pdf"
-            className="bio__button bio__button--secondary"
+            href="https://github.com/morrowchristian"
+            target="_blank"
+            rel="noreferrer"
+            className="bio__index-item"
           >
-            Download resume
+            <span>02</span> GitHub
           </a>
-        </div>
-      </div>
-
-      <div className="bio__stack" aria-label="Tech stack">
-        <p className="bio__stack-label">My stack</p>
-        <ul className="bio__stack-chips">
-          <li>React</li>
-          <li>TypeScript</li>
-          <li>Python</li>
-          <li>Django</li>
-          <li>SwiftUI</li>
-          <li>Astro</li>
-        </ul>
-      </div>
-
-      <div className="bio__portrait" aria-hidden="true">
-        <img
-          src="/portrait-cutout.png"
-          alt=""
-          className="bio__portrait-img"
-          fetchPriority="high"
-        />
-      </div>
-
-      <svg
-        className="bio__bars"
-        viewBox="0 0 1200 140"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-        focusable="false"
-      >
-        {/* Splotch bars escaping leftward from under the portrait,
-            longest near the photo, tapering off toward the left edge. */}
-        <rect x="420" y="16" width="780" height="8" fill="#2b6cb0" />
-        <rect x="180" y="42" width="1020" height="5" fill="#63b3ed" />
-        <rect x="640" y="64" width="560" height="10" fill="#e53e3e" />
-        <rect x="300" y="90" width="900" height="6" fill="#2b6cb0" />
-        <rect x="760" y="114" width="440" height="4" fill="#f5f5f2" opacity="0.45" />
-        <rect x="1150" y="28" width="12" height="12" fill="#2b6cb0" />
-        <rect x="1080" y="78" width="9" height="9" fill="#e53e3e" />
-        <rect x="980" y="118" width="10" height="10" fill="#63b3ed" />
-        <line x1="1120" y1="8" x2="1120" y2="56" stroke="#9aa0a6" strokeWidth="1.5" />
-      </svg>
+          <a
+            href="https://linkedin.com/in/morrowchristian"
+            target="_blank"
+            rel="noreferrer"
+            className="bio__index-item"
+          >
+            <span>03</span> LinkedIn
+          </a>
+        </nav>
       </div>
     </section>
   );

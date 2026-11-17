@@ -1,107 +1,130 @@
-/* src/components/Bio/Bio.css — landing page: SIGNAL DARK.
-   - One dark panel: the whole section shares the navbar/footer black
-     (#111111), so the landing reads as a single continuous dark page
-     with no seam at the top or bottom.
-   - 4x3 GRID below the navbar:
-       1  2  3  4
-       5  6  7  8
-       9 10 11 12
-     Text in 1, 2 (top-left, light tones: white title,
-     muted-grey subtitle, light-blue eyebrow). Stack chips in 3, 4
-     (top-right, above the portrait). Cutout in 7, 8, 11, 12
-     (right, lower two rows; portrait-cutout.png — him and the
-     splotches, no background), top-aligned so its top edge shares
-     a plane with the text's bottom edge. Bars in 9, 10,
-     11 (bottom row, left three cells), passing behind the cutout's
-     bottom-left. Both text and image are sized to fit one viewport
-     with no cropping.
-   - SPLOTCH BARS: blue/red glitch bars (.bio__bars, inline SVG in
-     Bio.tsx, a grid item in boxes 9-11) escape from under the
-     portrait and run leftward along the bottom of the page — longest
-     near the photo, tapering toward the left edge. They sit behind
-     the portrait (z-index 0) and never cross the text.
-   - DYNAMIC SCALING: title, subtitle, intro, gaps and padding all use
-     clamp(), so the page scales smoothly with the viewport instead of
-     jumping at breakpoints.
-   - The portrait is an <img> with object-fit: contain, anchored
-     bottom-right, so the whole face, hair and shoulders are always
-     fully visible: never cropped, never stretched, never warped.
-   - The section grows to fill the viewport (flex: 1 on .page) and the
-     page scrolls normally when content exceeds the viewport — there is
-     no fixed height or overflow lock on this route. */
+/* src/components/Bio/Bio.css — landing page: EDITORIAL (03).
+   - Warm paper #f6f1e7, espresso ink #211d16, shirt red #a02c1e,
+     soft brown #4c463a. The quietest branch: a person first, a
+     tech demo second.
+   - MAGAZINE LAYOUT: an intro column on the left (mono kick with
+     his name, a Newsreader serif headline, a short red rule, the
+     bio in soft brown, the stack chips, and a quiet résumé link),
+     the transparent glitch cutout anchored bottom-right with a
+     single deep-red block behind its lower part, and a numbered
+     link index along the bottom.
+   - The circuit art survives only as faint traces (opacity 0.16)
+     and one concentric red ring, top-right of the portrait column
+     — in flow above the portrait, so it can never overlap it.
+   - The red block sits behind the portrait's lower part: his shirt
+     merges into the block by design, while the face stays against
+     warm paper. The portrait is an <img> with object-fit: contain,
+     so the whole face, hair and shoulders are always fully visible:
+     never cropped, never stretched, never warped.
+   - Content stops at 1200px and centres; the warm paper stays
+     full-bleed. The section grows to fill the viewport (flex: 1 on
+     .page) and the page scrolls normally when content exceeds the
+     viewport — no fixed height or overflow lock on this route. */
 
 .bio-page {
   position: relative;
-  display: grid;
-  grid-template-rows: 1fr;
   flex: 1;
   min-height: 560px;
   padding-block: 0;
   overflow: hidden;
-  background: #111111;
-  color: #f5f5f2;
+  background: #f6f1e7;
+  color: #211d16;
 }
 
-/* Capped content: the dark background stays full-bleed, but the grid
-   itself stops at 1200px and centres — the leftover space becomes
-   the margin on wide screens. The grid is 4 columns x 3 rows:
-   text 1/2, stack 3/4, portrait 7/8/11/12, bars 9/10/11.
-   Rows are auto / auto / 1fr: row 1 sizes to the text, so the text's
-   bottom edge IS the top of the portrait's row — the portrait starts
-   exactly where the text ends, on the same horizontal plane. */
 .bio__inner {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: auto auto 1fr;
+  position: relative;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   max-width: 1200px;
+  min-height: calc(100svh - 64px);
   margin-inline: auto;
+  padding-inline: clamp(1.5rem, 4vw, 3rem);
 }
 
-/* Boxes 1, 2: text, top-left, top-aligned. The text sits in row 1
-   only — row 1 sizes exactly to it, so the text's bottom edge is the
-   boundary the portrait starts on (see .bio__inner). */
+/* Faint circuit traces across the paper, behind everything. */
+.bio__traces {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.bio__main {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: clamp(2rem, 4vw, 4rem);
+  padding-top: clamp(2rem, 5vh, 3.5rem);
+}
+
+/* Left: magazine intro column. */
 .bio__text {
-  grid-column: 1 / 3;
-  grid-row: 1;
-  position: relative;
-  z-index: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  gap: clamp(0.75rem, 1.5vh, 1rem);
-  max-width: clamp(28rem, 36vw, 40rem);
-  /* Bottom padding is 0: row 1 sizes exactly to the text, so the
-     portrait starts on the text's bottom edge — any bottom padding
-     here would push the portrait down by that much. */
-  padding: clamp(1.5rem, 3vh, 2rem) clamp(1.5rem, 2.5vw, 2rem) 0
-    clamp(1.5rem, 4vw, 3rem);
+  align-items: flex-start;
+  gap: clamp(0.9rem, 1.8vh, 1.25rem);
+  max-width: 34rem;
+  padding-bottom: clamp(1.5rem, 3vh, 2.5rem);
 }
 
-/* Boxes 3, 4: tech stack chips, top-right, above the portrait.
-   Top-aligned like the text, so the two blocks start on the same
-   line. Row 1 sizes to the text, which is taller, so the chips
-   never move the portrait. */
+.bio__kick {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: clamp(0.8rem, 0.7rem + 0.3vw, 0.9rem);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #a02c1e;
+}
+
+.bio__title {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: clamp(2.1rem, 1.6rem + 1.6vw, 3rem);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: #211d16;
+}
+
+.bio__rule {
+  display: block;
+  width: 3.5rem;
+  height: 3px;
+  background: #a02c1e;
+}
+
+.bio__subtitle {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: clamp(0.8rem, 0.75rem + 0.2vw, 0.9rem);
+  letter-spacing: 0.06em;
+  color: #4c463a;
+}
+
+.bio__intro {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: clamp(1.02rem, 0.95rem + 0.25vw, 1.15rem);
+  line-height: 1.6;
+  color: #4c463a;
+}
+
 .bio__stack {
-  grid-column: 3 / 5;
-  grid-row: 1;
-  position: relative;
-  z-index: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  gap: clamp(0.6rem, 1.2vh, 0.75rem);
-  min-width: 0;
-  padding: clamp(1.5rem, 3vh, 2rem) clamp(1.5rem, 4vw, 3rem) 0
-    clamp(1.5rem, 2.5vw, 2rem);
+  gap: 0.6rem;
+  margin-top: 0.25rem;
 }
 
 .bio__stack-label {
-  font-size: clamp(0.8rem, 0.7rem + 0.3vw, 0.9rem);
-  font-weight: var(--weight-bold);
-  letter-spacing: 0.12em;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-accent-light);
+  color: #a02c1e;
 }
 
 .bio__stack-chips {
@@ -115,191 +138,167 @@
 
 .bio__stack-chips li {
   padding: 0.35rem 0.8rem;
-  border: 1px solid #4a4f55;
+  border: 1px solid #211d16;
   border-radius: 999px;
-  font-size: clamp(0.8rem, 0.75rem + 0.2vw, 0.9rem);
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.8rem;
   line-height: 1.4;
-  color: #e8e6e1;
+  color: #211d16;
   background: transparent;
   white-space: nowrap;
 }
 
-/* Boxes 7, 8, 11, 12: transparent, so the dark page shows through
-   the cutout. Top-aligned in its rows, so the portrait starts exactly
-   where the text ends — the text's bottom edge and the portrait's top
-   edge share one horizontal plane. */
+.bio__resume {
+  margin-top: 0.25rem;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid #a02c1e;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #211d16;
+  text-decoration: none;
+}
+
+.bio__resume:hover {
+  color: #a02c1e;
+}
+
+/* Right: portrait column — ring on top, portrait at the bottom,
+   red block behind the portrait's lower part. */
 .bio__portrait {
-  grid-column: 3 / 5;
-  grid-row: 2 / 4;
   position: relative;
-  z-index: 1;
-  min-width: 0;
-  min-height: 0;
-  height: 100%;
-  background: transparent;
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  min-width: 0;
+  min-height: clamp(480px, 58svh, 620px);
+}
+
+.bio__ring {
+  flex: none;
+  width: clamp(120px, 14vw, 170px);
+  height: auto;
+  margin-top: clamp(0.5rem, 2vh, 1.5rem);
+}
+
+.bio__redblock {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  width: min(560px, 100%);
+  height: 180px;
+  background: #a02c1e;
 }
 
 .bio__portrait-img {
   position: relative;
   z-index: 1;
   display: block;
-  /* Wide enough to reach down into the bars strip: the portrait's
-     top is locked to the text's bottom, so width is what sets its
-     height — at 720px it overlaps the bars, and the lines read as
-     coming from behind the image instead of floating below it.
-     The 135% cap lets it spill left past its column (below the
-     text, so nothing collides) on narrower screens. */
-  width: min(720px, 135%);
-  height: 100%;
-  max-height: 56svh;
+  width: min(100%, 600px);
+  max-height: 62svh;
   object-fit: contain;
-  object-position: right top;
+  object-position: right bottom;
   margin-left: auto;
 }
 
-/* Boxes 9, 10, 11: bars along the bottom row, left three cells,
-   sitting at the bottom of the row and passing behind the
-   portrait's bottom-left (box 11). */
-.bio__bars {
-  grid-column: 1 / 4;
-  grid-row: 3;
-  align-self: end;
-  width: 100%;
-  height: 140px;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.85;
-}
-
-.bio__eyebrow {
-  font-size: clamp(0.8rem, 0.7rem + 0.3vw, 0.9rem);
-  font-weight: var(--weight-bold);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-accent-light);
-}
-
-.bio__title {
-  font-size: clamp(1.35rem, 0.9rem + 0.9vw, 1.75rem);
-  line-height: 1.05;
-  font-weight: var(--weight-bold);
-  color: #ffffff;
-}
-
-.bio__subtitle {
-  font-size: clamp(0.9rem, 0.85rem + 0.25vw, 1.05rem);
-  line-height: 1.4;
-  color: #c9c9c9;
-}
-
-.bio__intro {
-  font-size: clamp(0.85rem, 0.8rem + 0.2vw, 0.95rem);
-  line-height: 1.55;
-  color: #e8e6e1;
-}
-
-.bio__buttons {
+/* Bottom: numbered link index, under a hairline rule. */
+.bio__index {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-wrap: wrap;
-  gap: clamp(0.75rem, 1vw, 1rem);
-  margin-top: clamp(0.25rem, 1vh, 0.5rem);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  padding-block: 1rem 1.25rem;
+  border-top: 1px solid rgba(33, 29, 22, 0.25);
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
 }
 
-.bio__button {
+.bio__index-item {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(0.55rem, 0.45rem + 0.4vh, 0.65rem)
-    clamp(1.1rem, 0.9rem + 0.9vw, 1.35rem);
-  border-radius: var(--radius-md);
-  font-size: clamp(0.85rem, 0.8rem + 0.15vw, 0.95rem);
-  font-weight: var(--weight-medium);
-  transition: var(--transition-fast);
+  align-items: baseline;
+  gap: 0.5rem;
+  color: #211d16;
+  text-decoration: none;
 }
 
-.bio__button--primary {
-  background: var(--color-accent);
-  color: #ffffff;
+.bio__index-item span {
+  font-weight: 500;
+  color: #a02c1e;
 }
 
-.bio__button--primary:hover {
-  opacity: 0.9;
+.bio__index-item:hover {
+  color: #a02c1e;
 }
 
-.bio__button--secondary {
-  background: transparent;
-  color: #f5f5f2;
-  border: 1px solid #4a4f55;
-}
-
-.bio__button--secondary:hover {
-  border-color: var(--color-accent-light);
-  color: var(--color-accent-light);
-}
-
-/* Short desktop viewports: tighten the text so it still fits
-   comfortably. The fluid sizes already shrink, this just closes
+/* Short desktop viewports: tighten the column so it still fits
+   comfortably. The fluid sizes already shrink; this just closes
    the gaps a little more. */
 @media (max-height: 720px) {
   .bio__text {
-    gap: clamp(0.5rem, 1vh, 0.75rem);
-    padding-block: clamp(1rem, 2vh, 1.5rem) 0;
+    gap: clamp(0.6rem, 1.2vh, 0.9rem);
+    padding-bottom: 1.25rem;
   }
 
-  .bio__intro {
-    font-size: 0.9rem;
+  .bio__portrait {
+    min-height: 440px;
+  }
+
+  .bio__title {
+    font-size: clamp(1.8rem, 1.5rem + 1.2vw, 2.4rem);
   }
 }
 
-/* Narrow screens: one column — text on top, portrait below at ~38svh,
-   bars strip below the portrait. The portrait still uses object-fit:
-   contain, so his face is never cropped. The fixed-height rule is
-   relaxed here, so the page may scroll gracefully if the text needs
-   more room. */
+/* Narrow screens: one column — intro on top, portrait below at
+   ~38svh with the red block behind its lower part, index at the
+   bottom. The ring is hidden (it would crowd the text); the
+   portrait still uses object-fit: contain, so his face is never
+   cropped. The page scrolls gracefully if the text needs room. */
 @media (max-width: 768px) {
   .bio-page {
-    height: auto;
-    min-height: calc(100svh - 64px);
     overflow: visible;
   }
 
   .bio__inner {
+    min-height: calc(100svh - 64px);
+  }
+
+  .bio__main {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto minmax(260px, 38svh) auto;
-  }
-
-  .bio__stack {
-    grid-column: 1;
-    grid-row: 2;
-    padding: clamp(1.25rem, 4vw, 1.5rem) clamp(1.25rem, 4vw, 1.5rem) 0;
-  }
-
-  .bio__portrait {
-    grid-column: 1;
-    grid-row: 3;
-    height: 100%;
-  }
-
-  .bio__portrait-img {
-    width: min(100%, 600px);
-    object-position: center bottom;
-    margin-inline: auto;
-  }
-
-  .bio__bars {
-    grid-column: 1;
-    grid-row: 4;
-    height: 90px;
+    gap: 1.5rem;
+    padding-top: 1.5rem;
   }
 
   .bio__text {
-    grid-column: 1;
-    grid-row: 1;
     max-width: none;
-    padding: clamp(1.25rem, 4vw, 1.5rem) clamp(1.25rem, 4vw, 1.5rem) 0;
-    justify-content: flex-start;
+    padding-bottom: 0;
+  }
+
+  .bio__portrait {
+    align-items: center;
+    min-height: 0;
+  }
+
+  .bio__ring {
+    display: none;
+  }
+
+  .bio__redblock {
+    right: 50%;
+    width: min(420px, 100%);
+    height: 140px;
+    transform: translateX(50%);
+  }
+
+  .bio__portrait-img {
+    width: min(100%, 480px);
+    max-height: 38svh;
+    object-position: center bottom;
+    margin-inline: auto;
   }
 }
