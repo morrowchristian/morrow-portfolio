@@ -59,13 +59,18 @@
     clamp(1.5rem, 3vh, 2rem) clamp(1.5rem, 4vw, 3rem);
 }
 
-/* Bottom zone: transparent, so the dark page shows through the cutout. */
+/* Bottom zone: transparent, so the dark page shows through the cutout.
+   Flex-pinned to the bottom-right, so the portrait sits right on the
+   bars instead of floating above them with a gap. */
 .bio__portrait {
   position: relative;
   min-width: 0;
   min-height: 0;
   height: 100%;
   background: transparent;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
 }
 
 .bio__portrait-img {
