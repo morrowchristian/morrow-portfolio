@@ -5,15 +5,17 @@
    - MAGAZINE LAYOUT: an intro column on the left (mono kick with
      his name, a Newsreader serif headline, a short red rule, the
      bio in soft brown, the stack chips, and a quiet résumé link),
-     the transparent glitch cutout anchored bottom-right with a
+     the transparent paint cutout anchored bottom-right with a
      single deep-red block behind its lower part, and a numbered
      link index along the bottom.
    - The circuit art survives only as faint traces (opacity 0.16)
      and one concentric red ring, top-right of the portrait column
      — in flow above the portrait, so it can never overlap it.
-   - The red block sits behind the portrait's lower part: his shirt
-     merges into the block by design, while the face stays against
-     warm paper. The portrait is an <img> with object-fit: contain,
+   - The red block sits behind the portrait's lower part and
+     tracks the figure exactly: the portrait sits in a frame that
+     shrink-wraps to the image, and the block is 100% of the
+     frame, so it always matches the figure whatever its aspect
+     ratio. The portrait is an <img> with object-fit: contain,
      so the whole face, hair and shoulders are always fully visible:
      never cropped, never stretched, never warped.
    - Content stops at 1200px and centres; the warm paper stays
@@ -160,6 +162,14 @@
   min-height: clamp(480px, 58svh, 620px);
 }
 
+/* The frame shrink-wraps to the portrait image (a flex item with
+   width auto), so the red block inside it always matches the
+   figure's rendered width. */
+.bio__portrait-frame {
+  position: relative;
+  line-height: 0;
+}
+
 .bio__ring {
   flex: none;
   width: clamp(120px, 14vw, 170px);
@@ -169,10 +179,10 @@
 
 .bio__redblock {
   position: absolute;
-  right: 0;
+  left: 0;
   bottom: 0;
   z-index: 0;
-  width: min(560px, 100%);
+  width: 100%;
   height: 180px;
   background: #a02c1e;
 }
@@ -181,11 +191,11 @@
   position: relative;
   z-index: 1;
   display: block;
-  width: min(100%, 600px);
+  width: auto;
+  max-width: 100%;
   max-height: 62svh;
   object-fit: contain;
   object-position: right bottom;
-  margin-left: auto;
 }
 
 /* Bottom: numbered link index, under a hairline rule. */
@@ -238,7 +248,7 @@
 }
 
 /* Narrow screens: one column — intro on top, portrait below at
-   ~38svh with the red block behind its lower part, index at the
+   ~55svh with the red block behind its lower part, index at the
    bottom. The ring is hidden (it would crowd the text); the
    portrait still uses object-fit: contain, so his face is never
    cropped. The page scrolls gracefully if the text needs room. */
@@ -272,16 +282,13 @@
   }
 
   .bio__redblock {
-    right: 50%;
-    width: min(420px, 100%);
     height: 140px;
-    transform: translateX(50%);
   }
 
   .bio__portrait-img {
-    width: min(100%, 480px);
-    max-height: 38svh;
+    width: auto;
+    max-width: 100%;
+    max-height: 55svh;
     object-position: center bottom;
-    margin-inline: auto;
   }
 }

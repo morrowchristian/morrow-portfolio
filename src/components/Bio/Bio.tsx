@@ -3,7 +3,7 @@
 // deep-red block behind the portrait, taken from his shirt.
 // The circuit art survives only as faint traces and one red ring.
 // Magazine layout: an intro column on the left, the transparent
-// glitch cutout anchored bottom-right with the red block behind
+// paint cutout anchored bottom-right with the red block behind
 // its lower part, and a numbered link index along the bottom —
 // 01 About (this page), 02 Portfolio, 03 Resume, 04 Services.
 // GitHub, LinkedIn and Contact are not repeated here; they already
@@ -13,12 +13,13 @@
 // Type: Newsreader serif for the headline, IBM Plex Mono for the
 // furniture (kick, labels, index). Palette: #f6f1e7 warm paper,
 // #211d16 espresso ink, #a02c1e shirt red, #4c463a soft brown.
-// The portrait is portrait-cutout.png — the glitch portrait with
-// the white background removed — shown with object-fit: contain,
-// so his face, hair and shoulders are always fully visible, never
-// cropped, stretched or warped. The red block sits behind the
-// portrait's lower part (his shirt merges into the block, by
-// design); the face stays against warm paper.
+// The portrait is portrait-cutout.png — the paint portrait
+// (front-facing, white shirt, paint strokes) with the background
+// removed — shown with object-fit: contain, so his face, hair
+// and shoulders are always fully visible, never cropped,
+// stretched or warped. The red block sits behind the portrait's
+// lower part and tracks the figure exactly (see the frame below);
+// the face stays against warm paper.
 import "./Bio.css";
 import { Link } from "react-router-dom";
 import { useInViewAnimation } from "../../hooks/useInViewAnimation";
@@ -130,13 +131,18 @@ export const Bio: React.FC = () => {
                 opacity="0.55"
               />
             </svg>
-            <span className="bio__redblock" aria-hidden="true" />
-            <img
-              src="/portrait-cutout.png"
-              alt=""
-              className="bio__portrait-img"
-              fetchPriority="high"
-            />
+            {/* The frame shrink-wraps to the portrait image, so the
+                red block (100% of the frame) always matches the
+                figure exactly, whatever its aspect ratio. */}
+            <div className="bio__portrait-frame">
+              <span className="bio__redblock" aria-hidden="true" />
+              <img
+                src="/portrait-cutout.png"
+                alt=""
+                className="bio__portrait-img"
+                fetchPriority="high"
+              />
+            </div>
           </div>
         </div>
 
