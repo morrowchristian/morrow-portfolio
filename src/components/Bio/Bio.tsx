@@ -10,6 +10,12 @@
 // are not repeated here; they already live in the navbar. The
 // résumé download lives in the navbar too (next to Connect), not
 // on this page.
+// The title is kept small (2.5rem max) and the page is sized so
+// the Bio + footer fit one viewport: the inner min-height subtracts
+// the navbar (56px) and the footer (~60px), so the portrait is
+// always fully in frame. A single circuit line with a square on
+// each end sits between the intro and the stack — it replaces the
+// L-shaped trace that used to sit behind the stack.
 // Type: Newsreader serif for the headline, IBM Plex Mono for the
 // furniture (kick, labels, index). Palette: #f6f1e7 warm paper,
 // #211d16 espresso ink, #a02c1e shirt red, #4c463a soft brown.
@@ -41,14 +47,11 @@ export const Bio: React.FC = () => {
           <g stroke="#211d16" strokeWidth="1" fill="none" opacity="0.16">
             <polyline points="700,80 900,80 900,160 1040,160" />
             <polyline points="980,300 1120,300 1120,380" />
-            <polyline points="60,700 300,700 300,640" />
           </g>
           <g fill="#211d16" opacity="0.16">
             <rect x="696" y="76" width="8" height="8" />
             <rect x="1036" y="156" width="8" height="8" />
             <rect x="1116" y="376" width="8" height="8" />
-            <rect x="56" y="696" width="8" height="8" />
-            <rect x="296" y="636" width="8" height="8" />
           </g>
           <rect
             x="896"
@@ -81,6 +84,14 @@ export const Bio: React.FC = () => {
               team-lead experience to every project: calm problem-solving under
               pressure, clear communication, and code that stays maintainable.
             </p>
+            {/* A single circuit line with a square on each end, in
+                flow between the bio and the stack — it replaces the
+                L-shaped trace that used to sit behind the stack. */}
+            <div className="bio__divider" aria-hidden="true">
+              <span className="bio__divider-square" />
+              <span className="bio__divider-line" />
+              <span className="bio__divider-square" />
+            </div>
             <div className="bio__stack" aria-label="Tech stack">
               <p className="bio__stack-label">Stack</p>
               <ul className="bio__stack-chips">

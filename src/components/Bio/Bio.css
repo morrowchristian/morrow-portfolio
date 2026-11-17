@@ -8,6 +8,13 @@
      and the transparent paint cutout anchored bottom-right with a
      single deep-red block behind its lower part. The numbered
      link index now lives in the site footer, on every page.
+   - The title is kept small (2.5rem max) and the inner min-height
+     subtracts the navbar (56px) and the footer (~60px), so the
+     Bio + footer fit one viewport and the portrait is always
+     fully in frame (on short viewports the portrait caps at
+     50svh). A single circuit line with a square on each end sits
+     between the intro and the stack, replacing the L-shaped trace
+     that used to sit behind the stack.
    - The circuit art survives only as faint traces (opacity 0.16)
      and one concentric red ring, top-right of the portrait column
      — in flow above the portrait, so it can never overlap it.
@@ -39,7 +46,8 @@
   flex-direction: column;
   width: 100%;
   max-width: 1200px;
-  min-height: calc(100svh - 56px);
+  /* 56px navbar + ~60px footer, so the Bio + footer fit one viewport. */
+  min-height: calc(100svh - 56px - 60px);
   margin-inline: auto;
   padding-inline: clamp(1.5rem, 4vw, 3rem);
 }
@@ -85,7 +93,7 @@
 
 .bio__title {
   font-family: "Newsreader", Georgia, "Times New Roman", serif;
-  font-size: clamp(2.1rem, 1.6rem + 1.6vw, 3rem);
+  font-size: clamp(1.8rem, 1.4rem + 1.2vw, 2.5rem);
   font-weight: 500;
   line-height: 1.08;
   letter-spacing: -0.01em;
@@ -111,6 +119,29 @@
   font-size: clamp(1.02rem, 0.95rem + 0.25vw, 1.15rem);
   line-height: 1.6;
   color: #4c463a;
+}
+
+/* A single circuit line with a square on each end, in flow
+   between the intro and the stack — it replaces the L-shaped
+   trace that used to sit behind the stack. */
+.bio__divider {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.bio__divider-square {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  background: #211d16;
+}
+
+.bio__divider-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(33, 29, 22, 0.25);
 }
 
 .bio__stack {
@@ -211,8 +242,12 @@
     min-height: 440px;
   }
 
+  .bio__portrait-img {
+    max-height: 50svh;
+  }
+
   .bio__title {
-    font-size: clamp(1.8rem, 1.5rem + 1.2vw, 2.4rem);
+    font-size: clamp(1.6rem, 1.3rem + 1vw, 2.1rem);
   }
 }
 
