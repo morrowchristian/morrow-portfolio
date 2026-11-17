@@ -43,20 +43,25 @@
 /* Capped content: the dark background stays full-bleed, but the grid
    itself stops at 1200px and centres — the leftover space becomes
    the margin on wide screens. The grid is 4 columns x 3 rows:
-   text 1/2/5/6, portrait 7/8/11/12, bars 9/10/11. */
+   text 1/2/5/6, portrait 7/8/11/12, bars 9/10/11.
+   Rows are auto / auto / 1fr: row 1 sizes to the text, so the text's
+   bottom edge IS the top of the portrait's row — the portrait starts
+   exactly where the text ends, on the same horizontal plane. */
 .bio__inner {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: auto auto 1fr;
   width: 100%;
   max-width: 1200px;
   margin-inline: auto;
 }
 
-/* Boxes 1, 2, 5, 6: text, top-left, top-aligned. */
+/* Boxes 1, 2: text, top-left, top-aligned. The text sits in row 1
+   only — row 1 sizes exactly to it, so the text's bottom edge is the
+   boundary the portrait starts on (see .bio__inner). */
 .bio__text {
   grid-column: 1 / 3;
-  grid-row: 1 / 3;
+  grid-row: 1;
   position: relative;
   z-index: 1;
   display: flex;
@@ -69,8 +74,9 @@
 }
 
 /* Boxes 7, 8, 11, 12: transparent, so the dark page shows through
-   the cutout. Flex-pinned to the bottom-right, so the portrait sits
-   right on the bars instead of floating above them with a gap. */
+   the cutout. Top-aligned in its rows, so the portrait starts exactly
+   where the text ends — the text's bottom edge and the portrait's top
+   edge share one horizontal plane. */
 .bio__portrait {
   grid-column: 3 / 5;
   grid-row: 2 / 4;
@@ -81,7 +87,7 @@
   height: 100%;
   background: transparent;
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: flex-end;
 }
 
@@ -89,11 +95,11 @@
   position: relative;
   z-index: 1;
   display: block;
-  width: min(100%, 560px);
+  width: min(100%, 600px);
   height: 100%;
   max-height: 56svh;
   object-fit: contain;
-  object-position: right bottom;
+  object-position: right top;
   margin-left: auto;
 }
 
