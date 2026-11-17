@@ -44,7 +44,7 @@ function AppShell() {
           <Route path="/" element={<Bio />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/resume" element={<Resume />} />
-          <Route path="/services" element={<Services />} />
+          <Route path="/services" element={<Services onConnectClick={() => setIsModalOpen(true)} />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

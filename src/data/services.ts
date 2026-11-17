@@ -7,10 +7,9 @@ export const services = [
     description:
       "End‑to‑end development of modern, responsive, and scalable applications using React, Django, and TypeScript.",
     icon: FaLaptopCode,
-    accent: "blue",
     cta: {
       label: "View full-stack work",
-      href: "#portfolio",
+      to: "/portfolio",
     },
   },
   {
@@ -18,10 +17,9 @@ export const services = [
     description:
       "Pixel‑perfect interfaces with clean architecture, reusable components, and premium user experience.",
     icon: FaCode,
-    accent: "purple",
     cta: {
       label: "See UI/UX projects",
-      href: "#portfolio",
+      to: "/portfolio",
     },
   },
   {
@@ -29,10 +27,9 @@ export const services = [
     description:
       "Custom tools, scripts, and process automation that reduce manual work and improve team efficiency.",
     icon: FaTools,
-    accent: "green",
     cta: {
       label: "Discuss automation ideas",
-      href: "#contact",
+      to: "contact",
     },
   },
 ] as const;
