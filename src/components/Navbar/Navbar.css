@@ -37,6 +37,18 @@
   white-space: nowrap;
 }
 
+.navbar__brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.navbar__brand-subtitle {
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: var(--color-nav-text-muted);
+}
+
 .navbar__monogram {
   display: inline-flex;
   align-items: center;

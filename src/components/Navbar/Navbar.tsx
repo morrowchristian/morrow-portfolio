@@ -23,7 +23,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onConnectClick }) => {
       <div className="navbar__inner">
         <Link to="/" className="navbar__brand" aria-label="Christian Morrow — home">
           <span className="navbar__monogram">CM</span>
-          <span className="navbar__brand-name">Christian Morrow</span>
+          <span className="navbar__brand-text">
+            <span className="navbar__brand-name">Christian Morrow</span>
+            <span className="navbar__brand-subtitle">Full-Stack Software Engineer</span>
+          </span>
         </Link>
 
         <nav className="navbar__nav">
