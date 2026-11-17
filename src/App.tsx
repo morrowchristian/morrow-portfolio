@@ -40,7 +40,7 @@ function AppShell() {
 
       <main className="page">
         <Routes>
-          <Route path="/" element={<Bio onConnectClick={() => setIsModalOpen(true)} />} />
+          <Route path="/" element={<Bio />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/resume" element={<Resume />} />
           <Route path="/services" element={<Services />} />

@@ -5,8 +5,9 @@
 // Magazine layout: an intro column on the left, the transparent
 // glitch cutout anchored bottom-right with the red block behind
 // its lower part, and a numbered link index along the bottom that
-// holds the whole site menu — pages, externals and Contact. There
-// is no separate footer element.
+// holds the site pages — Portfolio, Resume, Services. GitHub,
+// LinkedIn and Contact are not repeated here; they already live
+// in the navbar. There is no separate footer element.
 // Type: Newsreader serif for the headline, IBM Plex Mono for the
 // furniture (kick, labels, index). Palette: #f6f1e7 warm paper,
 // #211d16 espresso ink, #a02c1e shirt red, #4c463a soft brown.
@@ -20,11 +21,7 @@ import "./Bio.css";
 import { Link } from "react-router-dom";
 import { useInViewAnimation } from "../../hooks/useInViewAnimation";
 
-interface BioProps {
-  onConnectClick: () => void;
-}
-
-export const Bio: React.FC<BioProps> = ({ onConnectClick }) => {
+export const Bio: React.FC = () => {
   const { ref, isVisible } = useInViewAnimation();
 
   return (
@@ -152,35 +149,12 @@ export const Bio: React.FC<BioProps> = ({ onConnectClick }) => {
           <Link to="/portfolio" className="bio__index-item">
             <span>01</span> Portfolio
           </Link>
-          <a
-            href="https://github.com/morrowchristian"
-            target="_blank"
-            rel="noreferrer"
-            className="bio__index-item"
-          >
-            <span>02</span> GitHub
-          </a>
-          <a
-            href="https://linkedin.com/in/morrowchristian"
-            target="_blank"
-            rel="noreferrer"
-            className="bio__index-item"
-          >
-            <span>03</span> LinkedIn
-          </a>
           <Link to="/resume" className="bio__index-item">
-            <span>04</span> Resume
+            <span>02</span> Resume
           </Link>
           <Link to="/services" className="bio__index-item">
-            <span>05</span> Services
+            <span>03</span> Services
           </Link>
-          <button
-            type="button"
-            className="bio__index-item bio__index-item--button"
-            onClick={onConnectClick}
-          >
-            <span>06</span> Contact
-          </button>
         </nav>
       </div>
     </section>

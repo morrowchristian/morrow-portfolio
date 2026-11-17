@@ -236,18 +236,6 @@
   color: #a02c1e;
 }
 
-/* The Contact item is a button that opens the contact modal; only
-   the button chrome is reset here — no font rules, so it keeps the
-   mono index type instead of falling back to the body font. */
-.bio__index-item--button {
-  padding: 0;
-  border-top: none;
-  border-right: none;
-  border-left: none;
-  background: none;
-  cursor: pointer;
-}
-
 /* Short desktop viewports: tighten the column so it still fits
    comfortably. The fluid sizes already shrink; this just closes
    the gaps a little more. */
