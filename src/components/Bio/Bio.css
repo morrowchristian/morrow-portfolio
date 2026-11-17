@@ -13,10 +13,6 @@
      the bottom of the page, behind the text zone — longest near the
      photo, tapering toward the left edge. They sit behind the text
      (z-index 0) and never cross it.
-   - CIRCUIT: a faint thin-line motif (.bio__circuit) in the empty
-     dark space between the text and the portrait, echoing the photo's
-     line work. It tracks the white — now dark — space left of the
-     image and is hidden where there is no gap to fill.
    - DYNAMIC SCALING: title, subtitle, intro, gaps and padding all use
      clamp(), so the page scales smoothly with the viewport instead of
      jumping at breakpoints.
@@ -84,38 +80,18 @@
   margin-left: auto;
 }
 
-/* Clean bar stack along the bottom of the page, lifted 16px off the
-   edge so it reads as placed, not clipped. Full-width within the
-   1200px column, behind the portrait. */
+/* Splotch bars running under the page: full-width strip along the
+   bottom, behind the text, anchored to the portrait's right edge. */
 .bio__bars {
   position: absolute;
   left: 50%;
-  bottom: 16px;
+  bottom: 0;
   width: min(1200px, 100%);
   height: 140px;
   transform: translateX(-50%);
   pointer-events: none;
   z-index: 0;
   opacity: 0.85;
-}
-
-/* Faint circuit lines in the dark gap left of the portrait image,
-   anchored to the seam (left edge of the portrait zone). The width is
-   exactly that gap — half of what is left after the 560px image —
-   minus a 12px safety margin, so the motif stops short of the photo
-   and never reaches the text. Pure decoration: never interactive. */
-.bio__circuit {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: min(
-    260px,
-    max(0px, calc((100% - min(100%, 560px)) / 2 - 12px))
-  );
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.28;
 }
 
 .bio__eyebrow {
@@ -184,15 +160,6 @@
   color: var(--color-accent-light);
 }
 
-/* Below ~1200px the gap left of the portrait is only a sliver, so the
-   circuit would be a meaningless clipped strip — hide it there rather
-   than show a fragment. */
-@media (max-width: 1200px) {
-  .bio__circuit {
-    display: none;
-  }
-}
-
 /* Short desktop viewports: tighten the text so it still fits
    comfortably. The fluid sizes already shrink, this just closes
    the gaps a little more. */
@@ -210,8 +177,7 @@
 /* Narrow screens: same stack — text on top, portrait below at ~38svh.
    The portrait still uses object-fit: contain, so his face is never
    cropped. The fixed-height rule is relaxed here, so the page may
-   scroll gracefully if the text needs more room. The circuit is
-   hidden on small screens so it cannot clutter the text, and the
+   scroll gracefully if the text needs more room, and the
    bars strip shrinks to fit under the text. */
 @media (max-width: 768px) {
   .bio-page {
@@ -232,10 +198,6 @@
   .bio__portrait-img {
     object-position: center bottom;
     margin-inline: auto;
-  }
-
-  .bio__circuit {
-    display: none;
   }
 
   .bio__bars {
