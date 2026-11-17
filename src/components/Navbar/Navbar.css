@@ -113,7 +113,7 @@
 }
 
 @media (max-width: 768px) {
-  .navbar__brand-name {
+  .navbar__brand-text {
     display: none;
   }
 
