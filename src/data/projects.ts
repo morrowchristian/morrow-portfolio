@@ -36,17 +36,17 @@ export const projects = [
     description:
       "Full-stack task tracker with a React frontend and Django REST API, JWT authentication, and protected routes.",
     image: "/project2.jpg",
-    tags: ["React", "Django", "TypeScript", "Python"],
+    tags: ["React", "Django", "Python", "JavaScript"],
     featured: true,
     repoLink: "https://github.com/morrowchristian/personal-tracker",
     modal: {
       longDescription:
-        "A full-stack React + Django REST API app with JWT authentication and protected routes. Add a live demo or screenshots before leading with it in applications.",
+        "A full-stack React + Django REST API task tracker with JWT authentication and protected routes. Create, edit, complete, and delete tasks with due dates and priorities — each user only sees their own tasks.",
       images: ["/project2.jpg"],
       highlights: [
-        "React + Django REST API",
+        "Task CRUD with due dates and priorities",
         "JWT authentication and protected routes",
-        "Full-stack architecture",
+        "Per-user task isolation",
       ],
     },
   },
