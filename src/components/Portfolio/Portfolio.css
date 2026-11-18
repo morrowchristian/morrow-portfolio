@@ -11,10 +11,13 @@
    always visible — the detail panel flexes to fill the space and
    its body scrolls internally if the content is taller than it. */
 
-/* Portfolio Section */
+/* Portfolio Section — the container gap and section padding were
+   tightened (see below) so the page still fits one viewport after
+   the polish gave the container a real gap: the gap had been an
+   undefined token collapsing to 0, and defining it added 96px. */
 .portfolio {
   background: #f6f1e7;
-  padding-block: var(--space-32) var(--space-24);
+  padding-block: var(--space-24) var(--space-16);
   min-height: calc(100svh - 116px);
   display: flex;
   flex-direction: column;
@@ -24,7 +27,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: var(--space-24);
+  gap: var(--space-16);
   min-height: 0;
 }
 
@@ -166,7 +169,7 @@
   min-height: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-16);
+  gap: var(--space-12);
 }
 
 .portfolio__detail-count {
@@ -369,7 +372,7 @@
 .portfolio__strip-card-thumb {
   display: block;
   width: 100%;
-  height: 84px;
+  height: 72px;
   object-fit: cover;
   border-bottom: 1px solid rgba(33, 29, 22, 0.15);
 }
