@@ -85,12 +85,12 @@
 .resume__sections {
   display: flex;
   flex-direction: column;
-  gap: var(--space-48);
+  gap: var(--space-32);
 }
 
 .resume__section {
   border-top: 1px solid rgba(33, 29, 22, 0.15);
-  padding-top: var(--space-24);
+  padding-top: var(--space-16);
 }
 
 .resume__section-title {
@@ -205,7 +205,7 @@
 /* Skills — mono pill chips by category, the same as the Bio's
    stack chips and the Portfolio's tags. */
 .resume__skill-group {
-  margin-bottom: var(--space-20);
+  margin-bottom: var(--space-24);
 }
 
 .resume__skill-group:last-child {
@@ -217,7 +217,7 @@
   font-size: 1.1rem;
   font-weight: 500;
   color: #211d16;
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-12);
 }
 
 .resume__chips {
@@ -240,7 +240,7 @@
 
 /* Education entries reuse the role/company type. */
 .resume__education {
-  margin-bottom: var(--space-20);
+  margin-bottom: var(--space-24);
 }
 
 .resume__education:last-child {
