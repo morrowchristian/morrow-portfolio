@@ -38,6 +38,11 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
     e.preventDefault();
     setStatus("loading");
 
+    // Give the request 20s before treating a hung backend as a
+    // failure (FormSubmit can be slow on the first submission).
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), 20000);
+
     try {
       const response = await fetch(FORMSUBMIT_URL, {
         method: "POST",
@@ -57,14 +62,25 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
           _template: "table",
           _captcha: "false",
         }),
+        signal: controller.signal,
       });
+      window.clearTimeout(timeoutId);
 
       const data = await response.json().catch(() => ({}));
 
       // FormSubmit returns success as the STRING "true" /
       // "false" — a plain truthiness check would treat the
       // string "false" as success, so compare exactly.
-      if (data && data.success === "true") {
+      //
+      // The one "false" that still counts as sent is the
+      // first-submission activation notice: FormSubmit queues
+      // the message and emails the owner an "Activate Form"
+      // link, and the message is delivered once that link is
+      // clicked. So an activation reply is a success for the
+      // visitor — only any other failure shows the error.
+      const message = typeof data?.message === "string" ? data.message : "";
+      const isActivation = message.toLowerCase().includes("activation");
+      if ((data && data.success === "true") || isActivation) {
         setStatus("success");
         setForm({ name: "", email: "", subject: "", message: "" });
 
@@ -76,6 +92,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
         setStatus("error");
       }
     } catch {
+      window.clearTimeout(timeoutId);
       setStatus("error");
     }
   };
