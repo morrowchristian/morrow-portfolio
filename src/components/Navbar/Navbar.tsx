@@ -18,7 +18,7 @@ const NAV_ITEMS = [
   { label: "Contact", to: "/contact" },
 ];
 
-const MENU_BREAKPOINT = 1200;
+const MENU_BREAKPOINT = 768;
 
 export const Navbar: React.FC = () => {
   const isScrolled = useScrollOffset(24);
