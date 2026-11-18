@@ -14,20 +14,20 @@ export const projects = [
   {
     title: "North Georgia Awning Website",
     description:
-      "A modern, responsive marketing website built for a local awning company, featuring clean UI, service pages, and a mobile-first layout.",
-    image: "/project1.jpg",
+      "A responsive marketing website for a local awning company, with an interactive quote calculator and a mobile-first layout.",
+    image: "/north-georgia-awning.png",
     tags: ["Astro", "Tailwind CSS", "TypeScript"],
     featured: true,
     demoLink: "https://north-georgia-awning.netlify.app",
     repoLink: "https://github.com/morrowchristian/north-georgia-awning-website",
     modal: {
       longDescription:
-        "A full redesign and rebuild of a small business website with a focus on clarity, accessibility, and conversion-driven UI. Includes service listings, gallery sections, and responsive layouts.",
-      images: ["/project1.jpg"],
+        "A marketing website built for North Georgia Awning LLC. Includes a responsive homepage and an interactive quote page with a price calculator (per-sq-ft pricing plus motor, lights, and sensor add-ons).",
+      images: ["/north-georgia-awning.png"],
       highlights: [
         "Responsive marketing layout",
-        "Service-driven content structure",
-        "Clean, accessible UI",
+        "Interactive quote calculator",
+        "Built for a real client",
       ],
     },
   },
@@ -53,18 +53,18 @@ export const projects = [
   {
     title: "Hiawatha City Council / Hiawatha Brown 2026",
     description:
-      "TypeScript civic and campaign websites for Cleveland, TN, including the campaign site, brand identity, and donation flow.",
-    image: "/project1.jpg",
+      "The campaign website for Hiawatha Brown for Cleveland, TN City Council 2026 — built as Campaign Manager & Digital Strategist. The campaign defeated the incumbent.",
+    image: "/hiawatha-banner.jpg",
     tags: ["TypeScript", "React", "Next.js", "Tailwind CSS"],
     featured: false,
     repoLink: "https://github.com/morrowchristian/hiawatha-brown-2026",
     modal: {
       longDescription:
-        "Civic and campaign websites built as Campaign Manager & Digital Strategist for Hiawatha Brown for City Council, 2026.",
-      images: ["/project1.jpg"],
+        "The campaign website for Hiawatha Brown for City Council, 2026, built as Campaign Manager & Digital Strategist. A single-page site with the candidate's bio, platform, district map, and contact — and the campaign won, defeating the incumbent.",
+      images: ["/hiawatha-banner.jpg"],
       highlights: [
-        "Campaign website and donation flow",
-        "Civic / community project",
+        "Campaign website — bio, platform, district map",
+        "Campaign defeated the incumbent",
         "Built with Next.js, React & TypeScript",
       ],
     },
@@ -91,18 +91,18 @@ export const projects = [
   {
     title: "Event Dashboard",
     description:
-      "A dashboard interface for managing events, attendees, and scheduling with a clean, data-driven layout.",
-    image: "/project1.jpg",
+      "A dashboard interface for managing events and tasks with a clean, data-driven layout.",
+    image: "/eventflow-dashboard.png",
     tags: ["JavaScript", "HTML", "CSS", "Playwright"],
     featured: true,
     repoLink: "https://github.com/morrowchristian/event-dashboard",
     modal: {
       longDescription:
         "A dashboard application designed to manage event data with clarity and efficiency. Includes tables, filters, and responsive layouts. Playwright tests exist; the repo README says they need updating, so no coverage percentage is claimed.",
-      images: ["/project1.jpg"],
+      images: ["/eventflow-dashboard.png"],
       highlights: [
         "Dashboard UI with clean data layout",
-        "Event and attendee management",
+        "Event and task management",
         "Responsive and modular components",
       ],
     },
@@ -111,14 +111,14 @@ export const projects = [
     title: "Timespan Calculator",
     description:
       "A Chrome extension for calculating time differences and adding minutes to times, with smart time parsing and a clean UI.",
-    image: "/project2.jpg",
+    image: "/timespan-card.png",
     tags: ["JavaScript", "HTML", "CSS", "Chrome Extension"],
     featured: false,
     repoLink: "https://github.com/morrowchristian/timespan-calculator",
     modal: {
       longDescription:
         "A Chrome extension that calculates minutes between two times and adds minutes to a start time, with smart parsing of formats like 9a, 930a, and 9:30 AM. Built with vanilla JavaScript and the Chrome Extension API.",
-      images: ["/project2.jpg"],
+      images: ["/timespan-card.png"],
       highlights: [
         "Smart time parsing",
         "Add-minutes calculation",
