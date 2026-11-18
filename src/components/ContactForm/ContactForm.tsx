@@ -1,6 +1,16 @@
 // src/components/ContactForm/ContactForm.tsx
+// Sends the message for real: the form POSTs to FormSubmit's
+// AJAX endpoint, which emails the submission to
+// morrowchristian@icloud.com. No backend, no signup, no API
+// key — the first submission triggers a one-time activation
+// email to that address (click "Activate Form" once, and every
+// submission after that lands in the inbox). The old mailto:
+// flow (which just opened the visitor's email client) is gone.
 import { useState } from "react";
 import "./ContactForm.css";
+
+const FORMSUBMIT_URL =
+  "https://formsubmit.co/ajax/morrowchristian@icloud.com";
 
 interface ContactFormProps {
   onSuccess?: () => void;
@@ -29,21 +39,42 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
     setStatus("loading");
 
     try {
-      // No backend exists for /api/send-email in this static site, so open the
-      // visitor's email client instead.
-      const subject = encodeURIComponent(form.subject || "Portfolio contact");
-      const body = encodeURIComponent(
-        `Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`
-      );
-      window.location.href = `mailto:morrowchristian@icloud.com?subject=${subject}&body=${body}`;
+      const response = await fetch(FORMSUBMIT_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          subject: form.subject,
+          message: form.message,
+          // FormSubmit options: a clear subject line, a table
+          // layout in the email, and no captcha challenge (it
+          // does not work over AJAX).
+          _subject: `Portfolio contact: ${form.subject || "New message"}`,
+          _template: "table",
+          _captcha: "false",
+        }),
+      });
 
-      setStatus("success");
-      setForm({ name: "", email: "", subject: "", message: "" });
+      const data = await response.json().catch(() => ({}));
 
-      setTimeout(() => {
-        onSuccess?.();
-        setStatus("idle");
-      }, 1500);
+      // FormSubmit returns success as the STRING "true" /
+      // "false" — a plain truthiness check would treat the
+      // string "false" as success, so compare exactly.
+      if (data && data.success === "true") {
+        setStatus("success");
+        setForm({ name: "", email: "", subject: "", message: "" });
+
+        setTimeout(() => {
+          onSuccess?.();
+          setStatus("idle");
+        }, 4000);
+      } else {
+        setStatus("error");
+      }
     } catch {
       setStatus("error");
     }
@@ -110,14 +141,15 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSuccess }) => {
 
       {status === "success" && (
         <p className="contact-form__success">
-          Your email app should now be open — send the message from there to
-          reach me.
+          Message sent — thanks for reaching out. I&apos;ll get back to
+          you soon.
         </p>
       )}
 
       {status === "error" && (
         <p className="contact-form__error">
-          Something went wrong. Please try again.
+          Something went wrong sending that. You can reach me directly
+          at morrowchristian@icloud.com.
         </p>
       )}
     </form>
