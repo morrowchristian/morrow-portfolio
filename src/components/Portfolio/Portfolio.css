@@ -140,13 +140,14 @@
 .portfolio__detail-media {
   position: relative;
   min-height: 0;
+  background: #ffffff;
 }
 
 .portfolio__detail-image {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .portfolio__detail-featured {
