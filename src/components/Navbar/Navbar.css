@@ -3,17 +3,16 @@
    Editorial Bio (and the other pages' light backgrounds) instead
    of the old black bar. Paper background with a hairline bottom
    rule, Newsreader serif for the brand name, IBM Plex Mono for
-   the subtitle and the menu, and a solid red Connect button.
-   Slimmer at 56px — the .page top offset in layout.css and the
-   Bio min-height calcs match it. Brand, the page menu, résumé
-   download and Connect: the GitHub and LinkedIn links live in
-   the footer now, so the menu can sit at the top without
-   crowding the bar. The menu is deliberately smaller than the
-   buttons (0.70rem, tighter tracking) and the brand subtitle
-   hides at ≤1024px, so the bar still fits at narrower widths.
-   At ≤768px the inline menu collapses into a hamburger button
-   that opens a dropdown panel with the page links (plus the
-   résumé download, which is hidden from the bar at ≤640px). */
+   the subtitle and the menu. Slimmer at 56px — the .page top
+   offset in layout.css and the Bio min-height calcs match it.
+   Brand and the page menu only: the GitHub and LinkedIn links
+   live in the footer, the résumé download lives on the Resume
+   page, and Contact is its own page, so the bar holds no
+   buttons. The menu is deliberately smaller than a button would
+   be (0.70rem, tighter tracking) and the brand subtitle hides
+   at ≤1024px, so the bar still fits at narrower widths. Below
+   1200px the inline menu collapses into a hamburger button that
+   opens a dropdown panel with the page links. */
 
 .navbar {
   position: fixed;
@@ -97,8 +96,8 @@
 }
 
 /* Page menu: mono uppercase links, the current page red with a
-   red underline. Smaller than the buttons (0.70rem, tighter
-   tracking) so the bar does not feel crowded. */
+   red underline. Smaller than the old buttons were (0.70rem,
+   tighter tracking) so the bar does not feel crowded. */
 .navbar__menu {
   display: flex;
   align-items: center;
@@ -128,58 +127,7 @@
   border-bottom-color: #a02c1e;
 }
 
-.navbar__connect-button {
-  padding: var(--space-8) var(--space-16);
-  border: 1px solid transparent;
-  border-radius: 2px;
-  background: #a02c1e;
-  color: #f6f1e7;
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
-  font-size: 0.78rem;
-  line-height: 1.2;
-  display: inline-flex;
-  align-items: center;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: var(--transition-fast);
-}
-
-.navbar__connect-button:hover {
-  background: #8c2418;
-}
-
-/* Secondary action next to Connect: an outlined résumé download,
-   same mono type and size. The transparent border on --connect
-   keeps the two buttons the same height. */
-.navbar__resume-button {
-  padding: var(--space-8) var(--space-16);
-  border: 1px solid #a02c1e;
-  border-radius: 2px;
-  background: transparent;
-  color: #a02c1e;
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
-  font-size: 0.78rem;
-  line-height: 1.2;
-  display: inline-flex;
-  align-items: center;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-decoration: none;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: var(--transition-fast);
-}
-
-.navbar__resume-button:hover {
-  background: #a02c1e;
-  color: #f6f1e7;
-}
-
-/* Hamburger: hidden on desktop, shown at ≤768px where it
+/* Hamburger: hidden on desktop, shown below 1200px where it
    replaces the inline menu. Three ink lines; when open they
    turn into an X. */
 .navbar__hamburger {
@@ -216,36 +164,15 @@
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Dropdown panel: hidden by default; at ≤768px it drops below
-   the bar when open, paper with a hairline bottom rule and a
-   soft shadow. Links stack vertically, mono uppercase, the
-   current page red. */
+/* Dropdown panel: hidden by default; below 1200px it drops
+   below the bar when open, paper with a hairline bottom rule
+   and a soft shadow. Links stack vertically, mono uppercase,
+   the current page red. */
 .navbar__dropdown {
   display: none;
 }
 
-@media (max-width: 1024px) {
-  /* The subtitle is the widest part of the brand; hiding it
-     frees ~84px so the menu and both buttons still fit. */
-  .navbar__brand-subtitle {
-    display: none;
-  }
-
-  .navbar__right {
-    gap: var(--space-12);
-  }
-}
-
-@media (max-width: 768px) {
-  .navbar__inner {
-    padding-inline: var(--space-16);
-    gap: var(--space-12);
-  }
-
-  .navbar__brand-text {
-    display: none;
-  }
-
+@media (max-width: 1200px) {
   /* The inline menu gives way to the hamburger. */
   .navbar__menu {
     display: none;
@@ -291,20 +218,27 @@
   .navbar__dropdown-link--active {
     color: #a02c1e;
   }
+}
 
-  .navbar__connect-button {
-    padding: 6px 10px;
-    font-size: 0.72rem;
+@media (max-width: 1024px) {
+  /* The subtitle is the widest part of the brand; hiding it
+     frees ~84px so the bar still fits at narrower widths. */
+  .navbar__brand-subtitle {
+    display: none;
   }
 
-  .navbar__resume-button {
-    padding: 6px 10px;
-    font-size: 0.72rem;
+  .navbar__right {
+    gap: var(--space-12);
   }
 }
 
-@media (max-width: 640px) {
-  .navbar__resume-button {
+@media (max-width: 768px) {
+  .navbar__inner {
+    padding-inline: var(--space-16);
+    gap: var(--space-12);
+  }
+
+  .navbar__brand-text {
     display: none;
   }
 }

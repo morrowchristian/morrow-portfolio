@@ -55,16 +55,6 @@
   color: #a02c1e;
 }
 
-/* The Contact button shares the link styling; only the button
-   chrome is reset here — no font rules, so it keeps the mono
-   link type instead of falling back to the body font. */
-.footer__link--button {
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
-}
-
 .footer__credit {
   font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
   font-size: 0.78rem;

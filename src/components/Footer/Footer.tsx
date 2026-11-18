@@ -2,14 +2,13 @@
 // links: GitHub and LinkedIn, Contact, and the copyright line.
 // The page menu lives in the navbar now; the numbered index that
 // used to be here is gone (it would duplicate the navbar menu).
+// Contact is a link to the Contact page now, not a button that
+// opened the old contact modal.
 import "./Footer.css";
+import { Link } from "react-router-dom";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
-interface FooterProps {
-  onConnectClick: () => void;
-}
-
-export const Footer: React.FC<FooterProps> = ({ onConnectClick }) => {
+export const Footer: React.FC = () => {
   return (
     <footer className="footer">
       <div className="footer__inner">
@@ -32,13 +31,9 @@ export const Footer: React.FC<FooterProps> = ({ onConnectClick }) => {
           >
             <FaLinkedin />
           </a>
-          <button
-            type="button"
-            className="footer__link footer__link--button"
-            onClick={onConnectClick}
-          >
+          <Link to="/contact" className="footer__link">
             Contact
-          </button>
+          </Link>
         </nav>
         <p className="footer__credit">
           © 2026 Christian Morrow — Full-Stack Software Engineer

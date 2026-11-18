@@ -1,29 +1,26 @@
-// src/components/Navbar/Navbar.tsx — Editorial navbar: brand, the
-// page menu (About, Portfolio, Resume, Services), résumé download
-// and Connect. The GitHub and LinkedIn links live in the footer
-// now, so the menu can sit at the top without crowding the bar.
-// At ≤768px the inline menu collapses into a hamburger button
-// that opens a dropdown panel with the page links (plus the
-// résumé download, which is hidden from the bar at ≤640px).
+// src/components/Navbar/Navbar.tsx — Editorial navbar: brand and
+// the page menu (About, Portfolio, Resume, Services, Contact).
+// The GitHub and LinkedIn links live in the footer, and the
+// résumé download lives on the Resume page, so the bar holds
+// only the brand and the menu — no buttons. Below 1200px the
+// inline menu collapses into a hamburger button that opens a
+// dropdown panel with the page links.
 import "./Navbar.css";
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useScrollOffset } from "../../hooks/useScrollOffset";
-
-interface NavbarProps {
-  onConnectClick: () => void;
-}
 
 const NAV_ITEMS = [
   { label: "About", to: "/" },
   { label: "Portfolio", to: "/portfolio" },
   { label: "Resume", to: "/resume" },
   { label: "Services", to: "/services" },
+  { label: "Contact", to: "/contact" },
 ];
 
-const MENU_BREAKPOINT = 768;
+const MENU_BREAKPOINT = 1200;
 
-export const Navbar: React.FC<NavbarProps> = ({ onConnectClick }) => {
+export const Navbar: React.FC = () => {
   const isScrolled = useScrollOffset(24);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
@@ -97,20 +94,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onConnectClick }) => {
               </NavLink>
             ))}
           </nav>
-          <a
-            href="/resume.pdf"
-            download="Christian-Morrow-Resume.pdf"
-            className="navbar__resume-button"
-          >
-            Download résumé
-          </a>
-          <button
-            type="button"
-            className="navbar__connect-button"
-            onClick={onConnectClick}
-          >
-            Connect
-          </button>
           <button
             type="button"
             className={`navbar__hamburger ${isMenuOpen ? "navbar__hamburger--open" : ""}`}
@@ -146,14 +129,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onConnectClick }) => {
             {item.label}
           </NavLink>
         ))}
-        <a
-          href="/resume.pdf"
-          download="Christian-Morrow-Resume.pdf"
-          className="navbar__dropdown-link"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Download résumé
-        </a>
       </nav>
     </header>
   );

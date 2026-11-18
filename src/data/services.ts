@@ -29,7 +29,7 @@ export const services = [
     icon: FaTools,
     cta: {
       label: "Discuss automation ideas",
-      to: "contact",
+      to: "/contact",
     },
   },
 ] as const;

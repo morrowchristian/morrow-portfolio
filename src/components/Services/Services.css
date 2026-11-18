@@ -126,15 +126,6 @@
   text-decoration: underline;
 }
 
-/* The contact card's CTA is a <button>, not a link — reset the
-   button's native styles so it reads as the same mono red link. */
-.service-card__cta--button {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-}
-
 @media (max-width: 768px) {
   .services {
     padding-block: 48px;

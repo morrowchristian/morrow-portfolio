@@ -2,10 +2,11 @@
 // Newsreader headings, IBM Plex Mono furniture, matching the Bio,
 // Portfolio and Resume pages. Three services, each a white card
 // with a mono number, a red icon, a serif title and a mono red
-// link. The two Portfolio links use React Router (Link) so they
-// land on /#/portfolio under the HashRouter — the old "#portfolio"
-// hrefs bounced back to the home page. The automation card opens
-// the contact modal via the onConnectClick prop from App.
+// link. All three links use React Router (Link) so they land on
+// /#/portfolio or /#/contact under the HashRouter — the old
+// "#portfolio" hrefs bounced back to the home page, and the
+// automation card used to open the contact modal before Contact
+// became its own page.
 import "./Services.css";
 import { services } from "../../data/services";
 import { ServiceCard } from "./ServiceCard";
@@ -14,11 +15,7 @@ import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { Grid } from "../Grid/Grid";
 import { Container } from "../Container/Container";
 
-interface ServicesProps {
-  onConnectClick: () => void;
-}
-
-export const Services: React.FC<ServicesProps> = ({ onConnectClick }) => {
+export const Services: React.FC = () => {
   const { ref, isVisible } = useInViewAnimation();
   const isMobile = useMediaQuery("(max-width: 768px)");
 
@@ -45,7 +42,6 @@ export const Services: React.FC<ServicesProps> = ({ onConnectClick }) => {
               key={service.title}
               {...service}
               number={String(index + 1).padStart(2, "0")}
-              onContactClick={onConnectClick}
             />
           ))}
         </Grid>
