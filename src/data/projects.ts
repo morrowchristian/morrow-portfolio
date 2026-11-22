@@ -1,8 +1,9 @@
 // src/data/projects.ts — CORRECTED 2026-11-13, updated 2026-11-14
 // 2026-11-14 fixes: "Live Demo" buttons linked to GitHub repos, not live sites —
 // ProjectCard renders demoLink as "Live Demo", so demoLink is now kept ONLY where
-// a live site was verified (North Georgia Awning on Netlify). The other five
-// projects keep repoLink only; no live demo is claimed for them.
+// a live site was verified. Business Website Template (Vercel) is the only project
+// with a verified live demo; the other five projects keep repoLink only; no live
+// demo is claimed for them.
 // Hiawatha tags now include Next.js + Tailwind CSS (its repo README: Next.js 16,
 // React 19, TypeScript, Tailwind v4). Timespan Calculator is a Chrome extension,
 // not a generic web utility — description/tags corrected to say so.
@@ -10,24 +11,29 @@
 // "/project1.jpg" / "/project2.jpg" (public-folder URLs Vite serves
 // as-is). The old "src/assets/projects/..." strings 404'd because
 // Vite does not bundle images referenced as bare strings.
+// 2026-11-22: North Georgia Awning removed from the portfolio; Business Website
+// Template added in its place (first, featured) with its verified Vercel demo.
+// Business Website Template has no screenshot yet, so it uses the generic
+// /project1.jpg thumbnail (same pattern as personal-tracker/MyNotes on
+// /project2.jpg) — a real screenshot of the template would replace it.
 export const projects = [
   {
-    title: "North Georgia Awning Website",
+    title: "Business Website Template",
     description:
-      "A responsive marketing website for a local awning company, with an interactive quote calculator and a mobile-first layout.",
-    image: "/north-georgia-awning.png",
+      "A reusable, component-driven website template for small business sites — 15 components with a live explorer, guides, and a complete example site.",
+    image: "/project1.jpg",
     tags: ["Astro", "Tailwind CSS", "TypeScript"],
     featured: true,
-    demoLink: "https://north-georgia-awning.netlify.app",
-    repoLink: "https://github.com/morrowchristian/north-georgia-awning-website",
+    demoLink: "https://business-website-template-three.vercel.app",
+    repoLink: "https://github.com/morrowchristian/business-website-template",
     modal: {
       longDescription:
-        "A marketing website built for North Georgia Awning LLC. Includes a responsive homepage and an interactive quote page with a price calculator (per-sq-ft pricing plus motor, lights, and sensor add-ons).",
-      images: ["/north-georgia-awning.png"],
+        "A reusable Astro + Tailwind CSS starter for building small business websites. Fifteen components with a live explorer (preview, variants, API docs, code examples), three guides (Page Catalog, Technical Checklist, Design Tokens), and a complete fictional example site — Cedar Creek Plumbing — built from the components. Dark mode ships as a component, and the template includes a sitemap and SEO meta tags.",
+      images: ["/project1.jpg"],
       highlights: [
-        "Responsive marketing layout",
-        "Interactive quote calculator",
-        "Built for a real client",
+        "15 reusable components with a live explorer",
+        "Complete example site built from the components",
+        "Guides: Page Catalog, Technical Checklist, Design Tokens",
       ],
     },
   },
