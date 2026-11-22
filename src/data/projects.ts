@@ -13,15 +13,14 @@
 // Vite does not bundle images referenced as bare strings.
 // 2026-11-22: North Georgia Awning removed from the portfolio; Business Website
 // Template added in its place (first, featured) with its verified Vercel demo.
-// Business Website Template has no screenshot yet, so it uses the generic
-// /project1.jpg thumbnail (same pattern as personal-tracker/MyNotes on
-// /project2.jpg) — a real screenshot of the template would replace it.
+// Thumbnail is a real screenshot of the live template's Component Explorer
+// (public/business-website-template.png, 1280x853), captured 2026-11-22.
 export const projects = [
   {
     title: "Business Website Template",
     description:
       "A reusable, component-driven website template for small business sites — 15 components with a live explorer, guides, and a complete example site.",
-    image: "/project1.jpg",
+    image: "/business-website-template.png",
     tags: ["Astro", "Tailwind CSS", "TypeScript"],
     featured: true,
     demoLink: "https://business-website-template-three.vercel.app",
@@ -29,7 +28,7 @@ export const projects = [
     modal: {
       longDescription:
         "A reusable Astro + Tailwind CSS starter for building small business websites. Fifteen components with a live explorer (preview, variants, API docs, code examples), three guides (Page Catalog, Technical Checklist, Design Tokens), and a complete fictional example site — Cedar Creek Plumbing — built from the components. Dark mode ships as a component, and the template includes a sitemap and SEO meta tags.",
-      images: ["/project1.jpg"],
+      images: ["/business-website-template.png"],
       highlights: [
         "15 reusable components with a live explorer",
         "Complete example site built from the components",
