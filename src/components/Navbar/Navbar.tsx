@@ -1,5 +1,7 @@
 // src/components/Navbar/Navbar.tsx — Editorial navbar: brand and
-// the page menu (About, Portfolio, Resume, Services, Contact).
+// the page menu (About, Portfolio, Resume, Contact).
+// Services is no longer a separate page — it renders on the
+// home page below the bio (2026-11-23).
 // The GitHub and LinkedIn links live in the footer, and the
 // résumé download lives on the Resume page, so the bar holds
 // only the brand and the menu — no buttons. Below 1200px the
@@ -14,7 +16,6 @@ const NAV_ITEMS = [
   { label: "About", to: "/" },
   { label: "Portfolio", to: "/portfolio" },
   { label: "Resume", to: "/resume" },
-  { label: "Services", to: "/services" },
   { label: "Contact", to: "/contact" },
 ];
 
