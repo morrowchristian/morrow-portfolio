@@ -1,9 +1,9 @@
 // src/data/projects.ts — CORRECTED 2026-11-13, updated 2026-11-14
 // 2026-11-14 fixes: "Live Demo" buttons linked to GitHub repos, not live sites —
 // ProjectCard renders demoLink as "Live Demo", so demoLink is now kept ONLY where
-// a live site was verified. Business Website Template (Vercel) is the only project
-// with a verified live demo; the other five projects keep repoLink only; no live
-// demo is claimed for them.
+// a live site was verified. Business Website Template (Vercel) and RealSync CRM
+// (Vercel) have verified live demos; the other five projects keep repoLink only;
+// no live demo is claimed for them.
 // Hiawatha tags now include Next.js + Tailwind CSS (its repo README: Next.js 16,
 // React 19, TypeScript, Tailwind v4). Timespan Calculator is a Chrome extension,
 // not a generic web utility — description/tags corrected to say so.
@@ -15,6 +15,9 @@
 // Template added in its place (first, featured) with its verified Vercel demo.
 // Thumbnail is a real screenshot of the live template's Component Explorer
 // (public/business-website-template.png, 1280x853), captured 2026-11-22.
+// 2026-11-23: RealSync CRM added second (featured) with its verified Vercel demo
+// and a real screenshot of the live dashboard as its thumbnail
+// (public/realsync-dashboard.png).
 export const projects = [
   {
     title: "Business Website Template",
@@ -33,6 +36,26 @@ export const projects = [
         "15 reusable components with a live explorer",
         "Complete example site built from the components",
         "Guides: Page Catalog, Technical Checklist, Design Tokens",
+      ],
+    },
+  },
+  {
+    title: "RealSync CRM",
+    description:
+      "A full-stack CRM for lead and contract management — Django REST API with JWT authentication, React frontend, PostgreSQL, and a real dashboard, deployed live.",
+    image: "/realsync-dashboard.png",
+    tags: ["Django", "React", "TypeScript", "PostgreSQL"],
+    featured: true,
+    demoLink: "https://real-sync-eta.vercel.app",
+    repoLink: "https://github.com/morrowchristian/RealSync",
+    modal: {
+      longDescription:
+        "A full-stack CRM for lead and contract management. JWT authentication with token refresh, lead and contract management with archive and restore, and a real dashboard with lead counts by status, contracts, pending signatures, and recent leads. The lead form is wide and professional — grouped Contact, Details, and Lead Info sections with company, lead source, notes, and preferred contact method, real labels, and frontend plus backend validation — and an admin can add custom fields and set field preferences in Settings, saved per user in the backend. Lead cards are clickable with a Cards/Sheet table toggle, archive and delete use in-app confirmations, and the sidebar has an active-page highlight.",
+      images: ["/realsync-dashboard.png"],
+      highlights: [
+        "Lead & contract management with archive and restore",
+        "Sophisticated lead form with validation and admin-configurable custom fields",
+        "Dashboard, clickable cards, and Cards/Sheet views",
       ],
     },
   },

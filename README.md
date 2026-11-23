@@ -29,6 +29,20 @@ Key goals of this project:
 
 ---
 
+## 💼 Featured Projects
+
+The portfolio's project lineup (7 projects, in display order):
+
+- **Business Website Template** — A reusable, component-driven website template for small business sites — 15 components with a live explorer, guides, and a complete example site. [Live demo](https://business-website-template-three.vercel.app) · [Repo](https://github.com/morrowchristian/business-website-template)
+- **RealSync CRM** — A full-stack CRM for lead and contract management — Django REST API with JWT authentication, React frontend, PostgreSQL, and a real dashboard, deployed live. [Live demo](https://real-sync-eta.vercel.app) · [Repo](https://github.com/morrowchristian/RealSync)
+- **personal-tracker** — Full-stack task tracker with a React frontend and Django REST API, JWT authentication, and protected routes. [Repo](https://github.com/morrowchristian/personal-tracker)
+- **Hiawatha City Council / Hiawatha Brown 2026** — The campaign website for Hiawatha Brown for Cleveland, TN City Council 2026 — built as Campaign Manager & Digital Strategist. The campaign defeated the incumbent. [Repo](https://github.com/morrowchristian/hiawatha-brown-2026)
+- **MyNotes** — A lightweight SwiftUI note-taking application with local storage persistence and a clean, distraction-free interface. [Repo](https://github.com/morrowchristian/MyNotes)
+- **Event Dashboard** — A dashboard interface for managing events and tasks with a clean, data-driven layout. [Repo](https://github.com/morrowchristian/event-dashboard)
+- **Timespan Calculator** — A Chrome extension for calculating time differences and adding minutes to times, with smart time parsing and a clean UI. [Repo](https://github.com/morrowchristian/timespan-calculator)
+
+---
+
 ## 🎨 UI & Interaction Design
 
 This portfolio emphasizes handcrafted UI over template-driven design.  
