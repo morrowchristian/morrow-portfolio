@@ -5,16 +5,20 @@
 // Magazine layout: an intro column on the left and the transparent
 // paint cutout anchored bottom-right with the red block behind
 // its lower part. The numbered link index (01 About, 02 Portfolio,
-// 03 Resume, 04 Services) now lives in the site footer, rendered
-// on every page — not on this page. GitHub, LinkedIn and Contact
-// are not repeated here; they already live in the navbar. The
+// 03 Resume) now lives in the site footer, rendered on every page
+// — not on this page. Services is rendered below the bio hero on
+// this page (the /services route was removed 2026-11-23).
+// GitHub, LinkedIn and Contact are not repeated here; they
+// already live in the navbar. The
 // résumé download lives in the navbar too (next to Connect), not
 // on this page.
-// The title is kept small (2.5rem max) and the page is sized so
-// the Bio + footer fit one viewport: the inner min-height subtracts
-// the navbar (56px) and the footer (~60px), so the portrait is
-// always fully in frame. A single circuit line with a square on
-// each end closes the intro — it replaces the L-shaped trace that
+// The title is kept small (2.5rem max) and the hero keeps its
+// one-viewport sizing (the inner min-height subtracts the navbar
+// (56px) and the footer (~60px), so the portrait is always fully
+// in frame); the Services section flows below the hero and the
+// page scrolls to it — the footer now sits below Services.
+// A single circuit line with a square on each end closes the
+// intro — it replaces the L-shaped trace that
 // used to sit behind the stack (the stack itself was removed
 // 2026-11-17 at Christian's request).
 // Type: Newsreader serif for the headline, IBM Plex Mono for the
@@ -29,11 +33,13 @@
 // the face stays against warm paper.
 import "./Bio.css";
 import { useInViewAnimation } from "../../hooks/useInViewAnimation";
+import { Services } from "../Services/Services";
 
 export const Bio: React.FC = () => {
   const { ref, isVisible } = useInViewAnimation();
 
   return (
+    <>
     <section className="bio-page">
       <div className="bio__inner">
         {/* Faint circuit traces across the paper — a nod to the
@@ -147,5 +153,12 @@ export const Bio: React.FC = () => {
         </div>
       </div>
     </section>
+      {/* Services merged onto the home page below the bio hero
+          (2026-11-23): the /services route is gone; the existing
+          Services component renders here unchanged, so the hero
+          keeps its one-viewport sizing and the page scrolls to
+          the services section below it. */}
+      <Services />
+    </>
   );
 };
