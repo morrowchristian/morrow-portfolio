@@ -2,20 +2,14 @@
    - Warm paper #f6f1e7, espresso ink #211d16, shirt red #a02c1e,
      soft brown #4c463a. The quietest branch: a person first, a
      tech demo second.
-   - MAGAZINE LAYOUT: an intro column on the left (mono kick with
-     his name, a Newsreader serif headline, a short red rule, the
-     bio in soft brown, and a circuit line closing the intro)
-     and the transparent paint cutout anchored bottom-right with a
-     single deep-red block behind its lower part. The numbered
-     link index now lives in the site footer, on every page.
-   - The title is kept small (2.5rem max) and the inner min-height
-     subtracts the navbar (56px) and the footer (~60px), so the
-     Bio + footer fit one viewport and the portrait is always
-     fully in frame (on short viewports the portrait caps at
-     50svh). A single circuit line with a square on each end
-     closes the intro, replacing the L-shaped trace that used to
-     sit behind the stack (the stack itself was removed 2026-11-17
-     at Christian's request).
+   - MAGAZINE LAYOUT (2026-11-23): three columns in one viewport —
+     an intro column on the left (mono kick with his name, a
+     Newsreader serif headline, a short red rule, the bio in soft
+     brown, and a circuit line closing the intro), the transparent
+     paint cutout in the middle, and the Services list on the
+     right. No scroll on desktop: the section fills the viewport
+     exactly (flex: 1, no fixed height lock), so the Bio + footer
+     fit one viewport and the portrait is always fully in frame.
    - The circuit art survives only as faint traces (opacity 0.16)
      and one concentric red ring, top-right of the portrait column
      — in flow above the portrait, so it can never overlap it.
@@ -27,12 +21,13 @@
      so the whole face, hair and shoulders are always fully visible:
      never cropped, never stretched, never warped.
    - Content stops at 1200px and centres; the warm paper stays
-     full-bleed. The section grows to fill the viewport (flex: 1 on
-     .page) and the page scrolls normally when content exceeds the
-     viewport — no fixed height or overflow lock on this route. */
+     full-bleed. On narrow screens the three columns stack —
+     intro, portrait, services — and the page scrolls normally. */
 
 .bio-page {
   position: relative;
+  display: flex;
+  flex-direction: column;
   flex: 1;
   min-height: 560px;
   padding-block: 0;
@@ -45,10 +40,10 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  flex: 1;
+  min-height: 0;
   width: 100%;
   max-width: 1200px;
-  /* 56px navbar + ~60px footer, so the Bio + footer fit one viewport. */
-  min-height: calc(100svh - 56px - 60px);
   margin-inline: auto;
   padding-inline: clamp(1.5rem, 4vw, 3rem);
 }
@@ -68,16 +63,24 @@
   z-index: 1;
   flex: 1;
   display: grid;
-  grid-template-columns: 1.05fr 1fr;
-  gap: clamp(2rem, 4vw, 4rem);
+  /* Three columns — intro, portrait, services list — so the home
+     page fits one viewport with no scroll on desktop. */
+  grid-template-columns: 0.9fr 1fr 1fr;
+  gap: clamp(1.5rem, 2.5vw, 2.5rem);
   padding-top: clamp(2rem, 5vh, 3.5rem);
 }
 
-/* Left: magazine intro column. */
+.bio__main > * {
+  min-width: 0;
+}
+
+/* Left: magazine intro column, vertically centred against the
+   portrait and services. */
 .bio__text {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: center;
   gap: clamp(0.9rem, 1.8vh, 1.25rem);
   max-width: 34rem;
   padding-bottom: clamp(1.5rem, 3vh, 2.5rem);
@@ -167,7 +170,7 @@
 
 .bio__ring {
   flex: none;
-  width: clamp(120px, 14vw, 170px);
+  width: clamp(110px, 11vw, 150px);
   height: auto;
   margin-top: clamp(0.5rem, 2vh, 1.5rem);
 }
@@ -238,6 +241,7 @@
   .bio__text {
     max-width: none;
     padding-bottom: 0;
+    justify-content: flex-start;
   }
 
   .bio__portrait {

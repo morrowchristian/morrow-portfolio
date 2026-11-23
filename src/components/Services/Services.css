@@ -126,8 +126,78 @@
   text-decoration: underline;
 }
 
+/* Compact list variant (home-page hero, beside the portrait):
+   same three services, tighter header, compact cards, no section
+   padding — the hero grid supplies the spacing. The list stretches
+   to fill the hero row so the three cards share the height. */
+.services--list {
+  flex: none;
+  padding-block: 0;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.services__header--compact {
+  margin-bottom: 1.25rem;
+}
+
+.services--list .services__title {
+  font-size: clamp(1.6rem, 1.4rem + 0.8vw, 2rem);
+}
+
+.services--list .services__intro {
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.services__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  flex: 1;
+  min-height: 0;
+}
+
+.services__list .service-card--compact {
+  flex: 1;
+}
+
+.service-card--compact {
+  padding: 0.95rem 1.25rem;
+}
+
+.service-card--compact .service-card__top {
+  margin-bottom: 0.5rem;
+}
+
+.service-card--compact .service-card__icon {
+  font-size: 1.35rem;
+}
+
+.service-card--compact .service-card__title {
+  font-size: 1.15rem;
+  margin-bottom: 0.4rem;
+}
+
+.service-card--compact .service-card__description {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
 @media (max-width: 768px) {
   .services {
     padding-block: 48px;
+  }
+
+  .services--list {
+    padding-block: 0;
+  }
+
+  /* Stacked on mobile: cards take their natural height. */
+  .services__list .service-card--compact {
+    flex: none;
   }
 }

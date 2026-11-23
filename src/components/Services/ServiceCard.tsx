@@ -14,6 +14,7 @@ interface ServiceCardProps {
     label: string;
     to: string;
   };
+  className?: string;
 }
 
 export const ServiceCard: React.FC<ServiceCardProps> = ({
@@ -22,9 +23,10 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
   icon: Icon,
   number,
   cta,
+  className,
 }) => {
   return (
-    <div className="service-card">
+    <div className={`service-card${className ? ` ${className}` : ""}`}>
       <div className="service-card__top">
         <span className="service-card__number">{number}</span>
         <Icon className="service-card__icon" />
