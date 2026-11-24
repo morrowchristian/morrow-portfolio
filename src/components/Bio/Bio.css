@@ -13,12 +13,20 @@
      is smaller in the frame with breathing room. CORRECTION
      (2026-11-24): the 75% look was about ELEMENT SIZES, not
      page height — the page still fills the entire viewport at
-     minimum. So the hero stretches (flex: 1) and the two columns
-     are vertically centred in it (align-items: center); the
-     extra vertical space lands INSIDE the hero as breathing
-     room above and below the content, never below a footer
-     (there is no footer any more — it was removed 2026-11-24
-     and its GitHub/LinkedIn links moved to the navbar).
+     minimum. So the hero stretches (flex: 1).
+   - POLISH (2026-11-24, "make it look good"): the smaller
+     elements left the content as a small block floating in the
+     middle of the hero (~125px empty above, ~118px below), so
+     the extra vertical space is now carried as deliberate
+     INTERNAL spacing instead of equal top/bottom margins: the
+     two columns are top-aligned (align-items: start) with a
+     modest gap below the navbar, the bio→Services gap is wide,
+     the service cards are roomier with wider gaps, and the
+     left column stretches to fill the hero height. The portrait
+     stays its own size (~516 x ~700px) and anchors the top
+     right; the left column's spacing carries the height. There
+     is no footer any more — it was removed 2026-11-24 and its
+     GitHub/LinkedIn links moved to the navbar.
    - The content area is narrower (1140px) so the left column is
      wide enough for the bio intro to wrap to four lines. The
      portrait is NOT stretched to the hero height: its frame
@@ -53,9 +61,9 @@
   flex-direction: column;
   /* Full height at minimum: the hero stretches to fill the
      viewport (the footer is gone, so there is nothing to pin —
-     the page is the hero). The extra vertical space becomes
-     breathing room inside the hero, via align-items: center
-     on .bio__main below. */
+     the page is the hero). The extra vertical space is carried
+     as internal spacing in the left column (see .bio__left),
+     not as margins around a centred block. */
   flex: 1;
   min-height: 420px;
   padding-block: 0;
@@ -92,14 +100,16 @@
   flex: 1;
   display: grid;
   /* Two columns — bio + services stacked on the left, the
-     portrait on the right — vertically centred in the hero,
-     so the extra vertical space is breathing room above and
-     below the content, not a gap below a footer. */
+     portrait on the right — top-aligned, so both start near
+     the navbar and the layout reads as grounded, not floating.
+     The breathing room below the navbar lives here (on the
+     grid, not the left column) so the portrait and the bio
+     start on the same line. */
   grid-template-columns: 1fr 1fr;
-  align-items: center;
+  align-items: start;
   gap: clamp(1.5rem, 2.25vw, 2.25rem);
   min-height: 0;
-  padding-top: clamp(0.4rem, 0.75vh, 0.55rem);
+  padding-top: 1.75rem;
 }
 
 .bio__main > * {
@@ -109,21 +119,20 @@
 /* Left column: bio on top, Services below it. The compact cards
    inside it take their natural height — the leftover space reads
    as breathing room below the last card, not stretched boxes.
-   The top padding is the breathing room between the navbar and
-   the name — it lives on the left column only, so the portrait
-   column keeps its own centring. */
+   POLISH (2026-11-24): this column carries the hero height.
+   The bio→Services gap is wide and deliberate (a section
+   break, not a hairline), the top/bottom padding is gone
+   (the grid's padding-top is the breathing room below the
+   navbar, and the last card sits close to the viewport
+   bottom), so the content stretches to fill the hero. */
 .bio__left {
   display: flex;
   flex-direction: column;
   min-width: 0;
   min-height: 0;
-  gap: clamp(0.7rem, 2vh, 1.5rem);
-  padding-top: 1.13rem;
-  /* Breathing room below the last service card before the
-     content's bottom edge (the 75% look keeps ~50px here).
-     The column is fit-content height now, so this padding is
-     part of the column — it does not stretch the portrait. */
-  padding-bottom: 3rem;
+  gap: clamp(2.5rem, 11vh, 6.5rem);
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .bio__left .services--list {
@@ -137,7 +146,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: clamp(0.4rem, 0.8vh, 0.65rem);
+  gap: clamp(0.6rem, 1.4vh, 0.9rem);
   max-width: 27rem;
 }
 
@@ -207,9 +216,10 @@
    shrink-wraps to the image (in flow, height auto), so the
    portrait renders at the width the column allows and its
    natural aspect sets its height (~516 x ~700px) — it does
-   NOT stretch with the hero. The column itself is vertically
-   centred in the hero by align-items: center on .bio__main,
-   so the portrait sits centred against the left column. */
+   NOT stretch with the hero. The column is top-aligned in
+   the hero (align-items: start on .bio__main), so the portrait
+   anchors the top right while the left column's spacing
+   carries the height. */
 .bio__portrait {
   position: relative;
   min-width: 0;
@@ -248,18 +258,20 @@
 
 /* Short desktop viewports: tighten everything so the left column
    still fits. The fluid sizes already shrink; this closes the
-   gaps and type a little more. (Scaled by 0.75 with the rest.) */
+   gaps and type a little more. (Scaled by 0.75 with the rest.)
+   POLISH: the wide bio→Services gap shrinks too, so a short
+   viewport still fits one screen without scrolling. */
 @media (max-height: 900px) {
   .bio__main {
-    padding-top: 0.38rem;
+    padding-top: 1rem;
   }
 
   .bio__left {
-    gap: 0.6rem;
+    gap: 1.5rem;
   }
 
   .bio__text {
-    gap: 0.3rem;
+    gap: 0.5rem;
   }
 
   .bio__title {
@@ -331,7 +343,13 @@
   }
 
   .bio__portrait-frame {
-    position: static;
+    /* POLISH (2026-11-24): position: relative (was static), so
+       the red block — absolutely positioned at the frame's
+       bottom — sits behind the portrait's lower part, as on
+       desktop. With position: static the block resolved against
+       .bio__main and landed at the very bottom of the page,
+       detached from the portrait. */
+    position: relative;
     flex: none;
     height: auto;
   }
