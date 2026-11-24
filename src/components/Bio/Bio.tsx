@@ -2,18 +2,19 @@
 // EDITORIAL (03): warm paper, a serif headline, and a single
 // deep-red block behind the portrait, taken from his shirt.
 // The circuit art survives only as faint traces and one red ring.
-// Magazine layout: an intro column on the left, the transparent
-// paint cutout in the middle, and the Services list on the right
-// — one viewport, no scroll on desktop. The numbered link index
+// Layout (2026-11-24, the user's diagram): two columns — the
+// portrait spans the FULL HEIGHT of the right column, while the
+// left column stacks the bio on top and the Services list below
+// it. One viewport, no scroll on desktop. The numbered link index
 // (01 About, 02 Portfolio, 03 Resume) now lives in the site
 // footer, rendered on every page — not on this page. Services
-// sits beside the portrait in the same hero grid (the /services
-// route was removed 2026-11-23).
+// sits in the left column below the bio (the /services route was
+// removed 2026-11-23).
 // GitHub, LinkedIn and Contact are not repeated here; they
 // already live in the navbar. The
 // résumé download lives in the navbar too (next to Connect), not
 // on this page.
-// The title is kept small (2.5rem max) and the section fills the
+// The title is kept small (2.2rem max) and the section fills the
 // viewport exactly (flex: 1, no fixed height lock), so the
 // portrait is always fully in frame and the footer sits directly
 // below — no scroll on desktop.
@@ -70,72 +71,51 @@ export const Bio: React.FC = () => {
         </svg>
 
         <div className="bio__main">
-          <div
-            ref={ref}
-            className={`bio__text animate ${isVisible ? "animate--visible" : ""}`}
-          >
-            <p className="bio__kick">Christian Morrow</p>
-            <h1 className="bio__title">
-              Software, built end to end — built to last.
-            </h1>
-            <span className="bio__rule" aria-hidden="true" />
-            <p className="bio__subtitle">
-              Full-Stack Software Engineer — Cleveland, TN
-            </p>
-            <p className="bio__intro">
-              B.S. Software Systems ’25 from the University of Tennessee at
-              Chattanooga, Latin Honors, 3.7 GPA. I build full-stack web
-              applications in React, TypeScript and Django — with real client
-              websites shipped — and bring 7+ years of high-urgency service and
-              team-lead experience to every project: calm problem-solving under
-              pressure, clear communication, and code that stays maintainable.
-            </p>
-            {/* A single circuit line with a square on each end,
-                closing the intro — it replaces the L-shaped trace
-                that used to sit behind the stack. */}
-            <div className="bio__divider" aria-hidden="true">
-              <span className="bio__divider-square" />
-              <span className="bio__divider-line" />
-              <span className="bio__divider-square" />
+          {/* Left column: bio on top, Services below it. */}
+          <div className="bio__left">
+            <div
+              ref={ref}
+              className={`bio__text animate ${isVisible ? "animate--visible" : ""}`}
+            >
+              <p className="bio__kick">Christian Morrow</p>
+              <h1 className="bio__title">
+                Software, built end to end — built to last.
+              </h1>
+              <span className="bio__rule" aria-hidden="true" />
+              <p className="bio__subtitle">
+                Full-Stack Software Engineer — Cleveland, TN
+              </p>
+              <p className="bio__intro">
+                B.S. Software Systems ’25 from the University of Tennessee at
+                Chattanooga, Latin Honors, 3.7 GPA. I build full-stack web
+                applications in React, TypeScript and Django — with real client
+                websites shipped — and bring 7+ years of high-urgency service and
+                team-lead experience to every project: calm problem-solving under
+                pressure, clear communication, and code that stays maintainable.
+              </p>
+              {/* A single circuit line with a square on each end,
+                  closing the intro — it replaces the L-shaped trace
+                  that used to sit behind the stack. */}
+              <div className="bio__divider" aria-hidden="true">
+                <span className="bio__divider-square" />
+                <span className="bio__divider-line" />
+                <span className="bio__divider-square" />
+              </div>
             </div>
+
+            {/* Services below the bio in the same left column
+                (2026-11-24): the compact list variant keeps every
+                service's title, description and link, so the home
+                page fits one viewport with no scroll on desktop. */}
+            <Services variant="list" />
           </div>
 
+          {/* Right column: the portrait spans the full hero height.
+              The concentric ring that used to sit above the
+              portrait is gone — it cannot share the column with a
+              full-height image. The faint traces and the circuit
+              divider above carry the circuit aesthetic now. */}
           <div className="bio__portrait" aria-hidden="true">
-            {/* One concentric ring, top-right of the portrait column,
-                in flow above the portrait so it can never overlap it. */}
-            <svg
-              className="bio__ring"
-              viewBox="0 0 220 220"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <circle
-                cx="110"
-                cy="110"
-                r="90"
-                fill="none"
-                stroke="#a02c1e"
-                strokeWidth="1.5"
-                opacity="0.35"
-              />
-              <circle
-                cx="110"
-                cy="110"
-                r="58"
-                fill="none"
-                stroke="#211d16"
-                strokeWidth="1"
-                opacity="0.2"
-              />
-              <rect
-                x="106"
-                y="106"
-                width="8"
-                height="8"
-                fill="#a02c1e"
-                opacity="0.55"
-              />
-            </svg>
             {/* The frame shrink-wraps to the portrait image, so the
                 red block (100% of the frame) always matches the
                 figure exactly, whatever its aspect ratio. */}
@@ -149,12 +129,6 @@ export const Bio: React.FC = () => {
               />
             </div>
           </div>
-
-          {/* Services beside the portrait, in the same hero grid
-              (2026-11-23): the compact list variant keeps every
-              service's title, description and link, so the home
-              page fits one viewport with no scroll on desktop. */}
-          <Services variant="list" />
         </div>
       </div>
     </section>
