@@ -5,9 +5,11 @@
 // Layout (2026-11-24, the user's diagram): two columns — the
 // portrait sits in the right column, while the left column stacks
 // the bio on top and the Services list below it. The section
-// fills the viewport at minimum (flex: 1) and the two columns
-// are vertically centred in it, so the smaller 75% elements sit
-// with breathing room above and below. No scroll on desktop.
+// fills the viewport at minimum (flex: 1). POLISH (2026-11-24):
+// the two columns are top-aligned and the left column's internal
+// spacing (wide bio→Services gap, roomier cards) carries the
+// hero height, so the content feels grounded instead of floating
+// in the middle of the frame. No scroll on desktop.
 // The site footer was removed 2026-11-24 (its GitHub/LinkedIn
 // links moved to the navbar); the numbered link index that used
 // to live in the footer is gone with it. Services sits in the
@@ -19,9 +21,9 @@
 // on this page.
 // The title is kept small (1.6rem max, the 75% size) and the
 // section fills the viewport at minimum (flex: 1, no fixed height
-// lock), with the two columns vertically centred in it — so the
-// portrait is always fully in frame and there is no scroll on
-// desktop.
+// lock), with the two columns top-aligned and the left column's
+// internal spacing carrying the hero height — so the portrait is
+// always fully in frame and there is no scroll on desktop.
 // A single circuit line with a square on each end closes the
 // intro — it replaces the L-shaped trace that
 // used to sit behind the stack (the stack itself was removed
@@ -116,11 +118,13 @@ export const Bio: React.FC = () => {
 
           {/* Right column: the portrait keeps its own size — the
               frame shrink-wraps to the image, so it does not
-              stretch with the hero. The concentric ring that used
-              to sit above the portrait is gone — it cannot share
-              the column with the image. The faint traces and the
-              circuit divider above carry the circuit aesthetic
-              now. */}
+              stretch with the hero. The column is top-aligned in
+              the hero, so the portrait anchors the top right
+              while the left column's spacing carries the height.
+              The concentric ring that used to sit above the
+              portrait is gone — it cannot share the column with
+              the image. The faint traces and the circuit divider
+              above carry the circuit aesthetic now. */}
           <div className="bio__portrait" aria-hidden="true">
             {/* The frame shrink-wraps to the portrait image, so the
                 red block (100% of the frame) always matches the

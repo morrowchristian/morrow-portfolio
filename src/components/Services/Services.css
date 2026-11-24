@@ -135,7 +135,11 @@
    THE 75% LOOK (2026-11-24): all type, gaps and padding here are
    ~0.75x the old values, so the home page at 100% zoom matches
    the 75% zoom view. Only this compact variant is scaled — the
-   full Services page keeps its own sizing. */
+   full Services page keeps its own sizing.
+   POLISH (2026-11-24): the cards are roomier and the gaps wider
+   than the 75% baseline, so the left column's internal spacing
+   carries the hero height — the type sizes stay at the 75%
+   values, only the padding and gaps grow. */
 .services--list {
   flex: none;
   padding-block: 0;
@@ -146,22 +150,22 @@
 }
 
 .services__header--compact {
-  margin-bottom: 0.88rem;
+  margin-bottom: 1.75rem;
 }
 
 .services__header--compact .services__kick {
   font-size: 0.6rem;
-  margin-bottom: 0.38rem;
+  margin-bottom: 0.6rem;
 }
 
 .services__header--compact .services__title {
-  margin-bottom: 0.38rem;
+  margin-bottom: 0.6rem;
 }
 
 .services__header--compact .services__rule {
   width: 2.6rem;
   height: 2px;
-  margin-bottom: 0.56rem;
+  margin-bottom: 0.9rem;
 }
 
 .services--list .services__title {
@@ -176,7 +180,7 @@
 .services__list {
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
+  gap: 1.5rem;
   /* Natural height: the section still fills the leftover column
      height (see Bio.css), but the list itself does not stretch,
      so the empty space sits below the last card. */
@@ -189,11 +193,11 @@
 }
 
 .service-card--compact {
-  padding: 0.3rem 0.75rem;
+  padding: 0.9rem 0.75rem;
 }
 
 .service-card--compact .service-card__top {
-  margin-bottom: 0.23rem;
+  margin-bottom: 0.4rem;
 }
 
 .service-card--compact .service-card__icon {
@@ -202,13 +206,13 @@
 
 .service-card--compact .service-card__title {
   font-size: 0.79rem;
-  margin-bottom: 0.15rem;
+  margin-bottom: 0.3rem;
 }
 
 .service-card--compact .service-card__description {
   font-size: 0.64rem;
   line-height: 1.45;
-  margin-bottom: 0.26rem;
+  margin-bottom: 0.5rem;
 }
 
 .service-card--compact .service-card__cta {
@@ -217,22 +221,31 @@
 
 /* Short desktop viewports: tighten the compact cards so the
    left column still fits in one viewport. (Scaled by 0.75 with
-   the rest of the 75% look.) */
+   the rest of the 75% look.) POLISH: the gaps shrink too, so a
+   short viewport still fits without scrolling. */
 @media (max-height: 900px) {
+  .services__header--compact {
+    margin-bottom: 0.9rem;
+  }
+
+  .services__list {
+    gap: 0.75rem;
+  }
+
   .service-card--compact {
-    padding: 0.26rem 0.75rem;
+    padding: 0.5rem 0.75rem;
   }
 
   .service-card--compact .service-card__top {
-    margin-bottom: 0.19rem;
+    margin-bottom: 0.25rem;
   }
 
   .service-card--compact .service-card__title {
-    margin-bottom: 0.15rem;
+    margin-bottom: 0.2rem;
   }
 
   .service-card--compact .service-card__description {
-    margin-bottom: 0.23rem;
+    margin-bottom: 0.3rem;
   }
 }
 
