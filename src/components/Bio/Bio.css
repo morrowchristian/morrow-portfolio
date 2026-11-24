@@ -5,15 +5,28 @@
    - LAYOUT (2026-11-24, the user's diagram): two columns in one
      viewport — the portrait spans the FULL HEIGHT of the right
      column, while the left column stacks the bio on top and the
-     Services list below it. No scroll on desktop: the section
-     fills the viewport exactly (flex: 1, no fixed height lock),
-     so the Bio + footer fit one viewport and the portrait is
-     always fully in frame. The content area is wider (1520px) so
-     the left column is wide enough for the bio intro to wrap to
-     four lines. The portrait is taken out of flow (absolutely
-     positioned in its column) so its height can never force the
-     page taller than the left column's content — it always renders
-     exactly the hero height, at its natural aspect (0.736).
+     Services list below it.
+   - THE 75% LOOK (2026-11-24): the page at 75% zoom is how the
+     home page should look by default at 100% zoom — the same
+     proportions, scaled by ~0.75. So the container, type, gaps
+     and cards are all ~0.75x the old 100% values: the content
+     is smaller in the frame with breathing room, and the page
+     does NOT stretch to fill the viewport. The hero takes its
+     natural height (~749px in a 999px viewport) and the footer
+     sits right below it, leaving ~250px of whitespace beneath
+     the footer. That whitespace is the 75% look — keep it.
+     To get it, the home page opts out of the stretch: .bio-page
+     is flex: none, and .page (which is flex: 1 in layout.css)
+     is set to flex: none only when it holds the bio, via :has().
+     Other pages are unaffected — they still stretch and pin the
+     footer to the viewport bottom.
+   - The content area is narrower (1140px) so the left column is
+     wide enough for the bio intro to wrap to four lines. The
+     portrait is taken out of flow (absolutely positioned in its
+     column) so its height can never force the page taller than
+     the left column's content — it always renders exactly the
+     hero height, at its natural aspect (0.736). As the left
+     column content shrinks, the portrait shrinks with it.
    - The circuit art survives only as faint traces (opacity 0.16)
      and the single circuit line closing the intro. The concentric
      ring that used to sit above the portrait is gone — it cannot
@@ -32,12 +45,22 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  flex: 1;
-  min-height: 560px;
+  /* The 75% look: natural height, not stretched to fill the
+     viewport. The footer sits right below the content. */
+  flex: none;
+  min-height: 420px;
   padding-block: 0;
   overflow: hidden;
   background: #f6f1e7;
   color: #211d16;
+}
+
+/* The 75% look: stop .page from growing on the home page only,
+   so the footer sits right below the content and the whitespace
+   lands beneath the footer. Scoped to a .page holding the bio,
+   so Portfolio/Resume/Contact keep their stretch behaviour. */
+.page:has(> .bio-page) {
+  flex: none;
 }
 
 .bio__inner {
@@ -47,9 +70,9 @@
   flex: 1;
   min-height: 0;
   width: 100%;
-  max-width: 1520px;
+  max-width: 1140px;
   margin-inline: auto;
-  padding-inline: clamp(1.5rem, 4vw, 3rem);
+  padding-inline: clamp(1.13rem, 3vw, 2.25rem);
 }
 
 /* Faint circuit traces across the paper, behind everything. */
@@ -68,12 +91,11 @@
   flex: 1;
   display: grid;
   /* Two columns — bio + services stacked on the left, the
-     full-height portrait on the right — so the home page fits
-     one viewport with no scroll on desktop. */
+     full-height portrait on the right. */
   grid-template-columns: 1fr 1fr;
-  gap: clamp(2rem, 3vw, 3rem);
+  gap: clamp(1.5rem, 2.25vw, 2.25rem);
   min-height: 0;
-  padding-top: clamp(0.5rem, 1vh, 0.75rem);
+  padding-top: clamp(0.4rem, 0.75vh, 0.55rem);
 }
 
 .bio__main > * {
@@ -89,15 +111,18 @@
    intentional. The top padding is the breathing room between
    the navbar and the name — it lives on the left column only,
    so the portrait column keeps its full height, and the space
-   comes out of the breathing room below the last card, so the
-   page still fits one viewport. */
+   comes out of the breathing room below the last card. */
 .bio__left {
   display: flex;
   flex-direction: column;
   min-width: 0;
   min-height: 0;
-  gap: clamp(0.9rem, 2vh, 1.3rem);
-  padding-top: 1.5rem;
+  gap: clamp(0.7rem, 2vh, 1.5rem);
+  padding-top: 1.13rem;
+  /* Breathing room below the last service card before the footer
+     (the 75% look keeps ~50px here). The left column sets the
+     grid row height, so this also sets the portrait height. */
+  padding-bottom: 3rem;
 }
 
 .bio__left .services--list {
@@ -111,13 +136,13 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: clamp(0.55rem, 1.1vh, 0.85rem);
-  max-width: 36rem;
+  gap: clamp(0.4rem, 0.8vh, 0.65rem);
+  max-width: 27rem;
 }
 
 .bio__kick {
   font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
-  font-size: clamp(0.8rem, 0.7rem + 0.3vw, 0.9rem);
+  font-size: clamp(0.6rem, 0.53rem + 0.23vw, 0.68rem);
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -126,7 +151,7 @@
 
 .bio__title {
   font-family: "Newsreader", Georgia, "Times New Roman", serif;
-  font-size: clamp(1.7rem, 1.35rem + 1vw, 2.1rem);
+  font-size: clamp(1.3rem, 1rem + 0.75vw, 1.6rem);
   font-weight: 500;
   line-height: 1.08;
   letter-spacing: -0.01em;
@@ -135,21 +160,21 @@
 
 .bio__rule {
   display: block;
-  width: 3.5rem;
-  height: 3px;
+  width: 2.6rem;
+  height: 2px;
   background: #a02c1e;
 }
 
 .bio__subtitle {
   font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
-  font-size: clamp(0.8rem, 0.75rem + 0.2vw, 0.9rem);
+  font-size: clamp(0.6rem, 0.56rem + 0.15vw, 0.68rem);
   letter-spacing: 0.06em;
   color: #4c463a;
 }
 
 .bio__intro {
   font-family: "Newsreader", Georgia, "Times New Roman", serif;
-  font-size: clamp(0.98rem, 0.92rem + 0.2vw, 1.08rem);
+  font-size: clamp(0.75rem, 0.7rem + 0.15vw, 0.8rem);
   line-height: 1.5;
   color: #4c463a;
 }
@@ -160,14 +185,14 @@
 .bio__divider {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   width: 100%;
 }
 
 .bio__divider-square {
   flex: none;
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   background: #211d16;
 }
 
@@ -207,7 +232,7 @@
   bottom: 0;
   z-index: 0;
   width: 100%;
-  height: 180px;
+  height: 135px;
   background: #a02c1e;
 }
 
@@ -225,49 +250,50 @@
 
 /* Short desktop viewports: tighten everything so the left column
    still fits. The fluid sizes already shrink; this closes the
-   gaps and type a little more. */
+   gaps and type a little more. (Scaled by 0.75 with the rest.) */
 @media (max-height: 900px) {
   .bio__main {
-    padding-top: 0.5rem;
+    padding-top: 0.38rem;
   }
 
   .bio__left {
-    gap: 0.8rem;
+    gap: 0.6rem;
   }
 
   .bio__text {
-    gap: 0.4rem;
+    gap: 0.3rem;
   }
 
   .bio__title {
-    font-size: clamp(1.6rem, 1.3rem + 0.9vw, 1.9rem);
+    font-size: clamp(1.2rem, 0.98rem + 0.68vw, 1.43rem);
   }
 
   .bio__intro {
-    font-size: 0.95rem;
+    font-size: 0.71rem;
     line-height: 1.5;
   }
 
   .bio__redblock {
-    height: 150px;
+    height: 113px;
   }
 }
 
 @media (max-height: 720px) {
   .bio__title {
-    font-size: clamp(1.5rem, 1.25rem + 0.8vw, 1.75rem);
+    font-size: clamp(1.13rem, 0.94rem + 0.6vw, 1.31rem);
   }
 
   .bio__intro {
-    font-size: 0.92rem;
+    font-size: 0.69rem;
   }
 }
 
 /* Narrow screens: one column — intro on top, portrait below at
-   ~55svh with the red block behind its lower part, services
+   ~41svh with the red block behind its lower part, services
    last. The left column dissolves (display: contents) so the
    three blocks can be ordered directly; the page scrolls
-   gracefully if the text needs room. */
+   gracefully if the text needs room. Spacing follows the same
+   tighter 75% rhythm as desktop. */
 @media (max-width: 768px) {
   .bio-page {
     overflow: visible;
@@ -280,8 +306,8 @@
 
   .bio__main {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
-    padding-top: 1.5rem;
+    gap: 1.13rem;
+    padding-top: 1.13rem;
   }
 
   .bio__left {
@@ -313,14 +339,14 @@
   }
 
   .bio__redblock {
-    height: 140px;
+    height: 105px;
   }
 
   .bio__portrait-img {
     height: auto;
     width: auto;
     max-width: 100%;
-    max-height: 55svh;
+    max-height: 41svh;
     object-position: center bottom;
   }
 

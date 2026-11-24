@@ -131,7 +131,11 @@
    padding — the hero grid supplies the spacing. The cards take
    their natural content height (flex: none) instead of stretching
    to fill the column, so they read as short boxes; the leftover
-   space in the left column becomes breathing room below the list. */
+   space in the left column becomes breathing room below the list.
+   THE 75% LOOK (2026-11-24): all type, gaps and padding here are
+   ~0.75x the old values, so the home page at 100% zoom matches
+   the 75% zoom view. Only this compact variant is scaled — the
+   full Services page keeps its own sizing. */
 .services--list {
   flex: none;
   padding-block: 0;
@@ -142,34 +146,37 @@
 }
 
 .services__header--compact {
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.88rem;
 }
 
 .services__header--compact .services__kick {
-  margin-bottom: 0.5rem;
+  font-size: 0.6rem;
+  margin-bottom: 0.38rem;
 }
 
 .services__header--compact .services__title {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.38rem;
 }
 
 .services__header--compact .services__rule {
-  margin-bottom: 0.75rem;
+  width: 2.6rem;
+  height: 2px;
+  margin-bottom: 0.56rem;
 }
 
 .services--list .services__title {
-  font-size: clamp(1.6rem, 1.4rem + 0.8vw, 2rem);
+  font-size: clamp(1.2rem, 1.05rem + 0.6vw, 1.5rem);
 }
 
 .services--list .services__intro {
-  font-size: 0.98rem;
+  font-size: 0.74rem;
   line-height: 1.5;
 }
 
 .services__list {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.45rem;
   /* Natural height: the section still fills the leftover column
      height (see Bio.css), but the list itself does not stretch,
      so the empty space sits below the last card. */
@@ -182,45 +189,50 @@
 }
 
 .service-card--compact {
-  padding: 0.4rem 1rem;
+  padding: 0.3rem 0.75rem;
 }
 
 .service-card--compact .service-card__top {
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.23rem;
 }
 
 .service-card--compact .service-card__icon {
-  font-size: 1.25rem;
+  font-size: 0.94rem;
 }
 
 .service-card--compact .service-card__title {
-  font-size: 1.05rem;
-  margin-bottom: 0.2rem;
+  font-size: 0.79rem;
+  margin-bottom: 0.15rem;
 }
 
 .service-card--compact .service-card__description {
-  font-size: 0.85rem;
+  font-size: 0.64rem;
   line-height: 1.45;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.26rem;
+}
+
+.service-card--compact .service-card__cta {
+  font-size: 0.6rem;
 }
 
 /* Short desktop viewports: tighten the compact cards so the
-   left column still fits in one viewport. */
+   left column still fits in one viewport. (Scaled by 0.75 with
+   the rest of the 75% look.) */
 @media (max-height: 900px) {
   .service-card--compact {
-    padding: 0.35rem 1rem;
+    padding: 0.26rem 0.75rem;
   }
 
   .service-card--compact .service-card__top {
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.19rem;
   }
 
   .service-card--compact .service-card__title {
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.15rem;
   }
 
   .service-card--compact .service-card__description {
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.23rem;
   }
 }
 
