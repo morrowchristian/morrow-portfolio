@@ -45,9 +45,9 @@ export const resume: ResumeData = {
       company: "Eagle Tele-Services, Remote",
       period: "May 2026 – Present",
       bullets: [
-        "Handle high-volume inbound calls from commercial fleet drivers, performing rapid diagnostic intake and dispatching emergency support.",
-        "Use digital mapping, fleet software, and repair manuals concurrently to pinpoint failures and pair drivers with qualified vendors.",
-        "Maintain audit-ready dispatch logs, quotes, and billing entries.",
+        "Pinpoint commercial vehicle breakdown locations across the U.S. and Canada with digital mapping tools, often working from minimal information.",
+        "Coordinate tire replacements for broken-down commercial vehicles with drivers, fleets, servicing dealers, and technicians by phone and email, following detailed customer profiles to ensure product accuracy and fleet satisfaction.",
+        "Verify tire sizes and all breakdown data before transmitting to tire shops, and enter critical service details in real time during calls.",
       ],
     },
     {
