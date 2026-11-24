@@ -2,17 +2,22 @@
    - Warm paper #f6f1e7, espresso ink #211d16, shirt red #a02c1e,
      soft brown #4c463a. The quietest branch: a person first, a
      tech demo second.
-   - MAGAZINE LAYOUT (2026-11-23): three columns in one viewport —
-     an intro column on the left (mono kick with his name, a
-     Newsreader serif headline, a short red rule, the bio in soft
-     brown, and a circuit line closing the intro), the transparent
-     paint cutout in the middle, and the Services list on the
-     right. No scroll on desktop: the section fills the viewport
-     exactly (flex: 1, no fixed height lock), so the Bio + footer
-     fit one viewport and the portrait is always fully in frame.
+   - LAYOUT (2026-11-24, the user's diagram): two columns in one
+     viewport — the portrait spans the FULL HEIGHT of the right
+     column, while the left column stacks the bio on top and the
+     Services list below it. No scroll on desktop: the section
+     fills the viewport exactly (flex: 1, no fixed height lock),
+     so the Bio + footer fit one viewport and the portrait is
+     always fully in frame. The content area is wider (1520px) so
+     the left column is wide enough for the bio intro to wrap to
+     four lines. The portrait is taken out of flow (absolutely
+     positioned in its column) so its height can never force the
+     page taller than the left column's content — it always renders
+     exactly the hero height, at its natural aspect (0.736).
    - The circuit art survives only as faint traces (opacity 0.16)
-     and one concentric red ring, top-right of the portrait column
-     — in flow above the portrait, so it can never overlap it.
+     and the single circuit line closing the intro. The concentric
+     ring that used to sit above the portrait is gone — it cannot
+     share the column with a full-height image.
    - The red block sits behind the portrait's lower part and
      tracks the figure exactly: the portrait sits in a frame that
      shrink-wraps to the image, and the block is 100% of the
@@ -20,9 +25,8 @@
      ratio. The portrait is an <img> with object-fit: contain,
      so the whole face, hair and shoulders are always fully visible:
      never cropped, never stretched, never warped.
-   - Content stops at 1200px and centres; the warm paper stays
-     full-bleed. On narrow screens the three columns stack —
-     intro, portrait, services — and the page scrolls normally. */
+   - On narrow screens the columns stack — intro, portrait,
+     services — and the page scrolls normally. */
 
 .bio-page {
   position: relative;
@@ -43,7 +47,7 @@
   flex: 1;
   min-height: 0;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1520px;
   margin-inline: auto;
   padding-inline: clamp(1.5rem, 4vw, 3rem);
 }
@@ -63,27 +67,43 @@
   z-index: 1;
   flex: 1;
   display: grid;
-  /* Three columns — intro, portrait, services list — so the home
-     page fits one viewport with no scroll on desktop. */
-  grid-template-columns: 0.9fr 1fr 1fr;
-  gap: clamp(1.5rem, 2.5vw, 2.5rem);
-  padding-top: clamp(2rem, 5vh, 3.5rem);
+  /* Two columns — bio + services stacked on the left, the
+     full-height portrait on the right — so the home page fits
+     one viewport with no scroll on desktop. */
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 3vw, 3rem);
+  min-height: 0;
+  padding-top: clamp(0.5rem, 1vh, 0.75rem);
 }
 
 .bio__main > * {
   min-width: 0;
 }
 
-/* Left: magazine intro column, vertically centred against the
-   portrait and services. */
+/* Left column: bio on top, Services below it. The Services
+   section stretches to fill whatever height is left, so its
+   three cards share the remaining space. */
+.bio__left {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  gap: clamp(0.6rem, 1.2vh, 0.9rem);
+}
+
+.bio__left .services--list {
+  flex: 1;
+  min-height: 0;
+}
+
+/* Bio intro, top of the left column. */
 .bio__text {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
-  gap: clamp(0.9rem, 1.8vh, 1.25rem);
-  max-width: 34rem;
-  padding-bottom: clamp(1.5rem, 3vh, 2.5rem);
+  justify-content: flex-start;
+  gap: clamp(0.55rem, 1.1vh, 0.85rem);
+  max-width: 36rem;
 }
 
 .bio__kick {
@@ -97,7 +117,7 @@
 
 .bio__title {
   font-family: "Newsreader", Georgia, "Times New Roman", serif;
-  font-size: clamp(1.8rem, 1.4rem + 1.2vw, 2.5rem);
+  font-size: clamp(1.7rem, 1.35rem + 1vw, 2.1rem);
   font-weight: 500;
   line-height: 1.08;
   letter-spacing: -0.01em;
@@ -120,8 +140,8 @@
 
 .bio__intro {
   font-family: "Newsreader", Georgia, "Times New Roman", serif;
-  font-size: clamp(1.02rem, 0.95rem + 0.25vw, 1.15rem);
-  line-height: 1.6;
+  font-size: clamp(0.98rem, 0.92rem + 0.2vw, 1.08rem);
+  line-height: 1.5;
   color: #4c463a;
 }
 
@@ -148,31 +168,28 @@
   background: rgba(33, 29, 22, 0.25);
 }
 
-/* Right: portrait column — ring on top, portrait at the bottom,
-   red block behind the portrait's lower part. */
+/* Right column: the portrait spans the full hero height. The
+   frame is absolutely positioned in its column — out of flow —
+   so the portrait's height can never force the page taller than
+   the left column's content: the frame is exactly the column
+   height, and the image fills it with object-fit: contain, so it
+   renders as large as the column allows without ever cropping or
+   warping. */
 .bio__portrait {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: space-between;
   min-width: 0;
-  min-height: clamp(480px, 58svh, 620px);
+  min-height: 0;
+  height: 100%;
 }
 
-/* The frame shrink-wraps to the portrait image (a flex item with
-   width auto), so the red block inside it always matches the
-   figure's rendered width. */
+/* The frame shrink-wraps to the portrait image, so the red block
+   inside it always matches the figure's rendered width. */
 .bio__portrait-frame {
-  position: relative;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 100%;
   line-height: 0;
-}
-
-.bio__ring {
-  flex: none;
-  width: clamp(110px, 11vw, 150px);
-  height: auto;
-  margin-top: clamp(0.5rem, 2vh, 1.5rem);
 }
 
 .bio__redblock {
@@ -189,40 +206,59 @@
   position: relative;
   z-index: 1;
   display: block;
+  height: 100%;
   width: auto;
   max-width: 100%;
-  max-height: 62svh;
+  max-height: 100%;
   object-fit: contain;
   object-position: right bottom;
 }
 
-/* Short desktop viewports: tighten the column so it still fits
-   comfortably. The fluid sizes already shrink; this just closes
-   the gaps a little more. */
-@media (max-height: 720px) {
+/* Short desktop viewports: tighten everything so the left column
+   still fits. The fluid sizes already shrink; this closes the
+   gaps and type a little more. */
+@media (max-height: 900px) {
+  .bio__main {
+    padding-top: 0.5rem;
+  }
+
+  .bio__left {
+    gap: 0.6rem;
+  }
+
   .bio__text {
-    gap: clamp(0.6rem, 1.2vh, 0.9rem);
-    padding-bottom: 1.25rem;
-  }
-
-  .bio__portrait {
-    min-height: 440px;
-  }
-
-  .bio__portrait-img {
-    max-height: 50svh;
+    gap: 0.4rem;
   }
 
   .bio__title {
-    font-size: clamp(1.6rem, 1.3rem + 1vw, 2.1rem);
+    font-size: clamp(1.6rem, 1.3rem + 0.9vw, 1.9rem);
+  }
+
+  .bio__intro {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .bio__redblock {
+    height: 150px;
+  }
+}
+
+@media (max-height: 720px) {
+  .bio__title {
+    font-size: clamp(1.5rem, 1.25rem + 0.8vw, 1.75rem);
+  }
+
+  .bio__intro {
+    font-size: 0.92rem;
   }
 }
 
 /* Narrow screens: one column — intro on top, portrait below at
-   ~55svh with the red block behind its lower part. The ring is
-   hidden (it would crowd the text); the portrait still uses
-   object-fit: contain, so his face is never cropped. The page
-   scrolls gracefully if the text needs room. */
+   ~55svh with the red block behind its lower part, services
+   last. The left column dissolves (display: contents) so the
+   three blocks can be ordered directly; the page scrolls
+   gracefully if the text needs room. */
 @media (max-width: 768px) {
   .bio-page {
     overflow: visible;
@@ -230,6 +266,7 @@
 
   .bio__inner {
     min-height: calc(100svh - 56px);
+    max-width: 1200px;
   }
 
   .bio__main {
@@ -238,19 +275,32 @@
     padding-top: 1.5rem;
   }
 
+  .bio__left {
+    display: contents;
+  }
+
   .bio__text {
+    order: 1;
     max-width: none;
     padding-bottom: 0;
     justify-content: flex-start;
   }
 
   .bio__portrait {
+    order: 2;
+    position: static;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: flex-end;
+    height: auto;
     min-height: 0;
   }
 
-  .bio__ring {
-    display: none;
+  .bio__portrait-frame {
+    position: static;
+    flex: none;
+    height: auto;
   }
 
   .bio__redblock {
@@ -258,9 +308,15 @@
   }
 
   .bio__portrait-img {
+    height: auto;
     width: auto;
     max-width: 100%;
     max-height: 55svh;
     object-position: center bottom;
+  }
+
+  .bio__left .services--list {
+    order: 3;
+    flex: none;
   }
 }

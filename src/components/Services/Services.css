@@ -140,7 +140,19 @@
 }
 
 .services__header--compact {
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.services__header--compact .services__kick {
+  margin-bottom: 0.5rem;
+}
+
+.services__header--compact .services__title {
+  margin-bottom: 0.5rem;
+}
+
+.services__header--compact .services__rule {
+  margin-bottom: 0.75rem;
 }
 
 .services--list .services__title {
@@ -155,7 +167,7 @@
 .services__list {
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
+  gap: 0.75rem;
   flex: 1;
   min-height: 0;
 }
@@ -165,11 +177,11 @@
 }
 
 .service-card--compact {
-  padding: 0.95rem 1.25rem;
+  padding: 0.55rem 1.1rem;
 }
 
 .service-card--compact .service-card__top {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
 .service-card--compact .service-card__icon {
@@ -177,14 +189,34 @@
 }
 
 .service-card--compact .service-card__title {
-  font-size: 1.15rem;
-  margin-bottom: 0.4rem;
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
 }
 
 .service-card--compact .service-card__description {
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   line-height: 1.5;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Short desktop viewports: tighten the compact cards so the
+   left column still fits in one viewport. */
+@media (max-height: 900px) {
+  .service-card--compact {
+    padding: 0.45rem 1rem;
+  }
+
+  .service-card--compact .service-card__top {
+    margin-bottom: 0.3rem;
+  }
+
+  .service-card--compact .service-card__title {
+    margin-bottom: 0.2rem;
+  }
+
+  .service-card--compact .service-card__description {
+    margin-bottom: 0.35rem;
+  }
 }
 
 @media (max-width: 768px) {
