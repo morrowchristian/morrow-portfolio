@@ -1,15 +1,18 @@
 // src/components/Navbar/Navbar.tsx — Editorial navbar: brand and
-// the page menu (About, Portfolio, Resume, Contact).
+// the page menu (About, Portfolio, Resume, Contact), plus the
+// GitHub and LinkedIn links at the top right (moved here from
+// the footer when the footer was removed 2026-11-24).
 // Services is no longer a separate page — it renders on the
 // home page below the bio (2026-11-23).
-// The GitHub and LinkedIn links live in the footer, and the
-// résumé download lives on the Resume page, so the bar holds
-// only the brand and the menu — no buttons. Below 1200px the
-// inline menu collapses into a hamburger button that opens a
-// dropdown panel with the page links.
+// The résumé download lives on the Resume page, so the bar holds
+// the brand, the menu and the social links — no buttons. Below
+// 1200px the inline menu collapses into a hamburger button that
+// opens a dropdown panel with the page links; the social links
+// stay visible in the bar at every width.
 import "./Navbar.css";
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { useScrollOffset } from "../../hooks/useScrollOffset";
 
 const NAV_ITEMS = [
@@ -95,6 +98,27 @@ export const Navbar: React.FC = () => {
               </NavLink>
             ))}
           </nav>
+          <div className="navbar__socials" aria-label="Social links">
+            <span className="navbar__socials-divider" aria-hidden="true" />
+            <a
+              href="https://github.com/morrowchristian"
+              target="_blank"
+              rel="noreferrer"
+              className="navbar__social"
+              aria-label="GitHub"
+            >
+              <FaGithub />
+            </a>
+            <a
+              href="https://linkedin.com/in/morrowchristian"
+              target="_blank"
+              rel="noreferrer"
+              className="navbar__social"
+              aria-label="LinkedIn"
+            >
+              <FaLinkedin />
+            </a>
+          </div>
           <button
             type="button"
             className={`navbar__hamburger ${isMenuOpen ? "navbar__hamburger--open" : ""}`}

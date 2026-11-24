@@ -2,10 +2,9 @@
 // horizontal scroller: one project in full detail, the rest lined
 // up in a strip below. Click a card (or the arrows, or the arrow
 // keys) to change the project being viewed. The page fits one
-// viewport so the footer is always visible — the detail panel
-// flexes to fill the space, and its body scrolls internally if
-// the content is taller than the panel. No modal: the detail panel
-// IS the details view. ProjectCard.tsx and ProjectModalContent.tsx
+// viewport — the detail panel flexes to fill the space, and its
+// body scrolls internally if the content is taller than the
+// panel. No modal: the detail panel IS the details view. ProjectCard.tsx and ProjectModalContent.tsx
 // are unreferenced now (kept in the repo, not deleted).
 import "./Portfolio.css";
 import { useEffect, useRef, useState } from "react";

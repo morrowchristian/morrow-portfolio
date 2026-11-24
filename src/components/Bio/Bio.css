@@ -3,30 +3,36 @@
      soft brown #4c463a. The quietest branch: a person first, a
      tech demo second.
    - LAYOUT (2026-11-24, the user's diagram): two columns in one
-     viewport — the portrait spans the FULL HEIGHT of the right
-     column, while the left column stacks the bio on top and the
-     Services list below it.
+     viewport — the portrait sits in the right column, while the
+     left column stacks the bio on top and the Services list
+     below it.
    - THE 75% LOOK (2026-11-24): the page at 75% zoom is how the
      home page should look by default at 100% zoom — the same
-     proportions, scaled by ~0.75. So the container, type, gaps
+     element sizes, scaled by ~0.75. So the container, type, gaps
      and cards are all ~0.75x the old 100% values: the content
-     is smaller in the frame with breathing room, and the page
-     does NOT stretch to fill the viewport. The hero takes its
-     natural height (~749px in a 999px viewport) and the footer
-     sits right below it, leaving ~250px of whitespace beneath
-     the footer. That whitespace is the 75% look — keep it.
-     To get it, the home page opts out of the stretch: .bio-page
-     is flex: none, and .page (which is flex: 1 in layout.css)
-     is set to flex: none only when it holds the bio, via :has().
-     Other pages are unaffected — they still stretch and pin the
-     footer to the viewport bottom.
+     is smaller in the frame with breathing room. CORRECTION
+     (2026-11-24): the 75% look was about ELEMENT SIZES, not
+     page height — the page still fills the entire viewport at
+     minimum. So the hero stretches (flex: 1) and the two columns
+     are vertically centred in it (align-items: center); the
+     extra vertical space lands INSIDE the hero as breathing
+     room above and below the content, never below a footer
+     (there is no footer any more — it was removed 2026-11-24
+     and its GitHub/LinkedIn links moved to the navbar).
    - The content area is narrower (1140px) so the left column is
      wide enough for the bio intro to wrap to four lines. The
-     portrait is taken out of flow (absolutely positioned in its
-     column) so its height can never force the page taller than
-     the left column's content — it always renders exactly the
-     hero height, at its natural aspect (0.736). As the left
-     column content shrinks, the portrait shrinks with it.
+     portrait is NOT stretched to the hero height: its frame
+     shrink-wraps to the image, so the portrait renders at the
+     width the column allows (~516px) and its natural aspect
+     (0.736) sets its height (~700px) — it stays that size
+     whatever the viewport height, never cropped or warped.
+     The red block sits behind the portrait's lower part and
+     tracks the figure exactly: the portrait sits in a frame that
+     shrink-wraps to the image, and the block is 100% of the
+     frame, so it always matches the figure whatever its aspect
+     ratio. The portrait is an <img> with object-fit: contain,
+     so the whole face, hair and shoulders are always fully visible:
+     never cropped, never stretched, never warped.
    - The circuit art survives only as faint traces (opacity 0.16)
      and the single circuit line closing the intro. The concentric
      ring that used to sit above the portrait is gone — it cannot
@@ -45,22 +51,17 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  /* The 75% look: natural height, not stretched to fill the
-     viewport. The footer sits right below the content. */
-  flex: none;
+  /* Full height at minimum: the hero stretches to fill the
+     viewport (the footer is gone, so there is nothing to pin —
+     the page is the hero). The extra vertical space becomes
+     breathing room inside the hero, via align-items: center
+     on .bio__main below. */
+  flex: 1;
   min-height: 420px;
   padding-block: 0;
   overflow: hidden;
   background: #f6f1e7;
   color: #211d16;
-}
-
-/* The 75% look: stop .page from growing on the home page only,
-   so the footer sits right below the content and the whitespace
-   lands beneath the footer. Scoped to a .page holding the bio,
-   so Portfolio/Resume/Contact keep their stretch behaviour. */
-.page:has(> .bio-page) {
-  flex: none;
 }
 
 .bio__inner {
@@ -91,8 +92,11 @@
   flex: 1;
   display: grid;
   /* Two columns — bio + services stacked on the left, the
-     full-height portrait on the right. */
+     portrait on the right — vertically centred in the hero,
+     so the extra vertical space is breathing room above and
+     below the content, not a gap below a footer. */
   grid-template-columns: 1fr 1fr;
+  align-items: center;
   gap: clamp(1.5rem, 2.25vw, 2.25rem);
   min-height: 0;
   padding-top: clamp(0.4rem, 0.75vh, 0.55rem);
@@ -102,16 +106,12 @@
   min-width: 0;
 }
 
-/* Left column: bio on top, Services below it. The Services
-   section stretches to fill whatever height is left, but the
-   compact cards inside it take their natural height — the
-   leftover space reads as breathing room below the last card,
-   not stretched boxes. The slightly larger gap below the bio
-   takes up a little of that space so the column still looks
-   intentional. The top padding is the breathing room between
-   the navbar and the name — it lives on the left column only,
-   so the portrait column keeps its full height, and the space
-   comes out of the breathing room below the last card. */
+/* Left column: bio on top, Services below it. The compact cards
+   inside it take their natural height — the leftover space reads
+   as breathing room below the last card, not stretched boxes.
+   The top padding is the breathing room between the navbar and
+   the name — it lives on the left column only, so the portrait
+   column keeps its own centring. */
 .bio__left {
   display: flex;
   flex-direction: column;
@@ -119,9 +119,10 @@
   min-height: 0;
   gap: clamp(0.7rem, 2vh, 1.5rem);
   padding-top: 1.13rem;
-  /* Breathing room below the last service card before the footer
-     (the 75% look keeps ~50px here). The left column sets the
-     grid row height, so this also sets the portrait height. */
+  /* Breathing room below the last service card before the
+     content's bottom edge (the 75% look keeps ~50px here).
+     The column is fit-content height now, so this padding is
+     part of the column — it does not stretch the portrait. */
   padding-bottom: 3rem;
 }
 
@@ -202,27 +203,25 @@
   background: rgba(33, 29, 22, 0.25);
 }
 
-/* Right column: the portrait spans the full hero height. The
-   frame is absolutely positioned in its column — out of flow —
-   so the portrait's height can never force the page taller than
-   the left column's content: the frame is exactly the column
-   height, and the image fills it with object-fit: contain, so it
-   renders as large as the column allows without ever cropping or
-   warping. */
+/* Right column: the portrait keeps its own size. The frame
+   shrink-wraps to the image (in flow, height auto), so the
+   portrait renders at the width the column allows and its
+   natural aspect sets its height (~516 x ~700px) — it does
+   NOT stretch with the hero. The column itself is vertically
+   centred in the hero by align-items: center on .bio__main,
+   so the portrait sits centred against the left column. */
 .bio__portrait {
   position: relative;
   min-width: 0;
   min-height: 0;
-  height: 100%;
+  height: auto;
 }
 
 /* The frame shrink-wraps to the portrait image, so the red block
    inside it always matches the figure's rendered width. */
 .bio__portrait-frame {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  height: 100%;
+  position: relative;
+  height: auto;
   line-height: 0;
 }
 
@@ -240,10 +239,9 @@
   position: relative;
   z-index: 1;
   display: block;
-  height: 100%;
+  height: auto;
   width: auto;
   max-width: 100%;
-  max-height: 100%;
   object-fit: contain;
   object-position: right bottom;
 }

@@ -3,21 +3,25 @@
 // deep-red block behind the portrait, taken from his shirt.
 // The circuit art survives only as faint traces and one red ring.
 // Layout (2026-11-24, the user's diagram): two columns — the
-// portrait spans the FULL HEIGHT of the right column, while the
-// left column stacks the bio on top and the Services list below
-// it. One viewport, no scroll on desktop. The numbered link index
-// (01 About, 02 Portfolio, 03 Resume) now lives in the site
-// footer, rendered on every page — not on this page. Services
-// sits in the left column below the bio (the /services route was
-// removed 2026-11-23).
+// portrait sits in the right column, while the left column stacks
+// the bio on top and the Services list below it. The section
+// fills the viewport at minimum (flex: 1) and the two columns
+// are vertically centred in it, so the smaller 75% elements sit
+// with breathing room above and below. No scroll on desktop.
+// The site footer was removed 2026-11-24 (its GitHub/LinkedIn
+// links moved to the navbar); the numbered link index that used
+// to live in the footer is gone with it. Services sits in the
+// left column below the bio (the /services route was removed
+// 2026-11-23).
 // GitHub, LinkedIn and Contact are not repeated here; they
 // already live in the navbar. The
 // résumé download lives in the navbar too (next to Connect), not
 // on this page.
-// The title is kept small (2.2rem max) and the section fills the
-// viewport exactly (flex: 1, no fixed height lock), so the
-// portrait is always fully in frame and the footer sits directly
-// below — no scroll on desktop.
+// The title is kept small (1.6rem max, the 75% size) and the
+// section fills the viewport at minimum (flex: 1, no fixed height
+// lock), with the two columns vertically centred in it — so the
+// portrait is always fully in frame and there is no scroll on
+// desktop.
 // A single circuit line with a square on each end closes the
 // intro — it replaces the L-shaped trace that
 // used to sit behind the stack (the stack itself was removed
@@ -110,11 +114,13 @@ export const Bio: React.FC = () => {
             <Services variant="list" />
           </div>
 
-          {/* Right column: the portrait spans the full hero height.
-              The concentric ring that used to sit above the
-              portrait is gone — it cannot share the column with a
-              full-height image. The faint traces and the circuit
-              divider above carry the circuit aesthetic now. */}
+          {/* Right column: the portrait keeps its own size — the
+              frame shrink-wraps to the image, so it does not
+              stretch with the hero. The concentric ring that used
+              to sit above the portrait is gone — it cannot share
+              the column with the image. The faint traces and the
+              circuit divider above carry the circuit aesthetic
+              now. */}
           <div className="bio__portrait" aria-hidden="true">
             {/* The frame shrink-wraps to the portrait image, so the
                 red block (100% of the frame) always matches the
