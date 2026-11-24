@@ -118,7 +118,7 @@ export const resume: ResumeData = {
     {
       role: "Lead, Bradley County Division",
       org: "Anna Galloway for U.S. Congress (TN-3)",
-      period: "2026 – Present",
+      period: "2026",
       bullets: [
         "Direct campaign operations, voter outreach, and field strategy across Bradley County.",
       ],
