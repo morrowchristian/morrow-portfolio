@@ -5,16 +5,19 @@
    rule, Newsreader serif for the brand name, IBM Plex Mono for
    the subtitle and the menu. Slimmer at 56px — the .page top
    offset in layout.css and the Bio min-height calcs match it.
-   Brand and the page menu only: the GitHub and LinkedIn links
-   live in the footer, the résumé download lives on the Resume
-   page, and Contact is its own page, so the bar holds no
-   buttons. The menu is deliberately smaller than a button would
-   be (0.70rem, tighter tracking) and the brand subtitle hides
-   at ≤1024px, so the bar still fits at narrower widths — and
-   below 1024px the menu text scales down a touch more (0.65rem,
-   tighter gap) rather than collapsing. Only on a mobile screen
-   (≤768px) does the menu collapse into a hamburger button that
-   opens a dropdown panel with the page links; the dropdown links
+   Brand, the page menu and the GitHub/LinkedIn links: the social
+   links moved here from the footer when the footer was removed
+   (2026-11-24) — the smaller elements leave room in the bar.
+   The résumé download lives on the Resume page, and Contact is
+   its own page, so the bar holds no buttons. The menu is
+   deliberately smaller than a button would be (0.70rem, tighter
+   tracking) and the brand subtitle hides at ≤1024px, so the bar
+   still fits at narrower widths — and below 1024px the menu text
+   scales down a touch more (0.65rem, tighter gap) rather than
+   collapsing. Only on a mobile screen (≤768px) does the menu
+   collapse into a hamburger button that opens a dropdown panel
+   with the page links; the social links stay visible in the bar
+   at every width, next to the hamburger. The dropdown links
    are large with generous tap targets, and the current page is
    red and bold, so it stays easy to navigate. */
 
@@ -129,6 +132,35 @@
 .navbar__link--active {
   color: #a02c1e;
   border-bottom-color: #a02c1e;
+}
+
+/* Social links (GitHub, LinkedIn) at the top right, after the
+   page menu: a hairline divider, then two ink icons that turn
+   red on hover. Small enough to fit the bar at every width. */
+.navbar__socials {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.navbar__socials-divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(33, 29, 22, 0.2);
+}
+
+.navbar__social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  color: #4c463a;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.navbar__social:hover {
+  color: #a02c1e;
 }
 
 /* Hamburger: hidden except on mobile (≤768px), where it
