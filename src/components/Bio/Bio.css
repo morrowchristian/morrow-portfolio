@@ -86,13 +86,18 @@
    leftover space reads as breathing room below the last card,
    not stretched boxes. The slightly larger gap below the bio
    takes up a little of that space so the column still looks
-   intentional. */
+   intentional. The top padding is the breathing room between
+   the navbar and the name — it lives on the left column only,
+   so the portrait column keeps its full height, and the space
+   comes out of the breathing room below the last card, so the
+   page still fits one viewport. */
 .bio__left {
   display: flex;
   flex-direction: column;
   min-width: 0;
   min-height: 0;
   gap: clamp(0.9rem, 2vh, 1.3rem);
+  padding-top: 1.5rem;
 }
 
 .bio__left .services--list {
