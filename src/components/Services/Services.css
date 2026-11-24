@@ -128,8 +128,10 @@
 
 /* Compact list variant (home-page hero, beside the portrait):
    same three services, tighter header, compact cards, no section
-   padding — the hero grid supplies the spacing. The list stretches
-   to fill the hero row so the three cards share the height. */
+   padding — the hero grid supplies the spacing. The cards take
+   their natural content height (flex: none) instead of stretching
+   to fill the column, so they read as short boxes; the leftover
+   space in the left column becomes breathing room below the list. */
 .services--list {
   flex: none;
   padding-block: 0;
@@ -140,7 +142,7 @@
 }
 
 .services__header--compact {
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.6rem;
 }
 
 .services__header--compact .services__kick {
@@ -161,53 +163,56 @@
 
 .services--list .services__intro {
   font-size: 0.98rem;
-  line-height: 1.55;
+  line-height: 1.5;
 }
 
 .services__list {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  flex: 1;
+  gap: 0.6rem;
+  /* Natural height: the section still fills the leftover column
+     height (see Bio.css), but the list itself does not stretch,
+     so the empty space sits below the last card. */
+  flex: none;
   min-height: 0;
 }
 
 .services__list .service-card--compact {
-  flex: 1;
+  flex: none;
 }
 
 .service-card--compact {
-  padding: 0.55rem 1.1rem;
+  padding: 0.4rem 1rem;
 }
 
 .service-card--compact .service-card__top {
-  margin-bottom: 0.4rem;
-}
-
-.service-card--compact .service-card__icon {
-  font-size: 1.35rem;
-}
-
-.service-card--compact .service-card__title {
-  font-size: 1.1rem;
   margin-bottom: 0.3rem;
 }
 
+.service-card--compact .service-card__icon {
+  font-size: 1.25rem;
+}
+
+.service-card--compact .service-card__title {
+  font-size: 1.05rem;
+  margin-bottom: 0.2rem;
+}
+
 .service-card--compact .service-card__description {
-  font-size: 0.88rem;
-  line-height: 1.5;
-  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  margin-bottom: 0.35rem;
 }
 
 /* Short desktop viewports: tighten the compact cards so the
    left column still fits in one viewport. */
 @media (max-height: 900px) {
   .service-card--compact {
-    padding: 0.45rem 1rem;
+    padding: 0.35rem 1rem;
   }
 
   .service-card--compact .service-card__top {
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.25rem;
   }
 
   .service-card--compact .service-card__title {
@@ -215,7 +220,7 @@
   }
 
   .service-card--compact .service-card__description {
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.3rem;
   }
 }
 
