@@ -94,8 +94,8 @@ export const Bio: React.FC = () => {
               <p className="bio__intro">
                 B.S. Software Systems ’25 from the University of Tennessee at
                 Chattanooga, Latin Honors, 3.7 GPA. I build full-stack web
-                applications in React, TypeScript and Django — with real client
-                websites shipped — and bring 7+ years of high-urgency service and
+                applications in React, TypeScript and Django — with a real client
+                website shipped — and bring 7+ years of high-urgency service and
                 team-lead experience to every project: calm problem-solving under
                 pressure, clear communication, and code that stays maintainable.
               </p>
