@@ -7,8 +7,26 @@
 // Eagle's careers page and the project list updated 2026-11-25;
 // nothing is invented here — see src/data/resume.ts.
 import "./Resume.css";
-import { resume } from "../../data/resume";
+import { resume, type ResumeSkillLevel } from "../../data/resume";
 import { Container } from "../Container/Container";
+
+const levelLabel: Record<ResumeSkillLevel, string> = {
+  strong: "Strong",
+  working: "Working",
+  familiar: "Familiar",
+};
+
+const levelDots = (level: ResumeSkillLevel) => (
+  <span
+    className={`resume__dots resume__dots--${level}`}
+    role="img"
+    aria-label={levelLabel[level]}
+  >
+    <i aria-hidden="true" />
+    <i aria-hidden="true" />
+    <i aria-hidden="true" />
+  </span>
+);
 
 export const Resume: React.FC = () => {
   return (
@@ -62,13 +80,18 @@ export const Resume: React.FC = () => {
 
           <section className="resume__section" aria-label="Technical skills">
             <h3 className="resume__section-title">Technical Skills</h3>
+            <p className="resume__skill-legend">
+              {levelDots("strong")} Strong · {levelDots("working")} Working ·{" "}
+              {levelDots("familiar")} Familiar
+            </p>
             {resume.skills.map((group) => (
               <div key={group.title} className="resume__skill-group">
                 <h4 className="resume__skill-group-title">{group.title}</h4>
                 <div className="resume__chips">
                   {group.items.map((skill) => (
-                    <span key={skill} className="resume__chip">
-                      {skill}
+                    <span key={skill.name} className="resume__chip">
+                      {skill.name}
+                      {levelDots(skill.level)}
                     </span>
                   ))}
                 </div>

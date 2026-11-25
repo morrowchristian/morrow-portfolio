@@ -246,6 +246,8 @@
 }
 
 .resume__chip {
+  display: inline-flex;
+  align-items: center;
   padding: 0.35rem 0.8rem;
   border: 1px solid #211d16;
   border-radius: 999px;
@@ -255,6 +257,47 @@
   color: #211d16;
   background: transparent;
   white-space: nowrap;
+}
+
+/* Proficiency tiers — three small dots, filled per level. */
+.resume__skill-legend {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.78rem;
+  color: #4c463a;
+  margin-bottom: var(--space-16);
+}
+
+.resume__dots {
+  display: inline-flex;
+  gap: 3px;
+  align-items: center;
+  margin-left: 0.45rem;
+  vertical-align: middle;
+}
+
+.resume__skill-legend .resume__dots {
+  margin-left: 0;
+  margin-right: 0.35rem;
+}
+
+.resume__dots i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: 1px solid #a02c1e;
+  background: transparent;
+}
+
+.resume__dots--strong i:nth-child(-n + 3) {
+  background: #a02c1e;
+}
+
+.resume__dots--working i:nth-child(-n + 2) {
+  background: #a02c1e;
+}
+
+.resume__dots--familiar i:nth-child(-n + 1) {
+  background: #a02c1e;
 }
 
 /* Education entries reuse the role/company type. */
