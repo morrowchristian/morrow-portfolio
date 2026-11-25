@@ -1,57 +1,38 @@
-// src/components/Bio/Bio.tsx — landing page (route "/").
-// EDITORIAL (03): warm paper, a serif headline, and a single
-// deep-red block behind the portrait, taken from his shirt.
-// The circuit art survives only as faint traces and one red ring.
-// Layout (2026-11-24, the user's diagram): two columns — the
-// portrait sits in the right column, while the left column stacks
-// the bio on top and the Services list below it. The section
-// fills the viewport at minimum (flex: 1). POLISH (2026-11-24):
-// the two columns are top-aligned and the left column's internal
-// spacing (wide bio→Services gap, roomier cards) carries the
-// hero height, so the content feels grounded instead of floating
-// in the middle of the frame. No scroll on desktop.
-// The site footer was removed 2026-11-24 (its GitHub/LinkedIn
-// links moved to the navbar); the numbered link index that used
-// to live in the footer is gone with it. Services sits in the
-// left column below the bio (the /services route was removed
-// 2026-11-23).
-// GitHub, LinkedIn and Contact are not repeated here; they
-// already live in the navbar. The résumé download lives on the
-// Resume page, not on this page.
-// The title is kept small (1.6rem max, the 75% size) and the
-// section fills the viewport at minimum (flex: 1, no fixed height
-// lock), with the two columns top-aligned and the left column's
-// internal spacing carrying the hero height — so the portrait is
-// always fully in frame and there is no scroll on desktop.
-// A single circuit line with a square on each end closes the
-// intro — it replaces the L-shaped trace that
-// used to sit behind the stack (the stack itself was removed
-// 2026-11-17 at Christian's request).
-// Type: Newsreader serif for the headline, IBM Plex Mono for the
-// furniture (kick, labels, index). Palette: #f6f1e7 warm paper,
-// #211d16 espresso ink, #a02c1e shirt red, #4c463a soft brown.
-// The portrait is portrait-cutout.png — the paint portrait
-// (front-facing, white shirt, paint strokes) with the background
-// removed — shown with object-fit: contain, so his face, hair
-// and shoulders are always fully visible, never cropped,
-// stretched or warped. The red block sits behind the portrait's
-// lower part and tracks the figure exactly (see the frame below);
-// the face stays against warm paper.
+// src/components/Bio/Bio.tsx — centered hero (Phase 1 redesign, 2026-11-25).
+// The old two-column layout (bio left, full-height portrait right) is
+// replaced by a centered stack: circular portrait, name, rotating
+// tagline, slogan, intro, CTAs. The portrait is a circular crop ONLY —
+// object-fit: cover on a square frame, never stretched or warped.
+// Stats, Services, and News no longer render here; they live in the
+// single-page shell (SinglePage), which composes this hero first.
+// The circuit art survives as faint traces and the single circuit line
+// with a square on each end closing the intro (2026-11-17).
+// Type: Newsreader serif for the name/slogan, IBM Plex Mono for the
+// furniture (tagline, labels, CTAs). Palette: theme-aware via tokens.
 import "./Bio.css";
 import { useInViewAnimation } from "../../hooks/useInViewAnimation";
-import { Services } from "../Services/Services";
-import { Stats } from "../Stats/Stats";
-import { News } from "../News/News";
+import { useRotatingTagline } from "../../hooks/useRotatingTagline";
+
+const TAGLINE_ROLES = [
+  "Full-Stack Software Engineer",
+  "React & Django",
+  "Built end to end",
+] as const;
+
+function scrollToSection(id: string) {
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
 
 export const Bio: React.FC = () => {
   const { ref, isVisible } = useInViewAnimation();
+  const tagline = useRotatingTagline(TAGLINE_ROLES);
 
   return (
-    <>
-    <section className="bio-page">
+    <section id="about" className="bio-page" aria-label="About">
       <div className="bio__inner">
-        {/* Faint circuit traces across the paper — a nod to the
-            original line-work, kept near-invisible. */}
+        {/* Faint circuit traces across the page — a nod to the
+            original line-work, kept near-invisible. Theme-aware:
+            the ink and accent resolve to the light or dark token. */}
         <svg
           className="bio__traces"
           viewBox="0 0 1200 800"
@@ -59,11 +40,16 @@ export const Bio: React.FC = () => {
           aria-hidden="true"
           focusable="false"
         >
-          <g stroke="#211d16" strokeWidth="1" fill="none" opacity="0.16">
+          <g
+            strokeWidth="1"
+            fill="none"
+            opacity="0.16"
+            style={{ stroke: "var(--color-line-strong)" }}
+          >
             <polyline points="700,80 900,80 900,160 1040,160" />
             <polyline points="980,300 1120,300 1120,380" />
           </g>
-          <g fill="#211d16" opacity="0.16">
+          <g opacity="0.16" style={{ fill: "var(--color-ink)" }}>
             <rect x="696" y="76" width="8" height="8" />
             <rect x="1036" y="156" width="8" height="8" />
             <rect x="1116" y="376" width="8" height="8" />
@@ -73,110 +59,93 @@ export const Bio: React.FC = () => {
             y="76"
             width="9"
             height="9"
-            fill="#a02c1e"
             opacity="0.55"
+            style={{ fill: "var(--color-accent)" }}
           />
         </svg>
 
-        <div className="bio__main">
-          {/* Left column: bio on top, Services below it. */}
-          <div className="bio__left">
-            <div
-              ref={ref}
-              className={`bio__text animate ${isVisible ? "animate--visible" : ""}`}
-            >
-              {/* Availability badge (2026-11-25): a quiet pill at
-                  the very top of the bio, adapted from the badge
-                  on sunnypatel.net — Christian's own status, in
-                  the Editorial mono. */}
-              <span className="bio__badge">
-                <span className="bio__badge-dot" aria-hidden="true" />
-                Open to software roles
-              </span>
-              <p className="bio__kick">Christian Morrow</p>
-              <h1 className="bio__title">
-                Software, built end to end — built to last.
-              </h1>
-              <span className="bio__rule" aria-hidden="true" />
-              <p className="bio__subtitle">
-                Full-Stack Software Engineer — Cleveland, TN
-              </p>
-              <p className="bio__intro">
-                B.S. Computer Science: Software Systems ’25 from the University
-                of Tennessee at Chattanooga, Cum Laude, 3.7 GPA. I build
-                full-stack web
-                applications in React, TypeScript and Django — with a real client
-                website shipped — and bring 7+ years of high-urgency service and
-                team-lead experience to every project: calm problem-solving under
-                pressure, clear communication, and code that stays maintainable.
-              </p>
-              {/* Currently (2026-11-25): a quiet status line under
-                  the intro, adapted from the "currently" idea on
-                  sunnypatel.net — Christian's own facts, in the
-                  Editorial mono. It sits inside the bio block, so
-                  the circuit divider below still closes the intro. */}
-              <p className="bio__currently">
-                <span className="bio__currently-label">Currently</span> —
-                Building RealSync &amp; Baseline · Dispatching at Eagle
-                Tele-Services
-              </p>
-              {/* A single circuit line with a square on each end,
-                  closing the intro — it replaces the L-shaped trace
-                  that used to sit behind the stack. */}
-              <div className="bio__divider" aria-hidden="true">
-                <span className="bio__divider-square" />
-                <span className="bio__divider-line" />
-                <span className="bio__divider-square" />
-              </div>
-            </div>
-
-            {/* Services below the bio in the same left column
-                (2026-11-24): the compact list variant keeps every
-                service's title, description and link, so the home
-                page fits one viewport with no scroll on desktop. */}
-            <Services variant="list" />
+        <div
+          ref={ref}
+          className={`bio__hero animate ${isVisible ? "animate--visible" : ""}`}
+        >
+          <div className="bio__portrait-wrap">
+            <img
+              src="/portrait-cutout.png"
+              alt="Portrait of Christian Morrow"
+              className="bio__portrait"
+              width={210}
+              height={210}
+              fetchPriority="high"
+              decoding="async"
+            />
           </div>
 
-          {/* Right column: the portrait keeps its own size — the
-              frame shrink-wraps to the image, so it does not
-              stretch with the hero. The column is top-aligned in
-              the hero, so the portrait anchors the top right
-              while the left column's spacing carries the height.
-              The concentric ring that used to sit above the
-              portrait is gone — it cannot share the column with
-              the image. The faint traces and the circuit divider
-              above carry the circuit aesthetic now. */}
-          <div className="bio__portrait" aria-hidden="true">
-            {/* The frame shrink-wraps to the portrait image, so the
-                red block (100% of the frame) always matches the
-                figure exactly, whatever its aspect ratio. */}
-            <div className="bio__portrait-frame">
-              <span className="bio__redblock" aria-hidden="true" />
-              <img
-                src="/portrait-cutout.png"
-                alt=""
-                className="bio__portrait-img"
-                fetchPriority="high"
-              />
-            </div>
+          {/* Availability badge (2026-11-25): a quiet pill above the
+              name, adapted from the badge on sunnypatel.net —
+              Christian's own status, in the Editorial mono. */}
+          <p className="bio__badge">
+            <span className="bio__badge-dot" aria-hidden="true" />
+            Open to software roles
+          </p>
+
+          <h1 className="bio__name">Christian Morrow</h1>
+
+          <p className="bio__tagline" aria-live="polite">
+            <span className="bio__tagline-text">{tagline}</span>
+            <span className="bio__cursor" aria-hidden="true">
+              |
+            </span>
+          </p>
+
+          <p className="bio__slogan">Software, built end to end — built to last.</p>
+
+          <p className="bio__subtitle">
+            Full-Stack Software Engineer — Cleveland, TN
+          </p>
+
+          <p className="bio__intro">
+            B.S. Computer Science: Software Systems ’25 from the University
+            of Tennessee at Chattanooga, Cum Laude, 3.7 GPA. I build
+            full-stack web applications in React, TypeScript and Django — with
+            a real client website shipped — and bring 7+ years of
+            high-urgency service and team-lead experience to every project:
+            calm problem-solving under pressure, clear communication, and
+            code that stays maintainable.
+          </p>
+
+          {/* Currently (2026-11-25): a quiet status line under the
+              intro, adapted from the "currently" idea on
+              sunnypatel.net — Christian's own facts, in the
+              Editorial mono. */}
+          <p className="bio__currently">
+            <span className="bio__currently-label">Currently</span> —
+            Building RealSync &amp; Baseline · Dispatching at Eagle
+            Tele-Services
+          </p>
+
+          {/* A single circuit line with a square on each end,
+              closing the intro — it replaces the L-shaped trace
+              that used to sit behind the stack. */}
+          <div className="bio__divider" aria-hidden="true">
+            <span className="bio__divider-square" />
+            <span className="bio__divider-line" />
+            <span className="bio__divider-square" />
+          </div>
+
+          <div className="bio__ctas">
+            <button
+              type="button"
+              className="bio__cta bio__cta--primary"
+              onClick={() => scrollToSection("projects")}
+            >
+              View projects
+            </button>
+            <a className="bio__cta bio__cta--secondary" href="/resume.pdf" download>
+              Download résumé
+            </a>
           </div>
         </div>
       </div>
     </section>
-
-      {/* Stats strip between the hero and News (2026-11-25):
-          a quiet band of verified facts. It renders as a sibling
-          of .bio-page — not inside it — so the hero's
-          one-viewport sizing and overflow: hidden are
-          untouched; the page scrolls to reveal it. */}
-      <Stats />
-
-      {/* News timeline below the hero (2026-11-25): a dated
-          list of milestones. It renders as a sibling of
-          .bio-page — not inside it — so the hero's
-          one-viewport sizing and overflow: hidden are
-          untouched; the page scrolls to reveal it. */}
-      <News />
-    </>
   );
 };

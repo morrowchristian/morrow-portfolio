@@ -27,12 +27,12 @@
   right: var(--space-12);
   background: none;
   border: none;
-  color: #211d16;
+  color: var(--color-ink);
   font-size: 1.1rem;
   line-height: 1;
   cursor: pointer;
 }
 
 .modal__close:hover {
-  color: #a02c1e;
+  color: var(--color-accent);
 }

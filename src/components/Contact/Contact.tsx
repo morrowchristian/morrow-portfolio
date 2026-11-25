@@ -46,7 +46,7 @@ const CONTACT_METHODS = [
 
 export const Contact: React.FC = () => {
   return (
-    <section className="contact">
+    <section id="contact" className="contact">
       <Container>
         <header className="contact__header">
           <p className="contact__kick">Get in Touch</p>

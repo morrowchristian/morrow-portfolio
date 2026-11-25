@@ -28,15 +28,19 @@
   height: 56px;
   display: flex;
   align-items: center;
-  background: #f6f1e7;
-  color: #211d16;
-  border-bottom: 1px solid rgba(33, 29, 22, 0.15);
+  /* Translucent dark in dark mode (blurred over the page), solid
+     paper in light mode — --color-nav resolves per theme. */
+  background: var(--color-nav);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  color: var(--color-ink);
+  border-bottom: 1px solid var(--color-line);
   transition: var(--transition-medium);
   z-index: 100;
 }
 
 .navbar--scrolled {
-  box-shadow: 0 4px 16px rgba(33, 29, 22, 0.08);
+  box-shadow: 0 4px 16px var(--color-shadow);
 }
 
 .navbar__inner {
@@ -54,7 +58,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-12);
-  color: #211d16;
+  color: var(--color-ink);
   white-space: nowrap;
 }
 
@@ -69,7 +73,7 @@
   font-size: 1.05rem;
   font-weight: 500;
   letter-spacing: -0.01em;
-  color: #211d16;
+  color: var(--color-ink);
 }
 
 .navbar__brand-subtitle {
@@ -78,7 +82,7 @@
   font-weight: 400;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #4c463a;
+  color: var(--color-muted);
 }
 
 .navbar__monogram {
@@ -88,8 +92,8 @@
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: #a02c1e;
-  color: #f6f1e7;
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
   font-family: "Newsreader", Georgia, "Times New Roman", serif;
   font-size: 0.85rem;
   font-weight: 600;
@@ -119,19 +123,19 @@
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #4c463a;
+  color: var(--color-muted);
   text-decoration: none;
   white-space: nowrap;
   transition: color var(--transition-fast), border-bottom-color var(--transition-fast);
 }
 
 .navbar__link:hover {
-  color: #211d16;
+  color: var(--color-ink);
 }
 
 .navbar__link--active {
-  color: #a02c1e;
-  border-bottom-color: #a02c1e;
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
 }
 
 /* Social links (GitHub, LinkedIn) at the top right, after the
@@ -146,7 +150,7 @@
 .navbar__socials-divider {
   width: 1px;
   height: 20px;
-  background: rgba(33, 29, 22, 0.2);
+  background: var(--color-line-strong);
 }
 
 .navbar__social {
@@ -154,13 +158,37 @@
   align-items: center;
   justify-content: center;
   font-size: 1.05rem;
-  color: #4c463a;
+  color: var(--color-muted);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
 
 .navbar__social:hover {
-  color: #a02c1e;
+  color: var(--color-accent);
+}
+
+/* Theme toggle (2026-11-25): a round icon button — sun in dark
+   mode (tap for light), moon in light mode (tap for dark). */
+.navbar__theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--color-line-strong);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.navbar__theme-toggle:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
 }
 
 /* Hamburger: hidden except on mobile (≤768px), where it
@@ -184,7 +212,7 @@
   display: block;
   width: 18px;
   height: 2px;
-  background: #211d16;
+  background: var(--color-ink);
   transition: transform var(--transition-fast), opacity var(--transition-fast);
 }
 
@@ -260,21 +288,26 @@
     left: 0;
     right: 0;
     padding: 8px var(--space-16) 16px;
-    background: #f6f1e7;
-    border-bottom: 1px solid rgba(33, 29, 22, 0.15);
-    box-shadow: 0 12px 24px rgba(33, 29, 22, 0.12);
+    background: var(--color-paper);
+    border-bottom: 1px solid var(--color-line);
+    box-shadow: 0 12px 24px var(--color-shadow);
   }
 
   .navbar__dropdown-link {
     padding: 16px 0;
-    border-bottom: 1px solid rgba(33, 29, 22, 0.1);
+    border-bottom: 1px solid var(--color-line-soft);
     font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
     font-size: 1rem;
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #4c463a;
+    color: var(--color-muted);
     text-decoration: none;
+    /* The section links are <button>s, not <a>s — left-align
+       the text and drop the button chrome. */
+    text-align: left;
+    background: transparent;
+    cursor: pointer;
   }
 
   .navbar__dropdown-link:last-child {
@@ -282,11 +315,11 @@
   }
 
   .navbar__dropdown-link:hover {
-    color: #211d16;
+    color: var(--color-ink);
   }
 
   .navbar__dropdown-link--active {
-    color: #a02c1e;
+    color: var(--color-accent);
     font-weight: 600;
   }
 }

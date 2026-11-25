@@ -1,6 +1,6 @@
 /* src/components/Contact/Contact.css — EDITORIAL, native to the
-   Bio. Warm paper #f6f1e7, espresso ink #211d16, shirt red
-   #a02c1e, soft brown #4c463a. Newsreader serif for headings,
+   Bio. Warm paper var(--color-paper), espresso ink var(--color-ink), shirt red
+   var(--color-accent), soft brown var(--color-muted). Newsreader serif for headings,
    IBM Plex Mono for labels. Sharp 2px corners, hairline rules,
    red used sparingly. The values are written out here (not the
    shared tokens) so the page stays scoped like the other
@@ -12,8 +12,8 @@
    content on a short page like this one. */
 .contact {
   flex: 1;
-  background: #f6f1e7;
-  color: #211d16;
+  background: var(--color-paper);
+  color: var(--color-ink);
   padding-block: 64px;
 }
 
@@ -27,7 +27,7 @@
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #a02c1e;
+  color: var(--color-eyebrow);
   margin-bottom: 0.75rem;
 }
 
@@ -36,7 +36,7 @@
   font-size: clamp(2rem, 1.7rem + 1vw, 2.5rem);
   font-weight: 500;
   line-height: 1.1;
-  color: #211d16;
+  color: var(--color-ink);
   margin-bottom: 0.75rem;
 }
 
@@ -44,7 +44,7 @@
   display: block;
   width: 3.5rem;
   height: 3px;
-  background: #a02c1e;
+  background: var(--color-accent);
   margin-bottom: 1rem;
 }
 
@@ -52,7 +52,7 @@
   font-family: "Newsreader", Georgia, "Times New Roman", serif;
   font-size: clamp(1.02rem, 0.95rem + 0.25vw, 1.15rem);
   line-height: 1.6;
-  color: #4c463a;
+  color: var(--color-muted);
   max-width: 40rem;
 }
 
@@ -76,16 +76,16 @@
   align-items: center;
   gap: 12px;
   padding-block: 16px;
-  border-bottom: 1px solid rgba(33, 29, 22, 0.15);
+  border-bottom: 1px solid var(--color-line);
 }
 
 .contact__method:first-child {
-  border-top: 1px solid rgba(33, 29, 22, 0.15);
+  border-top: 1px solid var(--color-line);
 }
 
 .contact__method-icon {
   font-size: 1.05rem;
-  color: #a02c1e;
+  color: var(--color-accent);
 }
 
 .contact__method-label {
@@ -94,28 +94,28 @@
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #4c463a;
+  color: var(--color-muted);
 }
 
 .contact__method-value {
   font-family: "Newsreader", Georgia, "Times New Roman", serif;
   font-size: 1.02rem;
   line-height: 1.4;
-  color: #211d16;
+  color: var(--color-ink);
   text-decoration: none;
   overflow-wrap: anywhere;
 }
 
 a.contact__method-value:hover {
-  color: #a02c1e;
+  color: var(--color-accent);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
 /* The form sits in a white card, like a service card. */
 .contact__form-card {
-  background: #ffffff;
-  border: 1px solid rgba(33, 29, 22, 0.15);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
   border-radius: 2px;
   padding: 32px;
 }
