@@ -18,6 +18,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Theme: dark is the default; the choice persists in
+         localStorage ("cm-theme"). Set data-theme before React
+         loads so the page never flashes the wrong theme. -->
+    <script>
+      try {
+        document.documentElement.dataset.theme =
+          localStorage.getItem("cm-theme") === "light" ? "light" : "dark";
+      } catch (e) {
+        document.documentElement.dataset.theme = "dark";
+      }
+    </script>
+
     <!-- Prevent browser from restoring scroll position -->
     <script>
       if ("scrollRestoration" in history) {

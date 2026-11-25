@@ -1,21 +1,38 @@
-// src/components/Navbar/Navbar.tsx — Editorial navbar: brand and
-// the page menu (About, Portfolio, Resume, Contact), plus the
-// GitHub and LinkedIn links at the top right (moved here from
-// the footer when the footer was removed 2026-11-24).
-// Services is no longer a separate page — it renders on the
-// home page below the bio (2026-11-23).
-// The résumé download lives on the Resume page, so the bar holds
-// the brand, the menu and the social links — no buttons. Below
-// 1200px the inline menu collapses into a hamburger button that
-// opens a dropdown panel with the page links; the social links
-// stay visible in the bar at every width.
+// src/components/Navbar/Navbar.tsx — Editorial navbar: brand and the
+// menu, plus the GitHub and LinkedIn links at the top right (moved
+// here from the footer when the footer was removed 2026-11-24), and
+// a light/dark theme toggle.
+// (2026-11-25, Phase 1): the home page is now a single scrolling
+// page, so on "/" the menu is section links (About, Skills,
+// Projects, Experience, Contact) that scroll to the section, with
+// the active section highlighted in shirt red via scroll-spy
+// (IntersectionObserver). On the old /portfolio, /resume, and
+// /contact routes the menu is still the page links, so those
+// routes keep working until the single page is verified live.
+// The résumé download lives on the Resume page and in the hero,
+// so the bar holds no buttons besides the theme toggle.
+// Below 1200px the inline menu collapses into a hamburger button
+// that opens a dropdown panel with the links; the social links
+// and the theme toggle stay visible in the bar at every width.
 import "./Navbar.css";
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaMoon, FaSun } from "react-icons/fa";
 import { useScrollOffset } from "../../hooks/useScrollOffset";
+import { useScrollSpy } from "../../hooks/useScrollSpy";
+import type { Theme } from "../../hooks/useTheme";
 
-const NAV_ITEMS = [
+const SECTION_ITEMS = [
+  { label: "About", id: "about" },
+  { label: "Skills", id: "skills" },
+  { label: "Projects", id: "projects" },
+  { label: "Experience", id: "experience" },
+  { label: "Contact", id: "contact" },
+] as const;
+
+const SECTION_IDS = SECTION_ITEMS.map((item) => item.id);
+
+const PAGE_ITEMS = [
   { label: "About", to: "/" },
   { label: "Portfolio", to: "/portfolio" },
   { label: "Resume", to: "/resume" },
@@ -24,11 +41,22 @@ const NAV_ITEMS = [
 
 const MENU_BREAKPOINT = 768;
 
-export const Navbar: React.FC = () => {
+function scrollToSection(id: string) {
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+interface NavbarProps {
+  theme: Theme;
+  onToggleTheme: () => void;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({ theme, onToggleTheme }) => {
   const isScrolled = useScrollOffset(24);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
   const location = useLocation();
+  const isSinglePage = location.pathname === "/";
+  const activeSection = useScrollSpy(SECTION_IDS, location.pathname);
 
   // Close the dropdown whenever the route changes (a link was
   // followed), so it never stays open on the new page.
@@ -67,6 +95,11 @@ export const Navbar: React.FC = () => {
     };
   }, [isMenuOpen]);
 
+  const handleSectionClick = (id: string) => {
+    setIsMenuOpen(false);
+    scrollToSection(id);
+  };
+
   return (
     <header
       ref={headerRef}
@@ -83,20 +116,36 @@ export const Navbar: React.FC = () => {
 
         <div className="navbar__right">
           <nav className="navbar__menu" aria-label="Site menu">
-            {NAV_ITEMS.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                end={item.to === "/"}
-                className={({ isActive }) =>
-                  isActive
-                    ? "navbar__link navbar__link--active"
-                    : "navbar__link"
-                }
-              >
-                {item.label}
-              </NavLink>
-            ))}
+            {isSinglePage
+              ? SECTION_ITEMS.map((item) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => handleSectionClick(item.id)}
+                    className={
+                      activeSection === item.id
+                        ? "navbar__link navbar__link--active"
+                        : "navbar__link"
+                    }
+                    aria-current={activeSection === item.id ? "true" : undefined}
+                  >
+                    {item.label}
+                  </button>
+                ))
+              : PAGE_ITEMS.map((item) => (
+                  <NavLink
+                    key={item.to}
+                    to={item.to}
+                    end={item.to === "/"}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "navbar__link navbar__link--active"
+                        : "navbar__link"
+                    }
+                  >
+                    {item.label}
+                  </NavLink>
+                ))}
           </nav>
           <div className="navbar__socials" aria-label="Social links">
             <span className="navbar__socials-divider" aria-hidden="true" />
@@ -121,6 +170,17 @@ export const Navbar: React.FC = () => {
           </div>
           <button
             type="button"
+            className="navbar__theme-toggle"
+            onClick={onToggleTheme}
+            aria-label={
+              theme === "dark" ? "Switch to light theme" : "Switch to dark theme"
+            }
+            title={theme === "dark" ? "Light theme" : "Dark theme"}
+          >
+            {theme === "dark" ? <FaSun aria-hidden="true" /> : <FaMoon aria-hidden="true" />}
+          </button>
+          <button
+            type="button"
             className={`navbar__hamburger ${isMenuOpen ? "navbar__hamburger--open" : ""}`}
             aria-expanded={isMenuOpen}
             aria-controls="navbar-menu-dropdown"
@@ -139,21 +199,36 @@ export const Navbar: React.FC = () => {
         className={`navbar__dropdown ${isMenuOpen ? "navbar__dropdown--open" : ""}`}
         aria-label="Site menu"
       >
-        {NAV_ITEMS.map((item) => (
-          <NavLink
-            key={item.to}
-            to={item.to}
-            end={item.to === "/"}
-            className={({ isActive }) =>
-              isActive
-                ? "navbar__dropdown-link navbar__dropdown-link--active"
-                : "navbar__dropdown-link"
-            }
-            onClick={() => setIsMenuOpen(false)}
-          >
-            {item.label}
-          </NavLink>
-        ))}
+        {isSinglePage
+          ? SECTION_ITEMS.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => handleSectionClick(item.id)}
+                className={
+                  activeSection === item.id
+                    ? "navbar__dropdown-link navbar__dropdown-link--active"
+                    : "navbar__dropdown-link"
+                }
+              >
+                {item.label}
+              </button>
+            ))
+          : PAGE_ITEMS.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                end={item.to === "/"}
+                className={({ isActive }) =>
+                  isActive
+                    ? "navbar__dropdown-link navbar__dropdown-link--active"
+                    : "navbar__dropdown-link"
+                }
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item.label}
+              </NavLink>
+            ))}
       </nav>
     </header>
   );

@@ -1,16 +1,16 @@
 /* src/components/News/News.css — changelog timeline below the
-   home hero. EDITORIAL: warm paper #f6f1e7, espresso #211d16,
-   shirt red #a02c1e, soft brown #4c463a. Newsreader for the
+   home hero. EDITORIAL: warm paper var(--color-paper), espresso var(--color-ink),
+   shirt red var(--color-accent), soft brown var(--color-muted). Newsreader for the
    heading and entries, IBM Plex Mono for the dates. The section
    sits outside .bio-page, so the hero's one-viewport sizing
    and overflow: hidden are untouched — the page scrolls to
    reveal it. */
 
 .news {
-  background: #f6f1e7;
-  color: #211d16;
+  background: var(--color-paper);
+  color: var(--color-ink);
   /* A hairline above the section separates it from the hero. */
-  border-top: 1px solid rgba(33, 29, 22, 0.15);
+  border-top: 1px solid var(--color-line);
   /* Override the global section padding-block (4rem) — the
      hero already carries the page's breathing room. */
   padding-block: 2.5rem 4rem;
@@ -33,7 +33,7 @@
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #a02c1e;
+  color: var(--color-eyebrow);
   margin-bottom: 0.6rem;
 }
 
@@ -43,7 +43,7 @@
   font-weight: 500;
   line-height: 1.08;
   letter-spacing: -0.01em;
-  color: #211d16;
+  color: var(--color-ink);
   margin-bottom: 0.6rem;
 }
 
@@ -51,7 +51,7 @@
   display: block;
   width: 2.6rem;
   height: 2px;
-  background: #a02c1e;
+  background: var(--color-accent);
 }
 
 .news__list ul {
@@ -65,11 +65,11 @@
   align-items: baseline;
   gap: 1.5rem;
   padding-block: 0.85rem;
-  border-top: 1px solid rgba(33, 29, 22, 0.12);
+  border-top: 1px solid var(--color-line-soft);
 }
 
 .news__item:last-child {
-  border-bottom: 1px solid rgba(33, 29, 22, 0.12);
+  border-bottom: 1px solid var(--color-line-soft);
 }
 
 .news__date {
@@ -80,14 +80,14 @@
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #4c463a;
+  color: var(--color-muted);
 }
 
 .news__text {
   font-family: "Newsreader", Georgia, "Times New Roman", serif;
   font-size: 0.95rem;
   line-height: 1.5;
-  color: #211d16;
+  color: var(--color-ink);
   margin: 0;
 }
 

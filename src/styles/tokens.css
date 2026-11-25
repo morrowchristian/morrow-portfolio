@@ -1,23 +1,44 @@
-/* src/styles/tokens.css — LIGHT theme, rebuilt 2026-11-15
-   Design: light theme — white background, black nav,
-   glitch blue as the primary accent, red used sparingly.
-   Colours sampled from Christian's glitch portrait (blue/black/red on white).
-   The warm-espresso dark palette from 2026-11-15 is superseded. */
+/* src/styles/tokens.css — THEME TOKENS (2026-11-25, Phase 1 redesign)
+   Two themes, one accent.
+   - LIGHT ("Editorial", the theme since 2026-11-15): warm paper,
+     espresso ink, shirt red. Preserved exactly behind the toggle.
+   - DARK (the default): charcoal #14181D, dark slate cards, warm
+     white text, shirt red as the single accent.
+   The accent is SHIRT RED #a02c1e in light mode. In dark mode it is
+   lightened to #d9604f (same hue, raised for legibility on charcoal)
+   — it is still the one accent, not a second color. Glitch blue
+   #2b6cb0 is retired as a theme accent; it survives only in the
+   (unused) tag tint tokens below.
+   Small mono labels ("eyebrows": kicks, section titles, dates) use
+   --color-eyebrow — red in light mode, warm white in dark mode —
+   because red reads as error/alert at small sizes on charcoal.
+   The theme is selected by data-theme on <html> ("dark" is the
+   default; see the inline script in index.html and useTheme). */
 
 :root {
-  /* Colors */
+  /* Colors — LIGHT (Editorial) */
   --color-bg: #faf9f6;
+  --color-paper: #f6f1e7;
   --color-surface: #ffffff;
-  --color-border: #e5e1db;
+  --color-ink: #211d16;
+  --color-muted: #4c463a;
   --color-text: #111111;
   --color-text-muted: #5b5b60;
-  --color-accent: #2b6cb0;
-  --color-accent-contrast: #ffffff;
+  --color-accent: #a02c1e;
+  --color-accent-contrast: #f6f1e7;
   --color-accent-red: #e53e3e;
-  --color-nav: #111111;
-  --color-nav-text: #f5f5f2;
-  --color-nav-text-muted: #c9c9c9;
+  --color-eyebrow: #a02c1e;
+  --color-nav: #f6f1e7;
+  --color-nav-text: #211d16;
+  --color-nav-text-muted: #4c463a;
   --color-accent-light: #63b3ed;
+  --color-border: #e5e1db;
+
+  /* Hairlines + shadows */
+  --color-line: rgba(33, 29, 22, 0.15);
+  --color-line-soft: rgba(33, 29, 22, 0.1);
+  --color-line-strong: rgba(33, 29, 22, 0.25);
+  --color-shadow: rgba(33, 29, 22, 0.12);
 
   /* Tag Colors — dark text on light tints, readable on white */
   --tag-react-bg: #e0f2fe;
@@ -73,4 +94,41 @@
   --modal-scale-in: 0.96;
   --modal-scale-out: 1;
   --modal-fade-duration: 250ms;
+}
+
+/* DARK theme — the default. Charcoal background, dark slate cards,
+   warm white text, shirt red (lightened) as the single accent.
+   Small labels go warm white via --color-eyebrow. */
+[data-theme="dark"] {
+  --color-bg: #14181d;
+  --color-paper: #14181d;
+  --color-surface: #23282d;
+  --color-ink: #f5f2ea;
+  --color-muted: #b3aa9c;
+  --color-text: #f5f2ea;
+  --color-text-muted: #b3aa9c;
+  --color-accent: #d9604f;
+  --color-accent-contrast: #f6f1e7;
+  --color-eyebrow: #e8e2d6;
+  --color-nav: rgba(20, 24, 29, 0.88);
+  --color-nav-text: #f5f2ea;
+  --color-nav-text-muted: #b3aa9c;
+  --color-border: #2e343a;
+
+  --color-line: rgba(245, 242, 234, 0.14);
+  --color-line-soft: rgba(245, 242, 234, 0.08);
+  --color-line-strong: rgba(245, 242, 234, 0.28);
+  --color-shadow: rgba(0, 0, 0, 0.45);
+
+  /* Shadows deepen on dark so cards still lift off the page. */
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.45);
+
+  /* Featured Project — dark slate card, red-tinted border. */
+  --featured-bg: #23282d;
+  --featured-border: rgba(217, 96, 79, 0.45);
+  --featured-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+
+  /* Modal */
+  --modal-backdrop: rgba(0, 0, 0, 0.65);
 }

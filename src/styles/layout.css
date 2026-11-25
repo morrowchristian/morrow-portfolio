@@ -32,3 +32,36 @@ section {
   flex-direction: column;
   padding-top: 56px;
 }
+
+/* Single page (Phase 1 redesign, 2026-11-25): one centered column,
+   ~1100px max width (each section's own Container/inner caps it),
+   generous gaps between sections. The hero keeps its full-viewport
+   sizing; it is not given the section padding below. */
+.single-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* The five anchor targets clear the fixed 56px navbar when a nav
+   link or CTA scrolls to them. */
+.single-page #about,
+.single-page #skills,
+.single-page #projects,
+.single-page #experience,
+.single-page #contact {
+  scroll-margin-top: 72px;
+}
+
+/* Generous 80–120px gaps between sections on the single page.
+   Each section carries 48px top + 48px bottom, so the gap between
+   two sections is 96px. This overrides the global section 64px
+   rule and each component's own tighter padding, in this context
+   only — the old routes keep their own spacing. */
+.single-page > .single-page__section,
+.single-page .services,
+.single-page .portfolio,
+.single-page .news,
+.single-page .contact {
+  padding-block: 3rem;
+}

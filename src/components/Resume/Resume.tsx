@@ -6,27 +6,18 @@
 // (2026-11-13), with the Eagle bullets rewritten 2026-11-24 from
 // Eagle's careers page and the project list updated 2026-11-25;
 // nothing is invented here — see src/data/resume.ts.
+// (2026-11-25, Phase 1): the section bodies moved to
+// ResumeSections.tsx so the single page can reuse them; this page
+// renders identically — same wrappers, titles, markup, and order.
 import "./Resume.css";
-import { resume, type ResumeSkillLevel } from "../../data/resume";
 import { Container } from "../Container/Container";
-
-const levelLabel: Record<ResumeSkillLevel, string> = {
-  strong: "Strong",
-  working: "Working",
-  familiar: "Familiar",
-};
-
-const levelDots = (level: ResumeSkillLevel) => (
-  <span
-    className={`resume__dots resume__dots--${level}`}
-    role="img"
-    aria-label={levelLabel[level]}
-  >
-    <i aria-hidden="true" />
-    <i aria-hidden="true" />
-    <i aria-hidden="true" />
-  </span>
-);
+import {
+  EducationContent,
+  ExperienceContent,
+  LeadershipContent,
+  ProjectsContent,
+  SkillsContent,
+} from "./ResumeSections";
 
 export const Resume: React.FC = () => {
   return (
@@ -59,55 +50,17 @@ export const Resume: React.FC = () => {
         <div className="resume__sections">
           <section className="resume__section" aria-label="Experience">
             <h3 className="resume__section-title">Experience</h3>
-            <ol className="resume__timeline">
-              {resume.experience.map((item) => (
-                <li key={item.company} className="resume__item">
-                  <p className="resume__period">{item.period}</p>
-                  <h4 className="resume__role">{item.role}</h4>
-                  <p className="resume__company">{item.company}</p>
-                  {item.bullets && (
-                    <ul className="resume__bullets">
-                      {item.bullets.map((bullet) => (
-                        <li key={bullet}>{bullet}</li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              ))}
-            </ol>
-            <p className="resume__earlier">{resume.earlierRoles}</p>
+            <ExperienceContent />
           </section>
 
           <section className="resume__section" aria-label="Technical skills">
             <h3 className="resume__section-title">Technical Skills</h3>
-            <p className="resume__skill-legend">
-              {levelDots("strong")} Strong · {levelDots("working")} Working ·{" "}
-              {levelDots("familiar")} Familiar
-            </p>
-            {resume.skills.map((group) => (
-              <div key={group.title} className="resume__skill-group">
-                <h4 className="resume__skill-group-title">{group.title}</h4>
-                <div className="resume__chips">
-                  {group.items.map((skill) => (
-                    <span key={skill.name} className="resume__chip">
-                      {skill.name}
-                      {levelDots(skill.level)}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
+            <SkillsContent />
           </section>
 
           <section className="resume__section" aria-label="Technical projects">
             <h3 className="resume__section-title">Technical Projects</h3>
-            {resume.projects.map((project) => (
-              <div key={project.name} className="resume__item">
-                <h4 className="resume__role">{project.name}</h4>
-                <p className="resume__company">{project.tech}</p>
-                <p className="resume__project-desc">{project.description}</p>
-              </div>
-            ))}
+            <ProjectsContent />
           </section>
 
           <section
@@ -117,20 +70,7 @@ export const Resume: React.FC = () => {
             <h3 className="resume__section-title">
               Education &amp; Certification
             </h3>
-            {resume.education.map((item) => (
-              <div key={item.title} className="resume__education">
-                <h4 className="resume__role">{item.title}</h4>
-                <p className="resume__company">{item.detail}</p>
-              </div>
-            ))}
-            <a
-              href="/diploma.pdf"
-              target="_blank"
-              rel="noreferrer"
-              className="resume__diploma"
-            >
-              View diploma (PDF)
-            </a>
+            <EducationContent />
           </section>
 
           <section
@@ -140,18 +80,7 @@ export const Resume: React.FC = () => {
             <h3 className="resume__section-title">
               Campaign &amp; Community Leadership
             </h3>
-            {resume.leadership.map((item) => (
-              <div key={item.org} className="resume__item">
-                <p className="resume__period">{item.period}</p>
-                <h4 className="resume__role">{item.role}</h4>
-                <p className="resume__company">{item.org}</p>
-                <ul className="resume__bullets">
-                  {item.bullets.map((bullet) => (
-                    <li key={bullet}>{bullet}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            <LeadershipContent />
           </section>
         </div>
       </Container>

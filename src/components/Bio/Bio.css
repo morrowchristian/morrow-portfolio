@@ -1,97 +1,44 @@
-/* src/components/Bio/Bio.css — landing page: EDITORIAL (03).
-   - Warm paper #f6f1e7, espresso ink #211d16, shirt red #a02c1e,
-     soft brown #4c463a. The quietest branch: a person first, a
-     tech demo second.
-   - LAYOUT (2026-11-24, the user's diagram): two columns in one
-     viewport — the portrait sits in the right column, while the
-     left column stacks the bio on top and the Services list
-     below it.
-   - THE 75% LOOK (2026-11-24): the page at 75% zoom is how the
-     home page should look by default at 100% zoom — the same
-     element sizes, scaled by ~0.75. So the container, type, gaps
-     and cards are all ~0.75x the old 100% values: the content
-     is smaller in the frame with breathing room. CORRECTION
-     (2026-11-24): the 75% look was about ELEMENT SIZES, not
-     page height — the page still fills the entire viewport at
-     minimum. So the hero stretches (flex: 1).
-   - POLISH (2026-11-24, "make it look good"): the smaller
-     elements left the content as a small block floating in the
-     middle of the hero (~125px empty above, ~118px below), so
-     the extra vertical space is now carried as deliberate
-     INTERNAL spacing instead of equal top/bottom margins: the
-     two columns are top-aligned (align-items: start) with a
-     modest gap below the navbar, the bio→Services gap is wide,
-     the service cards are roomier with wider gaps, and the
-     left column stretches to fill the hero height. The portrait
-     stays its own size (~516 x ~700px) and anchors the top
-     right; the left column's spacing carries the height. There
-     is no footer any more — it was removed 2026-11-24 and its
-     GitHub/LinkedIn links moved to the navbar.
-   - The content area is narrower (1140px) so the left column is
-     wide enough for the bio intro to wrap to four lines. The
-     portrait is NOT stretched to the hero height: its frame
-     shrink-wraps to the image, so the portrait renders at the
-     width the column allows (~516px) and its natural aspect
-     (0.736) sets its height (~700px) — it stays that size
-     whatever the viewport height, never cropped or warped.
-     The red block sits behind the portrait's lower part and
-     tracks the figure exactly: the portrait sits in a frame that
-     shrink-wraps to the image, and the block is 100% of the
-     frame, so it always matches the figure whatever its aspect
-     ratio. The portrait is an <img> with object-fit: contain,
-     so the whole face, hair and shoulders are always fully visible:
-     never cropped, never stretched, never warped.
-   - The circuit art survives only as faint traces (opacity 0.16)
-     and the single circuit line closing the intro. The concentric
-     ring that used to sit above the portrait is gone — it cannot
-     share the column with a full-height image.
-   - The red block sits behind the portrait's lower part and
-     tracks the figure exactly: the portrait sits in a frame that
-     shrink-wraps to the image, and the block is 100% of the
-     frame, so it always matches the figure whatever its aspect
-     ratio. The portrait is an <img> with object-fit: contain,
-     so the whole face, hair and shoulders are always fully visible:
-     never cropped, never stretched, never warped.
-   - On narrow screens the columns stack — intro, portrait,
-     services — and the page scrolls normally. */
+/* src/components/Bio/Bio.css — centered hero (Phase 1 redesign, 2026-11-25).
+   - The old two-column layout is gone. The hero is a centered stack:
+     circular portrait, badge, name, rotating tagline, slogan, intro,
+     Currently line, circuit divider, CTAs.
+   - Full viewport at minimum (min-height 100svh minus the navbar),
+     content centered both ways.
+   - The portrait is a circular crop ONLY: a 210px round frame with
+     object-fit: cover, object-position biased to the top so the face
+     stays in frame — never stretched, cropped at the edges of the
+     circle only, never warped. A shirt-red ring defines the circle.
+   - Colors are theme tokens; the light theme renders as before. */
 
 .bio-page {
   position: relative;
   display: flex;
   flex-direction: column;
-  /* Full height at minimum: the hero stretches to fill the
-     viewport (the footer is gone, so there is nothing to pin —
-     the page is the hero). The extra vertical space is carried
-     as internal spacing in the left column (see .bio__left),
-     not as margins around a centred block. */
   flex: 1;
-  /* NEWS (2026-11-25): the timeline below the hero makes the
-     page taller than the viewport, so flex: 1 alone no longer
-     stretches the hero — it would shrink to its content height
-     (~889px) and the News header would peek into the first
-     viewport. This floor keeps the hero exactly one viewport
-     tall, as before News existed; the page scrolls to reveal
-     News below the fold. */
-  min-height: max(420px, calc(100svh - 56px));
-  padding-block: 0;
+  /* Full viewport at minimum, so the hero fills the first screen
+     and the page scrolls to the sections below. */
+  min-height: max(560px, calc(100svh - 56px));
   overflow: hidden;
-  background: #f6f1e7;
-  color: #211d16;
+  background: var(--color-paper);
+  color: var(--color-ink);
 }
 
 .bio__inner {
   position: relative;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   flex: 1;
   min-height: 0;
   width: 100%;
-  max-width: 1140px;
+  max-width: 1100px;
   margin-inline: auto;
   padding-inline: clamp(1.13rem, 3vw, 2.25rem);
+  padding-block: 3rem;
 }
 
-/* Faint circuit traces across the paper, behind everything. */
+/* Faint circuit traces across the page, behind everything. */
 .bio__traces {
   position: absolute;
   inset: 0;
@@ -101,79 +48,47 @@
   pointer-events: none;
 }
 
-.bio__main {
+/* Centered stack. The intro is capped at a readable measure so
+   the text does not run edge to edge on wide screens. */
+.bio__hero {
   position: relative;
   z-index: 1;
-  flex: 1;
-  display: grid;
-  /* Two columns — bio + services stacked on the left, the
-     portrait on the right — top-aligned, so both start near
-     the navbar and the layout reads as grounded, not floating.
-     The breathing room below the navbar lives here (on the
-     grid, not the left column) so the portrait and the bio
-     start on the same line. */
-  grid-template-columns: 1fr 1fr;
-  align-items: start;
-  gap: clamp(1.5rem, 2.25vw, 2.25rem);
-  min-height: 0;
-  /* BADGE (2026-11-25): padding-top is 1.25rem (was 1.75rem) —
-     the badge adds ~39px to the bio block, so the grid gives
-     back 8px here and the bio→Services gap gives back the rest. */
-  padding-top: 1.25rem;
-}
-
-.bio__main > * {
-  min-width: 0;
-}
-
-/* Left column: bio on top, Services below it. The compact cards
-   inside it take their natural height — the leftover space reads
-   as breathing room below the last card, not stretched boxes.
-   POLISH (2026-11-24): this column carries the hero height.
-   The bio→Services gap is wide and deliberate (a section
-   break, not a hairline), the top/bottom padding is gone
-   (the grid's padding-top is the breathing room below the
-   navbar, and the last card sits close to the viewport
-   bottom), so the content stretches to fill the hero. */
-.bio__left {
   display: flex;
   flex-direction: column;
-  min-width: 0;
-  min-height: 0;
-  /* CURRENTLY (2026-11-25): the bio→Services gap is 7vh (was
-     11vh) — the Currently line adds ~34px to the bio block, so
-     the gap gives back the same height and the last service row
-     keeps its ~50px of breathing room above the viewport bottom.
-     The gap is still a wide, deliberate section break. */
-  /* BADGE (2026-11-25): the gap is 4vh (was 7vh) — the badge
-     adds ~39px to the bio block, so the gap gives back ~30px
-     (the grid's padding-top gives back the other ~8px) and the
-     last service row keeps its ~30px of breathing room. The gap
-     floors at 2.5rem, so it is still a clear section break. */
-  gap: clamp(2.5rem, 4vh, 6.5rem);
-  padding-top: 0;
-  padding-bottom: 0;
+  align-items: center;
+  text-align: center;
+  gap: clamp(0.7rem, 1.6vh, 1rem);
+  width: 100%;
+  max-width: 46rem;
+  margin-inline: auto;
 }
 
-.bio__left .services--list {
-  flex: 1;
-  min-height: 0;
+/* Circular portrait. The frame is a fixed 210px circle; the image
+   covers it with a top bias so the face stays in frame. The red
+   ring and the surface disc behind the cutout keep the circle
+   readable on either theme (the PNG has a transparent background). */
+.bio__portrait-wrap {
+  flex: none;
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid var(--color-accent);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-md);
 }
 
-/* Bio intro, top of the left column. */
-.bio__text {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: clamp(0.6rem, 1.4vh, 0.9rem);
-  max-width: 27rem;
+.bio__portrait {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
 }
 
-/* Availability badge (2026-11-25): a quiet pill at the top of
-   the bio. IBM Plex Mono, uppercase, shirt-red text and border
-   on paper, with a muted-green dot — the dot reads as
-   "available" at a glance, distinct from the red text. */
+/* Availability badge (2026-11-25): a quiet pill, IBM Plex Mono,
+   uppercase, shirt-red text and border, with a muted-green dot —
+   the dot reads as "available" at a glance, distinct from the red. */
 .bio__badge {
   display: inline-flex;
   align-items: center;
@@ -184,8 +99,8 @@
   line-height: 1;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #a02c1e;
-  border: 1px solid #a02c1e;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
   border-radius: 999px;
   background: transparent;
   padding: 0.35rem 0.75rem;
@@ -199,259 +114,220 @@
   background: #3e7c4f;
 }
 
-.bio__kick {
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
-  font-size: clamp(0.6rem, 0.53rem + 0.23vw, 0.68rem);
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #a02c1e;
-}
-
-.bio__title {
+.bio__name {
   font-family: "Newsreader", Georgia, "Times New Roman", serif;
-  font-size: clamp(1.3rem, 1rem + 0.75vw, 1.6rem);
+  font-size: clamp(2.4rem, 2rem + 2.4vw, 3.4rem);
   font-weight: 500;
-  line-height: 1.08;
+  line-height: 1.05;
   letter-spacing: -0.01em;
-  color: #211d16;
+  color: var(--color-ink);
 }
 
-.bio__rule {
-  display: block;
-  width: 2.6rem;
-  height: 2px;
-  background: #a02c1e;
+/* Rotating tagline (2026-11-25): IBM Plex Mono, shirt red, with a
+   blinking cursor. min-height holds the line steady while phrases
+   of different lengths type in and out. */
+.bio__tagline {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: clamp(0.85rem, 0.8rem + 0.2vw, 1rem);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 1.5;
+  min-height: 1.5em;
+  color: var(--color-accent);
+}
+
+.bio__cursor {
+  display: inline-block;
+  margin-left: 0.1rem;
+  animation: bio-cursor-blink 1.1s steps(1) infinite;
+}
+
+@keyframes bio-cursor-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.bio__slogan {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: clamp(1.35rem, 1.1rem + 0.9vw, 1.8rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
 }
 
 .bio__subtitle {
   font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
   font-size: clamp(0.6rem, 0.56rem + 0.15vw, 0.68rem);
   letter-spacing: 0.06em;
-  color: #4c463a;
+  color: var(--color-muted);
 }
 
 .bio__intro {
   font-family: "Newsreader", Georgia, "Times New Roman", serif;
-  font-size: clamp(0.75rem, 0.7rem + 0.15vw, 0.8rem);
-  line-height: 1.5;
-  color: #4c463a;
+  font-size: clamp(0.85rem, 0.8rem + 0.15vw, 0.95rem);
+  line-height: 1.6;
+  color: var(--color-muted);
+  max-width: 38rem;
 }
 
 /* Currently line (2026-11-25): a quiet status line under the
    intro. IBM Plex Mono, small, soft brown, with "Currently" in
-   shirt red — it reads as a status line, not a headline. */
+   the eyebrow color — it reads as a status line, not a headline. */
 .bio__currently {
   font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
   font-size: 0.85rem;
   line-height: 1.5;
-  color: #4c463a;
+  color: var(--color-muted);
 }
 
 .bio__currently-label {
   font-weight: 500;
-  color: #a02c1e;
+  color: var(--color-eyebrow);
 }
 
 /* A single circuit line with a square on each end, closing the
    intro — it replaces the L-shaped trace that used to sit behind
-   the stack. */
+   the stack. Centered and capped so it does not run full width. */
 .bio__divider {
   display: flex;
   align-items: center;
   gap: 0.4rem;
   width: 100%;
+  max-width: 26rem;
+  margin-top: 0.4rem;
 }
 
 .bio__divider-square {
   flex: none;
   width: 6px;
   height: 6px;
-  background: #211d16;
+  background: var(--color-ink);
 }
 
 .bio__divider-line {
   flex: 1;
   height: 1px;
-  background: rgba(33, 29, 22, 0.25);
+  background: var(--color-line-strong);
 }
 
-/* Right column: the portrait keeps its own size. The frame
-   shrink-wraps to the image (in flow, height auto), so the
-   portrait renders at the width the column allows and its
-   natural aspect sets its height (~516 x ~700px) — it does
-   NOT stretch with the hero. The column is top-aligned in
-   the hero (align-items: start on .bio__main), so the portrait
-   anchors the top right while the left column's spacing
-   carries the height. */
-.bio__portrait {
-  position: relative;
-  min-width: 0;
-  min-height: 0;
-  height: auto;
+/* Hero CTAs. Primary is solid shirt red; secondary is an outline
+   that picks up the accent on hover. */
+.bio__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  margin-top: 0.5rem;
 }
 
-/* The frame shrink-wraps to the portrait image, so the red block
-   inside it always matches the figure's rendered width. */
-.bio__portrait-frame {
-  position: relative;
-  height: auto;
-  line-height: 0;
+.bio__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+  padding: 0.85rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition: background var(--transition-fast), color var(--transition-fast),
+    border-color var(--transition-fast), filter var(--transition-fast);
 }
 
-.bio__redblock {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  z-index: 0;
-  width: 100%;
-  height: 135px;
-  background: #a02c1e;
+.bio__cta--primary {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-accent-contrast);
 }
 
-.bio__portrait-img {
-  position: relative;
-  z-index: 1;
-  display: block;
-  height: auto;
-  width: auto;
-  max-width: 100%;
-  object-fit: contain;
-  object-position: right bottom;
+.bio__cta--primary:hover {
+  filter: brightness(0.88);
 }
 
-/* Short desktop viewports: tighten everything so the left column
-   still fits. The fluid sizes already shrink; this closes the
-   gaps and type a little more. (Scaled by 0.75 with the rest.)
-   POLISH: the wide bio→Services gap shrinks too, so a short
-   viewport still fits one screen without scrolling. */
+.bio__cta--secondary {
+  background: transparent;
+  border-color: var(--color-line-strong);
+  color: var(--color-ink);
+}
+
+.bio__cta--secondary:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Short desktop viewports: tighten the stack so the hero still
+   fits one screen. The portrait shrinks a little and the gaps
+   close up. */
 @media (max-height: 900px) {
-  .bio__main {
-    /* BADGE (2026-11-25): 0.5rem (was 1rem) — the badge adds
-       ~31px at short heights, so the grid gives back 8px here. */
-    padding-top: 0.5rem;
+  .bio__inner {
+    padding-block: 2rem;
   }
 
-  .bio__left {
-    /* BADGE (2026-11-25): 0.75rem (was 1.5rem) — gives back
-       another 12px toward the badge's height. */
-    gap: 0.75rem;
+  .bio__hero {
+    gap: 0.6rem;
   }
 
-  .bio__text {
-    /* BADGE (2026-11-25): 0.4rem (was 0.5rem) — the badge adds
-       one more gap to the bio block, so each gap tightens
-       slightly and the block stays the same height. */
-    gap: 0.4rem;
+  .bio__portrait-wrap {
+    width: 180px;
+    height: 180px;
   }
 
-  /* The badge scales down with the intro, so it stays a quiet
-     pill rather than out-sizing the bio text. */
-  .bio__badge {
-    font-size: 0.7rem;
-    padding: 0.3rem 0.65rem;
+  .bio__name {
+    font-size: clamp(2.1rem, 1.9rem + 1.8vw, 2.9rem);
   }
 
-  .bio__title {
-    font-size: clamp(1.2rem, 0.98rem + 0.68vw, 1.43rem);
-  }
-
-  .bio__intro {
-    font-size: 0.71rem;
-    line-height: 1.5;
-  }
-
-  /* The Currently line scales down with the intro, so it stays
-     a quiet status line rather than out-sizing the bio text. */
-  .bio__currently {
-    font-size: 0.78rem;
-  }
-
-  .bio__redblock {
-    height: 113px;
+  .bio__slogan {
+    font-size: clamp(1.2rem, 1.05rem + 0.7vw, 1.55rem);
   }
 }
 
-@media (max-height: 720px) {
-  .bio__title {
-    font-size: clamp(1.13rem, 0.94rem + 0.6vw, 1.31rem);
-  }
-
-  .bio__intro {
-    font-size: 0.69rem;
-  }
-}
-
-/* Narrow screens: one column — intro on top, portrait below at
-   ~41svh with the red block behind its lower part, services
-   last. The left column dissolves (display: contents) so the
-   three blocks can be ordered directly; the page scrolls
-   gracefully if the text needs room. Spacing follows the same
-   tighter 75% rhythm as desktop. */
+/* Narrow screens: the hero stacks and scrolls gracefully. */
 @media (max-width: 768px) {
   .bio-page {
     overflow: visible;
-  }
-
-  .bio__inner {
-    min-height: calc(100svh - 56px);
-    max-width: 1200px;
-  }
-
-  .bio__main {
-    grid-template-columns: 1fr;
-    gap: 1.13rem;
-    padding-top: 1.13rem;
-  }
-
-  .bio__left {
-    display: contents;
-  }
-
-  .bio__text {
-    order: 1;
-    max-width: none;
-    padding-bottom: 0;
-    justify-content: flex-start;
-  }
-
-  .bio__portrait {
-    order: 2;
-    position: static;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    height: auto;
     min-height: 0;
   }
 
-  .bio__portrait-frame {
-    /* POLISH (2026-11-24): position: relative (was static), so
-       the red block — absolutely positioned at the frame's
-       bottom — sits behind the portrait's lower part, as on
-       desktop. With position: static the block resolved against
-       .bio__main and landed at the very bottom of the page,
-       detached from the portrait. */
-    position: relative;
-    flex: none;
-    height: auto;
+  .bio__inner {
+    padding-block: 2.5rem 3rem;
   }
 
-  .bio__redblock {
-    height: 105px;
+  .bio__portrait-wrap {
+    width: 170px;
+    height: 170px;
   }
 
-  .bio__portrait-img {
-    height: auto;
-    width: auto;
-    max-width: 100%;
-    max-height: 41svh;
-    object-position: center bottom;
+  .bio__intro {
+    font-size: 0.88rem;
   }
 
-  .bio__left .services--list {
-    order: 3;
-    flex: none;
+  .bio__currently {
+    font-size: 0.78rem;
+  }
+}
+
+/* Reduced motion: the cursor stops blinking (the tagline itself
+   is already static via useRotatingTagline), and the reveal
+   transition is removed. */
+@media (prefers-reduced-motion: reduce) {
+  .bio__cursor {
+    animation: none;
+  }
+
+  .bio__hero.animate {
+    transition: none;
+    opacity: 1;
+    transform: none;
   }
 }

@@ -1,17 +1,17 @@
 /* src/components/Stats/Stats.css — honest stats strip between
    the home hero and the News timeline. EDITORIAL: warm paper
-   #f6f1e7, espresso #211d16, shirt red #a02c1e, soft brown
-   #4c463a. Newsreader for the numbers, IBM Plex Mono for the
+   var(--color-paper), espresso var(--color-ink), shirt red var(--color-accent), soft brown
+   var(--color-muted). Newsreader for the numbers, IBM Plex Mono for the
    labels. The band is quiet and factual — no hype, no invented
    metrics. It sits outside .bio-page, so the hero's
    one-viewport sizing is untouched. */
 
 .stats {
-  background: #f6f1e7;
-  color: #211d16;
+  background: var(--color-paper);
+  color: var(--color-ink);
   /* A hairline above the band separates it from the hero; the
      News section's own border-top separates it below. */
-  border-top: 1px solid rgba(33, 29, 22, 0.15);
+  border-top: 1px solid var(--color-line);
   padding-block: 2rem;
 }
 
@@ -37,7 +37,7 @@
 
 /* Hairline dividers between the four stats. */
 .stats__item + .stats__item {
-  border-left: 1px solid rgba(33, 29, 22, 0.12);
+  border-left: 1px solid var(--color-line-soft);
 }
 
 .stats__number {
@@ -46,7 +46,7 @@
   font-size: 2rem;
   font-weight: 500;
   line-height: 1.1;
-  color: #211d16;
+  color: var(--color-ink);
 }
 
 .stats__label {
@@ -56,7 +56,7 @@
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #4c463a;
+  color: var(--color-muted);
   margin-top: 0.4rem;
 }
 
@@ -78,6 +78,6 @@
 
   .stats__item:nth-child(2),
   .stats__item:nth-child(4) {
-    border-left: 1px solid rgba(33, 29, 22, 0.12);
+    border-left: 1px solid var(--color-line-soft);
   }
 }

@@ -1,0 +1,44 @@
+/* src/components/SinglePage/SinglePage.css — the single scrolling page
+   (Phase 1 redesign, 2026-11-25). The column and section spacing live
+   in layout.css; this file holds the section headers (same furniture
+   as the Resume/Portfolio/Contact headers) and the single-page
+   section backgrounds. */
+
+/* Skills / Experience sections: paper background, ink text. */
+.single-page__section {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* Section header — mono kick, serif title, red rule, the same
+   furniture as the Bio's intro column and the Resume header. */
+.single-page__header {
+  margin-bottom: var(--space-32);
+}
+
+.single-page__kick {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-eyebrow);
+  margin-bottom: 0.75rem;
+}
+
+.single-page__title {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 1.6rem + 1.4vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+  margin-bottom: 1rem;
+}
+
+.single-page__rule {
+  display: block;
+  width: 3.5rem;
+  height: 3px;
+  background: var(--color-accent);
+}

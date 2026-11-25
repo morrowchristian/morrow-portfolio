@@ -71,17 +71,31 @@ export const Portfolio: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Keep the active card visible in the strip.
+  // Keep the active card visible in the strip. Scroll the strip
+  // container itself (scrollLeft) — never scrollIntoView on the
+  // card, which also scrolls the page: on the single page the
+  // Portfolio mounts far below the fold, so scrollIntoView yanked
+  // the whole page down to Projects on load (2026-11-25).
   const stripRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    const active = stripRef.current?.querySelector<HTMLElement>(
+    const strip = stripRef.current;
+    const active = strip?.querySelector<HTMLElement>(
       ".portfolio__strip-card--active"
     );
-    active?.scrollIntoView({
-      behavior: "smooth",
-      inline: "nearest",
-      block: "nearest",
-    });
+    if (!strip || !active) return;
+    const stripRect = strip.getBoundingClientRect();
+    const cardRect = active.getBoundingClientRect();
+    if (cardRect.left < stripRect.left) {
+      strip.scrollTo({
+        left: strip.scrollLeft + (cardRect.left - stripRect.left) - 8,
+        behavior: "smooth",
+      });
+    } else if (cardRect.right > stripRect.right) {
+      strip.scrollTo({
+        left: strip.scrollLeft + (cardRect.right - stripRect.right) + 8,
+        behavior: "smooth",
+      });
+    }
   }, [safeIndex, activeFilter]);
 
   return (
