@@ -9,6 +9,9 @@
 // Eagle Tele-Services bullets, rewritten 2026-11-24 from Eagle's own careers page, and the
 // Technical Projects list, updated 2026-11-25 to lead with the live full-stack apps
 // (Business Website Template, RealSync, Baseline) and to match the canonical resume file.
+// 2026-11-25: skills gained proficiency tiers (strong / working / familiar), assigned from
+// shipped-work evidence — strong = core across multiple shipped projects, working = used in a
+// shipped project, familiar = occasional exposure. Levels are Christian's to correct.
 export interface ResumeExperience {
   role: string;
   company: string;
@@ -16,9 +19,16 @@ export interface ResumeExperience {
   bullets?: string[];
 }
 
+export type ResumeSkillLevel = "strong" | "working" | "familiar";
+
+export interface ResumeSkill {
+  name: string;
+  level: ResumeSkillLevel;
+}
+
 export interface ResumeSkillGroup {
   title: string;
-  items: string[];
+  items: ResumeSkill[];
 }
 
 export interface ResumeProject {
@@ -103,43 +113,43 @@ export const resume: ResumeData = {
     {
       title: "Languages / Frameworks",
       items: [
-        "React",
-        "Next.js",
-        "TypeScript",
-        "JavaScript",
-        "Python",
-        "Django",
-        "Django REST Framework",
-        "SwiftUI",
-        "Swift",
-        "Astro",
-        "Tailwind CSS",
-        "HTML/CSS",
+        { name: "React", level: "strong" },
+        { name: "Next.js", level: "working" },
+        { name: "TypeScript", level: "strong" },
+        { name: "JavaScript", level: "strong" },
+        { name: "Python", level: "strong" },
+        { name: "Django", level: "strong" },
+        { name: "Django REST Framework", level: "working" },
+        { name: "SwiftUI", level: "working" },
+        { name: "Swift", level: "working" },
+        { name: "Astro", level: "working" },
+        { name: "Tailwind CSS", level: "working" },
+        { name: "HTML/CSS", level: "strong" },
       ],
     },
     {
       title: "Tools",
       items: [
-        "Git & GitHub",
-        "VS Code",
-        "npm",
-        "Postman",
-        "Playwright",
-        "Vite",
-        "Figma",
+        { name: "Git & GitHub", level: "strong" },
+        { name: "VS Code", level: "familiar" },
+        { name: "npm", level: "familiar" },
+        { name: "Postman", level: "familiar" },
+        { name: "Playwright", level: "familiar" },
+        { name: "Vite", level: "familiar" },
+        { name: "Figma", level: "familiar" },
       ],
     },
     {
       title: "Concepts",
       items: [
-        "Responsive design",
-        "Component architecture",
-        "State management",
-        "REST APIs",
-        "JWT authentication",
-        "Testing & QA",
-        "Debugging & problem isolation",
-        "Technical writing / SOPs",
+        { name: "Responsive design", level: "strong" },
+        { name: "Component architecture", level: "working" },
+        { name: "State management", level: "working" },
+        { name: "REST APIs", level: "strong" },
+        { name: "JWT authentication", level: "working" },
+        { name: "Testing & QA", level: "working" },
+        { name: "Debugging & problem isolation", level: "strong" },
+        { name: "Technical writing / SOPs", level: "familiar" },
       ],
     },
   ],
