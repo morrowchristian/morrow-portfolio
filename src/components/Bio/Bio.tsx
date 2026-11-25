@@ -92,8 +92,9 @@ export const Bio: React.FC = () => {
                 Full-Stack Software Engineer — Cleveland, TN
               </p>
               <p className="bio__intro">
-                B.S. Software Systems ’25 from the University of Tennessee at
-                Chattanooga, Latin Honors, 3.7 GPA. I build full-stack web
+                B.S. Computer Science: Software Systems ’25 from the University
+                of Tennessee at Chattanooga, Cum Laude, 3.7 GPA. I build
+                full-stack web
                 applications in React, TypeScript and Django — with a real client
                 website shipped — and bring 7+ years of high-urgency service and
                 team-lead experience to every project: calm problem-solving under

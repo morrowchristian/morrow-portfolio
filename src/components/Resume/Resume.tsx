@@ -19,9 +19,9 @@ export const Resume: React.FC = () => {
           <h2 className="resume__title">Resume</h2>
           <span className="resume__rule" aria-hidden="true" />
           <p className="resume__intro">
-            Full-stack software engineer — B.S. Software Systems &rsquo;25,
-            UTC, Latin Honors — with 7+ years in high-urgency service and
-            team-lead roles.
+            Full-stack software engineer — B.S. Computer Science: Software
+            Systems &rsquo;25, UTC, Cum Laude — with 7+ years in high-urgency
+            service and team-lead roles.
           </p>
           <p className="resume__contact">
             Cleveland, TN · 423-710-4223 · morrowchristian@icloud.com
@@ -100,6 +100,14 @@ export const Resume: React.FC = () => {
                 <p className="resume__company">{item.detail}</p>
               </div>
             ))}
+            <a
+              href="/diploma.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="resume__diploma"
+            >
+              View diploma (PDF)
+            </a>
           </section>
 
           <section

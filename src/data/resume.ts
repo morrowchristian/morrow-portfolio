@@ -201,8 +201,8 @@ export const resume: ResumeData = {
   ],
   education: [
     {
-      title: "B.S. Software Systems, University of Tennessee at Chattanooga",
-      detail: "Graduated May 2025 — Latin Honors, GPA 3.7",
+      title: "B.S. Computer Science: Software Systems, Cum Laude, University of Tennessee at Chattanooga",
+      detail: "Graduated May 2025 — GPA 3.7",
     },
     {
       title: "Microsoft Office Specialist: Excel Associate",
