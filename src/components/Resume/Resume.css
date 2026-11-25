@@ -65,8 +65,8 @@
   margin-bottom: var(--space-24);
 }
 
-/* Download button — the outlined red mono button for the
-   résumé download on this page. */
+/* Download button — the same outlined red mono button as the
+   navbar's résumé download. */
 .resume__download {
   display: inline-flex;
   padding: var(--space-8) var(--space-16);
@@ -102,6 +102,7 @@
 .resume__section {
   border-top: 1px solid rgba(33, 29, 22, 0.15);
   padding-top: var(--space-12);
+  padding-bottom: 0; /* overrides the global section 64px bottom padding (#37) */
 }
 
 .resume__section-title {
