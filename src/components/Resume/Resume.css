@@ -266,6 +266,25 @@
   margin-bottom: 0;
 }
 
+/* Diploma link — small red mono link under the Education entries. */
+.resume__diploma {
+  display: inline-block;
+  margin-top: var(--space-16);
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #a02c1e;
+  text-decoration: none;
+  border-bottom: 1px solid #a02c1e;
+}
+
+.resume__diploma:hover {
+  color: #211d16;
+  border-bottom-color: #211d16;
+}
+
 @media (max-width: 768px) {
   .resume {
     padding-block: var(--space-48);
