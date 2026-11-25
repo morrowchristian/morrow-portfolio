@@ -1,6 +1,6 @@
 // src/data/projects.ts — CORRECTED 2026-11-13, updated 2026-11-14
 // 2026-11-14 fixes: "Live Demo" buttons linked to GitHub repos, not live sites —
-// ProjectCard renders demoLink as "Live Demo", so demoLink is now kept ONLY where
+// the detail panel renders demoLink as "Live Demo", so demoLink is now kept ONLY where
 // a live site was verified. Business Website Template (Vercel) and RealSync CRM
 // (Vercel) have verified live demos; the other five projects keep repoLink only;
 // no live demo is claimed for them.
@@ -8,8 +8,8 @@
 // React 19, TypeScript, Tailwind v4). Timespan Calculator is a Chrome extension,
 // not a generic web utility — description/tags corrected to say so.
 // 2026-11-17: thumbnails now live in public/ — the image paths are
-// "/project1.jpg" / "/project2.jpg" (public-folder URLs Vite serves
-// as-is). The old "src/assets/projects/..." strings 404'd because
+// public-folder URLs Vite serves as-is (e.g. "/project2.jpg").
+// The old "src/assets/projects/..." strings 404'd because
 // Vite does not bundle images referenced as bare strings.
 // 2026-11-22: North Georgia Awning removed from the portfolio; Business Website
 // Template added in its place (first, featured) with its verified Vercel demo.
@@ -79,7 +79,7 @@ export const projects = [
     },
   },
   {
-    title: "Hiawatha City Council / Hiawatha Brown 2026",
+    title: "Hiawatha Brown 2026 — City Council Campaign",
     description:
       "The campaign website for Hiawatha Brown for Cleveland, TN City Council 2026 — built as Campaign Manager & Digital Strategist. The campaign defeated the incumbent.",
     image: "/hiawatha-banner.jpg",

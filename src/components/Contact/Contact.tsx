@@ -2,9 +2,10 @@
 // warm paper, Newsreader headings, IBM Plex Mono furniture,
 // matching the Bio, Portfolio, Resume and Services pages. His
 // contact info on the left (email, phone, location, LinkedIn,
-// GitHub) and the message form on the right. The form opens the
-// visitor's email client (mailto:) — there is no backend on
-// this static site.
+// GitHub) and the message form on the right. The form POSTs to
+// FormSubmit's AJAX endpoint, which emails the submission to
+// morrowchristian@icloud.com — there is no backend on this
+// static site, and the old mailto: flow is gone.
 import "./Contact.css";
 import { FaEnvelope, FaGithub, FaLinkedin, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
 import { ContactForm } from "../ContactForm/ContactForm";

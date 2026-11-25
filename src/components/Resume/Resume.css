@@ -65,8 +65,8 @@
   margin-bottom: var(--space-24);
 }
 
-/* Download button — the same outlined red mono button as the
-   navbar's résumé download. */
+/* Download button — the outlined red mono button for the
+   résumé download on this page. */
 .resume__download {
   display: inline-flex;
   padding: var(--space-8) var(--space-16);
