@@ -1,9 +1,11 @@
 // src/components/Resume/Resume.tsx — Editorial résumé page: warm
 // paper, Newsreader headings, IBM Plex Mono furniture, a timeline
 // for experience (with the bullets from his résumé), skill chips,
-// and the education, certification and campaign sections. The
-// content is his verified résumé (2026-11-13); nothing is invented
-// here — see src/data/resume.ts.
+// a Technical Projects section, and the education, certification
+// and campaign sections. The content is his verified résumé
+// (2026-11-13), with the Eagle bullets rewritten 2026-11-24 from
+// Eagle's careers page and the project list updated 2026-11-25;
+// nothing is invented here — see src/data/resume.ts.
 import "./Resume.css";
 import { resume } from "../../data/resume";
 import { Container } from "../Container/Container";
@@ -20,6 +22,12 @@ export const Resume: React.FC = () => {
             Full-stack software engineer — B.S. Software Systems &rsquo;25,
             UTC, Latin Honors — with 7+ years in high-urgency service and
             team-lead roles.
+          </p>
+          <p className="resume__contact">
+            Cleveland, TN · 423-710-4223 · morrowchristian@icloud.com
+            <br />
+            linkedin.com/in/morrowchristian · github.com/morrowchristian ·
+            morrow-portfolio.vercel.app
           </p>
           <a
             href="/resume.pdf"
@@ -64,6 +72,17 @@ export const Resume: React.FC = () => {
                     </span>
                   ))}
                 </div>
+              </div>
+            ))}
+          </section>
+
+          <section className="resume__section" aria-label="Technical projects">
+            <h3 className="resume__section-title">Technical Projects</h3>
+            {resume.projects.map((project) => (
+              <div key={project.name} className="resume__item">
+                <h4 className="resume__role">{project.name}</h4>
+                <p className="resume__company">{project.tech}</p>
+                <p className="resume__project-desc">{project.description}</p>
               </div>
             ))}
           </section>

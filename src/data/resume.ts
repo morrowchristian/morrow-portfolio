@@ -5,7 +5,10 @@
 // 2026-11-17: the experience bullets were added from the same resume (they already lived in
 // src/data/experience.ts, which nothing imports) so the Resume page can show the depth of each
 // role, plus the education, certification and campaign sections from that resume. Nothing here
-// is invented — every line comes from the resume Christian provided on 2026-11-13.
+// is invented — every line comes from the resume Christian provided on 2026-11-13, except the
+// Eagle Tele-Services bullets, rewritten 2026-11-24 from Eagle's own careers page, and the
+// Technical Projects list, updated 2026-11-25 to lead with the live full-stack apps
+// (Business Website Template, RealSync, Baseline) and to match the canonical resume file.
 export interface ResumeExperience {
   role: string;
   company: string;
@@ -16,6 +19,12 @@ export interface ResumeExperience {
 export interface ResumeSkillGroup {
   title: string;
   items: string[];
+}
+
+export interface ResumeProject {
+  name: string;
+  description: string;
+  tech: string;
 }
 
 export interface ResumeEducation {
@@ -33,6 +42,7 @@ export interface ResumeLeadership {
 export interface ResumeData {
   experience: ResumeExperience[];
   skills: ResumeSkillGroup[];
+  projects: ResumeProject[];
   education: ResumeEducation[];
   leadership: ResumeLeadership[];
   earlierRoles: string;
@@ -91,16 +101,102 @@ export const resume: ResumeData = {
   ],
   skills: [
     {
-      title: "Frontend",
-      items: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "Astro"],
+      title: "Languages / Frameworks",
+      items: [
+        "React",
+        "Next.js",
+        "TypeScript",
+        "JavaScript",
+        "Python",
+        "Django",
+        "Django REST Framework",
+        "SwiftUI",
+        "Swift",
+        "Astro",
+        "Tailwind CSS",
+        "HTML/CSS",
+      ],
     },
     {
-      title: "Backend",
-      items: ["Python", "Django", "Django REST Framework", "REST APIs", "JWT Auth"],
+      title: "Tools",
+      items: [
+        "Git & GitHub",
+        "VS Code",
+        "npm",
+        "Postman",
+        "Playwright",
+        "Vite",
+        "Figma",
+      ],
     },
     {
-      title: "Tools & Testing",
-      items: ["Git & GitHub", "Vite", "Postman", "Playwright", "VS Code"],
+      title: "Concepts",
+      items: [
+        "Responsive design",
+        "Component architecture",
+        "State management",
+        "REST APIs",
+        "JWT authentication",
+        "Testing & QA",
+        "Debugging & problem isolation",
+        "Technical writing / SOPs",
+      ],
+    },
+  ],
+  projects: [
+    {
+      name: "Business Website Template",
+      description:
+        "Reusable Astro + Tailwind CSS v4 business-website starter and template with a component explorer (15 components, style variants, preview-first pages) and a complete Cedar Creek Plumbing example site. Live demo: business-website-template-three.vercel.app",
+      tech: "Astro · Tailwind CSS v4",
+    },
+    {
+      name: "RealSync CRM",
+      description:
+        "Full-stack CRM for home service businesses (Django + React + Postgres): leads, estimates, follow-ups, contracts, signup/trial, per-user isolation. Live: real-sync-eta.vercel.app",
+      tech: "Django · React · Postgres",
+    },
+    {
+      name: "Baseline",
+      description:
+        "Construction job costing & crew scheduling (Next.js + Prisma + Postgres): single-page dashboard, roles/auth (Owner/PM/Crew/Viewer), job costing, crew scheduling. Live: baseline-omega-ochre.vercel.app",
+      tech: "Next.js · Prisma · Postgres",
+    },
+    {
+      name: "North Georgia Awning Website",
+      description:
+        "Real client site for North Georgia Awning LLC. Responsive, component-driven site in Astro + Tailwind CSS. Live: north-georgia-awning.netlify.app",
+      tech: "Astro · Tailwind CSS",
+    },
+    {
+      name: "personal-tracker",
+      description:
+        "Full-stack React + Django REST API task tracker with JWT authentication and protected routes.",
+      tech: "React · Django REST API",
+    },
+    {
+      name: "Hiawatha City Council / Hiawatha Brown 2026",
+      description:
+        "TypeScript civic and campaign websites for Cleveland, TN. Built the campaign site and brand identity as Campaign Manager & Digital Strategist.",
+      tech: "TypeScript · Next.js · Tailwind CSS",
+    },
+    {
+      name: "EventFlow / event-dashboard",
+      description:
+        "Vanilla JavaScript event/task dashboard with localStorage persistence and Playwright tests.",
+      tech: "JavaScript · Playwright",
+    },
+    {
+      name: "MyNotes",
+      description:
+        "SwiftUI iOS note-taking app with modular, block-based UI.",
+      tech: "SwiftUI · Swift",
+    },
+    {
+      name: "Timespan Calculator",
+      description:
+        "JavaScript utility for calculating time spans with a clean, user-friendly UI.",
+      tech: "JavaScript · Chrome Extension",
     },
   ],
   education: [
@@ -118,7 +214,7 @@ export const resume: ResumeData = {
     {
       role: "Lead, Bradley County Division",
       org: "Anna Galloway for U.S. Congress (TN-3)",
-      period: "2026",
+      period: "2026 – Present",
       bullets: [
         "Direct campaign operations, voter outreach, and field strategy across Bradley County.",
       ],

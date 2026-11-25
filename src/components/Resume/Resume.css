@@ -53,6 +53,15 @@
   line-height: 1.6;
   color: #4c463a;
   max-width: 34rem;
+  margin-bottom: var(--space-16);
+}
+
+/* Contact line — mono, same furniture as the kick and chips. */
+.resume__contact {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: #4c463a;
   margin-bottom: var(--space-24);
 }
 
@@ -167,6 +176,14 @@
   line-height: 1.5;
   color: #4c463a;
   margin-bottom: 12px;
+}
+
+/* Project description — body type, same as the experience bullets. */
+.resume__project-desc {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #4c463a;
 }
 
 .resume__bullets {
