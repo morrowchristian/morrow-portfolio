@@ -102,6 +102,7 @@
 .resume__section {
   border-top: 1px solid rgba(33, 29, 22, 0.15);
   padding-top: var(--space-12);
+  padding-bottom: 0; /* overrides the global section 64px bottom padding (#37) */
 }
 
 .resume__section-title {

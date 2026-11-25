@@ -4,8 +4,9 @@
 // keys) to change the project being viewed. The page fits one
 // viewport — the detail panel flexes to fill the space, and its
 // body scrolls internally if the content is taller than the
-// panel. No modal: the detail panel IS the details view. ProjectCard.tsx and ProjectModalContent.tsx
-// are unreferenced now (kept in the repo, not deleted).
+// panel. No modal: the detail panel IS the details view.
+// ProjectCard.tsx and ProjectModalContent.tsx were deleted
+// 2026-11-25 as unreferenced dead code.
 import "./Portfolio.css";
 import { useEffect, useRef, useState } from "react";
 import { projects } from "../../data/projects";
@@ -22,6 +23,14 @@ export const Portfolio: React.FC = () => {
       ? projects
       : projects.filter((p) => p.tags.includes(activeFilter));
 
+  // The arrow-key listener is registered once (empty deps), so
+  // goPrev/goNext read the current list from a ref instead of
+  // closing over it — otherwise the effect would re-register
+  // on every render, since a filtered array is a new identity
+  // each time.
+  const filteredRef = useRef(filteredProjects);
+  filteredRef.current = filteredProjects;
+
   // Clamp the selection so it stays valid when the filter changes.
   const safeIndex = Math.min(
     selectedIndex,
@@ -36,18 +45,22 @@ export const Portfolio: React.FC = () => {
 
   const goPrev = () => {
     setSelectedIndex((i) => {
-      const safe = Math.min(i, Math.max(filteredProjects.length - 1, 0));
-      return (safe - 1 + filteredProjects.length) % filteredProjects.length;
+      const list = filteredRef.current;
+      const safe = Math.min(i, Math.max(list.length - 1, 0));
+      return (safe - 1 + list.length) % list.length;
     });
   };
   const goNext = () => {
     setSelectedIndex((i) => {
-      const safe = Math.min(i, Math.max(filteredProjects.length - 1, 0));
-      return (safe + 1) % filteredProjects.length;
+      const list = filteredRef.current;
+      const safe = Math.min(i, Math.max(list.length - 1, 0));
+      return (safe + 1) % list.length;
     });
   };
 
-  // Arrow keys move through the projects.
+  // Arrow keys move through the projects. Registered once: the
+  // handlers read the current list from filteredRef, so the
+  // listener never goes stale and never re-registers.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "ArrowLeft") goPrev();
@@ -55,7 +68,8 @@ export const Portfolio: React.FC = () => {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [filteredProjects]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Keep the active card visible in the strip.
   const stripRef = useRef<HTMLDivElement>(null);

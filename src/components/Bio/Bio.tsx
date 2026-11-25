@@ -16,9 +16,8 @@
 // left column below the bio (the /services route was removed
 // 2026-11-23).
 // GitHub, LinkedIn and Contact are not repeated here; they
-// already live in the navbar. The
-// résumé download lives in the navbar too (next to Connect), not
-// on this page.
+// already live in the navbar. The résumé download lives on the
+// Resume page, not on this page.
 // The title is kept small (1.6rem max, the 75% size) and the
 // section fills the viewport at minimum (flex: 1, no fixed height
 // lock), with the two columns top-aligned and the left column's
