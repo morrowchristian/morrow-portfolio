@@ -137,7 +137,12 @@
   flex-direction: column;
   min-width: 0;
   min-height: 0;
-  gap: clamp(2.5rem, 11vh, 6.5rem);
+  /* CURRENTLY (2026-11-25): the bio→Services gap is 7vh (was
+     11vh) — the Currently line adds ~34px to the bio block, so
+     the gap gives back the same height and the last service row
+     keeps its ~50px of breathing room above the viewport bottom.
+     The gap is still a wide, deliberate section break. */
+  gap: clamp(2.5rem, 7vh, 6.5rem);
   padding-top: 0;
   padding-bottom: 0;
 }
@@ -194,6 +199,21 @@
   font-size: clamp(0.75rem, 0.7rem + 0.15vw, 0.8rem);
   line-height: 1.5;
   color: #4c463a;
+}
+
+/* Currently line (2026-11-25): a quiet status line under the
+   intro. IBM Plex Mono, small, soft brown, with "Currently" in
+   shirt red — it reads as a status line, not a headline. */
+.bio__currently {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #4c463a;
+}
+
+.bio__currently-label {
+  font-weight: 500;
+  color: #a02c1e;
 }
 
 /* A single circuit line with a square on each end, closing the
@@ -288,6 +308,12 @@
   .bio__intro {
     font-size: 0.71rem;
     line-height: 1.5;
+  }
+
+  /* The Currently line scales down with the intro, so it stays
+     a quiet status line rather than out-sizing the bio text. */
+  .bio__currently {
+    font-size: 0.78rem;
   }
 
   .bio__redblock {
