@@ -41,11 +41,13 @@
 import "./Bio.css";
 import { useInViewAnimation } from "../../hooks/useInViewAnimation";
 import { Services } from "../Services/Services";
+import { News } from "../News/News";
 
 export const Bio: React.FC = () => {
   const { ref, isVisible } = useInViewAnimation();
 
   return (
+    <>
     <section className="bio-page">
       <div className="bio__inner">
         {/* Faint circuit traces across the paper — a nod to the
@@ -143,5 +145,13 @@ export const Bio: React.FC = () => {
         </div>
       </div>
     </section>
+
+      {/* News timeline below the hero (2026-11-25): a dated
+          list of milestones. It renders as a sibling of
+          .bio-page — not inside it — so the hero's
+          one-viewport sizing and overflow: hidden are
+          untouched; the page scrolls to reveal it. */}
+      <News />
+    </>
   );
 };

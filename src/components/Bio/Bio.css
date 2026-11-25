@@ -65,7 +65,14 @@
      as internal spacing in the left column (see .bio__left),
      not as margins around a centred block. */
   flex: 1;
-  min-height: 420px;
+  /* NEWS (2026-11-25): the timeline below the hero makes the
+     page taller than the viewport, so flex: 1 alone no longer
+     stretches the hero — it would shrink to its content height
+     (~889px) and the News header would peek into the first
+     viewport. This floor keeps the hero exactly one viewport
+     tall, as before News existed; the page scrolls to reveal
+     News below the fold. */
+  min-height: max(420px, calc(100svh - 56px));
   padding-block: 0;
   overflow: hidden;
   background: #f6f1e7;
