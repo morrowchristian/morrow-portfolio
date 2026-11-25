@@ -103,6 +103,16 @@ export const Bio: React.FC = () => {
                 team-lead experience to every project: calm problem-solving under
                 pressure, clear communication, and code that stays maintainable.
               </p>
+              {/* Currently (2026-11-25): a quiet status line under
+                  the intro, adapted from the "currently" idea on
+                  sunnypatel.net — Christian's own facts, in the
+                  Editorial mono. It sits inside the bio block, so
+                  the circuit divider below still closes the intro. */}
+              <p className="bio__currently">
+                <span className="bio__currently-label">Currently</span> —
+                Building RealSync &amp; Baseline · Dispatching at Eagle
+                Tele-Services
+              </p>
               {/* A single circuit line with a square on each end,
                   closing the intro — it replaces the L-shaped trace
                   that used to sit behind the stack. */}
