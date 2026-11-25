@@ -128,7 +128,7 @@ export const resume: ResumeData = {
       org: "Hiawatha Brown for City Council",
       period: "2026",
       bullets: [
-        "Directed campaign operations, built the campaign website and donation flow, and managed social media and grassroots canvassing.",
+        "Directed campaign operations, built the campaign website, and managed social media and grassroots canvassing.",
       ],
     },
   ],
