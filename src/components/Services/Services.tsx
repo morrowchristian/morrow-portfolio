@@ -10,6 +10,7 @@
 import "./Services.css";
 import { services } from "../../data/services";
 import { ServiceCard } from "./ServiceCard";
+import { ServiceRow } from "./ServiceRow";
 import { useInViewAnimation } from "../../hooks/useInViewAnimation";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { Grid } from "../Grid/Grid";
@@ -20,6 +21,11 @@ import { Container } from "../Container/Container";
 // beside the portrait in one viewport: tighter header, compact
 // cards, no Container/Grid. Every title, description and link is
 // identical to the cards variant — only the presentation changes.
+// NUMBERED ROWS (2026-11-25): the compact cards became numbered
+// typographic rows (mono red number, Newsreader title, soft-brown
+// description, mono red link, hairline between rows) — no card
+// chrome, no icons. Same three services, same order, same
+// wording; only the presentation changed.
 interface ServicesProps {
   variant?: "cards" | "list";
 }
@@ -43,14 +49,15 @@ export const Services: React.FC<ServicesProps> = ({ variant = "cards" }) => {
 
         <div
           ref={ref}
-          className={`services__list animate ${isVisible ? "animate--visible" : ""}`}
+          className={`services__rows animate ${isVisible ? "animate--visible" : ""}`}
         >
           {services.map((service, index) => (
-            <ServiceCard
+            <ServiceRow
               key={service.title}
-              {...service}
+              title={service.title}
+              description={service.description}
               number={String(index + 1).padStart(2, "0")}
-              className="service-card--compact"
+              cta={service.cta}
             />
           ))}
         </div>

@@ -219,6 +219,76 @@
   font-size: 0.6rem;
 }
 
+/* Numbered rows (home-page hero list variant, 2026-11-25):
+   typographic rows, no card chrome, no icons. A mono red
+   number, a Newsreader title, a soft-brown description and a
+   mono red link, separated from the next row by a hairline
+   rule. The rows are shorter than the old compact cards, so
+   the freed height is carried as deliberate internal spacing
+   — a wider bio→Services gap and roomier row padding (see
+   Bio.css) — keeping the hero exactly one viewport. */
+.services__rows {
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  min-height: 0;
+}
+
+.service-row {
+  display: grid;
+  grid-template-columns: 2.75rem 1fr;
+  gap: 0 0.75rem;
+  padding-block: 1.1rem;
+}
+
+.service-row + .service-row {
+  border-top: 1px solid rgba(33, 29, 22, 0.15);
+}
+
+.service-row__number {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: #a02c1e;
+  padding-top: 0.2rem;
+}
+
+.service-row__body {
+  min-width: 0;
+}
+
+.service-row__title {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.25;
+  color: #211d16;
+  margin-bottom: 0.3rem;
+}
+
+.service-row__description {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: #4c463a;
+  margin-bottom: 0.45rem;
+}
+
+.service-row__cta {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #a02c1e;
+  text-decoration: none;
+}
+
+.service-row__cta:hover {
+  text-decoration: underline;
+}
+
 /* Short desktop viewports: tighten the compact cards so the
    left column still fits in one viewport. (Scaled by 0.75 with
    the rest of the 75% look.) POLISH: the gaps shrink too, so a
@@ -245,6 +315,20 @@
   }
 
   .service-card--compact .service-card__description {
+    margin-bottom: 0.3rem;
+  }
+
+  /* Numbered rows tighten the same way, so a short viewport
+     still fits without the hero clipping the last row. */
+  .service-row {
+    padding-block: 0.5rem;
+  }
+
+  .service-row__title {
+    margin-bottom: 0.2rem;
+  }
+
+  .service-row__description {
     margin-bottom: 0.3rem;
   }
 }
