@@ -154,4 +154,24 @@ export const projects = [
       ],
     },
   },
+  {
+    title: "Baseline",
+    description:
+      "Construction job costing & crew scheduling — a single-page dashboard with roles and auth, budget tracking, and a crew schedule. Next.js, Prisma, Postgres.",
+    image: "/baseline-dashboard.png",
+    tags: ["Next.js", "Prisma", "PostgreSQL", "Auth.js", "TypeScript"],
+    featured: true,
+    demoLink: "https://baseline-omega-ochre.vercel.app",
+    repoLink: "https://github.com/morrowchristian/baseline",
+    modal: {
+      longDescription:
+        "A construction job costing and crew scheduling app. The journal is the dashboard: tabbed Jobs, Costs, Time Logs, Crew, Schedule, and Users views on a single page, with KPI cards, an over-budget alert banner, a budget-by-job donut, and a jobs-at-a-glance table. Auth.js sign-in with four roles (Owner, Project Manager, Crew Member, Viewer) scoping what each user can see, and a seeded demo dataset (5 jobs, 6 crew, $299,500 budget). Deployed on Vercel with a Neon Postgres database.",
+      images: ["/baseline-dashboard.png"],
+      highlights: [
+        "Single-page journal dashboard with KPI cards and budget donut",
+        "Role-based access: Owner, Project Manager, Crew Member, Viewer",
+        "Job costing vs budget with over-budget alerts",
+      ],
+    },
+  },
 ];
