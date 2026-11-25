@@ -1,0 +1,106 @@
+/* src/components/News/News.css — changelog timeline below the
+   home hero. EDITORIAL: warm paper #f6f1e7, espresso #211d16,
+   shirt red #a02c1e, soft brown #4c463a. Newsreader for the
+   heading and entries, IBM Plex Mono for the dates. The section
+   sits outside .bio-page, so the hero's one-viewport sizing
+   and overflow: hidden are untouched — the page scrolls to
+   reveal it. */
+
+.news {
+  background: #f6f1e7;
+  color: #211d16;
+  /* A hairline above the section separates it from the hero. */
+  border-top: 1px solid rgba(33, 29, 22, 0.15);
+  /* Override the global section padding-block (4rem) — the
+     hero already carries the page's breathing room. */
+  padding-block: 2.5rem 4rem;
+}
+
+.news__inner {
+  width: 100%;
+  max-width: 1140px;
+  margin-inline: auto;
+  padding-inline: clamp(1.13rem, 3vw, 2.25rem);
+}
+
+.news__header {
+  margin-bottom: 1.5rem;
+}
+
+.news__kick {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #a02c1e;
+  margin-bottom: 0.6rem;
+}
+
+.news__title {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: clamp(1.3rem, 1rem + 0.75vw, 1.6rem);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: #211d16;
+  margin-bottom: 0.6rem;
+}
+
+.news__rule {
+  display: block;
+  width: 2.6rem;
+  height: 2px;
+  background: #a02c1e;
+}
+
+.news__list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.news__item {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding-block: 0.85rem;
+  border-top: 1px solid rgba(33, 29, 22, 0.12);
+}
+
+.news__item:last-child {
+  border-bottom: 1px solid rgba(33, 29, 22, 0.12);
+}
+
+.news__date {
+  flex: none;
+  width: 6.5rem;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4c463a;
+}
+
+.news__text {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #211d16;
+  margin: 0;
+}
+
+/* Narrow screens: the date stacks above the entry so nothing
+   overflows at 390px. */
+@media (max-width: 640px) {
+  .news__item {
+    flex-direction: column;
+    gap: 0.15rem;
+    padding-block: 0.75rem;
+  }
+
+  .news__date {
+    width: auto;
+  }
+}
