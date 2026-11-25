@@ -1,0 +1,83 @@
+/* src/components/Stats/Stats.css — honest stats strip between
+   the home hero and the News timeline. EDITORIAL: warm paper
+   #f6f1e7, espresso #211d16, shirt red #a02c1e, soft brown
+   #4c463a. Newsreader for the numbers, IBM Plex Mono for the
+   labels. The band is quiet and factual — no hype, no invented
+   metrics. It sits outside .bio-page, so the hero's
+   one-viewport sizing is untouched. */
+
+.stats {
+  background: #f6f1e7;
+  color: #211d16;
+  /* A hairline above the band separates it from the hero; the
+     News section's own border-top separates it below. */
+  border-top: 1px solid rgba(33, 29, 22, 0.15);
+  padding-block: 2rem;
+}
+
+.stats__inner {
+  width: 100%;
+  max-width: 1140px;
+  margin-inline: auto;
+  padding-inline: clamp(1.13rem, 3vw, 2.25rem);
+}
+
+.stats__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.stats__item {
+  text-align: center;
+  padding-inline: 1rem;
+}
+
+/* Hairline dividers between the four stats. */
+.stats__item + .stats__item {
+  border-left: 1px solid rgba(33, 29, 22, 0.12);
+}
+
+.stats__number {
+  display: block;
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.1;
+  color: #211d16;
+}
+
+.stats__label {
+  display: block;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #4c463a;
+  margin-top: 0.4rem;
+}
+
+/* Narrow screens: a 2x2 grid so nothing overflows at 390px.
+   The left divider applies only to the right-hand column. */
+@media (max-width: 640px) {
+  .stats {
+    padding-block: 1.5rem;
+  }
+
+  .stats__list {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 1.25rem;
+  }
+
+  .stats__item + .stats__item {
+    border-left: none;
+  }
+
+  .stats__item:nth-child(2),
+  .stats__item:nth-child(4) {
+    border-left: 1px solid rgba(33, 29, 22, 0.12);
+  }
+}

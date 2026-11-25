@@ -41,6 +41,7 @@
 import "./Bio.css";
 import { useInViewAnimation } from "../../hooks/useInViewAnimation";
 import { Services } from "../Services/Services";
+import { Stats } from "../Stats/Stats";
 import { News } from "../News/News";
 
 export const Bio: React.FC = () => {
@@ -145,6 +146,13 @@ export const Bio: React.FC = () => {
         </div>
       </div>
     </section>
+
+      {/* Stats strip between the hero and News (2026-11-25):
+          a quiet band of verified facts. It renders as a sibling
+          of .bio-page — not inside it — so the hero's
+          one-viewport sizing and overflow: hidden are
+          untouched; the page scrolls to reveal it. */}
+      <Stats />
 
       {/* News timeline below the hero (2026-11-25): a dated
           list of milestones. It renders as a sibling of
