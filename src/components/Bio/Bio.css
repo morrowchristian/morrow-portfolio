@@ -116,7 +116,10 @@
   align-items: start;
   gap: clamp(1.5rem, 2.25vw, 2.25rem);
   min-height: 0;
-  padding-top: 1.75rem;
+  /* BADGE (2026-11-25): padding-top is 1.25rem (was 1.75rem) —
+     the badge adds ~39px to the bio block, so the grid gives
+     back 8px here and the bio→Services gap gives back the rest. */
+  padding-top: 1.25rem;
 }
 
 .bio__main > * {
@@ -142,7 +145,12 @@
      the gap gives back the same height and the last service row
      keeps its ~50px of breathing room above the viewport bottom.
      The gap is still a wide, deliberate section break. */
-  gap: clamp(2.5rem, 7vh, 6.5rem);
+  /* BADGE (2026-11-25): the gap is 4vh (was 7vh) — the badge
+     adds ~39px to the bio block, so the gap gives back ~30px
+     (the grid's padding-top gives back the other ~8px) and the
+     last service row keeps its ~30px of breathing room. The gap
+     floors at 2.5rem, so it is still a clear section break. */
+  gap: clamp(2.5rem, 4vh, 6.5rem);
   padding-top: 0;
   padding-bottom: 0;
 }
@@ -160,6 +168,35 @@
   justify-content: flex-start;
   gap: clamp(0.6rem, 1.4vh, 0.9rem);
   max-width: 27rem;
+}
+
+/* Availability badge (2026-11-25): a quiet pill at the top of
+   the bio. IBM Plex Mono, uppercase, shirt-red text and border
+   on paper, with a muted-green dot — the dot reads as
+   "available" at a glance, distinct from the red text. */
+.bio__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #a02c1e;
+  border: 1px solid #a02c1e;
+  border-radius: 999px;
+  background: transparent;
+  padding: 0.35rem 0.75rem;
+}
+
+.bio__badge-dot {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3e7c4f;
 }
 
 .bio__kick {
@@ -290,15 +327,29 @@
    viewport still fits one screen without scrolling. */
 @media (max-height: 900px) {
   .bio__main {
-    padding-top: 1rem;
+    /* BADGE (2026-11-25): 0.5rem (was 1rem) — the badge adds
+       ~31px at short heights, so the grid gives back 8px here. */
+    padding-top: 0.5rem;
   }
 
   .bio__left {
-    gap: 1.5rem;
+    /* BADGE (2026-11-25): 0.75rem (was 1.5rem) — gives back
+       another 12px toward the badge's height. */
+    gap: 0.75rem;
   }
 
   .bio__text {
-    gap: 0.5rem;
+    /* BADGE (2026-11-25): 0.4rem (was 0.5rem) — the badge adds
+       one more gap to the bio block, so each gap tightens
+       slightly and the block stays the same height. */
+    gap: 0.4rem;
+  }
+
+  /* The badge scales down with the intro, so it stays a quiet
+     pill rather than out-sizing the bio text. */
+  .bio__badge {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.65rem;
   }
 
   .bio__title {

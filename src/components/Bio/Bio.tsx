@@ -86,6 +86,14 @@ export const Bio: React.FC = () => {
               ref={ref}
               className={`bio__text animate ${isVisible ? "animate--visible" : ""}`}
             >
+              {/* Availability badge (2026-11-25): a quiet pill at
+                  the very top of the bio, adapted from the badge
+                  on sunnypatel.net — Christian's own status, in
+                  the Editorial mono. */}
+              <span className="bio__badge">
+                <span className="bio__badge-dot" aria-hidden="true" />
+                Open to software roles
+              </span>
               <p className="bio__kick">Christian Morrow</p>
               <h1 className="bio__title">
                 Software, built end to end — built to last.
