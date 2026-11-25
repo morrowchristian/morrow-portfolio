@@ -85,6 +85,7 @@ export const projects = [
     image: "/hiawatha-banner.jpg",
     tags: ["TypeScript", "React", "Next.js", "Tailwind CSS"],
     featured: false,
+    demoLink: "https://www.hiawatha2026.com",
     repoLink: "https://github.com/morrowchristian/hiawatha-brown-2026",
     modal: {
       longDescription:
