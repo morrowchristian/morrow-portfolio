@@ -44,18 +44,23 @@
 }
 
 /* Scroll snap (2026-11-26): section-by-section locking, like
-   kartavya-singh.com. Gentle `proximity` (not `mandatory`) —
-   Projects and Experience are taller than a viewport, and
-   mandatory would trap the user inside a tall section, jumping
-   to the next one instead of letting them scroll through it.
-   The rules are scoped under `html.single-page--snap`, which the
-   SinglePage component toggles on document.documentElement while
-   it is mounted (and removes on unmount), so the old routes
-   never snap. The Stats strip is deliberately not a snap point:
-   it is a short strip between the hero and Services, and locking
-   onto it would feel like catching on a speed bump. */
+   kartavya-singh.com. `mandatory` (not `proximity`) — every scroll
+   lands decisively on a section start, so the scrolling feels
+   snappy, separate, and consistent instead of floaty. The
+   earlier `proximity` setting only snapped when the scroll
+   stopped near a section, which is why it felt off.
+   The tall sections (Projects, Experience, Skills) are carousels
+   navigated by their buttons / chevrons / tabs, not by scrolling
+   through them, so there is nothing to scroll through inside
+   them. The rules are scoped under `html.single-page--snap`,
+   which the SinglePage component toggles on
+   document.documentElement while it is mounted (and removes on
+   unmount), so the old routes never snap. The Stats strip is
+   deliberately not a snap point: it is a short strip between the
+   hero and Services, and locking onto it would feel like catching
+   on a speed bump. */
 html.single-page--snap {
-  scroll-snap-type: y proximity;
+  scroll-snap-type: y mandatory;
 }
 
 html.single-page--snap .single-page #about,
