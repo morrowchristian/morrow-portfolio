@@ -2,10 +2,11 @@
 // (Phase 1 redesign, 2026-11-25). One centered column:
 // Hero (About) → Stats → Services → Skills → Projects → Experience
 // → News → Contact. The Skills and Experience sections reuse the
-// Resume content blocks (ResumeSections), the Projects section reuses
-// the Portfolio detail view, and Contact/Services/Stats/News render
-// as-is. No copy, numbers, or project data are changed here — the
-// carousel rebuilds (skills, projects, experience) are later phases.
+// Resume content blocks (ResumeSections), the Projects section is
+// a peeking-card carousel (ProjectsCarousel), and Contact/Services/
+// Stats/News render as-is. No copy, numbers, or project data are
+// changed here — the carousel rebuilds (skills, projects,
+// experience) are later phases.
 // The old /portfolio, /resume, and /contact routes stay live in
 // App.tsx alongside this page until the single page is verified.
 import { useEffect } from "react";
@@ -13,7 +14,6 @@ import "./SinglePage.css";
 import { Bio } from "../Bio/Bio";
 import { Stats } from "../Stats/Stats";
 import { Services } from "../Services/Services";
-import { Portfolio } from "../Portfolio/Portfolio";
 import { News } from "../News/News";
 import { Contact } from "../Contact/Contact";
 import { Container } from "../Container/Container";
@@ -23,6 +23,7 @@ import {
   LeadershipContent,
 } from "../Resume/ResumeSections";
 import { SkillsCarousel } from "./SkillsCarousel";
+import { ProjectsCarousel } from "./ProjectsCarousel";
 import { ParticleWave } from "./ParticleWave";
 
 export const SinglePage: React.FC = () => {
@@ -67,7 +68,7 @@ export const SinglePage: React.FC = () => {
       </section>
 
       <div id="projects">
-        <Portfolio />
+        <ProjectsCarousel />
       </div>
 
       <section
