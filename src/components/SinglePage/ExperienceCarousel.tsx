@@ -39,7 +39,8 @@ interface Entry {
 // first comma segment, the period is the last, and the company
 // is everything in between. The two Copper Cellar server roles
 // each carry one bullet, in Christian's own words ("basic server
-// roles"); the Red Lobster role has no bullets. Returns [] if
+// roles"), and the Red Lobster role carries one bullet too
+// ("a host mainly", "basic host role"). Returns [] if
 // the format is unexpected, so the carousel never breaks on
 // bad data.
 const parseEarlierRoles = (text: string): Entry[] => {
@@ -55,7 +56,9 @@ const parseEarlierRoles = (text: string): Entry[] => {
       period: segments[segments.length - 1],
       bullets: org.includes("Copper Cellar")
         ? ["Basic server role — served guests in a full-service restaurant."]
-        : [],
+        : org.includes("Red Lobster")
+          ? ["Basic host role — greeted and seated guests."]
+          : [],
     });
   }
   return entries;
