@@ -86,7 +86,6 @@ export const SkillsCarousel: React.FC = () => {
       typeof window === "undefined" ||
       !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
   );
-  const [hovered, setHovered] = useState(false);
   const [progress, setProgress] = useState(0);
   const progressRef = useRef(0);
 
@@ -99,12 +98,15 @@ export const SkillsCarousel: React.FC = () => {
     [groups.length],
   );
 
-  // Auto-play: tick the progress bar; at 100% advance a category.
-  // Paused while the pause control is off or the pointer/focus is
-  // inside the card. The interval does not restart on category
-  // change — the ref is reset instead, so the timing stays even.
+  // Auto-play: tick the progress bar; at 100% advance a category,
+  // wrapping from the last category back to the first so the cycle
+  // repeats. It runs continuously unless the pause control is off —
+  // it does NOT pause on hover/focus, so the cycle never looks
+  // stopped at the last category. The interval does not restart on
+  // category change — the ref is reset instead, so the timing
+  // stays even.
   useEffect(() => {
-    if (!playing || hovered) return;
+    if (!playing) return;
     const id = window.setInterval(() => {
       progressRef.current += (TICK_MS / AUTOPLAY_MS) * 100;
       if (progressRef.current >= 100) {
@@ -114,7 +116,7 @@ export const SkillsCarousel: React.FC = () => {
       setProgress(progressRef.current);
     }, TICK_MS);
     return () => window.clearInterval(id);
-  }, [playing, hovered, groups.length]);
+  }, [playing, groups.length]);
 
   const group = groups[index];
   const nextGroup = groups[(index + 1) % groups.length];
@@ -123,21 +125,11 @@ export const SkillsCarousel: React.FC = () => {
     Math.ceil((AUTOPLAY_MS * (1 - progress / 100)) / 1000),
   );
 
-  const handleBlur = (e: React.FocusEvent) => {
-    if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
-      setHovered(false);
-    }
-  };
-
   return (
     <div
       className="skills-carousel"
       role="region"
       aria-label="Technical skills carousel"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onFocus={() => setHovered(true)}
-      onBlur={handleBlur}
     >
       <div className="skills-carousel__top">
         <h3 className="skills-carousel__category">{group.title}</h3>
@@ -248,15 +240,17 @@ export const SkillsCarousel: React.FC = () => {
       </div>
 
       <p className="skills-carousel__legend">
+        <span className="skills-carousel__legend-label">Proficiency:</span>
         <span className="skills-carousel__legend-item skills-carousel__legend-item--strong">
+          <span className="skills-carousel__legend-dot" aria-hidden="true" />
           Strong
         </span>
-        <span aria-hidden="true"> · </span>
         <span className="skills-carousel__legend-item skills-carousel__legend-item--working">
+          <span className="skills-carousel__legend-dot" aria-hidden="true" />
           Working
         </span>
-        <span aria-hidden="true"> · </span>
         <span className="skills-carousel__legend-item skills-carousel__legend-item--familiar">
+          <span className="skills-carousel__legend-dot" aria-hidden="true" />
           Familiar
         </span>
       </p>
