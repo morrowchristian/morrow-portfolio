@@ -1,0 +1,185 @@
+/* src/components/SinglePage/ExperienceCarousel.css — Experience carousel
+   (Phase 4 redesign, 2026-11-26). A segmented pill toggle switches
+   between Work and Campaign & Leadership; each track is a
+   peeking-card carousel: one entry sharp in the center, neighbors
+   peeking in from the sides, blurred and dimmed. Chevrons and
+   Previous/Next text buttons, no auto-play, no dots.
+
+   The card is opaque (var(--color-surface)) so the particle wave
+   behind the page never fights the text. Colors are theme tokens
+   throughout, so the card reads correctly in both the dark default
+   and the light Editorial theme. The entry text reuses the Resume
+   classes (resume__period / role / company / bullets) so the
+   typography matches the Resume page exactly. */
+
+/* Top row: segmented toggle left, chevrons right. */
+.experience-carousel__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+/* Segmented pill toggle. */
+.experience-carousel__toggle {
+  display: inline-flex;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  background: var(--color-surface);
+}
+
+.experience-carousel__toggle-btn {
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-muted);
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.55rem 1rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.experience-carousel__toggle-btn:hover {
+  color: var(--color-ink);
+}
+
+.experience-carousel__toggle-btn.is-active {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+/* Chevron controls — the same round buttons as the Skills carousel. */
+.experience-carousel__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: none;
+}
+
+.experience-carousel__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  border: 1px solid var(--color-line-strong);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: border-color var(--transition-fast),
+    color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.experience-carousel__btn:hover,
+.experience-carousel__btn:focus-visible {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  outline: none;
+}
+
+/* Viewport + track. The viewport clips the peeking neighbors;
+   the track is a flex row of fixed-width cards whose transform
+   (set inline) centers the active card — see the component.
+   The vertical padding keeps the cards' shadows from being
+   clipped by the overflow. */
+.experience-carousel__viewport {
+  overflow: hidden;
+  padding-block: 0.75rem;
+  margin-block: -0.75rem;
+}
+
+.experience-carousel__viewport:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-md);
+}
+
+.experience-carousel__track {
+  display: flex;
+  gap: 1rem;
+  align-items: stretch;
+  transition: transform 350ms ease;
+  will-change: transform;
+}
+
+.experience-carousel__card {
+  flex: 0 0 min(600px, 84%);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: clamp(1.25rem, 1rem + 1.5vw, 2rem);
+  cursor: pointer;
+  /* Neighbors are dimmed and blurred; the active card is sharp. */
+  opacity: 0.5;
+  filter: blur(2px);
+  transition: opacity var(--transition-medium),
+    filter var(--transition-medium);
+}
+
+.experience-carousel__card.is-active {
+  opacity: 1;
+  filter: none;
+  cursor: default;
+}
+
+/* Bottom nav: Previous / Next text buttons with a status line. */
+.experience-carousel__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.experience-carousel__textbtn {
+  border: none;
+  background: transparent;
+  color: var(--color-ink);
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.5rem 0;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.experience-carousel__textbtn:hover,
+.experience-carousel__textbtn:focus-visible {
+  color: var(--color-accent);
+  outline: none;
+}
+
+.experience-carousel__status {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--color-muted);
+  margin: 0;
+  text-align: center;
+}
+
+/* Reduced motion: no sliding, no blur fade — instant switch. */
+@media (prefers-reduced-motion: reduce) {
+  .experience-carousel__track {
+    transition: none;
+  }
+
+  .experience-carousel__card {
+    transition: none;
+  }
+}

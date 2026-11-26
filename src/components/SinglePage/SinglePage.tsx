@@ -1,11 +1,11 @@
 // src/components/SinglePage/SinglePage.tsx — the single scrolling page
 // (Phase 1 redesign, 2026-11-25). One centered column:
 // Hero (About) → Stats → Services → Skills → Projects → Experience
-// → News → Contact. The Skills and Experience sections reuse the
-// Resume content blocks (ResumeSections), the Projects section reuses
-// the Portfolio detail view, and Contact/Services/Stats/News render
-// as-is. No copy, numbers, or project data are changed here — the
-// carousel rebuilds (skills, projects, experience) are later phases.
+// → News → Contact. The Skills and Experience sections are
+// carousels (SkillsCarousel, ExperienceCarousel), the Projects
+// section reuses the Portfolio detail view, and Contact/Services/
+// Stats/News render as-is. No copy, numbers, or project data are
+// changed here.
 // The old /portfolio, /resume, and /contact routes stay live in
 // App.tsx alongside this page until the single page is verified.
 import { useEffect } from "react";
@@ -17,12 +17,9 @@ import { Portfolio } from "../Portfolio/Portfolio";
 import { News } from "../News/News";
 import { Contact } from "../Contact/Contact";
 import { Container } from "../Container/Container";
-import {
-  EducationContent,
-  ExperienceContent,
-  LeadershipContent,
-} from "../Resume/ResumeSections";
+import { EducationContent } from "../Resume/ResumeSections";
 import { SkillsCarousel } from "./SkillsCarousel";
+import { ExperienceCarousel } from "./ExperienceCarousel";
 import { ParticleWave } from "./ParticleWave";
 
 export const SinglePage: React.FC = () => {
@@ -81,22 +78,9 @@ export const SinglePage: React.FC = () => {
             <h2 className="single-page__title">Experience</h2>
             <span className="single-page__rule" aria-hidden="true" />
           </header>
+          <ExperienceCarousel />
+
           <div className="resume__sections">
-            <section className="resume__section" aria-label="Experience">
-              <h3 className="resume__section-title">Experience</h3>
-              <ExperienceContent />
-            </section>
-
-            <section
-              className="resume__section"
-              aria-label="Campaign and community leadership"
-            >
-              <h3 className="resume__section-title">
-                Campaign &amp; Community Leadership
-              </h3>
-              <LeadershipContent />
-            </section>
-
             <section
               className="resume__section"
               aria-label="Education and certification"
