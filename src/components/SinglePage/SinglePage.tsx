@@ -229,7 +229,10 @@ export const SinglePage: React.FC = () => {
                 (margin-top: auto) — the page-level footer is gone;
                 GitHub and LinkedIn are in the top bar. */}
             <p className="tabs-layout__footer">
-              © 2026 Christian Morrow · Cleveland, TN
+              © 2026 Christian Morrow
+              <span className="tabs-layout__footer-location">
+                Cleveland, TN
+              </span>
             </p>
           </aside>
 

@@ -86,7 +86,12 @@
   font-size: 0.72rem;
   letter-spacing: 0.05em;
   color: var(--color-muted);
-  white-space: nowrap;
+}
+
+/* The location sits on its own line below the name, so the
+   footer can never run long and clip at the sidebar edge. */
+.tabs-layout__footer-location {
+  display: block;
 }
 
 .tabs-list {
