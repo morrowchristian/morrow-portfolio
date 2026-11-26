@@ -42,3 +42,39 @@
   height: 3px;
   background: var(--color-accent);
 }
+
+/* Scroll snap (2026-11-26): section-by-section locking, like
+   kartavya-singh.com. Gentle `proximity` (not `mandatory`) —
+   Projects and Experience are taller than a viewport, and
+   mandatory would trap the user inside a tall section, jumping
+   to the next one instead of letting them scroll through it.
+   The rules are scoped under `html.single-page--snap`, which the
+   SinglePage component toggles on document.documentElement while
+   it is mounted (and removes on unmount), so the old routes
+   never snap. The Stats strip is deliberately not a snap point:
+   it is a short strip between the hero and Services, and locking
+   onto it would feel like catching on a speed bump. */
+html.single-page--snap {
+  scroll-snap-type: y proximity;
+}
+
+html.single-page--snap .single-page #about,
+html.single-page--snap .single-page #services,
+html.single-page--snap .single-page #skills,
+html.single-page--snap .single-page #projects,
+html.single-page--snap .single-page #experience,
+html.single-page--snap .single-page .news,
+html.single-page--snap .single-page #contact {
+  scroll-snap-align: start;
+  /* Same 72px as the anchor scroll-margin in layout.css: the
+     fixed 56px navbar plus 16px of breathing room, so a snapped
+     section heading never hides under the nav. */
+  scroll-margin-top: 72px;
+}
+
+/* Respect reduced motion: no scroll snapping. */
+@media (prefers-reduced-motion: reduce) {
+  html.single-page--snap {
+    scroll-snap-type: none;
+  }
+}

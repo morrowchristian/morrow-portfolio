@@ -8,6 +8,7 @@
 // carousel rebuilds (skills, projects, experience) are later phases.
 // The old /portfolio, /resume, and /contact routes stay live in
 // App.tsx alongside this page until the single page is verified.
+import { useEffect } from "react";
 import "./SinglePage.css";
 import { Bio } from "../Bio/Bio";
 import { Stats } from "../Stats/Stats";
@@ -24,6 +25,18 @@ import {
 } from "../Resume/ResumeSections";
 
 export const SinglePage: React.FC = () => {
+  // Scroll snap (2026-11-26): section-by-section locking, like
+  // kartavya-singh.com. The snap rules live in SinglePage.css
+  // under `html.single-page--snap`; this toggles that class on
+  // the document element while the single page is mounted and
+  // removes it on unmount, so the old routes never snap.
+  useEffect(() => {
+    document.documentElement.classList.add("single-page--snap");
+    return () => {
+      document.documentElement.classList.remove("single-page--snap");
+    };
+  }, []);
+
   return (
     <div className="single-page">
       <Bio />
