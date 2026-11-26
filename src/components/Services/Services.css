@@ -241,6 +241,12 @@
   padding-block: 1.1rem;
 }
 
+/* No number (About panel, sidebar-tabs redesign): the row
+   collapses to a single column. */
+.service-row--no-number {
+  grid-template-columns: 1fr;
+}
+
 .service-row + .service-row {
   border-top: 1px solid var(--color-line);
 }

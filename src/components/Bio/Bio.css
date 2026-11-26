@@ -1,9 +1,9 @@
-/* src/components/Bio/Bio.css — centered hero (Phase 1 redesign, 2026-11-25).
-   - The old two-column layout is gone. The hero is a centered stack:
-     circular portrait, badge, name, rotating tagline, slogan, intro,
-     Currently line, circuit divider, CTAs.
-   - Full viewport at minimum (min-height 100svh minus the navbar),
-     content centered both ways.
+/* src/components/Bio/Bio.css — compact hero header (sidebar-tabs
+   redesign, 2026-11-26). The old full-viewport hero is gone: the
+   hero is a compact centered stack — circular portrait, badge,
+   name, rotating tagline, circuit divider, CTAs — above the tab
+   layout. The bio copy, "What I build", and the Stats strip now
+   live in the About panel.
    - The portrait is a circular crop ONLY: a 210px round frame with
      object-fit: cover, object-position biased to the top so the face
      stays in frame — never stretched, cropped at the edges of the
@@ -14,10 +14,6 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  flex: 1;
-  /* Full viewport at minimum, so the hero fills the first screen
-     and the page scrolls to the sections below. */
-  min-height: max(560px, calc(100svh - 56px));
   overflow: hidden;
   background: var(--color-paper);
   color: var(--color-ink);
@@ -29,13 +25,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex: 1;
-  min-height: 0;
   width: 100%;
   max-width: 1280px;
   margin-inline: auto;
   padding-inline: clamp(1.13rem, 3vw, 2.25rem);
-  padding-block: 3rem;
+  padding-block: 3rem 2.5rem;
 }
 
 /* Faint circuit traces across the page, behind everything. */
@@ -48,8 +42,8 @@
   pointer-events: none;
 }
 
-/* Centered stack. The intro is capped at a readable measure so
-   the text does not run edge to edge on wide screens. */
+/* Centered stack. The text is capped at a readable measure so
+   it does not run edge to edge on wide screens. */
 .bio__hero {
   position: relative;
   z-index: 1;
@@ -153,48 +147,8 @@
   }
 }
 
-.bio__slogan {
-  font-family: "Newsreader", Georgia, "Times New Roman", serif;
-  font-size: clamp(1.35rem, 1.1rem + 0.9vw, 1.8rem);
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  color: var(--color-ink);
-}
-
-.bio__subtitle {
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
-  font-size: clamp(0.6rem, 0.56rem + 0.15vw, 0.68rem);
-  letter-spacing: 0.06em;
-  color: var(--color-muted);
-}
-
-.bio__intro {
-  font-family: "Newsreader", Georgia, "Times New Roman", serif;
-  font-size: clamp(0.85rem, 0.8rem + 0.15vw, 0.95rem);
-  line-height: 1.6;
-  color: var(--color-muted);
-  max-width: 38rem;
-}
-
-/* Currently line (2026-11-25): a quiet status line under the
-   intro. IBM Plex Mono, small, soft brown, with "Currently" in
-   the eyebrow color — it reads as a status line, not a headline. */
-.bio__currently {
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
-  font-size: clamp(0.78rem, 0.8rem + 0.15vw, 0.88rem);
-  line-height: 1.5;
-  color: var(--color-muted);
-}
-
-.bio__currently-label {
-  font-weight: 500;
-  color: var(--color-eyebrow);
-}
-
 /* A single circuit line with a square on each end, closing the
-   intro — it replaces the L-shaped trace that used to sit behind
-   the stack. Centered and capped so it does not run full width. */
+   header. Centered and capped so it does not run full width. */
 .bio__divider {
   display: flex;
   align-items: center;
@@ -266,90 +220,19 @@
   color: var(--color-accent);
 }
 
-/* "What I build" (2026-11-26): the three services, folded into
-   the hero below the CTAs. The block is left-aligned inside the
-   centered hero stack (the rows are typographic, not centered
-   text), and spans the hero column's width. The rows themselves
-   are ServiceRow (Services.css) — this only lays out the block
-   and its quiet kick, using the same furniture as the section
-   headers. */
-.bio__build {
-  width: 100%;
-  margin-top: 1.5rem;
-  text-align: left;
-}
-
-.bio__build-kick {
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
-  font-size: 0.8rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--color-eyebrow);
-  margin-bottom: 0.25rem;
-}
-
-.bio__build-rows {
-  width: 100%;
-}
-
-/* Stats strip at the bottom of the hero (2026-11-26): the Stats
-   section is a flex child of .bio__inner (align-items: center),
-   so it needs an explicit width to span the hero instead of
-   shrink-fitting to its content. This is layout only — the strip
-   itself (Stats.css) is untouched. */
-.bio__inner > .stats {
-  width: 100%;
-}
-
-/* Short desktop viewports: tighten the stack so the hero still
-   fits one screen. The portrait shrinks a little and the gaps
-   close up. */
-@media (max-height: 900px) {
-  .bio__inner {
-    padding-block: 2rem;
-  }
-
-  .bio__hero {
-    gap: 0.6rem;
-  }
-
-  .bio__portrait-wrap {
-    width: 180px;
-    height: 180px;
-  }
-
-  .bio__name {
-    font-size: clamp(2.1rem, 1.9rem + 1.8vw, 2.9rem);
-  }
-
-  .bio__slogan {
-    font-size: clamp(1.2rem, 1.05rem + 0.7vw, 1.55rem);
-  }
-}
-
-/* Narrow screens: the hero stacks and scrolls gracefully. */
+/* Narrow screens: the portrait shrinks a little. */
 @media (max-width: 768px) {
   .bio-page {
     overflow: visible;
-    min-height: 0;
   }
 
   .bio__inner {
-    padding-block: 2.5rem 3rem;
+    padding-block: 2.5rem 2rem;
   }
 
   .bio__portrait-wrap {
     width: 170px;
     height: 170px;
-  }
-
-  .bio__intro {
-    font-size: 0.88rem;
-  }
-
-  .bio__currently {
-    font-size: 0.78rem;
   }
 }
 
