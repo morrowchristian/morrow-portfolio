@@ -1,8 +1,9 @@
-/* src/components/SinglePage/ParticleWave.css — halftone dot wave
-   background for the single page (2026-11-26). The canvas is fixed
-   behind the page content and never intercepts input. The wave runs
-   in BOTH themes: warm-white dots on charcoal in dark mode,
-   espresso-ink dots on paper in light mode. */
+/* src/components/SinglePage/ParticleWave.css — plexus / constellation
+   network background for the single page (2026-11-26, replacing the
+   halftone dot wave). The canvas is fixed behind the page content
+   and never intercepts input. The plexus runs in BOTH themes:
+   warm-white dots + shirt red on charcoal in dark mode,
+   espresso-ink dots + shirt red on paper in light mode. */
 
 /* Fixed backdrop: covers the viewport, sits behind the content
    (negative z-index inside the page's stacking context), and can
@@ -16,18 +17,18 @@
   pointer-events: none;
 }
 
-/* Let the wave show through in both themes. Every top-level section
+/* Let the plexus show through in both themes. Every top-level section
    paints an opaque `var(--color-paper)` background. In dark mode
    --color-paper is #14181d, identical to --color-bg, so making those
    backgrounds transparent changes nothing visible: the body
-   background shows through at the exact same hex, and the wave
+   background shows through at the exact same hex, and the plexus
    becomes visible behind the content. In light mode --color-paper is
    #f6f1e7 (warm paper) and --color-bg is #faf9f6 (a shade lighter),
    so making the sections transparent shifts them to the page
    background hex — a subtle change inside the same warm-paper
    family, and the page still reads as warm paper. The cards inside
    the sections keep their own surface backgrounds in both themes,
-   so the wave shows in the gaps between cards, never through them. */
+   so the plexus shows in the gaps between cards, never through them. */
 html.single-page--wave .single-page__section,
 html.single-page--wave .bio-page,
 html.single-page--wave .stats,
