@@ -1,11 +1,12 @@
-/* src/components/SinglePage/ParticleWave.css — breathing particle
-   wave background for the single page (2026-11-26). The canvas is
-   fixed behind the page content and never intercepts input. */
+/* src/components/SinglePage/ParticleWave.css — halftone dot wave
+   background for the single page (2026-11-26). The canvas is fixed
+   behind the page content and never intercepts input. The wave runs
+   in BOTH themes: warm-white dots on charcoal in dark mode,
+   espresso-ink dots on paper in light mode. */
 
 /* Fixed backdrop: covers the viewport, sits behind the content
    (negative z-index inside the page's stacking context), and can
-   never block a click. The wave is a dark-theme effect only — in
-   light mode the canvas is hidden entirely. */
+   never block a click. */
 .particle-wave {
   position: fixed;
   inset: 0;
@@ -15,24 +16,25 @@
   pointer-events: none;
 }
 
-html[data-theme="light"] .particle-wave {
-  display: none;
-}
-
-/* Let the wave show through in dark mode. Every top-level section
-   paints an opaque `var(--color-paper)` background — but in dark
-   mode --color-paper is #14181d, identical to --color-bg, so making
-   those backgrounds transparent changes nothing visible: the body
+/* Let the wave show through in both themes. Every top-level section
+   paints an opaque `var(--color-paper)` background. In dark mode
+   --color-paper is #14181d, identical to --color-bg, so making those
+   backgrounds transparent changes nothing visible: the body
    background shows through at the exact same hex, and the wave
-   becomes visible behind the content. Light mode is untouched
-   (sections keep their paper backgrounds, the canvas is hidden). */
-html[data-theme="dark"].single-page--wave .single-page__section,
-html[data-theme="dark"].single-page--wave .bio-page,
-html[data-theme="dark"].single-page--wave .stats,
-html[data-theme="dark"].single-page--wave .services,
-html[data-theme="dark"].single-page--wave .portfolio,
-html[data-theme="dark"].single-page--wave .news,
-html[data-theme="dark"].single-page--wave .contact {
+   becomes visible behind the content. In light mode --color-paper is
+   #f6f1e7 (warm paper) and --color-bg is #faf9f6 (a shade lighter),
+   so making the sections transparent shifts them to the page
+   background hex — a subtle change inside the same warm-paper
+   family, and the page still reads as warm paper. The cards inside
+   the sections keep their own surface backgrounds in both themes,
+   so the wave shows in the gaps between cards, never through them. */
+html.single-page--wave .single-page__section,
+html.single-page--wave .bio-page,
+html.single-page--wave .stats,
+html.single-page--wave .services,
+html.single-page--wave .portfolio,
+html.single-page--wave .news,
+html.single-page--wave .contact {
   background: transparent;
 }
 

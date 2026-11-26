@@ -1,40 +1,65 @@
-// src/components/SinglePage/ParticleWave.tsx — breathing particle
-// wave background for the single page (2026-11-26). A grid of small
-// particles in a flowing sine-wave field, drawn on a fixed canvas
-// behind the page content. The wave breathes (its amplitude swells
-// and settles on a slow ~9s rhythm) and ripples outward from the
-// mouse, easing back when the mouse moves away.
+// src/components/SinglePage/ParticleWave.tsx — halftone dot wave
+// background for the single page (2026-11-26, rebuilt from the v1
+// grid wave). DOTS ONLY — no connecting lines. The wave is a pair of
+// flowing horizontal ribbons; each dot's size and opacity follow its
+// distance from a ribbon's centreline (a Gaussian falloff), so the
+// ribbons read as smooth halftone bands that dissolve into empty
+// space at their edges. The ribbons drift (their sine phase advances
+// slowly) and breathe (amplitude swells and settles on a ~9s rhythm),
+// and dots near the mouse ripple outward and ease back.
 //
-// Subtlety is the point: faint warm-white dots with a small fraction
-// in shirt red, low opacity, sparse grid — text stays perfectly
-// readable. Dark theme only (the palette is built for the charcoal
-// page); in light mode the canvas is hidden by CSS and the loop
-// never runs. Respects prefers-reduced-motion (one static frame,
-// no animation, no mouse response) and pauses when the tab is
-// hidden. Mounted by SinglePage only, so the old routes are
-// unaffected; everything is cleaned up on unmount.
+// Palette-matched for BOTH themes: warm-white dots with a fraction
+// in shirt red on the dark charcoal page; espresso-ink dots with a
+// fraction in shirt red on the light paper page. Subtle in both —
+// text stays perfectly readable. Respects prefers-reduced-motion
+// (one static frame, no animation, no mouse response) and pauses
+// when the tab is hidden. Mounted by SinglePage only, so the old
+// routes are unaffected; everything is cleaned up on unmount.
 import { useEffect, useRef } from "react";
 import "./ParticleWave.css";
 
-const SPACING = 64; // px between grid points
-const MAX_COLS = 42;
-const MAX_ROWS = 26;
-const MOUSE_RADIUS = 170; // px — particles inside this ripple away
+const SPACING = 34; // px between grid points (dense enough for halftone)
+const MAX_COLS = 52;
+const MAX_ROWS = 34;
+const MOUSE_RADIUS = 170; // px — dots inside this ripple away
 const MOUSE_PUSH = 26; // px max displacement from the mouse
 const EASE = 0.14; // per-frame lerp toward the mouse target (springy)
 const BREATHE_MS = 9000; // one full swell/settle cycle
-const WAVE_SPEED = 0.00035; // wave travel, radians per ms
-const BASE_AMPLITUDE = 16; // px, before the breathing multiplier
 
-const WARM_WHITE = "232, 226, 214";
-const SHIRT_RED = "217, 96, 79"; // #d9604f — lightened shirt red
+// One ribbon: a sine centreline that undulates across the viewport
+// and drifts as its phase advances. `base` is the centreline's
+// height as a fraction of viewport height, `amp` how far it rises
+// and dips, `sigma` the ribbon's thickness (Gaussian falloff),
+// `k` the wave number, `speed` the phase drift, `phase` an offset,
+// and `weight` how strongly it shows (the secondary ribbon is
+// fainter).
+type Ribbon = {
+  base: number;
+  amp: number;
+  sigma: number;
+  k: number;
+  speed: number;
+  phase: number;
+  weight: number;
+};
+
+const RIBBONS: Ribbon[] = [
+  { base: 0.38, amp: 90, sigma: 85, k: 0.0021, speed: 0.00012, phase: 0, weight: 1 },
+  { base: 0.72, amp: 70, sigma: 70, k: 0.0016, speed: -0.00009, phase: 1.7, weight: 0.6 },
+];
+
+// Dot palettes, as "r, g, b" triples. Dark: warm white + lightened
+// shirt red on charcoal. Light: espresso ink + shirt red on paper.
+const PALETTES = {
+  dark: { dot: "232, 226, 214", red: "217, 96, 79" },
+  light: { dot: "33, 29, 22", red: "160, 44, 30" },
+} as const;
 
 type Particle = {
   bx: number; // base grid x (css px)
   by: number; // base grid y (css px)
   red: boolean;
-  r: number; // radius px
-  phase: number; // per-particle alpha shimmer
+  phase: number; // per-particle shimmer phase
   ox: number; // eased mouse offset x
   oy: number; // eased mouse offset y
 };
@@ -79,9 +104,8 @@ export const ParticleWave: React.FC = () => {
           next.push({
             bx: x0 + col * SPACING,
             by: y0 + row * SPACING,
-            // ~1 in 8 dots is shirt red; the rest are warm white.
+            // ~1 in 8 dots is shirt red; the rest are the theme dot color.
             red: i % 8 === 3,
-            r: 1.1 + ((i * 37) % 10) / 10, // 1.1–2.0px, deterministic
             phase: (i * 0.7) % (Math.PI * 2),
             ox: 0,
             oy: 0,
@@ -91,27 +115,50 @@ export const ParticleWave: React.FC = () => {
       particles = next;
     };
 
-    // Draw one frame at time `t` (ms). Pure function of the particle
-    // grid, the breathing phase, and the eased mouse offsets.
+    // How strongly a dot belongs to the wave at time `t` (0..1).
+    // The strongest ribbon wins; a slow factor along x makes the
+    // density vary along each ribbon so it reads as a flowing wave
+    // rather than a uniform band.
+    const waveWeight = (bx: number, by: number, t: number, breathe: number) => {
+      let w = 0;
+      for (const r of RIBBONS) {
+        const centre =
+          height * r.base +
+          r.amp * breathe * Math.sin(bx * r.k + t * r.speed + r.phase);
+        const dy = by - centre;
+        const g = Math.exp(-(dy * dy) / (2 * r.sigma * r.sigma));
+        w = Math.max(w, g * r.weight);
+      }
+      const along = 0.8 + 0.2 * Math.sin(bx * 0.0013 + t * 0.00015);
+      return Math.min(1, w * along);
+    };
+
+    // Draw one frame at time `t` (ms). Dots only — no lines. Each
+    // dot's radius and opacity follow the wave weight, so the ribbons
+    // are halftone bands: big and present at the crest, tiny and
+    // faint at the edges, dissolving into empty space between bands.
     const draw = (t: number) => {
       ctx.clearRect(0, 0, width, height);
       if (particles.length === 0) return;
 
-      const breathe = 0.6 + 0.4 * Math.sin((t / BREATHE_MS) * Math.PI * 2);
-      const amp = BASE_AMPLITUDE * breathe;
+      const breathe = 0.65 + 0.35 * Math.sin((t / BREATHE_MS) * Math.PI * 2);
+      const palette = isDark() ? PALETTES.dark : PALETTES.light;
+      // Light ink on paper needs a slightly lower ceiling than warm
+      // white on charcoal to stay equally subtle.
+      const alphaBase = isDark() ? 0.05 : 0.04;
+      const alphaSpan = isDark() ? 0.25 : 0.2;
+      const alphaRedBase = isDark() ? 0.1 : 0.08;
+      const alphaRedSpan = isDark() ? 0.24 : 0.22;
 
-      // Resolve each particle's drawn position first (wave + eased
-      // mouse offset), so the faint neighbour lines bend with the
-      // wave instead of staying on the rigid grid.
-      const pts: { x: number; y: number }[] = new Array(particles.length);
       for (let i = 0; i < particles.length; i += 1) {
         const p = particles[i];
-        const wave =
-          amp *
-          Math.sin(p.bx * 0.0016 + t * WAVE_SPEED + p.by * 0.0012);
-        const sway =
-          6 * breathe * Math.sin(p.by * 0.0021 - t * 0.00022 + p.bx * 0.0009);
+        const w = waveWeight(p.bx, p.by, t, breathe);
 
+        // Gentle drift so the field feels alive, plus the eased
+        // mouse ripple (dots near the cursor push outward and settle
+        // back when the mouse leaves).
+        const sway =
+          4 * Math.sin(p.by * 0.0021 - t * 0.00022 + p.bx * 0.0009);
         let tx = 0;
         let ty = 0;
         if (mouse.active) {
@@ -127,41 +174,24 @@ export const ParticleWave: React.FC = () => {
         }
         p.ox += (tx - p.ox) * EASE;
         p.oy += (ty - p.oy) * EASE;
-        pts[i] = { x: p.bx + sway + p.ox, y: p.by + wave + p.oy };
-      }
 
-      // Faint vector lines between grid neighbours — the circuit-trace
-      // feel, kept barely visible so the page stays calm.
-      const cols = Math.min(MAX_COLS, Math.ceil(width / SPACING) + 1);
-      ctx.strokeStyle = `rgba(${WARM_WHITE}, 0.05)`;
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      for (let i = 0; i < particles.length; i += 1) {
-        const col = i % cols;
-        if (col < cols - 1 && pts[i + 1]) {
-          ctx.moveTo(pts[i].x, pts[i].y);
-          ctx.lineTo(pts[i + 1].x, pts[i + 1].y);
-        }
-        if (pts[i + cols]) {
-          ctx.moveTo(pts[i].x, pts[i].y);
-          ctx.lineTo(pts[i + cols].x, pts[i + cols].y);
-        }
-      }
-      ctx.stroke();
-
-      // Dots. Alpha shimmers gently with the wave phase so the field
-      // feels alive without ever getting bright.
-      for (let i = 0; i < particles.length; i += 1) {
-        const p = particles[i];
-        const shimmer = Math.sin(
-          p.bx * 0.0016 + t * WAVE_SPEED + p.by * 0.0012 + p.phase,
-        );
+        // Halftone size + opacity: big and present at the crest,
+        // tiny and faint at the edges. A whisper of shimmer keeps
+        // the field alive without ever getting bright.
+        const shimmer = Math.sin(p.bx * 0.0016 + t * 0.00035 + p.phase);
+        const radius = 0.6 + 3.1 * w + 0.15 * shimmer * w;
         const alpha = p.red
-          ? 0.26
-          : Math.min(0.26, Math.max(0.05, 0.12 + 0.08 * shimmer));
-        ctx.fillStyle = `rgba(${p.red ? SHIRT_RED : WARM_WHITE}, ${alpha.toFixed(3)})`;
+          ? alphaRedBase + alphaRedSpan * w
+          : alphaBase + alphaSpan * w;
+        ctx.fillStyle = `rgba(${p.red ? palette.red : palette.dot}, ${alpha.toFixed(3)})`;
         ctx.beginPath();
-        ctx.arc(pts[i].x, pts[i].y, p.r, 0, Math.PI * 2);
+        ctx.arc(
+          p.bx + sway + p.ox,
+          p.by + p.oy,
+          Math.max(0.5, radius * (p.red ? 1.1 : 1)),
+          0,
+          Math.PI * 2,
+        );
         ctx.fill();
       }
     };
@@ -174,7 +204,7 @@ export const ParticleWave: React.FC = () => {
     };
 
     const start = () => {
-      if (raf || !isDark() || reducedMotion.matches) return;
+      if (raf || reducedMotion.matches) return;
       const tick = (t: number) => {
         if (document.hidden) {
           raf = 0;
@@ -188,22 +218,15 @@ export const ParticleWave: React.FC = () => {
 
     const drawStatic = () => {
       stop();
-      if (!isDark()) {
-        ctx.clearRect(0, 0, width, height);
-        return;
-      }
-      // One still frame at a fixed, pleasant phase.
+      // One still frame at a fixed, pleasant phase, in the current
+      // theme's palette.
       draw(2600);
     };
 
-    // Decide what should be running right now: nothing in light
-    // mode, one static frame for reduced motion, the live loop
-    // otherwise.
+    // Decide what should be running right now: one static frame for
+    // reduced motion, the live loop otherwise — in BOTH themes.
     const refresh = () => {
-      if (!isDark()) {
-        stop();
-        ctx.clearRect(0, 0, width, height);
-      } else if (reducedMotion.matches) {
+      if (reducedMotion.matches) {
         drawStatic();
       } else {
         start();
@@ -227,9 +250,9 @@ export const ParticleWave: React.FC = () => {
     };
     const onMotionChange = () => refresh();
     const themeObserver = new MutationObserver((mutations) => {
-      if (
-        mutations.some((m) => m.attributeName === "data-theme")
-      ) {
+      if (mutations.some((m) => m.attributeName === "data-theme")) {
+        // The palette is resolved per frame, so a theme toggle just
+        // needs the loop (re)started in the new theme.
         refresh();
       }
     });
@@ -237,10 +260,7 @@ export const ParticleWave: React.FC = () => {
     buildGrid();
     refresh();
     window.addEventListener("mousemove", onMouseMove, { passive: true });
-    document.documentElement.addEventListener(
-      "mouseleave",
-      onMouseLeave,
-    );
+    document.documentElement.addEventListener("mouseleave", onMouseLeave);
     window.addEventListener("resize", onResize);
     document.addEventListener("visibilitychange", onVisibility);
     reducedMotion.addEventListener("change", onMotionChange);
@@ -252,10 +272,7 @@ export const ParticleWave: React.FC = () => {
     return () => {
       stop();
       window.removeEventListener("mousemove", onMouseMove);
-      document.documentElement.removeEventListener(
-        "mouseleave",
-        onMouseLeave,
-      );
+      document.documentElement.removeEventListener("mouseleave", onMouseLeave);
       window.removeEventListener("resize", onResize);
       document.removeEventListener("visibilitychange", onVisibility);
       reducedMotion.removeEventListener("change", onMotionChange);
@@ -265,10 +282,6 @@ export const ParticleWave: React.FC = () => {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="particle-wave"
-      aria-hidden="true"
-    />
+    <canvas ref={canvasRef} className="particle-wave" aria-hidden="true" />
   );
 };
