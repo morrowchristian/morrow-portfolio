@@ -1,23 +1,20 @@
-// src/components/Bio/Bio.tsx — centered hero (Phase 1 redesign, 2026-11-25).
-// The old two-column layout (bio left, full-height portrait right) is
-// replaced by a centered stack: circular portrait, name, rotating
-// tagline, slogan, intro, CTAs. The portrait is a circular crop ONLY —
-// object-fit: cover on a square frame, never stretched or warped.
-// "What I build" (the three services, 2026-11-26) and the Stats strip
-// live here in the hero now, not as standalone sections — the hero is
-// the About landing, and the services + stats are part of it. News
-// no longer renders here; it lives in the single-page shell
-// (SinglePage), which composes this hero first.
-// The circuit art survives as faint traces and the single circuit line
-// with a square on each end closing the intro (2026-11-17).
-// Type: Newsreader serif for the name/slogan, IBM Plex Mono for the
+// src/components/Bio/Bio.tsx — compact hero header (sidebar-tabs
+// redesign, 2026-11-26). The old full-viewport hero (with "What I
+// build" and the Stats strip folded in) is gone: the hero is now
+// a compact identity header — circular portrait, availability
+// badge, name, rotating tagline, circuit divider, CTAs — and the
+// bio copy, services, and stats live in the About panel. The
+// portrait is a circular crop ONLY — object-fit: cover on a
+// square frame, never stretched or warped. The circuit art
+// survives as faint traces and the single circuit line with a
+// square on each end. "View projects" switches to the Projects
+// tab (via the onViewProjects prop) instead of scrolling to a
+// #projects section, which no longer exists.
+// Type: Newsreader serif for the name, IBM Plex Mono for the
 // furniture (tagline, labels, CTAs). Palette: theme-aware via tokens.
 import "./Bio.css";
 import { useInViewAnimation } from "../../hooks/useInViewAnimation";
 import { useRotatingTagline } from "../../hooks/useRotatingTagline";
-import { services } from "../../data/services";
-import { ServiceRow } from "../Services/ServiceRow";
-import { Stats } from "../Stats/Stats";
 
 const TAGLINE_ROLES = [
   "Full-Stack Software Engineer",
@@ -25,11 +22,11 @@ const TAGLINE_ROLES = [
   "Built end to end",
 ] as const;
 
-function scrollToSection(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+interface BioProps {
+  onViewProjects: () => void;
 }
 
-export const Bio: React.FC = () => {
+export const Bio: React.FC<BioProps> = ({ onViewProjects }) => {
   const { ref, isVisible } = useInViewAnimation();
   const tagline = useRotatingTagline(TAGLINE_ROLES);
 
@@ -87,8 +84,7 @@ export const Bio: React.FC = () => {
           </div>
 
           {/* Availability badge (2026-11-25): a quiet pill above the
-              name, adapted from the badge on sunnypatel.net —
-              Christian's own status, in the Editorial mono. */}
+              name — Christian's own status, in the Editorial mono. */}
           <p className="bio__badge">
             <span className="bio__badge-dot" aria-hidden="true" />
             Open to software roles
@@ -103,35 +99,8 @@ export const Bio: React.FC = () => {
             </span>
           </p>
 
-          <p className="bio__slogan">Software, built end to end — built to last.</p>
-
-          <p className="bio__subtitle">
-            Full-Stack Software Engineer — Cleveland, TN
-          </p>
-
-          <p className="bio__intro">
-            B.S. Computer Science: Software Systems ’25 from the University
-            of Tennessee at Chattanooga, Cum Laude, 3.7 GPA. I build
-            full-stack web applications in React, TypeScript and Django — with
-            a real client website shipped — and bring 7+ years of
-            high-urgency service and team-lead experience to every project:
-            calm problem-solving under pressure, clear communication, and
-            code that stays maintainable.
-          </p>
-
-          {/* Currently (2026-11-25): a quiet status line under the
-              intro, adapted from the "currently" idea on
-              sunnypatel.net — Christian's own facts, in the
-              Editorial mono. */}
-          <p className="bio__currently">
-            <span className="bio__currently-label">Currently</span> —
-            Building RealSync &amp; Baseline · Dispatching at Eagle
-            Tele-Services
-          </p>
-
           {/* A single circuit line with a square on each end,
-              closing the intro — it replaces the L-shaped trace
-              that used to sit behind the stack. */}
+              closing the header. */}
           <div className="bio__divider" aria-hidden="true">
             <span className="bio__divider-square" />
             <span className="bio__divider-line" />
@@ -142,7 +111,7 @@ export const Bio: React.FC = () => {
             <button
               type="button"
               className="bio__cta bio__cta--primary"
-              onClick={() => scrollToSection("projects")}
+              onClick={onViewProjects}
             >
               View projects
             </button>
@@ -150,35 +119,7 @@ export const Bio: React.FC = () => {
               Download résumé
             </a>
           </div>
-
-          {/* "What I build" (2026-11-26): the three services, folded
-              into the hero instead of a standalone section. Numbered
-              rows (same presentation as the old Services list
-              variant), each grounded in shipped work and linking to
-              its proof — a live demo or the repo. */}
-          <div className="bio__build">
-            <p className="bio__build-kick">What I build</p>
-            <div className="bio__build-rows">
-              {services.map((service, index) => (
-                <ServiceRow
-                  key={service.title}
-                  title={service.title}
-                  description={service.description}
-                  number={String(index + 1).padStart(2, "0")}
-                  cta={service.cta}
-                />
-              ))}
-            </div>
-          </div>
         </div>
-
-        {/* Stats strip (2026-11-26): folded into the hero as its
-            bottom band, so it is part of the About landing instead
-            of a standalone strip you only glimpse while scrolling
-            between sections. Reuses the Stats component as-is —
-            same numbers, same styling. Not a snap point; the hero
-            (#about) is the single snap point for the whole landing. */}
-        <Stats />
       </div>
     </section>
   );

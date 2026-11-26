@@ -1,0 +1,171 @@
+/* src/components/SinglePage/panels/SkillsPanel.css — the Skills tab
+   (sidebar-tabs redesign, 2026-11-26). The tile grid and legend
+   are the carousel's (SkillsCarousel.css), with the prefix
+   renamed — the tile design is unchanged.
+
+   The groups sit in ONE dark slate card in BOTH themes (as the
+   carousel card did). That is what makes the level colors work
+   identically in either theme: the name color is the ONLY level
+   encoding, and the three colors are fixed values chosen for
+   legibility on the dark card (not theme tokens): Strong =
+   lightened shirt red #d9604f, Working = warm white #e8e2d6,
+   Familiar = burnt orange #e08a4c. The brand icons stay a muted
+   warm grey so they never encode level. */
+
+.skills-panel__card {
+  background: #23282d;
+  color: #f5f2ea;
+  border: 1px solid rgba(245, 242, 234, 0.12);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: clamp(1.25rem, 1rem + 1.5vw, 2rem);
+}
+
+/* One group per sub-block, separated by a thin rule — the same
+   sub-block rhythm as the other panels, inside the dark card. */
+.skills-panel__group {
+  padding-block: 1.25rem;
+}
+
+.skills-panel__group:first-child {
+  padding-top: 0;
+}
+
+.skills-panel__group + .skills-panel__group {
+  border-top: 1px solid rgba(245, 242, 234, 0.12);
+}
+
+.skills-panel__group-title {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: clamp(1.1rem, 1rem + 0.3vw, 1.3rem);
+  font-weight: 500;
+  line-height: 1.2;
+  color: #f5f2ea;
+  margin: 0 0 1rem;
+}
+
+/* Tile grid: 4 per row, stacked in rows. */
+.skills-panel__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+/* Narrow screens: 2 per row so the tiles stay roomy. */
+@media (max-width: 640px) {
+  .skills-panel__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.skills-panel__tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 96px;
+  padding: 0.9rem 0.5rem;
+  background: rgba(245, 242, 234, 0.04);
+  border: 1px solid rgba(245, 242, 234, 0.08);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+/* Icons are a muted warm grey — they never encode level. */
+.skills-panel__tile-icon {
+  font-size: 2rem;
+  color: #cfc8b8;
+  flex: none;
+}
+
+.skills-panel__tile-initials {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #cfc8b8;
+  flex: none;
+}
+
+/* The name color is the ONLY level encoding. */
+.skills-panel__tile-name {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.72rem;
+  line-height: 1.35;
+  overflow-wrap: break-word;
+}
+
+.skills-panel__tile-name--strong {
+  color: #d9604f;
+}
+
+.skills-panel__tile-name--working {
+  color: #e8e2d6;
+}
+
+.skills-panel__tile-name--familiar {
+  color: #e08a4c;
+}
+
+/* Legend: a color key — "Proficiency:" plus a color swatch and a
+   word per level, so the mapping from skill-name color to level
+   is explicit. (The per-skill proficiency dots are still gone;
+   these swatches live only in the key.) */
+.skills-panel__legend {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.78rem;
+  color: #b3aa9c;
+  margin: 0;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(245, 242, 234, 0.12);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.skills-panel__legend-label {
+  color: #b3aa9c;
+}
+
+.skills-panel__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.skills-panel__legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.skills-panel__legend-item--strong {
+  color: #d9604f;
+}
+
+.skills-panel__legend-item--strong .skills-panel__legend-dot {
+  background: #d9604f;
+}
+
+.skills-panel__legend-item--working {
+  color: #e8e2d6;
+}
+
+.skills-panel__legend-item--working .skills-panel__legend-dot {
+  background: #e8e2d6;
+}
+
+.skills-panel__legend-item--familiar {
+  color: #e08a4c;
+}
+
+.skills-panel__legend-item--familiar .skills-panel__legend-dot {
+  background: #e08a4c;
+}

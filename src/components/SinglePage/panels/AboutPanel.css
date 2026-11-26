@@ -1,0 +1,84 @@
+/* src/components/SinglePage/panels/AboutPanel.css — the About tab
+   (sidebar-tabs redesign, 2026-11-26). The bio type is copied from
+   the old hero (Bio.css): Newsreader slogan and intro, IBM Plex
+   Mono Currently line, the single circuit line with a square on
+   each end. The sub-block rules (spacing + the thin rule between
+   blocks) and the subhead style live in SinglePage.css
+   (.tabs-panel__block / .tabs-panel__subhead) and are shared by
+   every panel. */
+
+.about-panel__slogan {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: clamp(1.35rem, 1.1rem + 0.9vw, 1.8rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+  margin-bottom: 1rem;
+}
+
+.about-panel__intro {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: clamp(0.98rem, 0.92rem + 0.25vw, 1.1rem);
+  line-height: 1.6;
+  color: var(--color-muted);
+  max-width: 38rem;
+  margin-bottom: 1rem;
+}
+
+.about-panel__currently {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: clamp(0.78rem, 0.8rem + 0.15vw, 0.88rem);
+  line-height: 1.5;
+  color: var(--color-muted);
+  margin-bottom: 1.25rem;
+}
+
+.about-panel__currently-label {
+  font-weight: 500;
+  color: var(--color-eyebrow);
+}
+
+/* A single circuit line with a square on each end, closing the
+   bio — the same furniture as the hero divider. */
+.about-panel__divider {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+  max-width: 26rem;
+}
+
+.about-panel__divider-square {
+  flex: none;
+  width: 6px;
+  height: 6px;
+  background: var(--color-ink);
+}
+
+.about-panel__divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--color-line-strong);
+}
+
+/* "What I build": the rows are ServiceRow (Services.css) — this
+   only lays out the list. */
+.about-panel__services {
+  width: 100%;
+}
+
+/* The Stats strip inside the panel: strip its standalone-section
+   chrome (hairline, section padding, paper background, centered
+   1280px inner) so it reads as one block of the panel instead of
+   a section of its own. The strip itself (Stats.css) is untouched. */
+.about-panel .stats {
+  border-top: none;
+  padding-block: 0;
+  background: transparent;
+}
+
+.about-panel .stats__inner {
+  max-width: none;
+  padding-inline: 0;
+}

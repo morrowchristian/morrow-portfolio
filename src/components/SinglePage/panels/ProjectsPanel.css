@@ -1,0 +1,156 @@
+/* src/components/SinglePage/panels/ProjectsPanel.css — the Projects
+   tab (sidebar-tabs redesign, 2026-11-26). The card is the
+   carousel's card (ProjectsCarousel.css), with the prefix
+   renamed — the card design is unchanged. The grid replaces the
+   carousel track: 2 columns on desktop, 1 on mobile, all cards
+   visible at once. No viewport, no track, no chevrons, no
+   peeking blur/dim.
+
+   The cards are opaque `var(--color-surface)` so the particle
+   wave behind the page never fights the text. All colors come
+   from the theme tokens, so the light toggle keeps working. */
+
+.projects-panel__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+@media (max-width: 768px) {
+  .projects-panel__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Card: opaque surface, rounded like the Skills card. */
+.projects-panel__card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+/* Banner: ~16:7, cropped with cover (the source screenshots have
+   different native ratios; the banner is a crop, not the whole
+   image). */
+.projects-panel__media {
+  aspect-ratio: 16 / 7;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-line);
+  background: var(--color-surface);
+  flex: none;
+}
+
+.projects-panel__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.projects-panel__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+}
+
+.projects-panel__title {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: clamp(1.4rem, 1.25rem + 0.6vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+  margin: 0;
+}
+
+.projects-panel__description {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: clamp(0.98rem, 0.92rem + 0.25vw, 1.1rem);
+  line-height: 1.6;
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.projects-panel__highlights {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: clamp(0.9rem, 0.85rem + 0.2vw, 1rem);
+  line-height: 1.5;
+  color: var(--color-ink);
+  margin: 0;
+  padding: 0;
+}
+
+.projects-panel__highlights li {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.projects-panel__highlights li::before {
+  content: "";
+  flex: none;
+  width: 7px;
+  height: 7px;
+  margin-top: 0.45em;
+  background: var(--color-accent);
+}
+
+.projects-panel__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.projects-panel__tag {
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--color-ink);
+  border-radius: 999px;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--color-ink);
+  background: transparent;
+  white-space: nowrap;
+}
+
+.projects-panel__links {
+  display: flex;
+  gap: 1rem;
+  padding-top: 0.25rem;
+}
+
+.projects-panel__link {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.projects-panel__link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.projects-panel__link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .projects-panel__body {
+    padding: 1.25rem;
+  }
+}

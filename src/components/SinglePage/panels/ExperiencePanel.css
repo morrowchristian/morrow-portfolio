@@ -1,0 +1,175 @@
+/* src/components/SinglePage/panels/ExperiencePanel.css — the
+   Experience tab (sidebar-tabs redesign, 2026-11-26). Accordion
+   cards (Sakshi-style): a header row with role/company left,
+   dates right, and a chevron; the expanded body shows the
+   bullets. The entry type copies the Resume page's type
+   (resume__role / company / bullets / diploma in Resume.css),
+   so the typography matches the Resume page exactly — but the
+   rules live here, so the panel does not depend on Resume.css
+   being loaded. The cards are opaque (var(--color-surface)) so
+   the particle wave behind the page never fights the text. */
+
+.experience-panel__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.experience-panel__item {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+/* Header row: a button, so Enter/Space toggles it. Role and
+   company stack on the left; the period and chevron sit right. */
+.experience-panel__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  text-align: left;
+  padding: 1rem 1.25rem;
+  background: transparent;
+  color: var(--color-ink);
+  cursor: pointer;
+}
+
+.experience-panel__header:hover {
+  background: var(--color-line-soft);
+}
+
+.experience-panel__header:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: -2px;
+}
+
+.experience-panel__header-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.experience-panel__role {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: clamp(1.05rem, 1rem + 0.25vw, 1.25rem);
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--color-ink);
+}
+
+.experience-panel__org {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: clamp(0.9rem, 0.85rem + 0.2vw, 1rem);
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+
+.experience-panel__period {
+  flex: none;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-eyebrow);
+  white-space: nowrap;
+}
+
+/* Chevron: points down, rotates up when the entry is open. */
+.experience-panel__chevron {
+  flex: none;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  transition: transform var(--transition-fast);
+}
+
+.experience-panel__chevron.is-open {
+  transform: rotate(180deg);
+  color: var(--color-accent);
+}
+
+/* Expanded body: bullets, then the diploma link on the degree
+   card only. */
+.experience-panel__body {
+  padding: 0 1.25rem 1.25rem;
+  border-top: 1px solid var(--color-line-soft);
+  padding-top: 1rem;
+}
+
+.experience-panel__bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+}
+
+.experience-panel__bullets li {
+  position: relative;
+  padding-left: 16px;
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+
+.experience-panel__bullets li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  background: var(--color-accent);
+}
+
+/* Diploma link — small red mono link under the degree entry. */
+.experience-panel__diploma {
+  display: inline-block;
+  margin-top: var(--space-16);
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-accent);
+}
+
+.experience-panel__diploma:hover {
+  color: var(--color-ink);
+  border-bottom-color: var(--color-ink);
+}
+
+/* Narrow screens: the period wraps under the role/company so
+   the header never overflows. */
+@media (max-width: 640px) {
+  .experience-panel__header {
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+  }
+
+  .experience-panel__period {
+    order: 3;
+    width: 100%;
+  }
+
+  .experience-panel__chevron {
+    margin-left: auto;
+  }
+}
+
+/* Reduced motion: the chevron flips instantly. */
+@media (prefers-reduced-motion: reduce) {
+  .experience-panel__chevron {
+    transition: none;
+  }
+}

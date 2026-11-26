@@ -1,0 +1,56 @@
+/* src/components/SinglePage/panels/NewsPanel.css — the News tab
+   (sidebar-tabs redesign, 2026-11-26). The timeline is the old
+   News section's (News.css), with the prefix renamed — the
+   design is unchanged: Newsreader entries, IBM Plex Mono dates,
+   hairline rules between entries. */
+
+.news-panel__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.news-panel__item {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding-block: 0.85rem;
+  border-top: 1px solid var(--color-line-soft);
+}
+
+.news-panel__item:last-child {
+  border-bottom: 1px solid var(--color-line-soft);
+}
+
+.news-panel__date {
+  flex: none;
+  width: 6.5rem;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.news-panel__text {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: clamp(0.9rem, 0.85rem + 0.2vw, 1rem);
+  line-height: 1.5;
+  color: var(--color-ink);
+  margin: 0;
+}
+
+/* Narrow screens: the date stacks above the entry so nothing
+   overflows at 390px. */
+@media (max-width: 640px) {
+  .news-panel__item {
+    flex-direction: column;
+    gap: 0.15rem;
+    padding-block: 0.75rem;
+  }
+
+  .news-panel__date {
+    width: auto;
+  }
+}
