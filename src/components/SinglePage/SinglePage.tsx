@@ -19,6 +19,17 @@
 // panels show all of their content at once. The old /portfolio,
 // /resume, and /contact routes stay live in App.tsx alongside
 // this page. No copy, numbers, or project data are changed here.
+//
+// APP SHELL (2026-11-26): the single page is a fixed-height
+// layout — exactly the viewport height below the 56px top bar —
+// so the PAGE itself never scrolls. The CONTENT CARD is the
+// scroll container (overflow-y: auto in SinglePage.css). A tab
+// switch resets the card's scroll to the top (see the useEffect
+// on activeTab below). The sidebar is percentage-based, ~25% of
+// the viewport width. The top bar, sidebar, and card always
+// occupy the same viewport area on every tab, so the dimensions
+// feel consistent, and the content can never overlap the
+// sidebar footer.
 import { useEffect, useRef, useState } from "react";
 import {
   FaBriefcase,
@@ -111,6 +122,11 @@ const TABS: TabDef[] = [
 export const SinglePage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabId>("about");
   const tabRefs = useRef<Map<TabId, HTMLButtonElement>>(new Map());
+  // The content card is the scroll container (the page itself
+  // never scrolls). Keep a ref so a tab switch can reset the
+  // card to the top — each tab is a different panel, and
+  // starting scrolled-down would feel broken.
+  const cardRef = useRef<HTMLDivElement>(null);
 
   // The particle wave uses the `single-page--wave` class on the
   // document element to let the fixed canvas show through the
@@ -127,6 +143,16 @@ export const SinglePage: React.FC = () => {
 
   const activeIndex = TABS.findIndex((tab) => tab.id === activeTab);
   const active = TABS[activeIndex];
+
+  // Reset the card's scroll to the top on every tab change —
+  // clicks and keyboard both go through setActiveTab, so this
+  // one effect covers both. The card is the scroll container,
+  // so scrollTop (not window.scrollTo) is what moves.
+  useEffect(() => {
+    if (cardRef.current) {
+      cardRef.current.scrollTop = 0;
+    }
+  }, [activeTab]);
 
   const selectTab = (id: TabId) => {
     setActiveTab(id);
@@ -207,7 +233,7 @@ export const SinglePage: React.FC = () => {
             </p>
           </aside>
 
-          <div className="tabs-layout__card">
+          <div className="tabs-layout__card" ref={cardRef}>
             <PanelHeader
               icon={active.icon}
               title={active.title}
