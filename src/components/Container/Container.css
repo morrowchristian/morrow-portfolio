@@ -1,7 +1,9 @@
 /* src/components/Container/Container.css */
 
-.container {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
+/* The .container rule used to live here too (max-width 1120px),
+   duplicating the one in src/styles/layout.css (1200px). Whichever
+   loaded last won by accident of import order, so the page was
+   effectively one width for Container sections and different
+   widths elsewhere. The duplicate is removed (2026-11-26) —
+   layout.css is now the single definition, at 1280px. This file
+   is kept so the Container component's import stays intact. */

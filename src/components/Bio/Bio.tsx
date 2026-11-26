@@ -3,8 +3,11 @@
 // replaced by a centered stack: circular portrait, name, rotating
 // tagline, slogan, intro, CTAs. The portrait is a circular crop ONLY —
 // object-fit: cover on a square frame, never stretched or warped.
-// Stats, Services, and News no longer render here; they live in the
-// single-page shell (SinglePage), which composes this hero first.
+// "What I build" (the three services, 2026-11-26) and the Stats strip
+// live here in the hero now, not as standalone sections — the hero is
+// the About landing, and the services + stats are part of it. News
+// no longer renders here; it lives in the single-page shell
+// (SinglePage), which composes this hero first.
 // The circuit art survives as faint traces and the single circuit line
 // with a square on each end closing the intro (2026-11-17).
 // Type: Newsreader serif for the name/slogan, IBM Plex Mono for the
@@ -12,6 +15,9 @@
 import "./Bio.css";
 import { useInViewAnimation } from "../../hooks/useInViewAnimation";
 import { useRotatingTagline } from "../../hooks/useRotatingTagline";
+import { services } from "../../data/services";
+import { ServiceRow } from "../Services/ServiceRow";
+import { Stats } from "../Stats/Stats";
 
 const TAGLINE_ROLES = [
   "Full-Stack Software Engineer",
@@ -144,7 +150,35 @@ export const Bio: React.FC = () => {
               Download résumé
             </a>
           </div>
+
+          {/* "What I build" (2026-11-26): the three services, folded
+              into the hero instead of a standalone section. Numbered
+              rows (same presentation as the old Services list
+              variant), each grounded in shipped work and linking to
+              its proof — a live demo or the repo. */}
+          <div className="bio__build">
+            <p className="bio__build-kick">What I build</p>
+            <div className="bio__build-rows">
+              {services.map((service, index) => (
+                <ServiceRow
+                  key={service.title}
+                  title={service.title}
+                  description={service.description}
+                  number={String(index + 1).padStart(2, "0")}
+                  cta={service.cta}
+                />
+              ))}
+            </div>
+          </div>
         </div>
+
+        {/* Stats strip (2026-11-26): folded into the hero as its
+            bottom band, so it is part of the About landing instead
+            of a standalone strip you only glimpse while scrolling
+            between sections. Reuses the Stats component as-is —
+            same numbers, same styling. Not a snap point; the hero
+            (#about) is the single snap point for the whole landing. */}
+        <Stats />
       </div>
     </section>
   );

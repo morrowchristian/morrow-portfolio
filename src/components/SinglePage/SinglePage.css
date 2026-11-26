@@ -55,16 +55,15 @@
    them. The rules are scoped under `html.single-page--snap`,
    which the SinglePage component toggles on
    document.documentElement while it is mounted (and removes on
-   unmount), so the old routes never snap. The Stats strip is
-   deliberately not a snap point: it is a short strip between the
-   hero and Services, and locking onto it would feel like catching
-   on a speed bump. */
+   unmount), so the old routes never snap. (Services and Stats
+   used to be standalone strips here; both now live inside the
+   hero, so neither is a snap point — the hero is the single
+   snap point for that whole landing.) */
 html.single-page--snap {
   scroll-snap-type: y mandatory;
 }
 
 html.single-page--snap .single-page #about,
-html.single-page--snap .single-page #services,
 html.single-page--snap .single-page #skills,
 html.single-page--snap .single-page #projects,
 html.single-page--snap .single-page #experience,
@@ -81,8 +80,10 @@ html.single-page--snap .single-page #contact {
      below it (only while scrolling to the next one). The content
      is NOT rebuilt or resized to fit — a tall section (Projects,
      Experience) is unaffected, and a short section simply gets
-     breathing room below its content. The Stats strip is not a
-     snap point and is untouched. */
+     breathing room below its content. The hero is taller than a
+     viewport now that Services + Stats live inside it; it still
+     holds its landing, and a small nudge within it reveals the
+     lower content. */
   min-height: 100vh;
   min-height: 100svh;
 }
