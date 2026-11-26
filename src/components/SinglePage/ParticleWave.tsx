@@ -1,12 +1,14 @@
 // src/components/SinglePage/ParticleWave.tsx — halftone dot wave
 // background for the single page (2026-11-26, rebuilt from the v1
-// grid wave). DOTS ONLY — no connecting lines. The wave is a pair of
-// flowing horizontal ribbons; each dot's size and opacity follow its
-// distance from a ribbon's centreline (a Gaussian falloff), so the
-// ribbons read as smooth halftone bands that dissolve into empty
-// space at their edges. The ribbons drift (their sine phase advances
-// slowly) and breathe (amplitude swells and settles on a ~9s rhythm),
-// and dots near the mouse ripple outward and ease back.
+// grid wave). DOTS ONLY — no connecting lines. The wave is four
+// flowing horizontal ribbons (a main pair plus a fainter pair at
+// the top and bottom so the viewport fills out); each dot's size
+// and opacity follow its distance from a ribbon's centreline (a
+// Gaussian falloff), so the ribbons read as smooth halftone bands
+// that dissolve into empty space at their edges. The ribbons drift
+// (their sine phase advances slowly) and breathe (amplitude swells
+// and settles on a ~9s rhythm), and dots near the mouse ripple
+// outward and ease back.
 //
 // Palette-matched for BOTH themes: warm-white dots with a fraction
 // in shirt red on the dark charcoal page; espresso-ink dots with a
@@ -46,6 +48,11 @@ type Ribbon = {
 const RIBBONS: Ribbon[] = [
   { base: 0.38, amp: 90, sigma: 85, k: 0.0021, speed: 0.00018, phase: 0, weight: 1 },
   { base: 0.72, amp: 70, sigma: 70, k: 0.0016, speed: -0.00014, phase: 1.7, weight: 0.6 },
+  // Fainter pair at the top and bottom so the viewport's blank
+  // space fills out too (2026-11-26). Same flowing character,
+  // lower weight so they do not compete with the main pair.
+  { base: 0.1, amp: 60, sigma: 60, k: 0.0018, speed: 0.00012, phase: 3.0, weight: 0.5 },
+  { base: 0.9, amp: 60, sigma: 60, k: 0.0019, speed: -0.00011, phase: 0.9, weight: 0.5 },
 ];
 
 // Dot palettes, as "r, g, b" triples. Dark: warm white + lightened
