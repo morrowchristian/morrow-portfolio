@@ -4,7 +4,9 @@
 // description and a mono red link, separated from the next row
 // by a hairline rule (see Services.css). No card chrome, no
 // icon — the typographic rows ARE the design. The link is a
-// router Link to a page ("/portfolio" or "/contact").
+// router Link to a page ("/portfolio" or "/contact"), or —
+// since the services moved into the hero (2026-11-26) — an
+// external <a> to a live demo or repo when `href` is given.
 import "./Services.css";
 import { Link } from "react-router-dom";
 
@@ -14,7 +16,8 @@ interface ServiceRowProps {
   number: string;
   cta?: {
     label: string;
-    to: string;
+    to?: string;
+    href?: string;
   };
 }
 
@@ -31,11 +34,20 @@ export const ServiceRow: React.FC<ServiceRowProps> = ({
         <h3 className="service-row__title">{title}</h3>
         <p className="service-row__description">{description}</p>
 
-        {cta && (
+        {cta?.href ? (
+          <a
+            href={cta.href}
+            target="_blank"
+            rel="noreferrer"
+            className="service-row__cta"
+          >
+            {cta.label} →
+          </a>
+        ) : cta?.to ? (
           <Link to={cta.to} className="service-row__cta">
             {cta.label} →
           </Link>
-        )}
+        ) : null}
       </div>
     </div>
   );

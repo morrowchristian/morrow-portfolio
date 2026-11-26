@@ -1,7 +1,9 @@
 // src/components/Services/ServiceCard.tsx — one Editorial service
 // card: a mono number and a red icon on the top row, a Newsreader
 // title, a soft-brown description, and a mono red link. The link
-// is a router Link to a page ("/portfolio" or "/contact").
+// is a router Link to a page ("/portfolio" or "/contact"), or an
+// external <a> to a live demo or repo when `href` is given
+// (2026-11-26, services moved into the hero with proof links).
 import "./Services.css";
 import { Link } from "react-router-dom";
 
@@ -12,7 +14,8 @@ interface ServiceCardProps {
   number: string;
   cta?: {
     label: string;
-    to: string;
+    to?: string;
+    href?: string;
   };
   className?: string;
 }
@@ -34,11 +37,20 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
       <h3 className="service-card__title">{title}</h3>
       <p className="service-card__description">{description}</p>
 
-      {cta && (
+      {cta?.href ? (
+        <a
+          href={cta.href}
+          target="_blank"
+          rel="noreferrer"
+          className="service-card__cta"
+        >
+          {cta.label} →
+        </a>
+      ) : cta?.to ? (
         <Link to={cta.to} className="service-card__cta">
           {cta.label} →
         </Link>
-      )}
+      ) : null}
     </div>
   );
 };

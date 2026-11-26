@@ -1,12 +1,11 @@
-// src/components/Stats/Stats.tsx — honest stats strip on the
-// home page, between the hero and the News timeline. Inspired by
-// the stats row on kartavya-singh.com (Coding Hours / Projects /
-// LeetCode), adapted to Christian's own verified facts only —
-// nothing copied, nothing invented. EDITORIAL: Newsreader serif
-// numbers, IBM Plex Mono uppercase labels, warm paper / espresso
-// / shirt red / soft brown. The strip is a sibling of .bio-page
-// (like News), so the hero's one-viewport sizing is untouched;
-// the page scrolls to reveal it.
+// src/components/Stats/Stats.tsx — honest stats strip, folded into
+// the hero (2026-11-26) as its bottom band, so it is part of the
+// About landing instead of a standalone strip you only glimpse
+// while scrolling between sections. Inspired by the stats row on
+// kartavya-singh.com (Coding Hours / Projects / LeetCode), adapted
+// to Christian's own verified facts only — nothing copied, nothing
+// invented. EDITORIAL: Newsreader serif numbers, IBM Plex Mono
+// uppercase labels, warm paper / espresso / shirt red / soft brown.
 import "./Stats.css";
 
 interface Stat {

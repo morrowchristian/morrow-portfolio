@@ -6,10 +6,15 @@
   min-height: 100svh;
 }
 
-/* Container */
+/* Container — the single-page max width (2026-11-26): 1280px.
+   This is the ONE .container definition. Container.css used to
+   define the same class at 1120px; that duplicate is removed —
+   whichever loaded last used to win by accident of import order,
+   so the page was effectively 1120px for Container sections,
+   1100px for the hero, and 1140px for News/Stats. */
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   padding-inline: var(--space-24);
 }
@@ -34,7 +39,8 @@ section {
 }
 
 /* Single page (Phase 1 redesign, 2026-11-25): one centered column,
-   ~1100px max width (each section's own Container/inner caps it),
+   1280px max width (one width for the whole page — the Container
+   and each section's own inner cap it at the same value),
    generous gaps between sections. The hero keeps its full-viewport
    sizing; it is not given the section padding below. */
 .single-page {

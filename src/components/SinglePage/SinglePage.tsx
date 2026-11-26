@@ -1,17 +1,15 @@
 // src/components/SinglePage/SinglePage.tsx — the single scrolling page
 // (Phase 1 redesign, 2026-11-25). One centered column:
-// Hero (About) → Stats → Services → Skills → Projects → Experience
-// → News → Contact. The Skills, Projects, and Experience sections
-// are carousels (SkillsCarousel, ProjectsCarousel,
-// ExperienceCarousel), and Contact/Services/Stats/News render
+// Hero (About, now containing "What I build" + the Stats strip) →
+// Skills → Projects → Experience → News → Contact. The Skills,
+// Projects, and Experience sections are carousels (SkillsCarousel,
+// ProjectsCarousel, ExperienceCarousel), and Contact/News render
 // as-is. No copy, numbers, or project data are changed here.
 // The old /portfolio, /resume, and /contact routes stay live in
 // App.tsx alongside this page until the single page is verified.
 import { useEffect } from "react";
 import "./SinglePage.css";
 import { Bio } from "../Bio/Bio";
-import { Stats } from "../Stats/Stats";
-import { Services } from "../Services/Services";
 import { News } from "../News/News";
 import { Contact } from "../Contact/Contact";
 import { Container } from "../Container/Container";
@@ -45,10 +43,6 @@ export const SinglePage: React.FC = () => {
       <ParticleWave />
 
       <Bio />
-
-      <Stats />
-
-      <Services variant="cards" />
 
       <section id="skills" className="single-page__section" aria-label="Skills">
         <Container>

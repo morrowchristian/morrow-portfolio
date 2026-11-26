@@ -32,7 +32,7 @@
   flex: 1;
   min-height: 0;
   width: 100%;
-  max-width: 1100px;
+  max-width: 1280px;
   margin-inline: auto;
   padding-inline: clamp(1.13rem, 3vw, 2.25rem);
   padding-block: 3rem;
@@ -264,6 +264,42 @@
 .bio__cta--secondary:hover {
   border-color: var(--color-accent);
   color: var(--color-accent);
+}
+
+/* "What I build" (2026-11-26): the three services, folded into
+   the hero below the CTAs. The block is left-aligned inside the
+   centered hero stack (the rows are typographic, not centered
+   text), and spans the hero column's width. The rows themselves
+   are ServiceRow (Services.css) — this only lays out the block
+   and its quiet kick, using the same furniture as the section
+   headers. */
+.bio__build {
+  width: 100%;
+  margin-top: 1.5rem;
+  text-align: left;
+}
+
+.bio__build-kick {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-eyebrow);
+  margin-bottom: 0.25rem;
+}
+
+.bio__build-rows {
+  width: 100%;
+}
+
+/* Stats strip at the bottom of the hero (2026-11-26): the Stats
+   section is a flex child of .bio__inner (align-items: center),
+   so it needs an explicit width to span the hero instead of
+   shrink-fitting to its content. This is layout only — the strip
+   itself (Stats.css) is untouched. */
+.bio__inner > .stats {
+  width: 100%;
 }
 
 /* Short desktop viewports: tighten the stack so the hero still
