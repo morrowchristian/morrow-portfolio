@@ -17,8 +17,8 @@ export const SidebarProfile: React.FC = () => {
           src="/portrait-cutout.png"
           alt="Portrait of Christian Morrow"
           className="sidebar-profile__portrait"
-          width={180}
-          height={180}
+          width={200}
+          height={200}
           fetchPriority="high"
           decoding="async"
         />
