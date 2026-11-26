@@ -70,6 +70,16 @@ html.single-page--snap .single-page #contact {
      fixed 56px navbar plus 16px of breathing room, so a snapped
      section heading never hides under the nav. */
   scroll-margin-top: 72px;
+  /* Section isolation (2026-11-26): each section is at least a
+     viewport tall, so when you settle on a section it fills the
+     screen and you do not see the neighbouring sections above or
+     below it (only while scrolling to the next one). The content
+     is NOT rebuilt or resized to fit — a tall section (Projects,
+     Experience) is unaffected, and a short section simply gets
+     breathing room below its content. The Stats strip is not a
+     snap point and is untouched. */
+  min-height: 100vh;
+  min-height: 100svh;
 }
 
 /* Respect reduced motion: no scroll snapping. */
