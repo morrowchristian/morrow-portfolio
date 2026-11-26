@@ -239,5 +239,5 @@ export const resume: ResumeData = {
     },
   ],
   earlierRoles:
-    "Earlier roles: Server, Copper Cellar Family of Restaurants, Knoxville, TN, 2013–2015; Host / Server Assistant, Darden Restaurants (Red Lobster), Knoxville, TN, 2012–2013.",
+    "Earlier roles: Server, Chesapeake's Downtown (Copper Cellar), Knoxville, TN, 2014–2015; Server, Calhoun's on the River (Copper Cellar), Knoxville, TN, 2013–2014; Host / Server Assistant, Darden Restaurants (Red Lobster), Knoxville, TN, 2012–2013.",
 };
