@@ -129,15 +129,22 @@
   border-bottom-color: #d9604f;
 }
 
-/* Tile grid: brand-logo tiles ~96px, one category at a time.
+/* Tile grid: 4 per row, stacked in rows (one category at a time).
    The key on the grid re-mounts it on category change, so the
    fade runs once per category. */
 .skills-carousel__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 0.75rem;
   padding-block: 1.25rem 1rem;
   animation: skills-carousel-fade 300ms ease;
+}
+
+/* Narrow screens: 2 per row so the tiles stay roomy. */
+@media (max-width: 640px) {
+  .skills-carousel__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @keyframes skills-carousel-fade {
