@@ -38,10 +38,11 @@ interface Entry {
 // Each role is "Role, Company, ..., Period" — the role is the
 // first comma segment, the period is the last, and the company
 // is everything in between. The two Copper Cellar server roles
-// each carry one bullet, in Christian's own words ("basic server
-// roles"), and the Red Lobster role carries one bullet too
-// ("a host mainly", "basic host role"). Returns [] if
-// the format is unexpected, so the carousel never breaks on
+// each carry the standard duties of a full-service server, and
+// the Red Lobster role carries the standard duties of a host
+// (Christian was a host mainly there). These are the normal
+// duties of the role, not invented achievements. Returns []
+// if the format is unexpected, so the carousel never breaks on
 // bad data.
 const parseEarlierRoles = (text: string): Entry[] => {
   const body = text.replace(/^Earlier roles:\s*/, "").replace(/\.\s*$/, "");
@@ -55,9 +56,15 @@ const parseEarlierRoles = (text: string): Entry[] => {
       org,
       period: segments[segments.length - 1],
       bullets: org.includes("Copper Cellar")
-        ? ["Basic server role — served guests in a full-service restaurant."]
+        ? [
+            "Took orders and served food and drinks to guests.",
+            "Managed table sections and processed guest payments.",
+          ]
         : org.includes("Red Lobster")
-          ? ["Basic host role — greeted and seated guests."]
+          ? [
+              "Greeted guests, managed the waitlist, and seated parties.",
+              "Answered phones and handled guest inquiries.",
+            ]
           : [],
     });
   }
