@@ -24,7 +24,7 @@ const MAX_ROWS = 34;
 const MOUSE_RADIUS = 170; // px — dots inside this ripple away
 const MOUSE_PUSH = 26; // px max displacement from the mouse
 const EASE = 0.14; // per-frame lerp toward the mouse target (springy)
-const BREATHE_MS = 9000; // one full swell/settle cycle
+const BREATHE_MS = 6000; // one full swell/settle cycle (a visible breath)
 
 // One ribbon: a sine centreline that undulates across the viewport
 // and drifts as its phase advances. `base` is the centreline's
@@ -44,8 +44,8 @@ type Ribbon = {
 };
 
 const RIBBONS: Ribbon[] = [
-  { base: 0.38, amp: 90, sigma: 85, k: 0.0021, speed: 0.00012, phase: 0, weight: 1 },
-  { base: 0.72, amp: 70, sigma: 70, k: 0.0016, speed: -0.00009, phase: 1.7, weight: 0.6 },
+  { base: 0.38, amp: 90, sigma: 85, k: 0.0021, speed: 0.00018, phase: 0, weight: 1 },
+  { base: 0.72, amp: 70, sigma: 70, k: 0.0016, speed: -0.00014, phase: 1.7, weight: 0.6 },
 ];
 
 // Dot palettes, as "r, g, b" triples. Dark: warm white + lightened
@@ -141,7 +141,12 @@ export const ParticleWave: React.FC = () => {
       ctx.clearRect(0, 0, width, height);
       if (particles.length === 0) return;
 
-      const breathe = 0.65 + 0.35 * Math.sin((t / BREATHE_MS) * Math.PI * 2);
+      const breathe = 0.55 + 0.45 * Math.sin((t / BREATHE_MS) * Math.PI * 2);
+      // The breath also swells the dots themselves (bigger/brighter on
+      // the inhale, smaller/fainter on the exhale) so the swell reads
+      // clearly instead of just shifting the centreline. It never
+      // vanishes: at the deepest exhale the dots are still ~64% size.
+      const breathScale = 0.6 + 0.4 * breathe;
       const palette = isDark() ? PALETTES.dark : PALETTES.light;
       // Light ink on paper needs a slightly lower ceiling than warm
       // white on charcoal to stay equally subtle.
@@ -177,12 +182,14 @@ export const ParticleWave: React.FC = () => {
 
         // Halftone size + opacity: big and present at the crest,
         // tiny and faint at the edges. A whisper of shimmer keeps
-        // the field alive without ever getting bright.
+        // the field alive without ever getting bright. The breath
+        // scales the wave-driven size/opacity so the whole field
+        // visibly swells and settles.
         const shimmer = Math.sin(p.bx * 0.0016 + t * 0.00035 + p.phase);
-        const radius = 0.6 + 3.1 * w + 0.15 * shimmer * w;
+        const radius = 0.6 + 3.1 * w * breathScale + 0.15 * shimmer * w;
         const alpha = p.red
-          ? alphaRedBase + alphaRedSpan * w
-          : alphaBase + alphaSpan * w;
+          ? alphaRedBase + alphaRedSpan * w * breathScale
+          : alphaBase + alphaSpan * w * breathScale;
         ctx.fillStyle = `rgba(${p.red ? palette.red : palette.dot}, ${alpha.toFixed(3)})`;
         ctx.beginPath();
         ctx.arc(
