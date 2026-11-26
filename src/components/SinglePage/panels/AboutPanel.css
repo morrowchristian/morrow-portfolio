@@ -63,9 +63,16 @@
 }
 
 /* "What I build": the rows are ServiceRow (Services.css) — this
-   only lays out the list. */
+   only lays out the list. The row descriptions are capped at a
+   readable measure so they do not run edge to edge on a wide
+   full-viewport card (Services.css itself is untouched — the
+   old routes keep their own layout). */
 .about-panel__services {
   width: 100%;
+}
+
+.about-panel .service-row__description {
+  max-width: 56rem;
 }
 
 /* The Stats strip inside the panel: strip its standalone-section

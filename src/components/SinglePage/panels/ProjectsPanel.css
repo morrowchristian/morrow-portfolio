@@ -10,9 +10,13 @@
    wave behind the page never fights the text. All colors come
    from the theme tokens, so the light toggle keeps working. */
 
+/* Grid: flexible — auto-fill with a 300px minimum, so the grid
+   grows to 3 columns at a standard 1440px desktop and 4 on a
+   wide full-viewport card, instead of stretching two columns to
+   an extreme width. 1 column on mobile. */
 .projects-panel__grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1.5rem;
   align-items: stretch;
 }

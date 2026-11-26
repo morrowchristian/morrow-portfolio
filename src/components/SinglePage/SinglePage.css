@@ -1,42 +1,71 @@
-/* src/components/SinglePage/SinglePage.css — the tabbed, app-like
-   single page (sidebar-tabs redesign, 2026-11-26, modelled on
-   sakshi.is-cool.dev). A compact hero header (Bio) at the top,
-   then a two-column area: a narrow persistent sidebar with the
-   six section tabs, and ONE wide content card that swaps when a
-   tab is clicked. Same hero, same sidebar, same card, same footer
-   on every tab. The column and section spacing live in
+/* src/components/SinglePage/SinglePage.css — the sidebar-profile
+   single page (2026-11-26). The top hero (Bio) is gone: a
+   persistent left sidebar holds the identity (SidebarProfile:
+   portrait, badge, static tagline) above the six section tabs,
+   with the copyright at the bottom of the sidebar. The top bar
+   (Navbar) carries the name, the résumé button, and the socials.
+   To the right of the sidebar, ONE wide content card swaps when
+   a tab is clicked. Same sidebar, same card, same top bar on
+   every tab. The column and section spacing live in
    layout.css; this file holds the tab layout, the tab buttons,
-   the shared panel header and sub-block rhythm, and the footer.
+   the shared panel header and sub-block rhythm, and the sidebar
+   footer.
 
-   There is NO scroll-snap anymore — the tabbed layout is one
-   short panel at a time and scrolls freely, like Sakshi's. The
-   `single-page--snap` class and its mandatory snap rules were
-   removed with the redesign; do not reintroduce them. */
+   There is NO max-width on this page: the layout stretches to
+   100% of the viewport width (the global .container 1280px cap
+   is deliberately NOT used here, so the old routes keep their
+   own width). There is NO scroll-snap — the tabbed layout is
+   one panel at a time and scrolls freely. Do not reintroduce
+   scroll-snap, the carousels, or the top hero. */
 
-/* The two-column area. scroll-margin clears the fixed 56px
-   navbar when "View projects" scrolls to it. */
+/* The two-column area: full viewport width, gutters only at the
+   edges. No top padding — the sidebar starts right below the
+   56px top bar, and the card carries its own top margin so the
+   two tops line up. */
 .tabs-layout {
-  scroll-margin-top: 72px;
-  padding-block: 0.5rem 4rem;
+  padding-block: 0 4rem;
+  padding-inline: clamp(1rem, 2vw, 2.5rem);
 }
 
 .tabs-layout__inner {
   display: grid;
-  grid-template-columns: 240px minmax(0, 1fr);
+  grid-template-columns: 280px minmax(0, 1fr);
   gap: 2rem;
   align-items: start;
+  width: 100%;
 }
 
-/* Sidebar: sticky, so the tabs stay reachable while a long
-   panel (Projects, Experience) scrolls. min-width: 0 is load
-   bearing on mobile: the tab strip is horizontally scrollable,
-   and without it the grid item refuses to shrink below the
-   strip's full scroll width and blows the page out to ~782px
-   at 390px wide. */
+/* Sidebar: sticky below the top bar, full viewport height, a
+   flex column — profile at the top, tabs in the middle, the
+   copyright pinned to the bottom with margin-top: auto.
+   min-height fills the viewport (the 56px top bar is the only
+   offset); if the viewport is short and the content is taller,
+   the sidebar simply grows and the footer follows it.
+   min-width: 0 is load bearing on mobile: the tab strip is
+   horizontally scrollable, and without it the grid item refuses
+   to shrink below the strip's full scroll width and blows the
+   page out to ~782px at 390px wide. */
 .tabs-layout__sidebar {
   position: sticky;
-  top: 72px;
+  top: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-height: calc(100dvh - 56px);
   min-width: 0;
+  padding-top: 1.5rem;
+}
+
+/* Copyright at the bottom of the sidebar. Sized to fit on one
+   line at the 280px sidebar width. */
+.tabs-layout__footer {
+  margin-top: auto;
+  padding-top: 1.5rem;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  color: var(--color-muted);
+  white-space: nowrap;
 }
 
 .tabs-list {
@@ -98,9 +127,12 @@
 
 /* The content card: one wide opaque card, the same on every
    tab. The plexus shows in the gutters around it, never through
-   it, so the text stays readable in both themes. */
+   it, so the text stays readable in both themes. The top margin
+   lines the card up with the sidebar's content (which carries
+   the same 1.5rem as padding-top). */
 .tabs-layout__card {
   min-width: 0;
+  margin-top: 1.5rem;
   background: var(--color-surface);
   border: 1px solid var(--color-line);
   border-radius: var(--radius-lg);
@@ -205,57 +237,16 @@
   }
 }
 
-/* Footer: the same on every tab — a hairline above, the name
-   and location left, GitHub and LinkedIn right. */
-.single-page__footer {
-  border-top: 1px solid var(--color-line);
-  padding-block: 1.5rem 2rem;
-}
-
-.single-page__footer-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 0.75rem 1.5rem;
-}
-
-.single-page__footer-text {
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
-  font-size: 0.75rem;
-  letter-spacing: 0.06em;
-  color: var(--color-muted);
-}
-
-.single-page__footer-links {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-}
-
-.single-page__footer-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  color: var(--color-muted);
-  text-decoration: none;
-}
-
-.single-page__footer-link:hover {
-  color: var(--color-accent);
-}
-
-/* Narrow screens: the sidebar becomes a horizontal scrollable
-   tab strip above the card (sticky, just below the navbar, so
+/* Narrow screens: the portrait, badge, tagline, and sidebar
+   footer hide — the sidebar becomes a horizontal scrollable
+   tab strip above the card (sticky, just below the top bar, so
    the tabs stay reachable while a long panel scrolls). The tabs
-   become inline chips instead of full-width rows. */
+   become inline chips instead of full-width rows. The top bar
+   keeps the name, the résumé button, and the icons, compacted. */
 @media (max-width: 768px) {
   .tabs-layout {
     padding-block: 0 3rem;
+    padding-inline: var(--space-16);
   }
 
   .tabs-layout__inner {
@@ -267,10 +258,19 @@
     position: sticky;
     top: 56px;
     z-index: 5;
-    margin-inline: calc(-1 * var(--space-24));
-    padding-inline: var(--space-24);
+    min-height: 0;
+    padding-top: 0;
+    margin-inline: calc(-1 * var(--space-16));
+    padding-inline: var(--space-16);
     background: var(--color-nav);
     border-bottom: 1px solid var(--color-line);
+  }
+
+  /* The identity block and the sidebar footer hide on mobile —
+     the top bar carries the name, and the strip is the nav. */
+  .tabs-layout__sidebar .sidebar-profile,
+  .tabs-layout__footer {
+    display: none;
   }
 
   .tabs-list {
@@ -297,6 +297,7 @@
   }
 
   .tabs-layout__card {
+    margin-top: 0;
     padding: 1.25rem;
   }
 

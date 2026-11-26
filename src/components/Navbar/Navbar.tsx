@@ -7,15 +7,12 @@
 // Projects, Experience, News, Contact) that scrolled to the
 // section, with the active section highlighted in shirt red via
 // scroll-spy (IntersectionObserver).
-// (2026-11-26, sidebar-tabs redesign): "/" is now a tabbed
-// layout, and the SIDEBAR is the navigation — so on "/" the
-// navbar shows no section menu and no hamburger (there is
-// nothing to scroll to anymore). Brand, socials, and the theme
-// toggle stay. On the old /portfolio, /resume, and /contact
+// (2026-11-26, sidebar-profile layout): "/" has no hero anymore —
+// the top bar IS the header: brand (square monogram), the résumé
+// download button, the socials, and the theme toggle, full
+// viewport width. On the old /portfolio, /resume, and /contact
 // routes the menu is still the page links, so those routes keep
 // working until the single page is verified live.
-// The résumé download lives on the Resume page and in the hero,
-// so the bar holds no buttons besides the theme toggle.
 // Below 1200px the inline menu collapses into a hamburger button
 // that opens a dropdown panel with the links; the social links
 // and the theme toggle stay visible in the bar at every width.
@@ -87,7 +84,9 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, onToggleTheme }) => {
   return (
     <header
       ref={headerRef}
-      className={`navbar ${isScrolled ? "navbar--scrolled" : ""}`}
+      className={`navbar ${isScrolled ? "navbar--scrolled" : ""}${
+        isSinglePage ? " navbar--full" : ""
+      }`}
     >
       <div className="navbar__inner">
         <Link to="/" className="navbar__brand" aria-label="Christian Morrow — home">
@@ -101,7 +100,15 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, onToggleTheme }) => {
         <div className="navbar__right">
           {/* On the single page the sidebar is the navigation, so
               there is no section menu here (and no hamburger).
-              On the old routes the menu is the page links. */}
+              The résumé download lives in this bar instead of
+              the old hero. On the old routes the menu is the
+              page links. */}
+          {isSinglePage && (
+            <a className="navbar__resume" href="/resume.pdf" download>
+              <span className="navbar__resume-label">Download résumé</span>
+              <span className="navbar__resume-label-short">Résumé</span>
+            </a>
+          )}
           {!isSinglePage && (
             <nav className="navbar__menu" aria-label="Site menu">
               {PAGE_ITEMS.map((item) => (
