@@ -100,6 +100,51 @@
   letter-spacing: 0.5px;
 }
 
+/* Full-width top bar (sidebar-profile layout, 2026-11-26): on
+   the single page the bar stretches to 100% of the viewport —
+   no 1280px cap — and the monogram is a square, matching the
+   design. The old routes keep the capped bar and the round
+   monogram. */
+.navbar--full .navbar__inner {
+  max-width: none;
+}
+
+.navbar--full .navbar__monogram {
+  border-radius: 8px;
+}
+
+/* Résumé download (single page only): an outlined pill in the
+   top bar, mono uppercase, matching the old hero's secondary
+   CTA at bar scale. The short label is the mobile fallback. */
+.navbar__resume {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-line-strong);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-ink);
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.navbar__resume:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.navbar__resume-label-short {
+  display: none;
+}
+
 .navbar__right {
   display: flex;
   align-items: center;
@@ -268,6 +313,39 @@
 
   .navbar__brand-text {
     display: none;
+  }
+
+  /* Single page: the top bar keeps the name (subtitle stays
+     hidden — it already is at ≤1024px), the résumé button, and
+     the icons, compacted. The résumé label shortens to
+     "Résumé" and the gaps tighten so the bar fits at 390px. */
+  .navbar--full .navbar__brand-text {
+    display: flex;
+  }
+
+  .navbar--full .navbar__brand-name {
+    font-size: 0.95rem;
+  }
+
+  .navbar--full .navbar__right {
+    gap: 0.5rem;
+  }
+
+  .navbar--full .navbar__socials {
+    gap: 0.5rem;
+  }
+
+  .navbar__resume {
+    padding: 0.45rem 0.7rem;
+    font-size: 0.65rem;
+  }
+
+  .navbar__resume-label {
+    display: none;
+  }
+
+  .navbar__resume-label-short {
+    display: inline;
   }
 
   /* Only on mobile does the inline menu give way to the

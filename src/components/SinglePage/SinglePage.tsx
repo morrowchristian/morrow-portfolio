@@ -1,32 +1,35 @@
 // src/components/SinglePage/SinglePage.tsx — the single page,
-// rebuilt as a tabbed, app-like layout (sidebar-tabs redesign,
-// 2026-11-26, modelled on sakshi.is-cool.dev). The long scrolling
-// page is gone: a compact hero header (Bio) sits at the top, then
-// a two-column area — a narrow persistent sidebar with the six
-// section tabs, and ONE wide content card that swaps when a tab
-// is clicked. Same hero, same sidebar, same card, same footer on
-// every tab. Every panel uses the same header (PanelHeader: icon
-// tile + title + intro) and the same sub-block rhythm (thin rules
+// rebuilt as a sidebar-profile layout (2026-11-26). The long
+// scrolling page is gone and so is the top hero (Bio): the
+// identity now lives in a persistent left sidebar — portrait,
+// availability badge, and the static "Built end to end" tagline
+// (SidebarProfile) — above the six section tabs, with the
+// copyright at the bottom of the sidebar. A top bar (Navbar)
+// carries the name, the résumé button, and the socials. To the
+// right of the sidebar, ONE wide content card swaps when a tab
+// is clicked. Same sidebar, same card, same top bar on every
+// tab. Every panel uses the same header (PanelHeader: icon tile
+// + title + intro) and the same sub-block rhythm (thin rules
 // between blocks) — the shared frame is what makes the sections
 // feel consistent, instead of each section being a different
-// layout. The scroll-snap is gone with the scrolling page (the
-// panels scroll freely), and the three carousels are gone — the
+// layout. There is NO max-width on this page: the top bar,
+// sidebar, and card stretch to 100% of the viewport width.
+// There is NO scroll-snap — the tabbed layout is one panel at
+// a time and scrolls freely. The three carousels are gone — the
 // panels show all of their content at once. The old /portfolio,
 // /resume, and /contact routes stay live in App.tsx alongside
 // this page. No copy, numbers, or project data are changed here.
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   FaBriefcase,
   FaCode,
   FaEnvelope,
   FaFolderOpen,
-  FaGithub,
-  FaLinkedin,
   FaNewspaper,
   FaUser,
 } from "react-icons/fa";
 import "./SinglePage.css";
-import { Bio } from "../Bio/Bio";
+import { SidebarProfile } from "./SidebarProfile";
 import { ParticleWave } from "./ParticleWave";
 import { PanelHeader } from "./PanelHeader";
 import { AboutPanel } from "./panels/AboutPanel";
@@ -108,16 +111,13 @@ const TABS: TabDef[] = [
 export const SinglePage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabId>("about");
   const tabRefs = useRef<Map<TabId, HTMLButtonElement>>(new Map());
-  const tabsLayoutRef = useRef<HTMLDivElement>(null);
 
   // The particle wave uses the `single-page--wave` class on the
   // document element to let the fixed canvas show through the
   // section backgrounds; this toggles it while the single page
   // is mounted and removes it on unmount, so the old routes
   // never show the wave. There is NO scroll-snap anymore — the
-  // tabbed layout is one short panel at a time and scrolls
-  // freely, like Sakshi's. (The `single-page--snap` class and
-  // its mandatory snap rules were removed with the redesign.)
+  // tabbed layout is one panel at a time and scrolls freely.
   useEffect(() => {
     document.documentElement.classList.add("single-page--wave");
     return () => {
@@ -128,18 +128,9 @@ export const SinglePage: React.FC = () => {
   const activeIndex = TABS.findIndex((tab) => tab.id === activeTab);
   const active = TABS[activeIndex];
 
-  const selectTab = useCallback((id: TabId, scrollIntoView = false) => {
+  const selectTab = (id: TabId) => {
     setActiveTab(id);
-    if (scrollIntoView && tabsLayoutRef.current) {
-      const reducedMotion =
-        typeof window !== "undefined" &&
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      tabsLayoutRef.current.scrollIntoView({
-        behavior: reducedMotion ? "auto" : "smooth",
-        block: "start",
-      });
-    }
-  }, []);
+  };
 
   // Arrow keys move between tabs (and move focus with the
   // selection, per the tablist pattern); Home/End jump to the
@@ -166,11 +157,11 @@ export const SinglePage: React.FC = () => {
     <div className="single-page">
       <ParticleWave />
 
-      <Bio onViewProjects={() => selectTab("projects", true)} />
-
-      <div className="tabs-layout" id="tabs" ref={tabsLayoutRef}>
-        <div className="container tabs-layout__inner">
+      <div className="tabs-layout" id="tabs">
+        <div className="tabs-layout__inner">
           <aside className="tabs-layout__sidebar">
+            <SidebarProfile />
+
             <nav
               className="tabs-list"
               role="tablist"
@@ -207,6 +198,13 @@ export const SinglePage: React.FC = () => {
                 );
               })}
             </nav>
+
+            {/* The footer lives at the bottom of the sidebar now
+                (margin-top: auto) — the page-level footer is gone;
+                GitHub and LinkedIn are in the top bar. */}
+            <p className="tabs-layout__footer">
+              © 2026 Christian Morrow · Cleveland, TN
+            </p>
           </aside>
 
           <div className="tabs-layout__card">
@@ -227,34 +225,6 @@ export const SinglePage: React.FC = () => {
           </div>
         </div>
       </div>
-
-      <footer className="single-page__footer">
-        <div className="container single-page__footer-inner">
-          <span className="single-page__footer-text">
-            © 2026 Christian Morrow · Cleveland, TN
-          </span>
-          <span className="single-page__footer-links">
-            <a
-              href="https://github.com/morrowchristian"
-              target="_blank"
-              rel="noreferrer"
-              className="single-page__footer-link"
-              aria-label="GitHub"
-            >
-              <FaGithub aria-hidden="true" /> GitHub
-            </a>
-            <a
-              href="https://linkedin.com/in/morrowchristian"
-              target="_blank"
-              rel="noreferrer"
-              className="single-page__footer-link"
-              aria-label="LinkedIn"
-            >
-              <FaLinkedin aria-hidden="true" /> LinkedIn
-            </a>
-          </span>
-        </div>
-      </footer>
     </div>
   );
 };
