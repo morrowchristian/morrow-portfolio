@@ -188,9 +188,9 @@
 /* The name color is the ONLY level encoding. */
 .skills-carousel__tile-name {
   font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   line-height: 1.35;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .skills-carousel__tile-name--strong {
