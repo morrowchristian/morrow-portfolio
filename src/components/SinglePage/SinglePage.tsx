@@ -15,7 +15,6 @@ import { Services } from "../Services/Services";
 import { News } from "../News/News";
 import { Contact } from "../Contact/Contact";
 import { Container } from "../Container/Container";
-import { EducationContent } from "../Resume/ResumeSections";
 import { SkillsCarousel } from "./SkillsCarousel";
 import { ProjectsCarousel } from "./ProjectsCarousel";
 import { ExperienceCarousel } from "./ExperienceCarousel";
@@ -78,18 +77,6 @@ export const SinglePage: React.FC = () => {
             <span className="single-page__rule" aria-hidden="true" />
           </header>
           <ExperienceCarousel />
-
-          <div className="resume__sections">
-            <section
-              className="resume__section"
-              aria-label="Education and certification"
-            >
-              <h3 className="resume__section-title">
-                Education &amp; Certification
-              </h3>
-              <EducationContent />
-            </section>
-          </div>
         </Container>
       </section>
 

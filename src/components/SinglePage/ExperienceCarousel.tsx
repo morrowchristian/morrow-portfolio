@@ -2,49 +2,92 @@
 // (Phase 4 redesign, 2026-11-26). Replaces the flat Experience +
 // Campaign & Leadership lists on the single page only; the Resume
 // page keeps ExperienceContent / LeadershipContent untouched.
-// A segmented pill toggle switches between two tracks — Work and
-// Campaign & Leadership — and each track is a peeking-card
-// carousel: one entry at a time sharp in the center, neighbors
-// peeking in from the sides, blurred and dimmed. Chevrons and
-// Previous/Next text buttons, no auto-play, no dots. Data comes
-// from src/data/resume.ts — nothing added, dropped, or reworded.
-// Education stays below the carousel as a compact section
-// (rendered by SinglePage, not by this component).
+// A segmented pill toggle switches between three tracks — Work,
+// Campaign & Leadership, and Education & Certification — and each
+// track is a peeking-card carousel: one entry at a time sharp in
+// the center, neighbors peeking in from the sides, blurred and
+// dimmed. Chevrons and Previous/Next text buttons, no auto-play,
+// no dots. Data comes from src/data/resume.ts — nothing added,
+// dropped, or reworded. The earlier restaurant roles are full
+// cards at the end of the Work track (parsed from
+// resume.earlierRoles), not a disclaimer line, and Education &
+// Certification is a track inside the carousel — there is no
+// separate Education section below it.
 import { useCallback, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { resume } from "../../data/resume";
 import "./ExperienceCarousel.css";
 
-type Track = "work" | "campaign";
+type Track = "work" | "campaign" | "education";
 
 interface Entry {
   role: string;
   org: string;
   period: string;
   bullets: string[];
+  // Only the degree card carries the diploma link.
+  diploma?: boolean;
 }
 
-// Unified shape for the two data sources. Order is resume order:
-// Work = Eagle, Ascent, Dakota, 58 Short Stop, Angela's;
-// Campaign = Galloway lead, then Hiawatha.
+// Parse the two earlier roles out of resume.earlierRoles:
+// "Earlier roles: Server, Copper Cellar Family of Restaurants,
+// Knoxville, TN, 2013–2015; Host / Server Assistant, Darden
+// Restaurants (Red Lobster), Knoxville, TN, 2012–2013."
+// Each role is "Role, Company, ..., Period" — the role is the
+// first comma segment, the period is the last, and the company
+// is everything in between. Returns [] if the format is
+// unexpected, so the carousel never breaks on bad data.
+const parseEarlierRoles = (text: string): Entry[] => {
+  const body = text.replace(/^Earlier roles:\s*/, "").replace(/\.\s*$/, "");
+  const entries: Entry[] = [];
+  for (const part of body.split("; ")) {
+    const segments = part.split(", ");
+    if (segments.length < 3) continue;
+    entries.push({
+      role: segments[0],
+      org: segments.slice(1, -1).join(", "),
+      period: segments[segments.length - 1],
+      bullets: [],
+    });
+  }
+  return entries;
+};
+
+// Unified shape for the three data sources. Order is resume order:
+// Work = Eagle, Ascent, Dakota, 58 Short Stop, Angela's, then the
+// two earlier restaurant roles (Server, then Host / Server
+// Assistant — most recent first, matching the rest of the track);
+// Campaign = Galloway lead, then Hiawatha; Education = degree,
+// then the Excel certification.
 const tracks: Record<Track, Entry[]> = {
-  work: resume.experience.map((item) => ({
-    role: item.role,
-    org: item.company,
-    period: item.period,
-    bullets: item.bullets ?? [],
-  })),
+  work: [
+    ...resume.experience.map((item) => ({
+      role: item.role,
+      org: item.company,
+      period: item.period,
+      bullets: item.bullets ?? [],
+    })),
+    ...parseEarlierRoles(resume.earlierRoles),
+  ],
   campaign: resume.leadership.map((item) => ({
     role: item.role,
     org: item.org,
     period: item.period,
     bullets: item.bullets,
   })),
+  education: resume.education.map((item, i) => ({
+    role: item.title,
+    org: item.detail,
+    period: "",
+    bullets: [],
+    diploma: i === 0,
+  })),
 };
 
 const trackLabels: Record<Track, string> = {
   work: "Work",
   campaign: "Campaign & Leadership",
+  education: "Education & Certification",
 };
 
 export const ExperienceCarousel: React.FC = () => {
@@ -62,8 +105,8 @@ export const ExperienceCarousel: React.FC = () => {
   const switchTrack = (next: Track) => {
     setTrack(next);
     // Switching tracks resets to the first entry — the index
-    // from the other track may not exist here (Work has 5,
-    // Campaign has 2), so never carry it over.
+    // from the other track may not exist here (Work has 7,
+    // Campaign has 2, Education has 2), so never carry it over.
     setIndex(0);
   };
 
@@ -166,7 +209,9 @@ export const ExperienceCarousel: React.FC = () => {
                   if (!isActive) goTo(i);
                 }}
               >
-                <p className="resume__period">{item.period}</p>
+                {item.period && (
+                  <p className="resume__period">{item.period}</p>
+                )}
                 <h4 className="resume__role">{item.role}</h4>
                 <p className="resume__company">{item.org}</p>
                 {item.bullets.length > 0 && (
@@ -175,6 +220,17 @@ export const ExperienceCarousel: React.FC = () => {
                       <li key={bullet}>{bullet}</li>
                     ))}
                   </ul>
+                )}
+                {item.diploma && (
+                  <a
+                    href="/diploma.pdf"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="resume__diploma"
+                    tabIndex={isActive ? undefined : -1}
+                  >
+                    View diploma (PDF)
+                  </a>
                 )}
               </article>
             );
@@ -201,10 +257,6 @@ export const ExperienceCarousel: React.FC = () => {
           Next →
         </button>
       </div>
-
-      {track === "work" && (
-        <p className="resume__earlier">{resume.earlierRoles}</p>
-      )}
     </div>
   );
 };

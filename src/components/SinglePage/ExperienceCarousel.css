@@ -1,9 +1,10 @@
 /* src/components/SinglePage/ExperienceCarousel.css — Experience carousel
    (Phase 4 redesign, 2026-11-26). A segmented pill toggle switches
-   between Work and Campaign & Leadership; each track is a
-   peeking-card carousel: one entry sharp in the center, neighbors
-   peeking in from the sides, blurred and dimmed. Chevrons and
-   Previous/Next text buttons, no auto-play, no dots.
+   between Work, Campaign & Leadership, and Education &
+   Certification; each track is a peeking-card carousel: one entry
+   sharp in the center, neighbors peeking in from the sides,
+   blurred and dimmed. Chevrons and Previous/Next text buttons,
+   no auto-play, no dots.
 
    The card is opaque (var(--color-surface)) so the particle wave
    behind the page never fights the text. Colors are theme tokens
