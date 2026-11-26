@@ -4,7 +4,7 @@
 // a light/dark theme toggle.
 // (2026-11-25, Phase 1): the home page is now a single scrolling
 // page, so on "/" the menu is section links (About, Skills,
-// Projects, Experience, Contact) that scroll to the section, with
+// Projects, Experience, News, Contact) that scroll to the section, with
 // the active section highlighted in shirt red via scroll-spy
 // (IntersectionObserver). On the old /portfolio, /resume, and
 // /contact routes the menu is still the page links, so those
@@ -27,6 +27,7 @@ const SECTION_ITEMS = [
   { label: "Skills", id: "skills" },
   { label: "Projects", id: "projects" },
   { label: "Experience", id: "experience" },
+  { label: "News", id: "news" },
   { label: "Contact", id: "contact" },
 ] as const;
 

@@ -63,7 +63,7 @@ html.single-page--snap .single-page #services,
 html.single-page--snap .single-page #skills,
 html.single-page--snap .single-page #projects,
 html.single-page--snap .single-page #experience,
-html.single-page--snap .single-page .news,
+html.single-page--snap .single-page #news,
 html.single-page--snap .single-page #contact {
   scroll-snap-align: start;
   /* Same 72px as the anchor scroll-margin in layout.css: the

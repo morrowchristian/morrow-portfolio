@@ -49,7 +49,7 @@ export const News: React.FC = () => {
   const { ref, isVisible } = useInViewAnimation();
 
   return (
-    <section className="news" aria-label="News">
+    <section id="news" className="news" aria-label="News">
       <div className="news__inner">
         <header className="news__header">
           <p className="news__kick">Updates</p>
