@@ -1,0 +1,293 @@
+/* src/components/SinglePage/ProjectsCarousel.css — Projects carousel
+   (Phase 3 redesign, 2026-11-26). One project card at a time in
+   the center, sharp and in focus, with the neighboring cards
+   peeking in from the sides, blurred and dimmed — Kartavya-style.
+   Big chevrons plus "Previous" / "Next" text buttons. No auto-play,
+   no dots.
+
+   The section itself paints no background, so the particle wave
+   shows through behind it in dark mode (like the other single-page
+   sections under `html.single-page--wave`). The cards are opaque
+   `var(--color-surface)` — the wave never fights the text. All
+   colors come from the theme tokens, so the light toggle keeps
+   working: dark surface is #23282d, light surface is #ffffff. */
+
+.projects-carousel__intro {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: clamp(0.98rem, 0.92rem + 0.25vw, 1.1rem);
+  line-height: 1.6;
+  color: var(--color-muted);
+  max-width: 34rem;
+  margin: 1rem 0 0;
+}
+
+/* Viewport: clips the track so only the center card plus the
+   peeking neighbors show. Full column width — the viewport sits
+   outside the Container, so the neighbors peek in from the
+   section's edges. */
+.projects-carousel__viewport {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Track: a flex row of cards, slid by translateX. The offset is
+   measured in JS (the card width is min(680px, 84%), so it can't
+   be a fixed percentage). */
+.projects-carousel__track {
+  display: flex;
+  gap: 1.5rem;
+  padding-block: 0.5rem;
+  transition: transform 450ms ease;
+  will-change: transform;
+}
+
+/* Card: opaque surface, rounded like the Skills carousel card.
+   All cards stretch to the tallest one's height (flex default),
+   so the track never jumps between projects. */
+.projects-carousel__card {
+  flex: 0 0 min(680px, 84%);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  transition: filter 450ms ease, opacity 450ms ease,
+    transform 450ms ease;
+}
+
+/* Neighbors: blurred, dimmed, slightly shrunk — the center card
+   is the only one in focus. */
+.projects-carousel__card:not(.is-active) {
+  filter: blur(2px) saturate(0.85);
+  opacity: 0.55;
+  transform: scale(0.97);
+}
+
+/* Banner: ~16:7, cropped with cover (the source screenshots have
+   different native ratios; the banner is a crop, not the whole
+   image — the old detail view used contain instead). */
+.projects-carousel__media {
+  aspect-ratio: 16 / 7;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-line);
+  background: var(--color-surface);
+  flex: none;
+}
+
+.projects-carousel__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.projects-carousel__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+}
+
+.projects-carousel__title {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: clamp(1.4rem, 1.25rem + 0.6vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+  margin: 0;
+}
+
+.projects-carousel__description {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: clamp(0.98rem, 0.92rem + 0.25vw, 1.1rem);
+  line-height: 1.6;
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.projects-carousel__highlights {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: clamp(0.9rem, 0.85rem + 0.2vw, 1rem);
+  line-height: 1.5;
+  color: var(--color-ink);
+  margin: 0;
+  padding: 0;
+}
+
+.projects-carousel__highlights li {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.projects-carousel__highlights li::before {
+  content: "";
+  flex: none;
+  width: 7px;
+  height: 7px;
+  margin-top: 0.45em;
+  background: var(--color-accent);
+}
+
+.projects-carousel__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.projects-carousel__tag {
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--color-ink);
+  border-radius: 999px;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--color-ink);
+  background: transparent;
+  white-space: nowrap;
+}
+
+.projects-carousel__links {
+  display: flex;
+  gap: 1rem;
+  padding-top: 0.25rem;
+}
+
+.projects-carousel__link {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.projects-carousel__link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Big chevrons: circular, sitting on the viewport's edges over
+   the peeking neighbors — never over the center card. */
+.projects-carousel__chevron {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 3rem;
+  height: 3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--color-line-strong);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: background-color var(--transition-fast),
+    color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.projects-carousel__chevron:hover,
+.projects-carousel__chevron:focus-visible {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-accent-contrast);
+  outline: none;
+}
+
+.projects-carousel__chevron--prev {
+  left: 1rem;
+}
+
+.projects-carousel__chevron--next {
+  right: 1rem;
+}
+
+/* Nav row: Previous / count / Next, below the viewport. */
+.projects-carousel__nav {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.projects-carousel__nav-btn {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  background: transparent;
+  border: none;
+  padding: 0.25rem 0;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.projects-carousel__nav-btn:hover,
+.projects-carousel__nav-btn:focus-visible {
+  color: var(--color-accent);
+  outline: none;
+}
+
+.projects-carousel__count {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.projects-carousel__count span {
+  font-weight: 500;
+  color: var(--color-accent);
+}
+
+.projects-carousel__link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Small screens: tighter card padding, smaller chevrons that
+   stay clear of the center card. */
+@media (max-width: 768px) {
+  .projects-carousel__body {
+    padding: 1.25rem;
+  }
+
+  .projects-carousel__chevron {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 0.8rem;
+  }
+
+  .projects-carousel__chevron--prev {
+    left: 0.5rem;
+  }
+
+  .projects-carousel__chevron--next {
+    right: 0.5rem;
+  }
+}
+
+/* Respect reduced motion: no sliding, no blur fade — the switch
+   is instant. (There is no auto-play to pause.) */
+@media (prefers-reduced-motion: reduce) {
+  .projects-carousel__track,
+  .projects-carousel__card {
+    transition: none;
+  }
+}
