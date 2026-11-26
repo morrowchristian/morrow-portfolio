@@ -43,7 +43,7 @@
 .stats__number {
   display: block;
   font-family: "Newsreader", Georgia, "Times New Roman", serif;
-  font-size: 2rem;
+  font-size: clamp(1.6rem, 1.4rem + 1vw, 2.25rem);
   font-weight: 500;
   line-height: 1.1;
   color: var(--color-ink);

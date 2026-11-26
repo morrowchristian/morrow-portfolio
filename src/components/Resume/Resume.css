@@ -49,7 +49,7 @@
 
 .resume__intro {
   font-family: "Newsreader", Georgia, "Times New Roman", serif;
-  font-size: 1.05rem;
+  font-size: clamp(0.98rem, 0.92rem + 0.25vw, 1.1rem);
   line-height: 1.6;
   color: var(--color-muted);
   max-width: 34rem;
@@ -163,7 +163,7 @@
 
 .resume__role {
   font-family: "Newsreader", Georgia, "Times New Roman", serif;
-  font-size: 1.3rem;
+  font-size: clamp(1.15rem, 1.05rem + 0.5vw, 1.4rem);
   font-weight: 500;
   line-height: 1.25;
   color: var(--color-ink);
@@ -172,7 +172,7 @@
 
 .resume__company {
   font-family: "Newsreader", Georgia, "Times New Roman", serif;
-  font-size: 1rem;
+  font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
   font-style: italic;
   line-height: 1.5;
   color: var(--color-muted);
@@ -182,7 +182,7 @@
 /* Project description — body type, same as the experience bullets. */
 .resume__project-desc {
   font-family: "Newsreader", Georgia, "Times New Roman", serif;
-  font-size: 1rem;
+  font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
   line-height: 1.6;
   color: var(--color-muted);
 }
@@ -198,7 +198,7 @@
   position: relative;
   padding-left: 16px;
   font-family: "Newsreader", Georgia, "Times New Roman", serif;
-  font-size: 1rem;
+  font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
   line-height: 1.6;
   color: var(--color-muted);
 }
@@ -215,7 +215,7 @@
 
 .resume__earlier {
   font-family: "Newsreader", Georgia, "Times New Roman", serif;
-  font-size: 0.95rem;
+  font-size: clamp(0.9rem, 0.85rem + 0.2vw, 1rem);
   font-style: italic;
   line-height: 1.6;
   color: var(--color-muted);
@@ -234,7 +234,7 @@
 
 .resume__skill-group-title {
   font-family: "Newsreader", Georgia, "Times New Roman", serif;
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.15rem);
   font-weight: 500;
   color: var(--color-ink);
   margin-bottom: var(--space-12);

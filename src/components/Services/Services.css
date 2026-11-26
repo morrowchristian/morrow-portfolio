@@ -95,7 +95,7 @@
 
 .service-card__title {
   font-family: "Newsreader", Georgia, "Times New Roman", serif;
-  font-size: 1.3rem;
+  font-size: clamp(1.15rem, 1.05rem + 0.5vw, 1.4rem);
   font-weight: 500;
   line-height: 1.25;
   color: var(--color-ink);
@@ -104,7 +104,7 @@
 
 .service-card__description {
   font-family: "Newsreader", Georgia, "Times New Roman", serif;
-  font-size: 1.02rem;
+  font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.08rem);
   line-height: 1.6;
   color: var(--color-muted);
   margin-bottom: 1.5rem;

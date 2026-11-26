@@ -5,14 +5,20 @@
   --font-body: "Inter", sans-serif;
   --font-heading: "Poppins", "Inter", sans-serif;
 
-  /* Type scale */
+  /* Type scale — fluid (2026-11-26, Phase 2). The body sizes scale
+     smoothly with the viewport via clamp() instead of jumping
+     between fixed sizes at breakpoints. The small mono labels
+     (--text-xs / --text-sm) stay fixed — tiny furniture should not
+     grow with the screen. The min is the small-screen size, the
+     max is the desktop size, so at current desktop widths nothing
+     changes. */
   --text-xs: 0.8rem;
   --text-sm: 0.9rem;
-  --text-base: 1rem;
-  --text-lg: 1.25rem;
-  --text-xl: 1.5rem;
-  --text-2xl: 2rem;
-  --text-3xl: 3rem;
+  --text-base: clamp(0.95rem, 0.9rem + 0.25vw, 1.05rem);
+  --text-lg: clamp(1.15rem, 1.05rem + 0.5vw, 1.35rem);
+  --text-xl: clamp(1.3rem, 1.15rem + 0.75vw, 1.7rem);
+  --text-2xl: clamp(1.6rem, 1.35rem + 1.1vw, 2.25rem);
+  --text-3xl: clamp(2.2rem, 1.8rem + 1.8vw, 3.4rem);
 
   /* Line heights */
   --leading-tight: 1.2;
