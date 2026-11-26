@@ -1,0 +1,240 @@
+/* src/components/SinglePage/SkillsCarousel.css — Skills carousel
+   (Phase 2 redesign, 2026-11-26). One category at a time inside a
+   large rounded card, in the style of kartavya-singh.com's Skills.
+
+   The card is dark slate in BOTH themes — a deliberate dark
+   showcase card, like Kartavya's. That is what makes the level
+   colors work identically in either theme: the name color is the
+   ONLY level encoding, and the three colors are fixed values
+   chosen for legibility on the dark card (not theme tokens):
+   Strong = lightened shirt red #d9604f (same hue as #a02c1e,
+   raised for dark backgrounds), Working = warm white #e8e2d6,
+   Familiar = burnt orange #e08a4c. The brand icons stay a muted
+   warm grey so they never encode level. */
+
+.skills-carousel {
+  background: #23282d;
+  color: #f5f2ea;
+  border: 1px solid rgba(245, 242, 234, 0.12);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: clamp(1.25rem, 1rem + 1.5vw, 2rem);
+}
+
+/* Top row: current category title + chevrons / pause. */
+.skills-carousel__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.skills-carousel__category {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.6rem);
+  font-weight: 500;
+  line-height: 1.2;
+  color: #f5f2ea;
+  margin: 0;
+}
+
+.skills-carousel__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: none;
+}
+
+.skills-carousel__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  border: 1px solid rgba(245, 242, 234, 0.25);
+  background: transparent;
+  color: #f5f2ea;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: border-color var(--transition-fast), color var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.skills-carousel__btn:hover,
+.skills-carousel__btn:focus-visible {
+  border-color: var(--color-accent);
+  color: #d9604f;
+  background: rgba(217, 96, 79, 0.12);
+  outline: none;
+}
+
+/* Countdown / progress: a thin bar that fills over the auto-play
+   interval, plus a status line. */
+.skills-carousel__progress {
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(245, 242, 234, 0.14);
+  overflow: hidden;
+}
+
+.skills-carousel__progress-fill {
+  display: block;
+  height: 100%;
+  background: #d9604f;
+  border-radius: 999px;
+  transition: width 100ms linear;
+}
+
+.skills-carousel__status {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: #b3aa9c;
+  margin: 0.5rem 0 0;
+}
+
+/* Category tabs: jump straight to a category. */
+.skills-carousel__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(245, 242, 234, 0.12);
+}
+
+.skills-carousel__tab {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #b3aa9c;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 0.25rem 0;
+  cursor: pointer;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.skills-carousel__tab:hover {
+  color: #f5f2ea;
+}
+
+.skills-carousel__tab.is-active {
+  color: #d9604f;
+  border-bottom-color: #d9604f;
+}
+
+/* Tile grid: brand-logo tiles ~96px, one category at a time.
+   The key on the grid re-mounts it on category change, so the
+   fade runs once per category. */
+.skills-carousel__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 0.75rem;
+  padding-block: 1.25rem 1rem;
+  animation: skills-carousel-fade 300ms ease;
+}
+
+@keyframes skills-carousel-fade {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.skills-carousel__tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 96px;
+  padding: 0.9rem 0.5rem;
+  background: rgba(245, 242, 234, 0.04);
+  border: 1px solid rgba(245, 242, 234, 0.08);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+/* Icons are a muted warm grey — they never encode level. */
+.skills-carousel__tile-icon {
+  font-size: 2rem;
+  color: #cfc8b8;
+  flex: none;
+}
+
+.skills-carousel__tile-initials {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #cfc8b8;
+  flex: none;
+}
+
+/* The name color is the ONLY level encoding. */
+.skills-carousel__tile-name {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.skills-carousel__tile-name--strong {
+  color: #d9604f;
+}
+
+.skills-carousel__tile-name--working {
+  color: #e8e2d6;
+}
+
+.skills-carousel__tile-name--familiar {
+  color: #e08a4c;
+}
+
+/* Legend: the three level colors, no dots. */
+.skills-carousel__legend {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.78rem;
+  color: #b3aa9c;
+  margin: 0;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(245, 242, 234, 0.12);
+}
+
+.skills-carousel__legend-item--strong {
+  color: #d9604f;
+}
+
+.skills-carousel__legend-item--working {
+  color: #e8e2d6;
+}
+
+.skills-carousel__legend-item--familiar {
+  color: #e08a4c;
+}
+
+/* Reduced motion: no category fade; auto-play is already paused
+   by the component when this is preferred. */
+@media (prefers-reduced-motion: reduce) {
+  .skills-carousel__grid {
+    animation: none;
+  }
+
+  .skills-carousel__progress-fill {
+    transition: none;
+  }
+}

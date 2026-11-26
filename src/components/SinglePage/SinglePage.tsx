@@ -21,8 +21,8 @@ import {
   EducationContent,
   ExperienceContent,
   LeadershipContent,
-  SkillsContent,
 } from "../Resume/ResumeSections";
+import { SkillsCarousel } from "./SkillsCarousel";
 
 export const SinglePage: React.FC = () => {
   // Scroll snap (2026-11-26): section-by-section locking, like
@@ -52,7 +52,7 @@ export const SinglePage: React.FC = () => {
             <h2 className="single-page__title">Skills</h2>
             <span className="single-page__rule" aria-hidden="true" />
           </header>
-          <SkillsContent />
+          <SkillsCarousel />
         </Container>
       </section>
 

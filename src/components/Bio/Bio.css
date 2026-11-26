@@ -182,7 +182,7 @@
    the eyebrow color — it reads as a status line, not a headline. */
 .bio__currently {
   font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
-  font-size: 0.85rem;
+  font-size: clamp(0.78rem, 0.8rem + 0.15vw, 0.88rem);
   line-height: 1.5;
   color: var(--color-muted);
 }

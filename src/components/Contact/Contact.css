@@ -99,7 +99,7 @@
 
 .contact__method-value {
   font-family: "Newsreader", Georgia, "Times New Roman", serif;
-  font-size: 1.02rem;
+  font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.08rem);
   line-height: 1.4;
   color: var(--color-ink);
   text-decoration: none;
