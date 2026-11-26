@@ -437,3 +437,15 @@
     width: 160px;
   }
 }
+
+/* Arrow clearance — the prev/next arrows (44px wide, 16px from the
+   panel edge) float over the detail panel, so the body's right
+   padding must clear the next arrow's left edge (60px from the
+   panel's right edge) plus a gap — otherwise the description runs
+   under the button (seen live 2026-11-25 at 1919px: "Dark mode
+   shi…" hidden behind the → button). Placed after the media
+   queries so it also overrides the short-viewport padding
+   shorthand above. */
+.portfolio__detail-body {
+  padding-right: calc(var(--space-16) + 44px + var(--space-16));
+}
