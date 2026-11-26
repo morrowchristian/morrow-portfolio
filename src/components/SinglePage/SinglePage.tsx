@@ -23,6 +23,7 @@ import {
   LeadershipContent,
 } from "../Resume/ResumeSections";
 import { SkillsCarousel } from "./SkillsCarousel";
+import { ParticleWave } from "./ParticleWave";
 
 export const SinglePage: React.FC = () => {
   // Scroll snap (2026-11-26): section-by-section locking, like
@@ -30,15 +31,24 @@ export const SinglePage: React.FC = () => {
   // under `html.single-page--snap`; this toggles that class on
   // the document element while the single page is mounted and
   // removes it on unmount, so the old routes never snap.
+  // The particle wave (2026-11-26) uses the same pattern:
+  // `single-page--wave` lets the fixed canvas show through the
+  // section backgrounds (dark mode only — in dark mode the paper
+  // and page backgrounds are the same hex, so nothing visible
+  // changes). Both classes are removed on unmount.
   useEffect(() => {
     document.documentElement.classList.add("single-page--snap");
+    document.documentElement.classList.add("single-page--wave");
     return () => {
       document.documentElement.classList.remove("single-page--snap");
+      document.documentElement.classList.remove("single-page--wave");
     };
   }, []);
 
   return (
     <div className="single-page">
+      <ParticleWave />
+
       <Bio />
 
       <Stats />

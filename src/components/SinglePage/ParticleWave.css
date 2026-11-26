@@ -1,0 +1,45 @@
+/* src/components/SinglePage/ParticleWave.css — breathing particle
+   wave background for the single page (2026-11-26). The canvas is
+   fixed behind the page content and never intercepts input. */
+
+/* Fixed backdrop: covers the viewport, sits behind the content
+   (negative z-index inside the page's stacking context), and can
+   never block a click. The wave is a dark-theme effect only — in
+   light mode the canvas is hidden entirely. */
+.particle-wave {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+html[data-theme="light"] .particle-wave {
+  display: none;
+}
+
+/* Let the wave show through in dark mode. Every top-level section
+   paints an opaque `var(--color-paper)` background — but in dark
+   mode --color-paper is #14181d, identical to --color-bg, so making
+   those backgrounds transparent changes nothing visible: the body
+   background shows through at the exact same hex, and the wave
+   becomes visible behind the content. Light mode is untouched
+   (sections keep their paper backgrounds, the canvas is hidden). */
+html[data-theme="dark"].single-page--wave .single-page__section,
+html[data-theme="dark"].single-page--wave .bio-page,
+html[data-theme="dark"].single-page--wave .stats,
+html[data-theme="dark"].single-page--wave .services,
+html[data-theme="dark"].single-page--wave .portfolio,
+html[data-theme="dark"].single-page--wave .news,
+html[data-theme="dark"].single-page--wave .contact {
+  background: transparent;
+}
+
+/* Respect reduced motion: no animation is run by the component in
+   this case (it draws one static frame), and the canvas stays put. */
+@media (prefers-reduced-motion: reduce) {
+  .particle-wave {
+    animation: none;
+  }
+}
